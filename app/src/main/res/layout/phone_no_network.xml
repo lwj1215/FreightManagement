@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/no_net_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/no_data_img"
+        android:layout_width="@dimen/x180"
+        android:layout_height="@dimen/x180"
+        android:layout_marginTop="@dimen/x340"
+        android:layout_centerHorizontal="true"
+      />
+<!--    android:background="@mipmap/img_nonet"-->
+    <TextView
+        android:id="@+id/tv_wflj"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/no_data_img"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x30"
+        android:text="网络链接失败，请检查网络"
+        android:textColor="@color/color_999"
+        android:textSize="@dimen/x28" />
+
+<!--        android:background="@drawable/g_button_background"-->
+    <TextView
+        android:id="@+id/tv_btn"
+        android:layout_width="@dimen/x156"
+        android:layout_height="@dimen/x66"
+        android:layout_below="@id/tv_wflj"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x30"
+        android:gravity="center"
+        android:text="重新加载"
+        android:textColor="@color/color_999"
+        android:textSize="@dimen/x24" />
+</RelativeLayout>
