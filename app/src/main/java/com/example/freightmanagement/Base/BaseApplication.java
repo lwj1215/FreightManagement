@@ -3,6 +3,9 @@ package com.example.freightmanagement.Base;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+
+import com.qiniu.pili.droid.streaming.StreamingEnv;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mBaseApplication = this;
+        StreamingEnv.init(mBaseApplication);
     }
 
 

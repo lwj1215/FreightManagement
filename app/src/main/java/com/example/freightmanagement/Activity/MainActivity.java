@@ -21,7 +21,6 @@ public class MainActivity extends BaseActivity {
 
     private MyViewPager index_vp_fragment_list_top;
     private LinearLayout index_bottom_bar_home, index_bottom_bar_dynamic_state, index_bottom_bar_me;
-    private ImageView index_bottom_bar_home_image, index_bottom_bar_dynamic_state_image, index_bottom_bar_me_image;
     private ArrayList<Fragment> mFragments;
     private FragmentIndexAdapter mFragmentIndexAdapter;
 
@@ -36,10 +35,6 @@ public class MainActivity extends BaseActivity {
         index_bottom_bar_home = (LinearLayout) bindView(R.id.index_bottom_bar_home);//首页
         index_bottom_bar_dynamic_state = (LinearLayout) bindView(R.id.index_bottom_bar_dynamic_state);//会议
         index_bottom_bar_me = (LinearLayout) bindView(R.id.index_bottom_bar_me);//账户
-        index_bottom_bar_home_image = (ImageView) bindView(R.id.index_bottom_bar_home_image);
-        index_bottom_bar_dynamic_state_image = (ImageView) bindView(R.id.index_bottom_bar_dynamic_state_image);
-        index_bottom_bar_me_image = (ImageView) bindView(R.id.index_bottom_bar_me_image);
-
     }
 
     @Override
