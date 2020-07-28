@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">货运平台管理系统</string>
 
+    <string name="string_state_preparing">PREPARING</string>
+    <string name="string_state_ready">READY</string>
+    <string name="string_state_connecting">CONNECTING</string>
+    <string name="string_state_streaming">STREAMING</string>
 </resources>

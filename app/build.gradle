@@ -37,5 +37,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+    implementation 'com.qiniu:happy-dns:0.2.8'
     implementation files('libs/pldroid-media-streaming-3.0.0.jar')
 }
