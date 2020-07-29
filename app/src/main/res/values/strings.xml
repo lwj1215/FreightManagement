@@ -5,4 +5,10 @@
     <string name="string_state_ready">READY</string>
     <string name="string_state_connecting">CONNECTING</string>
     <string name="string_state_streaming">STREAMING</string>
+
+    <string name="login_username_hint">请输入手机号</string>
+    <string name="login_password_hint2">请输入旧密码</string>
+    <string name="login_password_hint3">请输新密码</string>
+    <string name="login_password_hint4">确认密码</string>
+    <string name="login_yzm_hint">请输入验证码</string>
 </resources>

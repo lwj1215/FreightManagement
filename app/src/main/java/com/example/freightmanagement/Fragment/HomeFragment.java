@@ -1,5 +1,6 @@
 package com.example.freightmanagement.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
 import com.example.freightmanagement.R;
@@ -46,6 +48,9 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 ToastUtils.popUpToast(mName[position].toString());
+                if (position==7){
+                    startActivity(new Intent(activity, ChangePasswordActivity.class));
+                }
             }
         });
     }

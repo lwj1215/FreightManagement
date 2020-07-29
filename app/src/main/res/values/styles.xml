@@ -23,4 +23,15 @@
         <!-- 模糊 -->
         <item name="android:backgroundDimEnabled">false</item>
     </style>
+
+    <!--按钮样式-->
+    <style name="bottom_button_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x88</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/x32</item>
+        <item name="android:background">@drawable/button_circle</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:gravity">center</item>
+    </style>
 </resources>
