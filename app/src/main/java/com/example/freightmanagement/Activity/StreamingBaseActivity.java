@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
-import com.example.freightmanagement.Utils.EncodingConfig;
 import com.qiniu.android.dns.DnsManager;
 import com.qiniu.android.dns.IResolver;
 import com.qiniu.android.dns.NetworkInfo;

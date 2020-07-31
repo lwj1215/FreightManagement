@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bodyLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <RelativeLayout
+        android:id="@+id/contentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x600"
+        android:background="@android:color/white">
+
+        <LinearLayout
+            android:id="@+id/lin_notice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x80"
+                android:gravity="center"
+                android:text="请书写横向签名" />
+
+            <View
+                android:id="@+id/line"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="@dimen/x30"
+                android:layout_marginRight="@dimen/x30"
+                android:background="@color/gray_background" />
+        </LinearLayout>
+
+        <com.example.freightmanagement.View.ElectronicSignature
+            android:id="@+id/sign_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/lin_notice" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/bottomLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contentLayout"
+        android:background="@color/blue_079EEB"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/btn_no"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/gray_background"
+            android:text="重写"
+            android:textColor="@color/color_666"
+            android:textSize="@dimen/x36" />
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/blue_079EEB"
+            android:text="确定"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/x36" />
+    </LinearLayout>
+
+</RelativeLayout>

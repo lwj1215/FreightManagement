@@ -45,23 +45,33 @@ public class MainActivity extends BaseActivity {
 
     private void initData() {
         mFragments = new ArrayList<Fragment>();
-        mFragments.add(new HomeFragment());//首页
         mFragments.add(new MeetingFragment());//会议
+        mFragments.add(new HomeFragment());//首页
         mFragments.add(new AccountFragment());//我的
         initIndexFragmentAdapter();
     }
 
     private void initEvent() {
-        index_bottom_bar_home.setOnClickListener(new TabOnClickListener(0));
+        index_bottom_bar_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         index_bottom_bar_dynamic_state.setOnClickListener(new TabOnClickListener(1));
-        index_bottom_bar_me.setOnClickListener(new TabOnClickListener(2));
+        index_bottom_bar_me.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initIndexFragmentAdapter() {
         mFragmentIndexAdapter = new FragmentIndexAdapter(this.getSupportFragmentManager(), mFragments);
         index_vp_fragment_list_top.setAdapter(mFragmentIndexAdapter);
-        index_bottom_bar_home.setSelected(true);
-        index_vp_fragment_list_top.setCurrentItem(0);
+        index_bottom_bar_dynamic_state.setSelected(true);
+        index_vp_fragment_list_top.setCurrentItem(1);
         index_vp_fragment_list_top.setOffscreenPageLimit(3);
         index_vp_fragment_list_top.addOnPageChangeListener(new TabOnPageChangeListener());
     }
@@ -84,6 +94,7 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
     public class TabOnPageChangeListener implements ViewPager.OnPageChangeListener {
 
         //当滑动状态改变时调用
