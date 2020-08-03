@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
+import com.example.freightmanagement.Activity.DriverInfoActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
@@ -60,9 +61,9 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onItemClick(View view, int position) {
                 ToastUtils.popUpToast(mName[position].toString());
-                if (position==3){
+                if (position == 3){
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
-                }else if (position==6){
+                }else if (position == 6){
                     boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
                     if (!isPermissionOK) {
                         ToastUtils.popUpToast("Some permissions is not approved !!!");
@@ -75,8 +76,10 @@ public class HomeFragment extends BaseFragment {
                     intent.putExtra("url", url);
                     intent.putExtra("CameraConfig", buildCameraConfig());
                     startActivity(intent);
-                }else if (position==7){
+                }else if (position == 7){
                     startActivity(new Intent(activity, ChangePasswordActivity.class));
+                }else if(position == 0){
+                    startActivity(new Intent(activity, DriverInfoActivity.class));
                 }
             }
         });

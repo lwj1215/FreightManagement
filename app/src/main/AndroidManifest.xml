@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.freightmanagement">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -24,8 +25,9 @@
         android:networkSecurityConfig="@xml/file_paths"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".Activity.EmploymentContractActivity"></activity>
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
+        <activity android:name=".Activity.EmploymentContractActivity" />
         <activity android:name=".Activity.SignUpActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -38,7 +40,8 @@
             android:name=".Activity.SWCameraStreamingActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.DriverInfoActivity"></activity>
     </application>
 
 </manifest>
