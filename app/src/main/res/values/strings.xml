@@ -5,6 +5,9 @@
     <string name="string_state_ready">READY</string>
     <string name="string_state_connecting">CONNECTING</string>
     <string name="string_state_streaming">STREAMING</string>
+    <string name="select_company">我是企业</string>
+    <string name="select_car_owner">我是车主</string>
+    <string name="select_driver">我是驾驶员</string>
 
     <string name="login_username_hint">请输入手机号</string>
     <string name="login_password_hint2">请输入旧密码</string>

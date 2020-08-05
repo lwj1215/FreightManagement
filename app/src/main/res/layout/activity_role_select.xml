@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.example.freightmanagement.Activity.RoleSelectActivity">
+    <TextView
+        android:id="@+id/tv_company"
+        style="@style/bottom_button_style"
+        android:layout_below="@+id/inputEdit_phone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x90"
+        android:layout_marginTop="@dimen/x150"
+        android:layout_marginRight="@dimen/x90"
+        android:text="@string/select_company" />
+    <TextView
+        android:id="@+id/tv_car_owner"
+        style="@style/bottom_button_style"
+        android:layout_below="@+id/inputEdit_phone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x90"
+        android:layout_marginTop="@dimen/x150"
+        android:layout_marginRight="@dimen/x90"
+        android:text="@string/select_car_owner" />
+    <TextView
+        android:id="@+id/tv_driver"
+        style="@style/bottom_button_style"
+        android:layout_below="@+id/inputEdit_phone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x90"
+        android:layout_marginTop="@dimen/x150"
+        android:layout_marginRight="@dimen/x90"
+        android:text="@string/select_driver" />
+</LinearLayout>
