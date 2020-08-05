@@ -7,21 +7,20 @@ import android.os.Bundle;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 
-public class DriverInformationActivity extends BaseActivity {
+public class VehicleInformationActivity extends BaseActivity {
 
     @Override
     public int setLayoutResource() {
-        return R.layout.activity_driver_information;
+        return R.layout.activity_vehicle_information;
     }
 
     @Override
     protected void onInitView() {
-      setDefaultTitle("驾驶员信息");
+       setDefaultTitle("车辆信息");
     }
 
     @Override
     protected void onLoadData2Remote() {
 
     }
-
 }

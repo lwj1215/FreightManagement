@@ -29,81 +29,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x280"
-                    android:padding="@dimen/x30">
-
-                    <RelativeLayout
-                        android:id="@+id/re_pic"
-                        android:layout_width="@dimen/x0"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/x16"
-                        android:layout_weight="1"
-                        android:background="@drawable/inflate_txt_bg_white">
-
-                        <TextView
-                            android:id="@+id/tv_card1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableTop="@mipmap/upload_identity"
-                            android:drawablePadding="@dimen/x16"
-                            android:text="上传身份证正面照片"
-                            android:textSize="@dimen/x28"
-                            android:visibility="visible" />
-
-                        <ImageView
-                            android:id="@+id/iv_card_front"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
-
-                        <ImageView
-                            android:id="@+id/closeImageViewFont"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/icon_oreder_remark_delete"
-                            android:visibility="gone" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:id="@+id/re_pic_reverse"
-                        android:layout_width="@dimen/x0"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:layout_weight="1"
-                        android:background="@drawable/inflate_txt_bg_white">
-
-                        <TextView
-                            android:id="@+id/tv_card2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:drawableTop="@mipmap/upload_identity"
-                            android:drawablePadding="@dimen/x16"
-                            android:text="上传身份证反面照片"
-                            android:textSize="@dimen/x28" />
-
-                        <ImageView
-                            android:id="@+id/iv_card_revers"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
-
-                        <ImageView
-                            android:id="@+id/closeImageViewReverse"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/icon_oreder_remark_delete"
-                            android:visibility="gone" />
-                    </RelativeLayout>
-                </LinearLayout>
-
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x2"
@@ -123,7 +48,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="真实姓名"
+                            android:text="车牌号:"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -135,7 +60,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的真实姓名"
+                            android:hint=""
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
@@ -161,7 +86,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="性别"
+                            android:text="车辆品牌"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -173,7 +98,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的性别"
+                            android:hint=""
                             android:paddingRight="@dimen/x30"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
@@ -201,7 +126,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="年龄"
+                            android:text="车型"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -214,7 +139,7 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
                             android:ellipsize="end"
-                            android:hint="请填写您的年龄"
+                            android:hint=""
                             android:maxLines="2"
                             android:paddingRight="@dimen/x30"
                             android:textColor="@color/color_666"
@@ -228,45 +153,6 @@
                         android:background="@color/gray_background" />
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:text="身份证号"
-                            android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28" />
-
-                        <EditText
-                            android:id="@+id/et_card_num"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:background="@null"
-                            android:hint="请填写您的身份证号"
-                            android:textColor="@color/color_666"
-                            android:textColorHint="@color/color_999"
-                            android:textSize="@dimen/x28" />
-
-                    </LinearLayout>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x2"
-                        android:layout_gravity="bottom"
-                        android:background="@color/gray_background" />
-                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -284,7 +170,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="上岗证号码"
+                            android:text="车辆运营证号码"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -296,7 +182,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:text="请填写上岗证号码"
+                            android:text=""
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28" />
 
@@ -328,7 +214,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="上岗证有效期"
+                            android:text="运营证有效期"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -338,7 +224,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="有效期"
+                            android:text=""
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
@@ -364,7 +250,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="岗前培训情况"
+                            android:text="车辆检查情况"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -395,7 +281,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="成绩"
+                            android:text="状态"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
@@ -432,7 +318,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="签约车辆:"
+                            android:text="车辆维修情况:"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
@@ -441,58 +327,42 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x10"
-                            android:text="车牌号:"
+                            android:text="调度算法十大:"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
 
                         <TextView
-                            android:id="@+id/tv_sign_cph"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:text="KE8581"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆保养情况:"
                             android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28"
-
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x10"
-                            android:text="车辆品牌:"
-                            android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28"
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:id="@+id/tv_sign_pp"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="Jeep"
-                            android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28"
-                            android:visibility="visible" />
+                            android:textSize="@dimen/x28" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x10"
-                            android:text="型号:"
-                            android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28"
-                            android:visibility="visible" />
-
-                        <TextView
-                            android:id="@+id/tv_sign_xh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="45sa"
+                            android:text="调度算法十大:"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />

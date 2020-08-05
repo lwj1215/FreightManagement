@@ -16,6 +16,7 @@ import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
+import com.example.freightmanagement.Activity.VehicleInformationActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
 import com.example.freightmanagement.R;
@@ -63,12 +64,14 @@ public class HomeFragment extends BaseFragment {
 //                ToastUtils.popUpToast(mName[position].toString());
                 if (position == 0) {
                     startActivity(new Intent(activity, DriverInformationActivity.class));
+                }else if (position == 1) {
+                    startActivity(new Intent(activity, VehicleInformationActivity.class));
                 } else if (position == 3) {
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
                 } else if (position == 6) {
                     boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
                     if (!isPermissionOK) {
-                        ToastUtils.popUpToast("Some permissions is not approved !!!");
+//                        ToastUtils.popUpToast("");
                         return;
                     }
                     StreamingEnv.setLogLevel(Log.VERBOSE);
