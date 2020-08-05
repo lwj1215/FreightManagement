@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.freightmanagement.Activity.CarInformationActivity;
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
@@ -64,14 +63,14 @@ public class HomeFragment extends BaseFragment {
 //                ToastUtils.popUpToast(mName[position].toString());
                 if (position == 0) {
                     startActivity(new Intent(activity, DriverInformationActivity.class));
-                }else if(position == 1){
-                    startActivity(new Intent(activity, CarInformationActivity.class));
-                }else if (position == 3) {
+                }else if (position == 1) {
+                    startActivity(new Intent(activity, VehicleInformationActivity.class));
+                } else if (position == 3) {
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
                 } else if (position == 6) {
                     boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
                     if (!isPermissionOK) {
-                        ToastUtils.popUpToast("Some permissions is not approved !!!");
+//                        ToastUtils.popUpToast("");
                         return;
                     }
                     StreamingEnv.setLogLevel(Log.VERBOSE);

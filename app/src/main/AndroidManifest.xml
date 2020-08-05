@@ -25,6 +25,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.VehicleInformationActivity"></activity>
         <activity android:name=".Activity.DriverInformationActivity" />
         <activity android:name=".Activity.EmploymentContractActivity" />
         <activity android:name=".Activity.SignUpActivity">
