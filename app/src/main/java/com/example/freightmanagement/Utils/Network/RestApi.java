@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import com.example.freightmanagement.Base.BaseApplication;
 import com.example.freightmanagement.Utils.NetUtils;
 import com.example.freightmanagement.Utils.StringUtils;
+import com.google.gson.Gson;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -29,6 +31,7 @@ public class RestApi {
     private static RestApi sRestApi = null;
     private final Handler mDelivery;
     private OkHttpClient mClient;
+    private static final MediaType MEDIA_TYPE_BODY = MediaType.parse("application/json; charset=utf-8");
 
     public RestApi() {
         if (mClient == null) {
@@ -54,21 +57,20 @@ public class RestApi {
      */
     public void post(String url, String jsonValue, @Nullable final OnRequestResult callback) {
         Log.i(TAG, "post: "+jsonValue+url);
-        RequestBody formBody = new FormBody.Builder()
-                .add("", jsonValue)
-                .build();
+//        RequestBody formBody = new FormBody.Builder()
+//                .add("", jsonValue)
+//                .build();
+        RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
+//        RequestBody formBody = FormBody.create(MediaType.parse("application/json"), jsonValue);
+
         Request request = new Request.Builder()
                 .url(Host.BASE_URL + url)
+//                .addHeader("content-type", "application/json;charset:utf-8")
                 .post(formBody)
                 .build();
         enqueue("", request, new OnRequestResult() {
             @Override
             public void onSuccess(String json) {
-                //保存token
-//                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-//                if (stateBean.getLoginstate()!=null&&stateBean.getLoginstate().equals("0")) {
-//                    PrefUtilsData.setToken(stateBean.getUser_token());
-//                }
                 if (callback != null) callback.onSuccess(json);
             }
 
@@ -84,7 +86,40 @@ public class RestApi {
             }
         });
     }
+    /**
+     * 请求公共方法
+     */
+    public  void get(final String url, @Nullable final OnRequestResult callback) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Request request = new Request.Builder().url(Host.BASE_URL+url).build(); //添加头部信息
+                mClient.newCall(request);
+                enqueue("", request, new OnRequestResult() {
+                    @Override
+                    public void onSuccess(String json) {
+//                        //保存token
+//                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
+//                        if ("0".equals(stateBean.getLoginstate())) {
+//                            PrefUtilsData.setToken(stateBean.getUser_token());
+//                        }
+                        if (callback != null) callback.onSuccess(json);
+                    }
 
+                    @Override
+                    public void onFail() {
+                        if (callback != null) callback.onFail();
+                    }
+
+                    @Override
+                    public void netUnlink() {
+                        if (callback != null) callback.netUnlink();}
+                });
+            }
+
+        }).start();
+
+    }
     /**
      * 添加到请求队列请求
      */

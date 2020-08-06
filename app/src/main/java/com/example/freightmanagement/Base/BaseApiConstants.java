@@ -9,9 +9,28 @@ package com.example.freightmanagement.Base;
  */
 public class BaseApiConstants {
 
+
+    /**
+     * 验证码
+     * 参数：username，userpass
+     */
+    public static final String API_SMS_CODE = "/cccc/register/getMessageCode/";
     /**
      * 账号登录
      * 参数：username，userpass
      */
-    public static final String API_LOG = "/login_password.php";
+    public static final String API_LOGIN = "/cccc/login";
+
+    /**
+     * 账号注册
+     * 参数：username，password
+     */
+    public static final String API_REGISTER = "/cccc/register";
+
+    /**
+     * 找回密码
+     */
+    public static final String API_RETRIEVE_PWD = "/cccc/register/retrieve";
+
+
 }

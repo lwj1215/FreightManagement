@@ -1,5 +1,6 @@
 package com.example.freightmanagement.Activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,7 +10,7 @@ import com.example.freightmanagement.R;
 public class RoleSelectActivity extends BaseActivity implements View.OnClickListener {
 
     /**
-     * 我是企业
+     * 企业,车主,驾驶员
      */
     private TextView mTvCompany,mTvCarOwner,mTvDriver;
 
@@ -55,7 +56,11 @@ public class RoleSelectActivity extends BaseActivity implements View.OnClickList
             case R.id.tv_car_owner:
                 break;
             case R.id.tv_driver:
+                startActivity(DriverConfigActivity.class);
                 break;
         }
+    }
+    private void startActivity(Class<? extends BaseActivity> cls){
+        startActivity(new Intent(this,cls));
     }
 }

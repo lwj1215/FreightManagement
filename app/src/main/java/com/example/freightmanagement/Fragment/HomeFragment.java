@@ -13,8 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
+import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
+import com.example.freightmanagement.Activity.VehicleInformationActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
 import com.example.freightmanagement.R;

@@ -1,6 +1,7 @@
 package com.example.freightmanagement.Base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
@@ -475,7 +476,9 @@ public abstract class BaseActivity<P extends BasePresenter> extends FragmentActi
         }
         return flag;
     }
-
+    public void startActivity(Activity activity, Class<? extends BaseActivity> cls){
+        startActivity(new Intent(activity,cls));
+    }
 
 
 }

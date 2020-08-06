@@ -9,6 +9,6 @@ public class Host {
     /**
      * URL
      */
-   public static String BASE_URL = "https://www.baidu.com";
+   public static String BASE_URL = "http://aicc.ctags.cn";
 
 }

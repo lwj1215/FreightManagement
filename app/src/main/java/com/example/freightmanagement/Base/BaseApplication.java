@@ -4,10 +4,17 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.baidu.ocr.sdk.OCR;
+import com.baidu.ocr.sdk.OnResultListener;
+import com.baidu.ocr.sdk.exception.OCRError;
+import com.baidu.ocr.sdk.model.AccessToken;
 import com.qiniu.pili.droid.streaming.StreamingEnv;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.freightmanagement.common.ApiConstants.BAIDU_API_KEY;
+import static com.example.freightmanagement.common.ApiConstants.BAIDU_SECRET_KEY;
 
 /**
  * @author: ztc
@@ -28,8 +35,26 @@ public class BaseApplication extends Application {
         super.onCreate();
         mBaseApplication = this;
         StreamingEnv.init(mBaseApplication);
+        initAccessTokenWithAkSk();
     }
+    /**
+     * 用明文ak，sk初始化
+     */
+    private void initAccessTokenWithAkSk() {
+        OCR.getInstance(this).initAccessTokenWithAkSk(new OnResultListener<AccessToken>() {
+            @Override
+            public void onResult(AccessToken result) {
+                String token = result.getAccessToken();
+//                hasGotToken = true;
+            }
 
+            @Override
+            public void onError(OCRError error) {
+                error.printStackTrace();
+//                alertText("AK，SK方式获取token失败", error.getMessage());
+            }
+        }, getApplicationContext(),  BAIDU_API_KEY, BAIDU_SECRET_KEY);
+    }
 
     /**
      * 把界面添加到集合
