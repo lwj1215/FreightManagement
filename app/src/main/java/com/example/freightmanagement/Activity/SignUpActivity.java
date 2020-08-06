@@ -1,14 +1,13 @@
 package com.example.freightmanagement.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.presenter.LogPresenter;
+import com.example.freightmanagement.enums.RoleTypeEnum;
 
 public class SignUpActivity extends BaseActivity<LogPresenter> implements  LogPresenter.View,View.OnClickListener {
 
@@ -24,6 +23,20 @@ public class SignUpActivity extends BaseActivity<LogPresenter> implements  LogPr
 
     @Override
     protected void onLoadData2Remote() {
+        int code = 3;
+        RoleTypeEnum roleTypeEnum = RoleTypeEnum.find(code);
+        switch (roleTypeEnum){
+            case COMPANY:
+                break;
+            case CAR_OWNER:
+                break;
+            case DRIVER:
+                break;
+            default:
+                startActivity(new Intent(this,RoleSelectActivity.class));
+                break;
+        }
+
      mPresenter.getCode();//调用
     }
 

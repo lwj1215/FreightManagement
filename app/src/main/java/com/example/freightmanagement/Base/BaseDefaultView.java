@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.example.freightmanagement.R;
 
 public class BaseDefaultView extends LinearLayout {
@@ -52,7 +52,7 @@ public class BaseDefaultView extends LinearLayout {
         //让旋转动画一直转，不停顿的重点
         animation.setRepeatCount(-1);
         progress_view.startAnimation(animation);
-        Glide.with(getContext()).load(R.mipmap.loading).into(progress_view);
+//        Glide.with(getContext()).load(R.mipmap.loading).into(progress_view);
 
         //没有数据页面
         mNoDataView = layoutInflater.inflate(R.layout.base_no_data_view, null);

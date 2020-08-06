@@ -36,7 +36,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.WindowUtils;
 
@@ -261,7 +261,7 @@ public abstract class BaseActivity<P extends BasePresenter> extends FragmentActi
         mDialog = new Dialog(getContext(), R.style.refresh_dialog);
         RelativeLayout  loaing = (RelativeLayout) LayoutInflater.from(getContext()).inflate(R.layout.refresh_dialog, null);
         progress_view = loaing.findViewById(R.id.progress_view);
-        Glide.with(getContext()).load(R.mipmap.loading).into(progress_view);
+//        Glide.with(getContext()).load(R.mipmap.loading).into(progress_view);
         mDialog.setContentView(loaing);
         mDialog.setCanceledOnTouchOutside(false);
     }
