@@ -10,7 +10,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -20,35 +20,24 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    dexOptions {
-        preDexLibraries = false
-    }
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
-
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-//    implementation 'com.android.support:appcompat-v7:29.+'
-//    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
-
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation('com.github.bumptech.glide:glide:3.7.0')
-//
-//    annotationProcessor "com.github.bumptech.glide:compiler:4.9.0"
-
+    //    implementation 'com.github.bumptech.glide:glide:4.9.0'
     implementation 'org.greenrobot:eventbus:3.1.1'
-////    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
-    compile('com.squareup.okhttp3:okhttp:3.12.1') {
-        exclude group: 'com.squareup.okio'
-    }
     implementation 'com.qiniu:happy-dns:0.2.8'
     implementation files('libs/pldroid-media-streaming-3.0.0.jar')
+    implementation files('libs/ocr-sdk.jar')
 }

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
-import com.example.freightmanagement.Activity.DriverInfoActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
@@ -32,7 +31,7 @@ import java.util.Arrays;
 public class HomeFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
-    private String[] mName=new String[]{"驾驶员信息","车辆信息","岗前培训","聘用合同","签订承诺书","签订责任书","公司例会","修改密码","关于"};
+    private String[] mName = new String[]{"驾驶员信息", "车辆信息", "岗前培训", "聘用合同", "签订承诺书", "签订责任书", "公司例会", "修改密码", "关于"};
     private HomeFragmentAdapter jp_adapter;
     private PermissionChecker mPermissionChecker;
     private String url = "rtmp://pili-publish.qnsdk.com/sdk-live/2a9b9dae-c229-411c-bfc6-940bda942d47?e=1595833142&token=QxZugR8TAhI38AiJ_cptTl3RbzLyca3t-AAiH-Hh:ioKtdeyOnxdnEsheNQvhCbyvlBY=";
@@ -60,13 +59,17 @@ public class HomeFragment extends BaseFragment {
         jp_adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                ToastUtils.popUpToast(mName[position].toString());
-                if (position == 3){
+//                ToastUtils.popUpToast(mName[position].toString());
+                if (position == 0) {
+                    startActivity(new Intent(activity, DriverInformationActivity.class));
+                }else if (position == 1) {
+                    startActivity(new Intent(activity, VehicleInformationActivity.class));
+                }else if (position == 3) {
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
-                }else if (position == 6){
+                }else if (position==6){
                     boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
                     if (!isPermissionOK) {
-                        ToastUtils.popUpToast("Some permissions is not approved !!!");
+//                        ToastUtils.popUpToast("");
                         return;
                     }
                     StreamingEnv.setLogLevel(Log.VERBOSE);
@@ -76,10 +79,8 @@ public class HomeFragment extends BaseFragment {
                     intent.putExtra("url", url);
                     intent.putExtra("CameraConfig", buildCameraConfig());
                     startActivity(intent);
-                }else if (position == 7){
+                }else if (position == 7) {
                     startActivity(new Intent(activity, ChangePasswordActivity.class));
-                }else if(position == 0){
-                    startActivity(new Intent(activity, DriverInfoActivity.class));
                 }
             }
         });
