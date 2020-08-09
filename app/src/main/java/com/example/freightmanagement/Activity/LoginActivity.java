@@ -11,6 +11,7 @@ import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
+import com.example.freightmanagement.enums.RoleTypeEnum;
 import com.example.freightmanagement.model.AccountParam;
 import com.example.freightmanagement.presenter.LoginPresenter;
 
@@ -108,5 +109,23 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
     @Override
     public void onFailed(String error) {
         ToastUtils.popUpToast(error);
+//                int code = 3;
+//        RoleTypeEnum roleTypeEnum = RoleTypeEnum.find(code);
+//        switch (roleTypeEnum){
+//            case COMPANY:
+//                break;
+//            case CAR_OWNER:
+//                break;
+//            case DRIVER:
+//                break;
+//            default:
+//                startActivity(new Intent(this,RoleSelectActivity.class));
+//                break;
+//        }
+    }
+
+    @Override
+    protected LoginPresenter onInitLogicImpl() {
+        return new LoginPresenter();
     }
 }

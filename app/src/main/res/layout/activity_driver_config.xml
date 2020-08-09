@@ -205,7 +205,7 @@
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
-                        <TextView
+                        <EditText
                             android:id="@+id/tv_current_address"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -503,6 +503,34 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_sign"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x300">
+
+                    <TextView
+                        android:id="@+id/tv_sign"
+                        android:textStyle="bold"
+                        android:text="电子签名"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/x50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/iv_sign"
+                        android:layout_marginLeft="@dimen/x90"
+                        android:layout_marginRight="@dimen/x90"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_srue"
+                    style="@style/bottom_button_style"
+                    android:layout_below="@+id/inputEdit_phone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x90"
+                    android:text="提交" />
             </LinearLayout>
         </ScrollView>
 

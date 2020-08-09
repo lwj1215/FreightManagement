@@ -67,7 +67,7 @@
             android:hint="@string/login_yzm_hint"
             android:imeOptions="actionDone"
             android:inputType="number"
-            android:maxLength="4"
+            android:maxLength="6"
             android:paddingLeft="@dimen/x30"
             android:singleLine="true"
             android:textColor="@color/color_333"

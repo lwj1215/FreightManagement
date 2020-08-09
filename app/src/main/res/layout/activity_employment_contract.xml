@@ -21,7 +21,6 @@
         android:id="@+id/img_sign"
         android:layout_width="@dimen/x300"
         android:layout_height="@dimen/x150"
-        android:layout_marginTop="@dimen/x200"
         android:layout_gravity="center_horizontal"
         android:visibility="visible" />
 </LinearLayout>
