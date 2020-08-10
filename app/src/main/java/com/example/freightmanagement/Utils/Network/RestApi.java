@@ -6,7 +6,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseApplication;
+import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.Utils.NetUtils;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.google.gson.Gson;
 
@@ -71,6 +73,11 @@ public class RestApi {
         enqueue("", request, new OnRequestResult() {
             @Override
             public void onSuccess(String json) {
+                //保存token
+                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
+                if ("0".equals(stateBean.getCode())) {
+                    PrefUtilsData.setToken(stateBean.getData().getToken());
+                }
                 if (callback != null) callback.onSuccess(json);
             }
 
@@ -98,11 +105,11 @@ public class RestApi {
                 enqueue("", request, new OnRequestResult() {
                     @Override
                     public void onSuccess(String json) {
-//                        //保存token
-//                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-//                        if ("0".equals(stateBean.getLoginstate())) {
-//                            PrefUtilsData.setToken(stateBean.getUser_token());
-//                        }
+                        //保存token
+                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
+                        if ("0".equals(stateBean.getCode())) {
+                            PrefUtilsData.setToken(stateBean.getData().getToken());
+                        }
                         if (callback != null) callback.onSuccess(json);
                     }
 

@@ -25,12 +25,17 @@ public class BaseApiConstants {
      * 账号注册
      * 参数：username，password
      */
+
     public static final String API_REGISTER = "/cccc/register";
 
     /**
      * 找回密码
      */
     public static final String API_RETRIEVE_PWD = "/cccc/register/retrieve";
+    /**
+     * 获取驾驶员信息
+     */
+    public static final String API_DRIVERINFORMATION = "/driver/getID/";
 
 
 }

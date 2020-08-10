@@ -3,8 +3,10 @@ package com.example.freightmanagement.presenter;
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Base.BaseResponse;
+import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.enums.ResponseCodeEnum;
 import com.example.freightmanagement.model.AccountParam;
 import com.example.freightmanagement.presenter.constract.LoginConstact;
@@ -21,9 +23,16 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                BaseResponse response = new Gson().fromJson(json, BaseResponse.class);
-                int code = response.getCode();
-                if(code == ResponseCodeEnum.SUCCESS.getCode()){
+
+                TokenBean loginBean = new Gson().fromJson(json, TokenBean.class);
+                if (loginBean.getCode()==0) {
+                    PrefUtilsData.setIsLogin(true);
+                    PrefUtilsData.setToken(loginBean.getData().getToken());
+                    PrefUtilsData.setUserId(loginBean.getData().getUser().getTel());
+                    PrefUtilsData.setDriverId(loginBean.getData().getUser().getDriverCertificateId()+"");
+                    PrefUtilsData.setWorkId(loginBean.getData().getUser().getWorkCertificateId()+"");
+                    PrefUtilsData.setIdCordId(loginBean.getData().getUser().getIdcertificateId()+"");
+                    PrefUtilsData.setMobile(loginBean.getData().getUser().getTel());
                     mView.getDataSuc();
                 }else {
                     mView.onFailed(json);
@@ -34,6 +43,7 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
             @Override
             public void onFail() {
 //                super.onFail();
+                super.onFail();
                 mView.getDataSuc();
             }
 
@@ -44,3 +54,5 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
         });
     }
 }
+
+

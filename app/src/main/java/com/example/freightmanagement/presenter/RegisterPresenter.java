@@ -12,7 +12,7 @@ public class RegisterPresenter extends BasePresenter<RegisterConstact.View> impl
 
 
     @Override
-    public void getCode(String tel) {//获取支付列表
+    public void getCode(String tel) {
         RestApi.getInstance().get(BaseApiConstants.API_SMS_CODE.concat(tel), new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {

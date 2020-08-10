@@ -29,16 +29,17 @@
         <activity android:name=".Activity.DriverInformationActivity" />
         <activity android:name=".Activity.EmploymentContractActivity" />
         <activity android:name=".Activity.DriverConfigActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".Activity.TrainingActivity"/>
         <activity android:name=".Activity.RegisterActivity"/>
         <activity android:name=".Activity.ForgetPasswordActivity"/>
         <activity android:name=".Activity.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity android:name=".Activity.SignUpActivity">
@@ -51,7 +52,8 @@
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
         <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.CarInformationActivity" />
-        <activity android:name=".Activity.RoleSelectActivity"></activity>
+        <activity android:name=".Activity.RoleSelectActivity">
+        </activity>
     </application>
 
 </manifest>

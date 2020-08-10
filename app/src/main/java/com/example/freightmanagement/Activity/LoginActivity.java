@@ -108,7 +108,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
 
     @Override
     public void onFailed(String error) {
-        ToastUtils.popUpToast(error);
+        ToastUtils.popUpToast("登录失败,请重新登录");
 //                int code = 3;
 //        RoleTypeEnum roleTypeEnum = RoleTypeEnum.find(code);
 //        switch (roleTypeEnum){
