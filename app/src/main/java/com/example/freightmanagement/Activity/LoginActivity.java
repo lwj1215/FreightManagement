@@ -8,12 +8,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseResponse;
+import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
-import com.example.freightmanagement.enums.RoleTypeEnum;
+import com.example.freightmanagement.enums.AdminTypeEnum;
 import com.example.freightmanagement.model.AccountParam;
+import com.example.freightmanagement.model.AdminBean;
 import com.example.freightmanagement.presenter.LoginPresenter;
+
+import static com.example.freightmanagement.common.Constants.ADMIN_TYPE;
+import static com.example.freightmanagement.common.Constants.ID;
 
 /**
  * Created by songdechuan on 2020/8/6.
@@ -49,7 +55,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
     @Override
     protected void onInitView() {
         initView();
-
     }
 
     @Override
@@ -102,30 +107,38 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
     }
 
     @Override
-    public void getDataSuc() {
-        startActivity(this,MainActivity.class);
+    public void getDataSuc(TokenBean data) {
+        if(data != null){
+            TokenBean.DataBean dataBean = data.getData();
+            TokenBean.DataBean.UserBean user = dataBean.getUser();
+            int driverCertificateId = user.getDriverCertificateId();
+            int idcertificateId = user.getIdcertificateId();
+            int workCertificateId = user.getWorkCertificateId();
+            if(driverCertificateId != 0){
+                startActivity(driverCertificateId,MainActivity.class, AdminTypeEnum.DRIVER.getCode());
+            }else if(idcertificateId != 0){
+                startActivity(idcertificateId,MainActivity.class,AdminTypeEnum.DRIVER.getCode());
+            }else if(workCertificateId != 0){
+                startActivity(workCertificateId,MainActivity.class,AdminTypeEnum.DRIVER.getCode());
+            }else{
+                startActivity(new Intent(this,RoleSelectActivity.class));
+            }
+        }
     }
 
     @Override
     public void onFailed(String error) {
-        ToastUtils.popUpToast("登录失败,请重新登录");
-//                int code = 3;
-//        RoleTypeEnum roleTypeEnum = RoleTypeEnum.find(code);
-//        switch (roleTypeEnum){
-//            case COMPANY:
-//                break;
-//            case CAR_OWNER:
-//                break;
-//            case DRIVER:
-//                break;
-//            default:
-//                startActivity(new Intent(this,RoleSelectActivity.class));
-//                break;
-//        }
+        ToastUtils.popUpToast("登录失败!");
     }
 
     @Override
     protected LoginPresenter onInitLogicImpl() {
         return new LoginPresenter();
+    }
+    private void startActivity(int id,Class<?> cls,int type){
+        Intent intent = new Intent(this, cls);
+        intent.putExtra(ID,id);
+        intent.putExtra(ADMIN_TYPE,type);
+        startActivity(intent);
     }
 }

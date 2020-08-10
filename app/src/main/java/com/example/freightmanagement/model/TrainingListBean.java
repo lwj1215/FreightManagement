@@ -1,12 +1,11 @@
 package com.example.freightmanagement.model;
 
-import com.example.freightmanagement.Base.BaseResponse;
 
 /**
  * Created by songdechuan on 2020/8/6.
  */
 
-public class TrainingListBean extends BaseResponse{
+public class TrainingListBean {
 
         /**
          * id : 1

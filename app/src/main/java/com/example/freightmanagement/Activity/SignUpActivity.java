@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.View;
 
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseResponse;
+import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.presenter.LoginPresenter;
 
@@ -49,8 +51,10 @@ public class SignUpActivity extends BaseActivity<LoginPresenter> implements  Log
         }
     }
 
+
+
     @Override
-    public void getDataSuc() {//请求成功回调
+    public void getDataSuc(TokenBean data) {
 
     }
 

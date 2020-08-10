@@ -28,6 +28,12 @@
         <activity android:name=".Activity.VehicleInformationActivity" />
         <activity android:name=".Activity.DriverInformationActivity" />
         <activity android:name=".Activity.EmploymentContractActivity" />
+        <activity android:name=".Activity.CompanyRegisterActivity">
+        </activity>
+
+        <activity android:name=".Activity.CarOwnerActivity">
+
+        </activity>
         <activity android:name=".Activity.DriverConfigActivity">
 
         </activity>

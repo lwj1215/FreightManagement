@@ -1,18 +1,20 @@
 package com.example.freightmanagement.enums;
 
 /**
- * Created by Administrator on 2020/8/6.
+ * Created by songdechuan on 2020/8/10.
  */
 
-public enum ResponseCodeEnum {
+public enum  AdminTypeEnum {
 
-    SUCCESS(0,"SUCCESS"),
-    FAILED(404,"FAILED");
+    DRIVER(1,"驾驶员"),
+    CAR_OWNER(2,"车主"),
+    COMPANY(3,"企业");
+
     private Integer code;
 
     private String msg;
 
-    ResponseCodeEnum(int code, String msg){
+    AdminTypeEnum(int code, String msg){
         this.code = code;
         this.msg = msg;
     }

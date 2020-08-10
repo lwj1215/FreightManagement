@@ -25,7 +25,7 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
                 super.onSuccess(json);
 
                 TokenBean loginBean = new Gson().fromJson(json, TokenBean.class);
-                if (loginBean.getCode()==0) {
+                if (loginBean.getCode()==ResponseCodeEnum.SUCCESS.getCode()) {
                     PrefUtilsData.setIsLogin(true);
                     PrefUtilsData.setToken(loginBean.getData().getToken());
                     PrefUtilsData.setUserId(loginBean.getData().getUser().getTel());
@@ -33,7 +33,8 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
                     PrefUtilsData.setWorkId(loginBean.getData().getUser().getWorkCertificateId()+"");
                     PrefUtilsData.setIdCordId(loginBean.getData().getUser().getIdcertificateId()+"");
                     PrefUtilsData.setMobile(loginBean.getData().getUser().getTel());
-                    mView.getDataSuc();
+                    BaseResponse response = new Gson().fromJson(json, BaseResponse.class);
+                    mView.getDataSuc(loginBean);
                 }else {
                     mView.onFailed(json);
                 }
@@ -42,9 +43,7 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
 
             @Override
             public void onFail() {
-//                super.onFail();
                 super.onFail();
-                mView.getDataSuc();
             }
 
             @Override
@@ -54,5 +53,3 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
         });
     }
 }
-
-
