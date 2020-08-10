@@ -121,4 +121,5 @@
         android:layout_marginTop="@dimen/x150"
         android:layout_marginRight="@dimen/x90"
         android:text="登录" />
+
 </LinearLayout>

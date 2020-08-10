@@ -16,6 +16,7 @@ import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
+import com.example.freightmanagement.Activity.TrainingSelectActivity;
 import com.example.freightmanagement.Activity.VehicleInformationActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
@@ -66,6 +67,8 @@ public class HomeFragment extends BaseFragment {
                     startActivity(new Intent(activity, DriverInformationActivity.class));
                 }else if (position == 1) {
                     startActivity(new Intent(activity, VehicleInformationActivity.class));
+                }else if (position == 2) {
+                    startActivity(new Intent(activity, TrainingSelectActivity.class));
                 }else if (position == 3) {
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
                 }else if (position==6){

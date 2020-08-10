@@ -37,9 +37,12 @@
         <activity android:name=".Activity.DriverConfigActivity">
 
         </activity>
+        <activity android:name=".Activity.TrainingSelectActivity"/>
         <activity android:name=".Activity.TrainingActivity"/>
         <activity android:name=".Activity.RegisterActivity"/>
         <activity android:name=".Activity.ForgetPasswordActivity"/>
+        <activity android:name=".Activity.TrainingStartActivity"/>
+
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
