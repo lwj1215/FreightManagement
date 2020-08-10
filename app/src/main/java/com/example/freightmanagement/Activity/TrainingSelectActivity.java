@@ -1,13 +1,14 @@
 package com.example.freightmanagement.Activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /**
@@ -36,13 +37,22 @@ public class TrainingSelectActivity extends BaseActivity implements View.OnClick
     protected void onInitView() {
         setDefaultTitle("岗前培训");
         initView();
+        initAdapter();
+    }
+
+    private void initAdapter() {
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mTrainingList.setLayoutManager(linearLayoutManager);
+        TrainingAdapter trainingAdapter = new TrainingAdapter(this);
+        mTrainingList.setAdapter(trainingAdapter);
     }
 
     @Override
     protected void onLoadData2Remote() {
 
     }
-
     public void initView() {
         mTrainingList = (RecyclerView) findViewById(R.id.training_list);
         mTvStartTraining = (TextView) findViewById(R.id.tv_start_training);
@@ -58,8 +68,10 @@ public class TrainingSelectActivity extends BaseActivity implements View.OnClick
             default:
                 break;
             case R.id.tv_start_training:
+                startActivity(this,TrainingStartActivity.class);
                 break;
             case R.id.tv_start_answer:
+                startActivity(this,TrainingStartActivity.class);
                 break;
         }
     }
