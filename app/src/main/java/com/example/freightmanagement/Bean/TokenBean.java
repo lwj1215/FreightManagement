@@ -5,7 +5,7 @@ public class TokenBean {
     /**
      * code : 0
      * message : 登录成功
-     * data : {"loginState":1,"token":"44EjD8O78lEQyjMrjZLTxfPhJ/DKvgSB","tokenName":"adminId","user":{"id":2,"driverCertificateId":1,"workCertificateId":1,"isActive":1,"createTime":1596607489000,"updateTime":1596607489000,"name":null,"pass":null,"tel":"13111111111","idcertificateId":1}}
+     * data : {"loginState":1,"token":"aUFjXE/MBB/IJkNgCaj+qEVNyQj6j1B/","tokenName":"adminId","user":{"id":1,"driverCertificateId":1,"workCertificateId":1,"isActive":1,"createTime":1596607210000,"updateTime":1596607210000,"name":"syy","pass":null,"tel":null,"adminId":12,"idcertificateId":1},"type":1}
      */
 
     private int code;
@@ -39,15 +39,17 @@ public class TokenBean {
     public static class DataBean {
         /**
          * loginState : 1
-         * token : 44EjD8O78lEQyjMrjZLTxfPhJ/DKvgSB
+         * token : aUFjXE/MBB/IJkNgCaj+qEVNyQj6j1B/
          * tokenName : adminId
-         * user : {"id":2,"driverCertificateId":1,"workCertificateId":1,"isActive":1,"createTime":1596607489000,"updateTime":1596607489000,"name":null,"pass":null,"tel":"13111111111","idcertificateId":1}
+         * user : {"id":1,"driverCertificateId":1,"workCertificateId":1,"isActive":1,"createTime":1596607210000,"updateTime":1596607210000,"name":"syy","pass":null,"tel":null,"adminId":12,"idcertificateId":1}
+         * type : 1
          */
 
         private int loginState;
         private String token;
         private String tokenName;
         private UserBean user;
+        private int type;
 
         public int getLoginState() {
             return loginState;
@@ -81,17 +83,26 @@ public class TokenBean {
             this.user = user;
         }
 
+        public int getType() {
+            return type;
+        }
+
+        public void setType(int type) {
+            this.type = type;
+        }
+
         public static class UserBean {
             /**
-             * id : 2
+             * id : 1
              * driverCertificateId : 1
              * workCertificateId : 1
              * isActive : 1
-             * createTime : 1596607489000
-             * updateTime : 1596607489000
-             * name : null
+             * createTime : 1596607210000
+             * updateTime : 1596607210000
+             * name : syy
              * pass : null
-             * tel : 13111111111
+             * tel : null
+             * adminId : 12
              * idcertificateId : 1
              */
 
@@ -101,9 +112,10 @@ public class TokenBean {
             private int isActive;
             private long createTime;
             private long updateTime;
-            private Object name;
-            private Object pass;
+            private String name;
+            private String pass;
             private String tel;
+            private int adminId;
             private int idcertificateId;
 
             public int getId() {
@@ -154,19 +166,19 @@ public class TokenBean {
                 this.updateTime = updateTime;
             }
 
-            public Object getName() {
+            public String getName() {
                 return name;
             }
 
-            public void setName(Object name) {
+            public void setName(String name) {
                 this.name = name;
             }
 
-            public Object getPass() {
+            public String getPass() {
                 return pass;
             }
 
-            public void setPass(Object pass) {
+            public void setPass(String pass) {
                 this.pass = pass;
             }
 
@@ -176,6 +188,14 @@ public class TokenBean {
 
             public void setTel(String tel) {
                 this.tel = tel;
+            }
+
+            public int getAdminId() {
+                return adminId;
+            }
+
+            public void setAdminId(int adminId) {
+                this.adminId = adminId;
             }
 
             public int getIdcertificateId() {

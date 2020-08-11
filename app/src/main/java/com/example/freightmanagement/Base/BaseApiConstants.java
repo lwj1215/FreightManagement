@@ -35,7 +35,15 @@ public class BaseApiConstants {
     /**
      * 获取驾驶员信息
      */
-    public static final String API_DRIVERINFORMATION = "/driver/getID/";
+    public static final String API_DRIVERINFORMATION = "/cccc/driver/getID/";
+    /**
+     * 获取驾驶员上岗证信息
+     */
+    public static final String API_WROKID = "/cccc/examination/getExaminationDriverDatas/";
+    /**
+     * 获取培训结果
+     */
+    public static final String API_PEIXUNJIEGUO = "/cccc/driver/getDirver/";
 
 
 }

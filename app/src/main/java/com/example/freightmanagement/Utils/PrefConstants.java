@@ -27,6 +27,8 @@ public interface PrefConstants {
     String WROKID = "wrokId";
     //身份证id
     String IDCORDID = "idcordId";
+   //身份type
+    String TYPE = "type";
 
 
     //用户登录密码

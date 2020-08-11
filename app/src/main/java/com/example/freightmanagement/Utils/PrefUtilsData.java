@@ -39,6 +39,14 @@ public abstract class PrefUtilsData {
         SP.putString(PrefConstants.WROKID, user);
     }
 
+    public static String getType() {
+        return SP.getString(PrefConstants.TYPE, "");
+    }
+
+    public static void setType(String user) {
+        SP.putString(PrefConstants.TYPE, user);
+    }
+
     public static String getIdCordId() {
         return SP.getString(PrefConstants.IDCORDID, "");
     }

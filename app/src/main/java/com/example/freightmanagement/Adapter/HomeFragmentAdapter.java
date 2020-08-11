@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 
 import java.util.List;
 
@@ -48,7 +49,18 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     @Override
     public void onBindViewHolder(final HomeViewHolder holder, final int position) {
         if (dataList != null && dataList.size() > 0) {
+            if (position==0){
+                if (PrefUtilsData.getType().equals("1")){
+                    holder.tv_name.setText("驾驶员信息");
+                }else if (PrefUtilsData.getType().equals("2")){
+                    holder.tv_name.setText("车主信息");
+                }else {
+                    holder.tv_name.setText("企业信息");
+                }
+            }else {
+
             holder.tv_name.setText(dataList.get(position).toString());
+            }
 
         } else {
         }

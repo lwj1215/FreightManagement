@@ -11,6 +11,16 @@ public class AccountParam {
     private String tel;
     private String msCode;
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
+
     public String getName() {
         return name;
     }

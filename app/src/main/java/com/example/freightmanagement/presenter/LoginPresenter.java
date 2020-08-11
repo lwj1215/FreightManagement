@@ -28,12 +28,12 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
                 if (loginBean.getCode()==ResponseCodeEnum.SUCCESS.getCode()) {
                     PrefUtilsData.setIsLogin(true);
                     PrefUtilsData.setToken(loginBean.getData().getToken());
-                    PrefUtilsData.setUserId(loginBean.getData().getUser().getTel());
+                    PrefUtilsData.setType(loginBean.getData().getType()+"");
+                    PrefUtilsData.setUserId(loginBean.getData().getUser().getId()+"");
                     PrefUtilsData.setDriverId(loginBean.getData().getUser().getDriverCertificateId()+"");
                     PrefUtilsData.setWorkId(loginBean.getData().getUser().getWorkCertificateId()+"");
                     PrefUtilsData.setIdCordId(loginBean.getData().getUser().getIdcertificateId()+"");
-                    PrefUtilsData.setMobile(loginBean.getData().getUser().getTel());
-                    BaseResponse response = new Gson().fromJson(json, BaseResponse.class);
+                    PrefUtilsData.setMobile(loginBean.getData().getUser().getTel()+"");
                     mView.getDataSuc(loginBean);
                 }else {
                     mView.onFailed(json);

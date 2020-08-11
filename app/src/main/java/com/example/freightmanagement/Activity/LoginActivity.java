@@ -101,6 +101,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
                 AccountParam accountParam = new AccountParam();
                 accountParam.setPass(password);
                 accountParam.setTel(tel);
+                accountParam.setType("1");
                 mPresenter.login(accountParam);
                 break;
         }

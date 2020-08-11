@@ -49,7 +49,7 @@
                             android:layout_centerInParent="true"
                             android:drawableTop="@mipmap/upload_identity"
                             android:drawablePadding="@dimen/x16"
-                            android:text="上传身份证正面照片"
+                            android:text="身份证正面照片"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
 
@@ -84,7 +84,7 @@
                             android:layout_centerInParent="true"
                             android:drawableTop="@mipmap/upload_identity"
                             android:drawablePadding="@dimen/x16"
-                            android:text="上传身份证反面照片"
+                            android:text="身份证反面照片"
                             android:textSize="@dimen/x28" />
 
                         <ImageView
@@ -125,20 +125,20 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:text="真实姓名"
                             android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
 
-                        <EditText
-                            android:id="@+id/et_real_name"
+                        <TextView
+                            android:id="@+id/tv_real_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的真实姓名"
+                            android:hint=""
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
                     </LinearLayout>
 
                     <View
@@ -163,21 +163,21 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:text="性别"
                             android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
 
-                        <EditText
-                            android:id="@+id/et_detail_address"
+                        <TextView
+                            android:id="@+id/tv_detail_sex"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的性别"
+                            android:hint=""
                             android:paddingRight="@dimen/x30"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
                     </LinearLayout>
 
                     <View
@@ -185,7 +185,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
-                <!--添加现居住地-->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -201,12 +201,12 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="年龄"
+                            android:text="出生日期"
                             android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
 
                         <TextView
-                            android:id="@+id/tv_current_address"
+                            android:id="@+id/tv_age"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -214,12 +214,12 @@
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
                             android:ellipsize="end"
-                            android:hint="请填写您的年龄"
+                            android:hint=""
                             android:maxLines="2"
                             android:paddingRight="@dimen/x30"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
-                            android:textSize="@dimen/x28" />
+                            android:textSize="@dimen/x30" />
                     </LinearLayout>
 
                     <View
@@ -246,15 +246,15 @@
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
-                        <EditText
-                            android:id="@+id/et_card_num"
+                        <TextView
+                            android:id="@+id/tv_card"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的身份证号"
+                            android:hint=""
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
@@ -289,14 +289,14 @@
                             android:textSize="@dimen/x28" />
 
                         <TextView
-                            android:id="@+id/tv_sign_hint"
+                            android:id="@+id/tv_workid"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:text="请填写上岗证号码"
+                            android:text=""
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28" />
 
@@ -333,12 +333,12 @@
                             android:textSize="@dimen/x28" />
 
                         <TextView
-                            android:id="@+id/tv_mobile"
+                            android:id="@+id/tv_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="有效期"
+                            android:text=""
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
