@@ -8,12 +8,18 @@
     tools:context=".Activity.EmploymentContractActivity">
 
 
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
     <TextView
         android:id="@+id/tv_qz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textSize="@dimen/x50"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/x200"
         android:text="点击签字"/>
 
@@ -22,5 +28,5 @@
         android:layout_width="@dimen/x300"
         android:layout_height="@dimen/x150"
         android:layout_gravity="center_horizontal"
-        android:visibility="visible" />
+        android:visibility="gone" />
 </LinearLayout>
