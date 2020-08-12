@@ -1,5 +1,6 @@
 package com.example.freightmanagement.presenter;
 
+import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
@@ -11,13 +12,13 @@ import static com.example.freightmanagement.BuildConfig.BASE_URL;
  * Created by songdechuan on 2020/8/6.
  */
 
-public class TrainingPresenter extends BasePresenter<TrainingConstact.View> implements TrainingConstact {
+public class TrainingSelectPresenter extends BasePresenter<TrainingConstact.View> implements TrainingConstact {
 
 
 
     @Override
     public void getTrainingList() {
-        RestApi.getInstance().post(BASE_URL + "/train/getTrainDatas", "", new OnRequestResultForCommon() {
+        RestApi.getInstance().post(BaseApiConstants.API_XUNLIANTIMU, "", new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 mView.trainingList(json);

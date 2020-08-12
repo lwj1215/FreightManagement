@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.presenter.TrainingSelectPresenter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by songdechuan on 2020/8/10.
  */
 
-public class TrainingSelectActivity extends BaseActivity implements View.OnClickListener {
+public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter> implements TrainingSelectPresenter.View,View.OnClickListener {
 
     private RecyclerView mTrainingList;
     /**
@@ -51,8 +52,14 @@ public class TrainingSelectActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void onLoadData2Remote() {
-
+     mPresenter.getTrainingList();
     }
+
+    @Override
+    protected TrainingSelectPresenter onInitLogicImpl() {
+        return new TrainingSelectPresenter();
+    }
+
     public void initView() {
         mTrainingList = (RecyclerView) findViewById(R.id.training_list);
         mTvStartTraining = (TextView) findViewById(R.id.tv_start_training);
@@ -74,5 +81,10 @@ public class TrainingSelectActivity extends BaseActivity implements View.OnClick
                 startActivity(this,TrainingStartActivity.class);
                 break;
         }
+    }
+
+    @Override
+    public String trainingList(String msg) {
+        return null;
     }
 }

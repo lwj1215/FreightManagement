@@ -45,5 +45,9 @@ public class BaseApiConstants {
      */
     public static final String API_PEIXUNJIEGUO = "/cccc/driver/getDirver/";
 
+    /**
+     * 获取训练题目
+     */
+    public static final String API_XUNLIANTIMU = "/cccc/examination/getExaminationDatas";
 
 }

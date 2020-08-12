@@ -141,5 +141,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
         intent.putExtra(ID,id);
         intent.putExtra(ADMIN_TYPE,type);
         startActivity(intent);
+        finish();
     }
 }

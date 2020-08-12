@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
+import com.example.freightmanagement.Activity.PromiseBookActivity;
+import com.example.freightmanagement.Activity.ResponsibilityBookActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
 import com.example.freightmanagement.Activity.TrainingSelectActivity;
 import com.example.freightmanagement.Activity.VehicleInformationActivity;
@@ -71,6 +73,10 @@ public class HomeFragment extends BaseFragment {
                     startActivity(new Intent(activity, TrainingSelectActivity.class));
                 }else if (position == 3) {
                     startActivity(new Intent(activity, EmploymentContractActivity.class));
+                }else if (position == 4) {
+                    startActivity(new Intent(activity, PromiseBookActivity.class));
+                }else if (position == 5) {
+                    startActivity(new Intent(activity, ResponsibilityBookActivity.class));
                 }else if (position==6){
                     boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
                     if (!isPermissionOK) {

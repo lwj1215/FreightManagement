@@ -10,7 +10,8 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -25,47 +26,75 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.VehicleInformationActivity" />
-        <activity android:name=".Activity.DriverInformationActivity" />
-        <activity android:name=".Activity.EmploymentContractActivity" />
-        <activity android:name=".Activity.CompanyRegisterActivity">
-        </activity>
-
-        <activity android:name=".Activity.CarOwnerActivity">
-
-        </activity>
-        <activity android:name=".Activity.DriverConfigActivity">
-
-        </activity>
-        <activity android:name=".Activity.TrainingSelectActivity">
+        <activity android:name=".Activity.PromiseBookActivity"></activity>
+        <activity
+            android:name=".Activity.ResponsibilityBookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.VehicleInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DriverInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.EmploymentContractActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CompanyRegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CarOwnerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.DriverConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TrainingSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TrainingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ForgetPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TrainingStartActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.TrainingAnswerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.TrainingActivity"/>
-        <activity android:name=".Activity.RegisterActivity"/>
-        <activity android:name=".Activity.ForgetPasswordActivity"/>
-        <activity android:name=".Activity.TrainingStartActivity"/>
-        <activity android:name=".Activity.TrainingAnswerActivity"/>
-
-        <activity android:name=".Activity.LoginActivity">
-
-
-        </activity>
-        <activity android:name=".Activity.SignUpActivity">
-
-        </activity>
-        <activity android:name=".Activity.ChangePasswordActivity" />
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SWCameraStreamingActivity"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize" />
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.CarInformationActivity" />
-        <activity android:name=".Activity.RoleSelectActivity">
-        </activity>
+        <activity
+            android:name=".Activity.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CarInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.RoleSelectActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
