@@ -33,8 +33,8 @@ public class QusetionnaireAdapter extends BaseAdapter {
     }
 
 
-    public void setData(List<TrainingSelectBean.DataBean> data) {
-        this.mDatas = data;
+    public void setData(List<TrainingSelectBean.DataBean> answerList) {
+        this.mDatas = answerList;
         notifyDataSetChanged();
     }
 

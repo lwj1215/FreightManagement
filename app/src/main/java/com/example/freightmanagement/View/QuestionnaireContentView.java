@@ -43,6 +43,7 @@ public class QuestionnaireContentView extends View  {
     private int age;
 //    private List<NewHealthAnswerAll> answerList;
     private EditText editText;
+    private TrainingSelectBean.DataBean.OptionsMapBean answerList;
 
     private QuestionnaireContentView(Context context) {
         super(context);
@@ -71,7 +72,7 @@ public class QuestionnaireContentView extends View  {
     public void initData() {
         mRecyclerView = new RecyclerView(mActivity);
         mRecyclerView.setLayoutManager(new FullyGridLayoutManager(mActivity, 2));
-//        answerList = questionEntity.getValuelist();
+        answerList = questionEntity.getOptionsMap();
         showViewDatas();
     }
 
@@ -86,7 +87,7 @@ public class QuestionnaireContentView extends View  {
 
     /*显示页面元素*/
     private void showViewDatas() {
-        question.setText("Q" + String.valueOf(titleNum) + ": " + questionEntity.getId());
+        question.setText("Q" + String.valueOf(titleNum) + ": " + questionEntity.getContent());
         createMoreEditTextView();
 
     }

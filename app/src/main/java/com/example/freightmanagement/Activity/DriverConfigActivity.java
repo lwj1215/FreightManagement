@@ -225,7 +225,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 takeIDCardReverse();
                 break;
             case R.id.tv_srue:
-
+                startActivity(new Intent(this,MainActivity.class));
                 break;
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);

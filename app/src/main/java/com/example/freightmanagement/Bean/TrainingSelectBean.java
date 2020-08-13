@@ -7,11 +7,15 @@ public class TrainingSelectBean {
     /**
      * code : 0
      * message : 成功
-     * data : [{"id":1,"type":1,"content":"1+2+3+4","isActive":1,"createTime":1596427338000,"updateTime":1597206408000,"options":"A:1 B:2 C:3 D:10","rightKey":null},{"id":5,"type":2,"content":"奥术大师","isActive":1,"createTime":1597041288000,"updateTime":1597150413000,"options":"正确  不正确","rightKey":null},{"id":2,"type":1,"content":"1+2","isActive":0,"createTime":1596534343000,"updateTime":1597139877000,"options":"11111","rightKey":null}]
+     * data : [{"id":12,"type":2,"content":"1+1等于2","isActive":1,"createTime":1597305869000,"updateTime":1597305869000,"options":"A:正确,B:错误","rightKey":null,"file":null,"index":1,"optionsMap":{"A":"正确","B":"错误"}},{"id":5,"type":1,"content":"1加1等于几","isActive":1,"createTime":1597305798000,"updateTime":1597305798000,"options":"A:2,B:3","rightKey":null,"file":null,"index":2,"optionsMap":{"A":"2","B":"3"}}]
+     * type : 1
+     * token : 2ojd68KkJQKJHEVx2TbBXz3yl7fNb+dY
      */
 
     private int code;
     private String message;
+    private String type;
+    private String token;
     private List<DataBean> data;
 
     public int getCode() {
@@ -30,6 +34,22 @@ public class TrainingSelectBean {
         this.message = message;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public List<DataBean> getData() {
         return data;
     }
@@ -40,14 +60,17 @@ public class TrainingSelectBean {
 
     public static class DataBean {
         /**
-         * id : 1
-         * type : 1
-         * content : 1+2+3+4
+         * id : 12
+         * type : 2
+         * content : 1+1等于2
          * isActive : 1
-         * createTime : 1596427338000
-         * updateTime : 1597206408000
-         * options : A:1 B:2 C:3 D:10
+         * createTime : 1597305869000
+         * updateTime : 1597305869000
+         * options : A:正确,B:错误
          * rightKey : null
+         * file : null
+         * index : 1
+         * optionsMap : {"A":"正确","B":"错误"}
          */
 
         private int id;
@@ -58,6 +81,9 @@ public class TrainingSelectBean {
         private long updateTime;
         private String options;
         private Object rightKey;
+        private Object file;
+        private int index;
+        private OptionsMapBean optionsMap;
 
         public int getId() {
             return id;
@@ -121,6 +147,56 @@ public class TrainingSelectBean {
 
         public void setRightKey(Object rightKey) {
             this.rightKey = rightKey;
+        }
+
+        public Object getFile() {
+            return file;
+        }
+
+        public void setFile(Object file) {
+            this.file = file;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public OptionsMapBean getOptionsMap() {
+            return optionsMap;
+        }
+
+        public void setOptionsMap(OptionsMapBean optionsMap) {
+            this.optionsMap = optionsMap;
+        }
+
+        public static class OptionsMapBean {
+            /**
+             * A : 正确
+             * B : 错误
+             */
+
+            private String A;
+            private String B;
+
+            public String getA() {
+                return A;
+            }
+
+            public void setA(String A) {
+                this.A = A;
+            }
+
+            public String getB() {
+                return B;
+            }
+
+            public void setB(String B) {
+                this.B = B;
+            }
         }
     }
 }

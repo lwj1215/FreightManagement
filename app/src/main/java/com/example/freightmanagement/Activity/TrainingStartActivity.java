@@ -104,7 +104,7 @@ public class TrainingStartActivity extends BaseActivity<TrainingSelectPresenter>
             switch (data.get(i).getType()) {
                 case 1:
                 case 2:
-                    baseFragment = QuestionnaireFragment.newInstance(data, i + 1, data.get(i).getId());
+                    baseFragment = QuestionnaireFragment.newInstance(data, i + 1, 1);
                     break;
             }
             fragmentList.add(baseFragment);

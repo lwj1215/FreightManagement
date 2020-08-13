@@ -32,7 +32,7 @@
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
         android:fillViewport="false"
-        android:scrollbars="none"></ScrollView>
+        android:scrollbars="none"/>
 
     <ScrollView
         android:id="@+id/health_fillout_question_physical_edit_scrollview"
@@ -42,5 +42,5 @@
         android:layout_marginRight="10dp"
         android:fillViewport="false"
         android:scrollbars="none"
-        android:visibility="gone"></ScrollView>
+        android:visibility="gone"/>
 </RelativeLayout>
