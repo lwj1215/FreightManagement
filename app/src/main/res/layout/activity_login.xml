@@ -109,9 +109,6 @@
             android:textSize="@dimen/x24" />
     </RelativeLayout>
 
-
-
-
     <TextView
         android:id="@+id/tv_srue"
         style="@style/bottom_button_style"
@@ -121,5 +118,32 @@
         android:layout_marginTop="@dimen/x150"
         android:layout_marginRight="@dimen/x90"
         android:text="登录" />
-
+    <RadioGroup
+        android:id="@+id/login_rg"
+        android:layout_marginTop="@dimen/x40"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/login_rb1"
+            android:text="驾驶员"
+            android:checked="true"
+            android:buttonTint="@color/blue_079EEB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/login_rb2"
+            android:text="车主"
+            android:buttonTint="@color/blue_079EEB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/login_rb3"
+            android:text="企业"
+            android:buttonTint="@color/blue_079EEB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
 </LinearLayout>

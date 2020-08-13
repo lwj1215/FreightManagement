@@ -23,7 +23,6 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-
                 TokenBean loginBean = new Gson().fromJson(json, TokenBean.class);
                 if (loginBean.getCode()==ResponseCodeEnum.SUCCESS.getCode()) {
                     PrefUtilsData.setIsLogin(true);

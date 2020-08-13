@@ -124,8 +124,6 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
 
     }
 
-
-
     public void initView() {
         mLine = (View) findViewById(R.id.line);
         mTvCard1 = (TextView) findViewById(R.id.tv_card1);
@@ -148,11 +146,6 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
         mCloseBusinessFont = (ImageView) findViewById(R.id.close_business_font);
         mReBusiness = (RelativeLayout) findViewById(R.id.re_business);
         mReBusiness.setOnClickListener(this);
-//        mTvBusiness = (TextView) findViewById(R.id.tv_business);
-//        mIvBusinessRevers = (ImageView) findViewById(R.id.iv_business_revers);
-//        mCloseBusinessReverse = (ImageView) findViewById(R.id.close_business_reverse);
-//        mReBusinessReverse = (RelativeLayout) findViewById(R.id.re_business_reverse);
-//        mReBusinessReverse.setOnClickListener(this);
         mTvSign = (TextView) findViewById(R.id.tv_sign);
         mIvSign = (ImageView) findViewById(R.id.iv_sign);
         mIvSign.setOnClickListener(this);
@@ -201,8 +194,6 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_business1:
                 break;
-//            case R.id.re_business_reverse:
-//                break;
         }
     }
 

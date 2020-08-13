@@ -1,6 +1,7 @@
 package com.example.freightmanagement.Bean;
 
 import java.util.List;
+import java.util.Map;
 
 public class TrainingSelectBean {
 
@@ -83,7 +84,7 @@ public class TrainingSelectBean {
         private Object rightKey;
         private Object file;
         private int index;
-        private OptionsMapBean optionsMap;
+        private Map<String ,String> optionsMap;
 
         public int getId() {
             return id;
@@ -165,38 +166,12 @@ public class TrainingSelectBean {
             this.index = index;
         }
 
-        public OptionsMapBean getOptionsMap() {
+        public Map<String, String> getOptionsMap() {
             return optionsMap;
         }
 
-        public void setOptionsMap(OptionsMapBean optionsMap) {
+        public void setOptionsMap(Map<String, String> optionsMap) {
             this.optionsMap = optionsMap;
-        }
-
-        public static class OptionsMapBean {
-            /**
-             * A : 正确
-             * B : 错误
-             */
-
-            private String A;
-            private String B;
-
-            public String getA() {
-                return A;
-            }
-
-            public void setA(String A) {
-                this.A = A;
-            }
-
-            public String getB() {
-                return B;
-            }
-
-            public void setB(String B) {
-                this.B = B;
-            }
         }
     }
 }

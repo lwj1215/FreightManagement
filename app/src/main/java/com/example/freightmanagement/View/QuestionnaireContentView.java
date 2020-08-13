@@ -17,6 +17,8 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.FullyGridLayoutManager;
 import com.example.freightmanagement.Utils.RadioCallBack;
 
+import java.util.Map;
+
 /**
  * 普通问卷页面
  */
@@ -43,7 +45,7 @@ public class QuestionnaireContentView extends View  {
     private int age;
 //    private List<NewHealthAnswerAll> answerList;
     private EditText editText;
-    private TrainingSelectBean.DataBean.OptionsMapBean answerList;
+    private TrainingSelectBean.DataBean answerList;
 
     private QuestionnaireContentView(Context context) {
         super(context);
@@ -72,7 +74,7 @@ public class QuestionnaireContentView extends View  {
     public void initData() {
         mRecyclerView = new RecyclerView(mActivity);
         mRecyclerView.setLayoutManager(new FullyGridLayoutManager(mActivity, 2));
-        answerList = questionEntity.getOptionsMap();
+        Map<String, String> optionsMap = questionEntity.getOptionsMap();
         showViewDatas();
     }
 

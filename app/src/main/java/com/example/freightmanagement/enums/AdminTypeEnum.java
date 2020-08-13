@@ -6,22 +6,25 @@ package com.example.freightmanagement.enums;
 
 public enum  AdminTypeEnum {
 
-    DRIVER(1,"驾驶员"),
-    CAR_OWNER(2,"车主"),
-    COMPANY(3,"企业");
+    DRIVER(1,"驾驶员","1"),
+    CAR_OWNER(2,"车主","2"),
+    COMPANY(3,"企业","3");
 
     private Integer code;
 
     private String msg;
 
-    AdminTypeEnum(int code, String msg){
+    private String value;
+
+    AdminTypeEnum(int code, String msg,String value){
         this.code = code;
         this.msg = msg;
+        this.value = value;
     }
 
-    public static ResponseCodeEnum find(int timeType) {
-        ResponseCodeEnum[] values = ResponseCodeEnum.values();
-        for (ResponseCodeEnum value : values) {
+    public static AdminTypeEnum find(int timeType) {
+        AdminTypeEnum[] values = AdminTypeEnum.values();
+        for (AdminTypeEnum value : values) {
             if (value.getCode().equals(timeType)){
                 return value;
             }
@@ -43,5 +46,13 @@ public enum  AdminTypeEnum {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

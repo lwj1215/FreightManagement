@@ -5,10 +5,10 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -19,7 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
+import android.widget.Toast;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
@@ -42,6 +42,10 @@ import com.google.gson.Gson;
 import java.io.File;
 
 import androidx.core.app.ActivityCompat;
+import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.picker.OptionPicker;
+import cn.qqtheme.framework.util.ConvertUtils;
+import cn.qqtheme.framework.widget.WheelView;
 
 /**
  * Created by songdechuan on 2020/8/6.
@@ -51,6 +55,13 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
     private static final int REQUEST_CODE_CAMERA = 102;
+    private static final int REQUEST_CODE_DRIVING_LICENSE = 121;
+    private static final int DATE_TYPE_START_DATE = 300;
+    private static final int DATE_TYPE_END_DATE = 301;
+    private static final int DATE_TYPE_FIRST_RECEIVE_DATE = 302;
+    private static final int DATE_TYPE_EFFECTIVE_DATE= 303;
+
+
     /**
      * 上传身份证正面照片
      */
@@ -122,6 +133,45 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     private Dialog bottomDialog;
     private View bottomView;
     private ElectronicSignature vSignView;
+    /**
+     * 上传驾驶证正页照片
+     */
+    private TextView mTvDriver;
+    private ImageView mIvDriverFront;
+    private ImageView mCloseDriverFont;
+    private RelativeLayout mReDriverPic;
+    /**
+     * 上传驾驶证副页照片
+     */
+    private TextView mTvDriver2;
+    private ImageView mIvDriverReverse;
+    private ImageView mCloseDriverReverse;
+    private RelativeLayout mReDriverReverse;
+    /**
+     * 请选择您的准驾类型
+     */
+    private TextView mEtPermitType;
+    /**
+     * 开始日期
+     */
+    private TextView mTvStartDate;
+    /**
+     * 结束日期
+     */
+    private TextView mEtEndDate;
+    /**
+     * 请填写从业资格类别
+     */
+    private EditText mTvQualificationType;
+    /**
+     * 选择日期
+     */
+    private TextView mTvFirstReceive;
+    /**
+     * 选择日期
+     */
+    private TextView mTvEffectiveDate;
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_driver_config;
@@ -129,9 +179,9 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     protected void onInitView() {
+        setDefaultTitle("驾驶员注册");
         checkGalleryPermission();
         initView();
-
     }
 
     @Override
@@ -211,6 +261,31 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
         bottomView.findViewById(R.id.btn_no).setOnClickListener(this);
         bottomView.findViewById(R.id.btn_yes).setOnClickListener(this);
         vSignView = (ElectronicSignature) bottomView.findViewById(R.id.sign_view);
+        mTvDriver = (TextView) findViewById(R.id.tv_driver);
+        mIvDriverFront = (ImageView) findViewById(R.id.iv_driver_front);
+        mCloseDriverFont = (ImageView) findViewById(R.id.close_driver_Font);
+        mCloseDriverFont.setOnClickListener(this);
+        mReDriverPic = (RelativeLayout) findViewById(R.id.re_driver_pic);
+        mReDriverPic.setOnClickListener(this);
+        mTvDriver2 = (TextView) findViewById(R.id.tv_driver2);
+        mTvDriver2.setOnClickListener(this);
+        mIvDriverReverse = (ImageView) findViewById(R.id.iv_driver_reverse);
+        mCloseDriverReverse = (ImageView) findViewById(R.id.close_driver_reverse);
+        mCloseDriverReverse.setOnClickListener(this);
+        mReDriverReverse = (RelativeLayout) findViewById(R.id.re_driver_reverse);
+        mReDriverReverse.setOnClickListener(this);
+        mEtPermitType = (TextView) findViewById(R.id.et_permit_type);
+        mTvStartDate = (TextView) findViewById(R.id.tv_start_date);
+        mEtEndDate = (TextView) findViewById(R.id.et_end_date);
+        mTvSignHint = (EditText) findViewById(R.id.tv_sign_hint);
+        mTvQualificationType = (EditText) findViewById(R.id.tv_qualification_type);
+        mTvFirstReceive = (TextView) findViewById(R.id.tv_first_receive);
+        mTvFirstReceive.setOnClickListener(this);
+        mTvEffectiveDate = (TextView) findViewById(R.id.tv_effective_date);
+        mTvEffectiveDate.setOnClickListener(this);
+        mEtPermitType.setOnClickListener(this);
+        mTvStartDate.setOnClickListener(this);
+        mEtEndDate.setOnClickListener(this);
     }
 
     @Override
@@ -244,13 +319,45 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
                 break;
+            case R.id.close_driver_Font:
+                break;
+            case R.id.re_driver_pic:
+
+                Intent intent = new Intent(this, CameraActivity.class);
+                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                        CameraActivity.CONTENT_TYPE_GENERAL);
+                startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
+                break;
+            case R.id.tv_driver2:
+                break;
+            case R.id.close_driver_reverse:
+                break;
+            case R.id.re_driver_reverse:
+                break;
+            case R.id.tv_first_receive:
+                onYearMonthDayPicker(DATE_TYPE_START_DATE);
+                break;
+            case R.id.tv_effective_date:
+                onYearMonthDayPicker(DATE_TYPE_END_DATE);
+                break;
+            case R.id.et_permit_type:
+                onOptionPicker();
+                break;
+            case R.id.tv_start_date:
+                onYearMonthDayPicker(DATE_TYPE_FIRST_RECEIVE_DATE);
+                break;
+            case R.id.et_end_date:
+                onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
+                break;
         }
     }
 
     /**
      * 正面身份证拍照
      */
-    private void takeIDCard(){
+    private void takeIDCard() {
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication()).getAbsolutePath());
@@ -281,9 +388,10 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 if (result != null) {
                     result.getAddress();
 //                    alertText(idCardSide, new Gson().toJson(result));
-                   setIDCardInfo(idCardSide,new Gson().toJson(result),filePath);
+                    setIDCardInfo(idCardSide, new Gson().toJson(result), filePath);
                 }
             }
+
             @Override
             public void onError(OCRError error) {
                 alertText("", error.getMessage());
@@ -295,7 +403,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                switch (idCardSide){
+                switch (idCardSide) {
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
@@ -317,7 +425,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     /**
      * 反面身份证扫描
      */
-    private void takeIDCardReverse(){
+    private void takeIDCardReverse() {
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication()).getAbsolutePath());
@@ -361,6 +469,16 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 }
             }
         }
+        // 识别成功回调，驾驶证识别
+        if (requestCode == REQUEST_CODE_DRIVING_LICENSE && resultCode == Activity.RESULT_OK) {
+            RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath(),
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+//                            infoPopText(result);
+                        }
+                    });
+        }
     }
 
     private String getRealPathFromURI(Uri contentURI) {
@@ -384,10 +502,82 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 ToastUtils.popUpToast(title);
 
                 ToastUtils.popUpToast(message);
-                Log.d("title",title);
-                Log.d("message",message);
+                Log.d("title", title);
+                Log.d("message", message);
 
             }
         });
     }
+
+    /**
+     * 准驾车型选择
+     */
+    public void onOptionPicker() {
+        OptionPicker picker = new OptionPicker(this, new String[]{
+                "A1", "A2", "B1", "B2", "C1", "C2"
+        });
+        picker.setCanceledOnTouchOutside(false);
+        picker.setDividerRatio(WheelView.DividerConfig.FILL);
+//        picker.setShadowColor(Color.RED, 40);
+        picker.setSelectedIndex(1);
+        picker.setCycleDisable(true);
+        picker.setTextSize(18);
+        picker.setOnOptionPickListener(new OptionPicker.OnOptionPickListener() {
+            @Override
+            public void onOptionPicked(int index, String item) {
+//                showToast("index=" + index + ", item=" + item);
+            }
+        });
+        picker.show();
+    }
+    public void onYearMonthDayPicker(final int type) {
+        final DatePicker picker = new DatePicker(this);
+        picker.setCanceledOnTouchOutside(true);
+        picker.setTextSize(20);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setRangeEnd(2111, 1, 11);
+        picker.setRangeStart(2016, 8, 29);
+        picker.setSelectedItem(2050, 10, 14);
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                switch (type){
+                    case DATE_TYPE_START_DATE:
+
+                        break;
+                    case DATE_TYPE_END_DATE:
+                        break;
+                    case DATE_TYPE_FIRST_RECEIVE_DATE:
+                        break;
+                    case DATE_TYPE_EFFECTIVE_DATE:
+                        break;
+                }
+            }
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
+    }
+//    private boolean checkTokenStatus() {
+//        if (!hasGotToken) {
+//            Toast.makeText(getApplicationContext(), "token还未成功获取", Toast.LENGTH_LONG).show();
+//        }
+//        return hasGotToken;
+//    }
 }

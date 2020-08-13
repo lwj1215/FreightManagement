@@ -1,31 +1,31 @@
 package com.example.freightmanagement.Activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Base.BaseActivity;
-import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.enums.AdminTypeEnum;
 import com.example.freightmanagement.model.AccountParam;
-import com.example.freightmanagement.model.AdminBean;
 import com.example.freightmanagement.presenter.LoginPresenter;
+import com.google.gson.Gson;
+
+import java.util.Map;
 
 import static com.example.freightmanagement.common.Constants.ADMIN_TYPE;
-import static com.example.freightmanagement.common.Constants.ID;
 
 /**
  * Created by songdechuan on 2020/8/6.
  */
 
-public class LoginActivity extends BaseActivity<LoginPresenter> implements  LoginPresenter.View,View.OnClickListener {
+public class LoginActivity extends BaseActivity<LoginPresenter> implements LoginPresenter.View, View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     /**
      * 请输入手机号
      */
@@ -46,6 +46,21 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
      * 登录
      */
     private TextView mTvSrue;
+    /**
+     * 驾驶员
+     */
+    private RadioButton mLoginRb1;
+    /**
+     * 车主
+     */
+    private RadioButton mLoginRb2;
+    /**
+     * 企业
+     */
+    private RadioButton mLoginRb3;
+    private RadioGroup mLoginRg;
+    private String type = "1";
+    private int code = 1;
 
     @Override
     public int setLayoutResource() {
@@ -59,7 +74,6 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
 
     @Override
     protected void onLoadData2Remote() {
-
     }
 
 
@@ -72,6 +86,11 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
         mTvForget.setOnClickListener(this);
         mTvSrue = (TextView) findViewById(R.id.tv_srue);
         mTvSrue.setOnClickListener(this);
+        mLoginRb1 = (RadioButton) findViewById(R.id.login_rb1);
+        mLoginRb2 = (RadioButton) findViewById(R.id.login_rb2);
+        mLoginRb3 = (RadioButton) findViewById(R.id.login_rb3);
+        mLoginRg = (RadioGroup) findViewById(R.id.login_rg);
+        mLoginRg.setOnCheckedChangeListener(this);
     }
 
     @Override
@@ -80,19 +99,19 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
             default:
                 break;
             case R.id.tv_register:
-                startActivity(this,RegisterActivity.class);
+                startActivity(this, RegisterActivity.class);
                 break;
             case R.id.tv_forget:
-                startActivity(this,ForgetPasswordActivity.class);
+                startActivity(this, ForgetPasswordActivity.class);
                 break;
             case R.id.tv_srue:
                 String tel = mEdtTxtYzmImg.getText().toString();
-                if(StringUtils.isEmpty(tel)){
+                if (StringUtils.isEmpty(tel)) {
                     ToastUtils.popUpToast(R.string.tel_cannot_be_empty);
                     return;
                 }
                 String password = mEdtTxtPasswordPhone.getText().toString();
-                if(StringUtils.isEmpty(password)){
+                if (StringUtils.isEmpty(password)) {
                     ToastUtils.popUpToast(R.string.password_cannot_be_empty);
                     return;
                 }
@@ -101,7 +120,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
                 AccountParam accountParam = new AccountParam();
                 accountParam.setPass(password);
                 accountParam.setTel(tel);
-                accountParam.setType("1");
+                accountParam.setType(type);
                 mPresenter.login(accountParam);
                 break;
         }
@@ -109,21 +128,43 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
 
     @Override
     public void getDataSuc(TokenBean data) {
-        if(data != null){
+        if (data != null) {
             TokenBean.DataBean dataBean = data.getData();
             TokenBean.DataBean.UserBean user = dataBean.getUser();
-            int driverCertificateId = user.getDriverCertificateId();
-            int idcertificateId = user.getIdcertificateId();
-            int workCertificateId = user.getWorkCertificateId();
-            if(driverCertificateId != 0){
-                startActivity(driverCertificateId,MainActivity.class, AdminTypeEnum.DRIVER.getCode());
-            }else if(idcertificateId != 0){
-                startActivity(idcertificateId,MainActivity.class,AdminTypeEnum.DRIVER.getCode());
-            }else if(workCertificateId != 0){
-                startActivity(workCertificateId,MainActivity.class,AdminTypeEnum.DRIVER.getCode());
-            }else{
-                startActivity(new Intent(this,RoleSelectActivity.class));
+//            int driverCertificateId = user.getDriverCertificateId();
+//            int idcertificateId = user.getIdcertificateId();
+//            int workCertificateId = user.getWorkCertificateId();
+//            if (driverCertificateId != 0) {
+//                startActivity(driverCertificateId, MainActivity.class,code);
+//            } else if (idcertificateId != 0) {
+//                startActivity(idcertificateId, MainActivity.class, code);
+//            } else if (workCertificateId != 0) {
+//                startActivity(workCertificateId, MainActivity.class,code);
+//            } else {
+//                startActivity(new Intent(this, RoleSelectActivity.class));
+//            }
+            int type = dataBean.getType();
+            switch (type){
+                case 0:
+                    if(this.code == 1){
+                        startActivity(DriverConfigActivity.class,type);
+                    }else if(this.code == 2){
+                        startActivity(CarOwnerActivity.class,type);
+                    }else if(this.code == 3){
+                        startActivity(CompanyRegisterActivity.class,type);
+                    }
+                    break;
+                case 1:
+                    startActivity( MainActivity.class,code);
+                    break;
+                case 2:
+                    startActivity( MainActivity.class,code);
+                    break;
+                case 3:
+                    startActivity( MainActivity.class,code);
+                    break;
             }
+
         }
     }
 
@@ -136,11 +177,31 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements  Logi
     protected LoginPresenter onInitLogicImpl() {
         return new LoginPresenter();
     }
-    private void startActivity(int id,Class<?> cls,int type){
+
+    private void startActivity(Class<?> cls, int type) {
         Intent intent = new Intent(this, cls);
-        intent.putExtra(ID,id);
-        intent.putExtra(ADMIN_TYPE,type);
+//        intent.putExtra(ID, id);
+        intent.putExtra(ADMIN_TYPE, type);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
+        switch (checkedId){
+            case R.id.login_rb1:
+                type = AdminTypeEnum.DRIVER.getValue();
+                code = AdminTypeEnum.DRIVER.getCode();
+                break;
+            case R.id.login_rb2:
+                type = AdminTypeEnum.CAR_OWNER.getValue();
+                code = AdminTypeEnum.CAR_OWNER.getCode();
+                break;
+            case R.id.login_rb3:
+                type = AdminTypeEnum.COMPANY.getValue();
+                code = AdminTypeEnum.COMPANY.getCode();
+                break;
+        }
     }
 }
