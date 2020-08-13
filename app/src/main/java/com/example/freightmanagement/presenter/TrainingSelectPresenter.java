@@ -34,4 +34,9 @@ public class TrainingSelectPresenter extends BasePresenter<TrainingSelectConstac
             }
         });
     }
+
+//    @Override
+//    public void getTestList(int id) {
+//
+//    }
 }

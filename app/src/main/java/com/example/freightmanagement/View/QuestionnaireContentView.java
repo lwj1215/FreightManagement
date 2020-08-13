@@ -45,7 +45,8 @@ public class QuestionnaireContentView extends View  {
     private int age;
 //    private List<NewHealthAnswerAll> answerList;
     private EditText editText;
-    private TrainingSelectBean.DataBean answerList;
+//    private TrainingSelectBean.DataBean answerList;
+    private Map<String, String> answerList;
 
     private QuestionnaireContentView(Context context) {
         super(context);
@@ -74,7 +75,7 @@ public class QuestionnaireContentView extends View  {
     public void initData() {
         mRecyclerView = new RecyclerView(mActivity);
         mRecyclerView.setLayoutManager(new FullyGridLayoutManager(mActivity, 2));
-        Map<String, String> optionsMap = questionEntity.getOptionsMap();
+        answerList = questionEntity.getOptionsMap();
         showViewDatas();
     }
 
@@ -101,7 +102,7 @@ public class QuestionnaireContentView extends View  {
         ListView listView = (ListView) view3.findViewById(R.id.listView);
         QusetionnaireAdapter listAdapter = new QusetionnaireAdapter(getContext());
         listView.setAdapter(listAdapter);
-//        listAdapter.setData(answerList);
+        listAdapter.setData(answerList);
         scrollView.addView(view3);
     }
 

@@ -8,6 +8,7 @@ import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.presenter.TrainingPresenter;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -86,8 +87,17 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
         }
     }
 
+
+
     @Override
     public void trainingList(List<TrainingSelectBean.DataBean> data) {
 
     }
+
+//    @Override
+//    public void testResult(String msg) {
+//
+//    }
+
+
 }

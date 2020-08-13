@@ -11,8 +11,13 @@ public interface TrainingConstact {
 
     void getTrainingList();
 
+    void getTestList(int id);
+
     interface View extends BaseView{
 
         String trainingList(String msg);
+
+        void testResult(String msg);
+
     }
 }

@@ -58,4 +58,9 @@ public class TrainingActivity extends BaseActivity<TrainingPresenter> implements
         }
         return null;
     }
+
+    @Override
+    public void testResult(String msg) {
+
+    }
 }

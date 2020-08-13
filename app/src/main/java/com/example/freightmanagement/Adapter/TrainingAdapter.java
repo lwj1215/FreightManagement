@@ -11,6 +11,8 @@ import com.example.freightmanagement.R;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 /**
  * Created by songdechuan on 2020/8/6.
  */
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder> {
     private final LayoutInflater layoutInflater;
     private Context context;
+    private List<String> dataList;
 
     public TrainingAdapter(Context context) {
         this.context = context;
@@ -25,7 +28,7 @@ public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.Train
     }
     @Override
     public TrainingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TrainingAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.home_item_layout, parent, false));
+        return new TrainingAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.training_item_layout, parent, false));
     }
 
     @Override
@@ -35,19 +38,20 @@ public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.Train
 
     @Override
     public int getItemCount() {
-        return 0;
+        return null == dataList || dataList.size() == 0 ? 0 : dataList.size();
+
     }
 
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
-        ImageView img;
-        TextView tv_name;
+        TextView tv_score;
+        TextView tv_date;
         private View itemView;
 
         public TrainingViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            tv_name = itemView.findViewById(R.id.tv_name);
-            img = itemView.findViewById(R.id.home_jp_img);
+            tv_date = itemView.findViewById(R.id.tv_date);
+            tv_score = itemView.findViewById(R.id.tv_score);
         }
     }
 }

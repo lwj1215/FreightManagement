@@ -16,6 +16,7 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.StringUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -26,29 +27,34 @@ public class QusetionnaireAdapter extends BaseAdapter {
     private TextView textView;
 
     private int selectorPosition;
-    private List<TrainingSelectBean.DataBean> mDatas;
+    private Map<String, String> mDatas;
 
     public QusetionnaireAdapter(Context context) {
         this.mContext = context;
     }
 
 
-    public void setData(List<TrainingSelectBean.DataBean> answerList) {
+    public void setData(Map<String, String> answerList) {
         this.mDatas = answerList;
         notifyDataSetChanged();
     }
 
     /*保存单选题、多选题答案*/
-    private void saveCurrentSelectValue(String value, String answerName) {
-        for (int i = 0; i < mDatas.size(); i++) {
-            TrainingSelectBean.DataBean answerEntity = mDatas.get(i);
-            if (answerEntity.getContent().equals(answerName)) {
-//                answerEntity.setAnswerValue(value);
-            }
-
-        }
-
-    }
+//    private void saveCurrentSelectValue(String value, String answerName) {
+//        for(Map.Entry<String ,String > entry :mDatas.entrySet()){
+//            String key = entry.getKey();
+//            String msg = entry.getValue();
+//                answerEntity.setAnswerValue(msg);
+//
+//        }
+////        for (int i = 0; i < mDatas.size(); i++) {
+////            String s = mDatas.get(i);
+////            if (answerEntity.getContent().equals(answerName)) {
+////            }
+////
+////        }
+//
+//    }
 
     @Override
     public int getCount() {
@@ -82,7 +88,7 @@ public class QusetionnaireAdapter extends BaseAdapter {
             viewHodler = (QusetionnaireAdapter.ViewHodler) convertView.getTag();
         }
 
-        viewHodler.text.setText(mDatas.get(position).getContent());
+//        viewHodler.text.setText(mDatas.get(position).getContent());
 //        if (!StringUtils.isEmpty(item.getAnswerValue()) && item.getAnswerValue().equals(String.valueOf(item.getUpload_id()))) {
 //            item.setSelect(true);
 //        }

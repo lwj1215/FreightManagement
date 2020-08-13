@@ -34,9 +34,14 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
+import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
+import com.example.freightmanagement.model.CertificateDriverParam;
+import com.example.freightmanagement.model.CertificateWorkParam;
+import com.example.freightmanagement.model.DriverInfoSubmitParam;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
+import com.example.freightmanagement.model.IDCardParam;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -96,33 +101,33 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     /**
      * 请填写上岗证号码
      */
-    private TextView mTvSignHint;
+    private EditText mEtPostCard;
     private ImageView mImgSign;
     private LinearLayout mLinSign;
     /**
      * 有效期
      */
-    private TextView mTvMobile;
+//    private TextView mTvMobile;
     /**
      * 2020/08/4
      */
-    private TextView mTvSignDate;
+//    private TextView mTvSignDate;
     /**
      * 60分
      */
-    private TextView mTvSignFen;
+//    private TextView mTvSignFen;
     /**
      * KE8581
      */
-    private TextView mTvSignCph;
+//    private TextView mTvSignCph;
     /**
      * Jeep
      */
-    private TextView mTvSignPp;
+//    private TextView mTvSignPp;
     /**
      * 45sa
      */
-    private TextView mTvSignXh;
+//    private TextView mTvSignXh;
     private RelativeLayout mActivityNewDoctorSignProtocol;
     private final String FRONT = "front";
     private final String BACK = "back";
@@ -171,6 +176,16 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
      * 选择日期
      */
     private TextView mTvEffectiveDate;
+
+    private String idCardFrontPath = "";
+    private String idCardBackPath = "";
+    private String driverPath = "";
+    private String signUrl = "";
+    private String permitType;
+    private String startTime;
+    private String endTime;
+    private String firstReceiveTime;
+    private String effectiveTime;
 
     @Override
     public int setLayoutResource() {
@@ -240,17 +255,17 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
         mTvCurrentAddress = (EditText) findViewById(R.id.tv_current_address);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
         mEtCardNum = (EditText) findViewById(R.id.et_card_num);
-        mTvSignHint = (TextView) findViewById(R.id.tv_sign_hint);
+        mEtPostCard = (EditText) findViewById(R.id.et_post_card);
         mImgSign = (ImageView) findViewById(R.id.img_sign);
         mLinSign = (LinearLayout) findViewById(R.id.lin_sign);
-        mTvMobile = (TextView) findViewById(R.id.tv_mobile);
-        mTvSignDate = (TextView) findViewById(R.id.tv_sign_date);
+//        mTvMobile = (TextView) findViewById(R.id.tv_mobile);
+//        mTvSignDate = (TextView) findViewById(R.id.tv_sign_date);
         mTvSure = (TextView) findViewById(R.id.tv_srue);
         mTvSure.setOnClickListener(this);
-        mTvSignFen = (TextView) findViewById(R.id.tv_sign_fen);
-        mTvSignCph = (TextView) findViewById(R.id.tv_sign_cph);
-        mTvSignPp = (TextView) findViewById(R.id.tv_sign_pp);
-        mTvSignXh = (TextView) findViewById(R.id.tv_sign_xh);
+//        mTvSignFen = (TextView) findViewById(R.id.tv_sign_fen);
+//        mTvSignCph = (TextView) findViewById(R.id.tv_sign_cph);
+//        mTvSignPp = (TextView) findViewById(R.id.tv_sign_pp);
+//        mTvSignXh = (TextView) findViewById(R.id.tv_sign_xh);
         mTvSign = (TextView) findViewById(R.id.tv_sign);
         mIvSign = (ImageView) findViewById(R.id.iv_sign);
         mRlSign = (RelativeLayout) findViewById(R.id.rl_sign);
@@ -277,7 +292,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
         mEtPermitType = (TextView) findViewById(R.id.et_permit_type);
         mTvStartDate = (TextView) findViewById(R.id.tv_start_date);
         mEtEndDate = (TextView) findViewById(R.id.et_end_date);
-        mTvSignHint = (EditText) findViewById(R.id.tv_sign_hint);
+
         mTvQualificationType = (EditText) findViewById(R.id.tv_qualification_type);
         mTvFirstReceive = (TextView) findViewById(R.id.tv_first_receive);
         mTvFirstReceive.setOnClickListener(this);
@@ -299,9 +314,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
             case R.id.re_pic_reverse:
                 takeIDCardReverse();
                 break;
-            case R.id.tv_srue:
-                startActivity(new Intent(this,MainActivity.class));
-                break;
+
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);
                 break;
@@ -316,6 +329,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     bottomDialog.dismiss();
                 }
                 Bitmap bitmap = vSignView.save();
+
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
                 break;
@@ -350,6 +364,62 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.et_end_date:
                 onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
+                break;
+            case R.id.tv_srue:
+                if(StringUtils.isEmpty(idCardFrontPath)){
+                    ToastUtils.popUpToast("请选择身份证正面照片");
+                }
+                if(StringUtils.isEmpty(idCardBackPath)){
+                    ToastUtils.popUpToast("请选择身份证反面照片");
+                }
+                String userName = mEtRealName.getText().toString();
+                if(StringUtils.isEmpty(userName)){
+                    ToastUtils.popUpToast("姓名不得为空");
+                }
+                String idCardNum = mEtCardNum.getText().toString();
+                if(StringUtils.isEmpty(idCardNum)){
+                    ToastUtils.popUpToast("身份证号不得为空");
+                }
+                String postCardNum = mEtPostCard.getText().toString();
+                if(StringUtils.isEmpty(postCardNum)){
+                    ToastUtils.popUpToast("上岗证号不得为空");
+                }
+                String qualificationType = mTvQualificationType.getText().toString();
+                if(StringUtils.isEmpty(qualificationType)){
+                    ToastUtils.popUpToast("从业资格类别不得为空");
+                }
+                if(StringUtils.isEmpty(permitType)){
+                    ToastUtils.popUpToast("准驾车型不得为空");
+                }
+                if(StringUtils.isEmpty(startTime)){
+                    ToastUtils.popUpToast("开始日期不得为空");
+                }
+                if(StringUtils.isEmpty(endTime)){
+                    ToastUtils.popUpToast("结束日期不得为空");
+                }
+                if(StringUtils.isEmpty(firstReceiveTime)){
+                    ToastUtils.popUpToast("初次领证日期不得为空");
+                }
+                if(StringUtils.isEmpty(effectiveTime)){
+                    ToastUtils.popUpToast("有效起始日期不得为空");
+                }
+                DriverInfoSubmitParam driverInfoSubmitParam = new DriverInfoSubmitParam();
+                driverInfoSubmitParam.setName("川");
+                IDCardParam idCardParam = new IDCardParam();
+                idCardParam.setIDNo(idCardNum);
+                idCardParam.setName(userName);
+                driverInfoSubmitParam.setCertificateIDBo(idCardParam);
+                CertificateDriverParam certificateDriverParam = new CertificateDriverParam();
+                certificateDriverParam.setClasss(permitType);
+                certificateDriverParam.setStartTime(startTime);
+                driverInfoSubmitParam.setCertificateDriverBo(certificateDriverParam);
+                CertificateWorkParam certificateWorkParam = new CertificateWorkParam();
+                certificateWorkParam.setFileNumber(postCardNum);
+                certificateWorkParam.setCategory(qualificationType);
+//                certificateWorkParam.setFirstTime(firstReceiveTime);
+//                certificateWorkParam.set
+//                mPresenter.
+//                startActivity(new Intent(this,MainActivity.class));
                 break;
         }
     }
@@ -389,6 +459,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     result.getAddress();
 //                    alertText(idCardSide, new Gson().toJson(result));
                     setIDCardInfo(idCardSide, new Gson().toJson(result), filePath);
+
                 }
             }
 
@@ -399,7 +470,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-    private void setIDCardInfo(final String idCardSide, final String result, String filePath) {
+    private void setIDCardInfo(final String idCardSide, final String result, final String filePath) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -413,8 +484,10 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
+                        idCardFrontPath = filePath;
                         break;
                     case BACK:
+                        idCardBackPath = filePath;
                         break;
                 }
 
@@ -444,18 +517,19 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        //身份证正面返回
         if (requestCode == REQUEST_CODE_PICK_IMAGE_FRONT && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             String filePath = getRealPathFromURI(uri);
             recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
         }
-
+        //身份证反面返回
         if (requestCode == REQUEST_CODE_PICK_IMAGE_BACK && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             String filePath = getRealPathFromURI(uri);
             recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
         }
-
+        //
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
@@ -526,6 +600,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
             @Override
             public void onOptionPicked(int index, String item) {
 //                showToast("index=" + index + ", item=" + item);
+                permitType = item;
             }
         });
         picker.show();
@@ -545,13 +620,16 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
             public void onDatePicked(String year, String month, String day) {
                 switch (type){
                     case DATE_TYPE_START_DATE:
-
+                        startTime = year+"年"+month+"月"+day+"日";
                         break;
                     case DATE_TYPE_END_DATE:
+                        endTime = year+"年"+month+"月"+day+"日";
                         break;
                     case DATE_TYPE_FIRST_RECEIVE_DATE:
+                        firstReceiveTime = year+"年"+month+"月"+day+"日";
                         break;
                     case DATE_TYPE_EFFECTIVE_DATE:
+                        effectiveTime = year+"年"+month+"月"+day+"日";
                         break;
                 }
             }
