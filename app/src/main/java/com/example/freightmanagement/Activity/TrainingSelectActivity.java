@@ -6,11 +6,14 @@ import android.widget.TextView;
 
 import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
 
 /**
  * Created by songdechuan on 2020/8/10.
@@ -52,7 +55,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
     @Override
     protected void onLoadData2Remote() {
-     mPresenter.getTrainingList();
+
     }
 
     @Override
@@ -61,12 +64,12 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
     }
 
     public void initView() {
-        mTrainingList = (RecyclerView) findViewById(R.id.training_list);
-        mTvStartTraining = (TextView) findViewById(R.id.tv_start_training);
+        mTrainingList =  findViewById(R.id.training_list);
+        mTvStartTraining =  findViewById(R.id.tv_start_training);
         mTvStartTraining.setOnClickListener(this);
-        mTvStartAnswer = (TextView) findViewById(R.id.tv_start_answer);
+        mTvStartAnswer =  findViewById(R.id.tv_start_answer);
         mTvStartAnswer.setOnClickListener(this);
-        mLl = (LinearLayout) findViewById(R.id.ll);
+        mLl =  findViewById(R.id.ll);
     }
 
     @Override
@@ -84,7 +87,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
     }
 
     @Override
-    public String trainingList(String msg) {
-        return null;
+    public void trainingList(List<TrainingSelectBean.DataBean> data) {
+
     }
 }

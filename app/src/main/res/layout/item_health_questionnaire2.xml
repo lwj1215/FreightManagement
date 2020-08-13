@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+        <com.example.freightmanagement.View.ListViewToScrollView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/inflate_txt_bg_white"
+            android:choiceMode="singleChoice"
+            android:divider="@color/gray_background"
+            android:dividerHeight="0.5px"
+            android:gravity="center"
+            android:listSelector="@color/transparent"
+            android:padding="@dimen/x1"
+            android:stretchMode="columnWidth" />
+</LinearLayout>

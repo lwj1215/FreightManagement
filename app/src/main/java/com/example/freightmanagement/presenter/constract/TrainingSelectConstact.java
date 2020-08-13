@@ -1,6 +1,9 @@
 package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
+import com.example.freightmanagement.Bean.TrainingSelectBean;
+
+import java.util.List;
 
 
 public interface TrainingSelectConstact {
@@ -9,6 +12,6 @@ public interface TrainingSelectConstact {
 
     interface View extends BaseView{
 
-        String trainingList(String msg);
+        void trainingList(List<TrainingSelectBean.DataBean> data);
     }
 }

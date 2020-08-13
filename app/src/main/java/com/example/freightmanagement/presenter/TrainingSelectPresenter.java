@@ -2,26 +2,25 @@ package com.example.freightmanagement.presenter;
 
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
+import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
-import com.example.freightmanagement.presenter.constract.TrainingConstact;
-
-import static com.example.freightmanagement.BuildConfig.BASE_URL;
+import com.example.freightmanagement.presenter.constract.TrainingSelectConstact;
+import com.google.gson.Gson;
 
 /**
  * Created by songdechuan on 2020/8/6.
  */
 
-public class TrainingSelectPresenter extends BasePresenter<TrainingConstact.View> implements TrainingConstact {
-
-
-
+public class TrainingSelectPresenter extends BasePresenter<TrainingSelectConstact.View> implements TrainingSelectConstact {
     @Override
     public void getTrainingList() {
-        RestApi.getInstance().post(BaseApiConstants.API_XUNLIANTIMU, "", new OnRequestResultForCommon() {
+        RestApi.getInstance().get(BaseApiConstants.API_XUNLIANTIMU, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
-                mView.trainingList(json);
+                super.onSuccess(json);
+                TrainingSelectBean trainingSelectBean = new Gson().fromJson(json, TrainingSelectBean.class);
+                mView.trainingList(trainingSelectBean.getData());
             }
 
             @Override

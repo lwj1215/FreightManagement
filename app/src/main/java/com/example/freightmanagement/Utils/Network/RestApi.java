@@ -105,11 +105,11 @@ public class RestApi {
                 enqueue("", request, new OnRequestResult() {
                     @Override
                     public void onSuccess(String json) {
-                        //保存token
-                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-                        if ("0".equals(stateBean.getCode())) {
-                            PrefUtilsData.setToken(stateBean.getData().getToken());
-                        }
+//                        //保存token
+//                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
+//                        if ("0".equals(stateBean.getCode())) {
+//                            PrefUtilsData.setToken(stateBean.getData().getToken());
+//                        }
                         if (callback != null) callback.onSuccess(json);
                     }
 
@@ -184,7 +184,8 @@ public class RestApi {
                         public void run() {
                             try {
                                 //请求成功
-                                if (callback != null) callback.onSuccess(body);
+                                if (callback != null)
+                                    callback.onSuccess(body);
                             } catch (Exception e) {
                                 Log.e(TAG, "crashInfo: ", e);
                             }
