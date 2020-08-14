@@ -542,7 +542,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //身份证正面返回
         if (requestCode == REQUEST_CODE_PICK_IMAGE_FRONT && resultCode == Activity.RESULT_OK) {
@@ -572,6 +572,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
         // 识别成功回调，驾驶证识别
         if (requestCode == REQUEST_CODE_DRIVING_LICENSE && resultCode == Activity.RESULT_OK) {
+            final Uri uri = data.getData();
+            final String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();
+
             RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath(),
                     new RecognizeService.ServiceListener() {
                         @Override
@@ -581,13 +584,12 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             DriverLicenseBean.WordsResultBean words_result = driverLicenseBean.getWords_result();
                             DriverLicenseBean.WordsResultBean.准驾车型Bean 准驾车型 = words_result.get准驾车型();
                             DriverLicenseBean.WordsResultBean.有效期限Bean 有效期限 = words_result.get有效期限();
-                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
-                            Uri uri = data.getData();
-                            String filePath = getRealPathFromURI(uri);
+//                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
+
                             mPresenter.upload(new File(filePath),UPLOAD_DRIVER);
                             mEtPermitType.setText(准驾车型.getWords());
                             mTvStartDate.setText(有效期限.getWords());
-                            mEtEndDate.setText(至.getWords());
+//                            mEtEndDate.setText(至.getWords());
 
                         }
             });
