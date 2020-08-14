@@ -144,6 +144,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 //                startActivity(new Intent(this, RoleSelectActivity.class));
 //            }
             int type = dataBean.getType();
+            type = 0;
             switch (type){
                 case 0:
                     if(this.code == 1){

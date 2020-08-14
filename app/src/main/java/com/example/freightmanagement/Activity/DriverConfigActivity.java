@@ -30,6 +30,7 @@ import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.DriverLicenseBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
@@ -42,6 +43,8 @@ import com.example.freightmanagement.model.CertificateWorkParam;
 import com.example.freightmanagement.model.DriverInfoSubmitParam;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
 import com.example.freightmanagement.model.IDCardParam;
+import com.example.freightmanagement.presenter.DriverConfigPresenter;
+import com.example.freightmanagement.presenter.constract.DriverConfigConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -52,11 +55,15 @@ import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
 
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
+
 /**
  * Created by songdechuan on 2020/8/6.
  */
 
-public class DriverConfigActivity extends BaseActivity implements View.OnClickListener {
+public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> implements DriverConfigConstact.View,View.OnClickListener {
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
     private static final int REQUEST_CODE_CAMERA = 102;
@@ -111,7 +118,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     /**
      * 2020/08/4
      */
-//    private TextView mTvSignDate;
+    private TextView mTvSignDate;
     /**
      * 60分
      */
@@ -177,16 +184,15 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
      */
     private TextView mTvEffectiveDate;
 
-    private String idCardFrontPath = "";
-    private String idCardBackPath = "";
-    private String driverPath = "";
+    private String idCardFrontUrl = "";
+    private String idCardBackUrl = "";
+    private String driverUrl = "";
     private String signUrl = "";
     private String permitType;
     private String startTime;
     private String endTime;
     private String firstReceiveTime;
     private String effectiveTime;
-
     @Override
     public int setLayoutResource() {
         return R.layout.activity_driver_config;
@@ -195,7 +201,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     @Override
     protected void onInitView() {
         setDefaultTitle("驾驶员注册");
-        checkGalleryPermission();
+//        checkGalleryPermission();
         initView();
     }
 
@@ -229,9 +235,11 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
     private boolean checkGalleryPermission() {
         int ret = ActivityCompat.checkSelfPermission(this, Manifest.permission
                 .READ_EXTERNAL_STORAGE);
-        if (ret != PackageManager.PERMISSION_GRANTED) {
+        int wet = ActivityCompat.checkSelfPermission(this, Manifest.permission
+                .WRITE_EXTERNAL_STORAGE);
+        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1000);
             return false;
         }
@@ -329,7 +337,6 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     bottomDialog.dismiss();
                 }
                 Bitmap bitmap = vSignView.save();
-
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
                 break;
@@ -366,45 +373,56 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
                 break;
             case R.id.tv_srue:
-                if(StringUtils.isEmpty(idCardFrontPath)){
+                if(StringUtils.isEmpty(idCardFrontUrl)){
                     ToastUtils.popUpToast("请选择身份证正面照片");
+                    return;
                 }
-                if(StringUtils.isEmpty(idCardBackPath)){
+                if(StringUtils.isEmpty(idCardBackUrl)){
                     ToastUtils.popUpToast("请选择身份证反面照片");
+                    return;
                 }
                 String userName = mEtRealName.getText().toString();
                 if(StringUtils.isEmpty(userName)){
                     ToastUtils.popUpToast("姓名不得为空");
+                    return;
                 }
                 String idCardNum = mEtCardNum.getText().toString();
                 if(StringUtils.isEmpty(idCardNum)){
                     ToastUtils.popUpToast("身份证号不得为空");
+                    return;
                 }
                 String postCardNum = mEtPostCard.getText().toString();
                 if(StringUtils.isEmpty(postCardNum)){
                     ToastUtils.popUpToast("上岗证号不得为空");
+                    return;
                 }
                 String qualificationType = mTvQualificationType.getText().toString();
                 if(StringUtils.isEmpty(qualificationType)){
                     ToastUtils.popUpToast("从业资格类别不得为空");
+                    return;
                 }
                 if(StringUtils.isEmpty(permitType)){
                     ToastUtils.popUpToast("准驾车型不得为空");
+                    return;
                 }
                 if(StringUtils.isEmpty(startTime)){
                     ToastUtils.popUpToast("开始日期不得为空");
+                    return;
                 }
                 if(StringUtils.isEmpty(endTime)){
                     ToastUtils.popUpToast("结束日期不得为空");
+                    return;
                 }
                 if(StringUtils.isEmpty(firstReceiveTime)){
                     ToastUtils.popUpToast("初次领证日期不得为空");
+                    return;
                 }
                 if(StringUtils.isEmpty(effectiveTime)){
                     ToastUtils.popUpToast("有效起始日期不得为空");
+                    return;
                 }
                 DriverInfoSubmitParam driverInfoSubmitParam = new DriverInfoSubmitParam();
-                driverInfoSubmitParam.setName("川");
+                driverInfoSubmitParam.setName(userName);
                 IDCardParam idCardParam = new IDCardParam();
                 idCardParam.setIDNo(idCardNum);
                 idCardParam.setName(userName);
@@ -418,8 +436,9 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                 certificateWorkParam.setCategory(qualificationType);
 //                certificateWorkParam.setFirstTime(firstReceiveTime);
 //                certificateWorkParam.set
-//                mPresenter.
+                mPresenter.submit(driverInfoSubmitParam);
 //                startActivity(new Intent(this,MainActivity.class));
+
                 break;
         }
     }
@@ -459,7 +478,6 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     result.getAddress();
 //                    alertText(idCardSide, new Gson().toJson(result));
                     setIDCardInfo(idCardSide, new Gson().toJson(result), filePath);
-
                 }
             }
 
@@ -478,16 +496,25 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
+                        if(idCardInfoFrontBean == null){
+                            ToastUtils.popUpToast("身份证选择失败，请重新选择");
+                            break;
+
+                        }
+                        if(!idCardInfoFrontBean.getImageStatus().equals("normal")){
+                            ToastUtils.popUpToast("身份证照片不正常，请重新选择");
+                            break;
+                        }
                         mEtRealName.setText(idCardInfoFrontBean.getName().getWords());
                         mEtDetailAddress.setText(idCardInfoFrontBean.getGender().getWords());
                         String number = idCardInfoFrontBean.getIdNumber().getWords();
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
-                        idCardFrontPath = filePath;
+                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_FRONT);
                         break;
                     case BACK:
-                        idCardBackPath = filePath;
+                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_BACK);
                         break;
                 }
 
@@ -515,7 +542,7 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //身份证正面返回
         if (requestCode == REQUEST_CODE_PICK_IMAGE_FRONT && resultCode == Activity.RESULT_OK) {
@@ -549,9 +576,21 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
-//                            infoPopText(result);
+//                            ToastUtils.popUpToast(result);
+                            DriverLicenseBean driverLicenseBean = new Gson().fromJson(result, DriverLicenseBean.class);
+                            DriverLicenseBean.WordsResultBean words_result = driverLicenseBean.getWords_result();
+                            DriverLicenseBean.WordsResultBean.准驾车型Bean 准驾车型 = words_result.get准驾车型();
+                            DriverLicenseBean.WordsResultBean.有效期限Bean 有效期限 = words_result.get有效期限();
+                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
+                            Uri uri = data.getData();
+                            String filePath = getRealPathFromURI(uri);
+                            mPresenter.upload(new File(filePath),UPLOAD_DRIVER);
+                            mEtPermitType.setText(准驾车型.getWords());
+                            mTvStartDate.setText(有效期限.getWords());
+                            mEtEndDate.setText(至.getWords());
+
                         }
-                    });
+            });
         }
     }
 
@@ -651,6 +690,26 @@ public class DriverConfigActivity extends BaseActivity implements View.OnClickLi
             }
         });
         picker.show();
+    }
+
+    @Override
+    public void success() {
+
+    }
+
+    @Override
+    public void imageUrl(String url,int type) {
+        switch (type){
+            case UPLOAD_ID_CARD_FRONT:
+                idCardFrontUrl = url;
+                break;
+            case UPLOAD_ID_CARD_BACK:
+                idCardBackUrl = url;
+                break;
+            case UPLOAD_DRIVER:
+                driverUrl = url;
+                break;
+        }
     }
 //    private boolean checkTokenStatus() {
 //        if (!hasGotToken) {

@@ -211,7 +211,7 @@ public class RestApi {
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("image1", encode, fileBody)
+                .addFormDataPart("file", encode, fileBody)
                 .build();
         Request request = new Request.Builder()
                 .url(Host.BASE_URL + url)

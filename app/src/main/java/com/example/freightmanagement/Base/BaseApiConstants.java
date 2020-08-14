@@ -9,6 +9,10 @@ package com.example.freightmanagement.Base;
  */
 public class BaseApiConstants {
 
+    /**
+     * 图片上传后的BASE_URL
+     */
+    public static final String IMAGE_BASE_URL = "aicc.ctags.cn/cccc/file/download/";
 
     /**
      * 验证码
@@ -52,5 +56,16 @@ public class BaseApiConstants {
 
 
     public static final String API_TRAINING = "/train/getTrainDatas";
+    /**
+     * 上传图片
+     */
+    public static final String API_IMAGE_UPLOAD = "/cccc/file/upload";
+
+    /**
+     * 驾驶员注册
+     */
+    public static final String API_DRIVER_REGISTER = "/cccc/driver/addDirver";
+
+
 
 }
