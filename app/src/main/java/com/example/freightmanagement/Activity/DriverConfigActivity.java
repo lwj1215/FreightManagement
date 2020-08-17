@@ -55,6 +55,7 @@ import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
 
+import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
@@ -358,19 +359,19 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case R.id.re_driver_reverse:
                 break;
             case R.id.tv_first_receive:
-                onYearMonthDayPicker(DATE_TYPE_START_DATE);
+                onYearMonthDayPicker(DATE_TYPE_FIRST_RECEIVE_DATE);
                 break;
             case R.id.tv_effective_date:
-                onYearMonthDayPicker(DATE_TYPE_END_DATE);
+                onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
                 break;
             case R.id.et_permit_type:
                 onOptionPicker();
                 break;
             case R.id.tv_start_date:
-                onYearMonthDayPicker(DATE_TYPE_FIRST_RECEIVE_DATE);
+                onYearMonthDayPicker(DATE_TYPE_START_DATE);
                 break;
             case R.id.et_end_date:
-                onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
+                onYearMonthDayPicker(DATE_TYPE_END_DATE);
                 break;
             case R.id.tv_srue:
                 if(StringUtils.isEmpty(idCardFrontUrl)){
@@ -426,19 +427,21 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 IDCardParam idCardParam = new IDCardParam();
                 idCardParam.setIDNo(idCardNum);
                 idCardParam.setName(userName);
+                idCardParam.setPicUrl(idCardFrontUrl);
+                idCardParam.setPicUrl2(idCardBackUrl);
                 driverInfoSubmitParam.setCertificateIDBo(idCardParam);
+
                 CertificateDriverParam certificateDriverParam = new CertificateDriverParam();
                 certificateDriverParam.setClasss(permitType);
                 certificateDriverParam.setStartTime(startTime);
+                certificateDriverParam.setPicUrl(driverUrl);
                 driverInfoSubmitParam.setCertificateDriverBo(certificateDriverParam);
+
                 CertificateWorkParam certificateWorkParam = new CertificateWorkParam();
                 certificateWorkParam.setFileNumber(postCardNum);
                 certificateWorkParam.setCategory(qualificationType);
-//                certificateWorkParam.setFirstTime(firstReceiveTime);
-//                certificateWorkParam.set
+                driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
                 mPresenter.submit(driverInfoSubmitParam);
-//                startActivity(new Intent(this,MainActivity.class));
-
                 break;
         }
     }
@@ -572,23 +575,22 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
         // 识别成功回调，驾驶证识别
         if (requestCode == REQUEST_CODE_DRIVING_LICENSE && resultCode == Activity.RESULT_OK) {
-            final Uri uri = data.getData();
             final String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();
 
             RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath(),
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
-//                            ToastUtils.popUpToast(result);
                             DriverLicenseBean driverLicenseBean = new Gson().fromJson(result, DriverLicenseBean.class);
                             DriverLicenseBean.WordsResultBean words_result = driverLicenseBean.getWords_result();
                             DriverLicenseBean.WordsResultBean.准驾车型Bean 准驾车型 = words_result.get准驾车型();
                             DriverLicenseBean.WordsResultBean.有效期限Bean 有效期限 = words_result.get有效期限();
 //                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
-
+                            permitType = 准驾车型.getWords();
                             mPresenter.upload(new File(filePath),UPLOAD_DRIVER);
                             mEtPermitType.setText(准驾车型.getWords());
                             mTvStartDate.setText(有效期限.getWords());
+                            startTime = 有效期限.getWords();
 //                            mEtEndDate.setText(至.getWords());
 
                         }
@@ -662,15 +664,19 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 switch (type){
                     case DATE_TYPE_START_DATE:
                         startTime = year+"年"+month+"月"+day+"日";
+                        mTvStartDate.setText(startTime);
                         break;
                     case DATE_TYPE_END_DATE:
                         endTime = year+"年"+month+"月"+day+"日";
+                        mEtEndDate.setText(endTime);
                         break;
                     case DATE_TYPE_FIRST_RECEIVE_DATE:
                         firstReceiveTime = year+"年"+month+"月"+day+"日";
+                        mTvFirstReceive.setText(firstReceiveTime);
                         break;
                     case DATE_TYPE_EFFECTIVE_DATE:
                         effectiveTime = year+"年"+month+"月"+day+"日";
+                        mTvEffectiveDate.setText(effectiveTime);
                         break;
                 }
             }
@@ -703,13 +709,13 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     public void imageUrl(String url,int type) {
         switch (type){
             case UPLOAD_ID_CARD_FRONT:
-                idCardFrontUrl = url;
+                idCardFrontUrl = IMAGE_BASE_URL+url;
                 break;
             case UPLOAD_ID_CARD_BACK:
-                idCardBackUrl = url;
+                idCardBackUrl = IMAGE_BASE_URL+url;
                 break;
             case UPLOAD_DRIVER:
-                driverUrl = url;
+                driverUrl = IMAGE_BASE_URL+url;
                 break;
         }
     }

@@ -476,7 +476,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:text="请填写上岗证号码"
+                            android:hint="请填写上岗证号码"
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28" />
 
@@ -521,7 +521,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:text="请填写从业资格类别"
+                            android:hint="请填写从业资格类别"
                             android:textColor="@color/color_999"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>

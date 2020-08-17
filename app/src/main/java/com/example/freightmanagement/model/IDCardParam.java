@@ -8,8 +8,9 @@ import java.io.File;
 
 public class IDCardParam {
 
-    private File file;
-    private File file2;
+    private String picUrl;
+
+    private String picUrl2;
 
     private String name;
 
@@ -23,20 +24,20 @@ public class IDCardParam {
 
     private String IDNo;
 
-    public File getFile() {
-        return file;
+    public String getPicUrl() {
+        return picUrl;
     }
 
-    public void setFile(File file) {
-        this.file = file;
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 
-    public File getFile2() {
-        return file2;
+    public String getPicUrl2() {
+        return picUrl2;
     }
 
-    public void setFile2(File file2) {
-        this.file2 = file2;
+    public void setPicUrl2(String picUrl2) {
+        this.picUrl2 = picUrl2;
     }
 
     public String getName() {

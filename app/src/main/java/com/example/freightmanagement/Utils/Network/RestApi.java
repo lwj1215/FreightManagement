@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseApplication;
+import com.example.freightmanagement.Base.TokenHeaderInterceptor;
 import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.Utils.NetUtils;
 import com.example.freightmanagement.Utils.PrefUtilsData;
@@ -42,6 +43,7 @@ public class RestApi {
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(new TokenHeaderInterceptor())
                     .build();
         }
         mDelivery = new Handler(Looper.getMainLooper());
@@ -59,6 +61,45 @@ public class RestApi {
      * 请求公共方法
      */
     public void post(String url, String jsonValue, @Nullable final OnRequestResult callback) {
+        Log.i(TAG, "post: "+jsonValue+url);
+//        RequestBody formBody = new FormBody.Builder()
+//                .add("", jsonValue)
+//                .build();
+        RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
+//        RequestBody formBody = FormBody.create(MediaType.parse("application/json"), jsonValue);
+
+        Request request = new Request.Builder()
+                .url(Host.BASE_URL + url)
+                .post(formBody)
+                .build();
+        enqueue("", request, new OnRequestResult() {
+            @Override
+            public void onSuccess(String json) {
+                //保存token
+                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
+                if ("0".equals(stateBean.getCode())) {
+                    PrefUtilsData.setToken(stateBean.getData().getToken());
+                }
+                if (callback != null) callback.onSuccess(json);
+            }
+
+            @Override
+            public void onFail() {
+                if (callback != null) callback.onFail();
+
+            }
+
+            @Override
+            public void netUnlink() {
+                if (callback != null) callback.netUnlink();
+            }
+        });
+    }
+
+    /**
+     * 请求公共方法
+     */
+    public void postJson(String url, String jsonValue, @Nullable final OnRequestResult callback) {
         Log.i(TAG, "post: "+jsonValue+url);
 //        RequestBody formBody = new FormBody.Builder()
 //                .add("", jsonValue)
@@ -94,6 +135,7 @@ public class RestApi {
             }
         });
     }
+
     /**
      * 请求公共方法
      */
@@ -239,44 +281,6 @@ public class RestApi {
                 if (callback != null) callback.netUnlink();
             }
         });
-    }
-    public void post_file(final String url, final Map<String, Object> map, File file) {
-        OkHttpClient client = new OkHttpClient();
-        // form 表单形式上传
-        MultipartBody.Builder requestBody = new MultipartBody.Builder().setType(MultipartBody.FORM);
-        if(file != null){
-            // MediaType.parse() 里面是上传的文件类型。
-            RequestBody body = RequestBody.create(MediaType.parse("image/*"), file);
-            String filename = file.getName();
-            // 参数分别为， 请求key ，文件名称 ， RequestBody
-            requestBody.addFormDataPart("headImage", file.getName(), body);
-        }
-        if (map != null) {
-            // map 里面是请求中所需要的 key 和 value
-            for (Map.Entry entry : map.entrySet()) {
-                requestBody.addFormDataPart(String.valueOf(entry.getKey()), String.valueOf(entry.getValue()));
-            }
-        }
-        Request request = new Request.Builder().url(url).post(requestBody.build()).build();
-        // readTimeout("请求超时时间" , 时间单位);
-        client.newBuilder().readTimeout(5000, TimeUnit.MILLISECONDS).build().newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.i("lfq" ,"onFailure");
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String str = response.body().string();
-                    Log.i("lfq", response.message() + " , body " + str);
-
-                } else {
-                    Log.i("lfq" ,response.message() + " error : body " + response.body().string());
-                }
-            }
-        });
-
     }
     /**
      * 微信的第三方登录  qq需要另外的一个接口

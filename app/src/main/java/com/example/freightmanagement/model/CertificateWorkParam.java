@@ -34,6 +34,8 @@ public class CertificateWorkParam {
 
     private String fileNumber;
 
+    private String picUrl;
+
     public File getFile() {
         return file;
     }
@@ -136,5 +138,13 @@ public class CertificateWorkParam {
 
     public void setFileNumber(String fileNumber) {
         this.fileNumber = fileNumber;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

@@ -8,8 +8,6 @@ import java.io.File;
 
 public class CertificateDriverParam {
 
-    private File file;
-
     private String name;
 
     private String sex;
@@ -30,13 +28,8 @@ public class CertificateDriverParam {
 
     private String note;
 
-    public File getFile() {
-        return file;
-    }
+    private String picUrl;
 
-    public void setFile(File file) {
-        this.file = file;
-    }
 
     public String getName() {
         return name;
@@ -116,5 +109,13 @@ public class CertificateDriverParam {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getPicUrl() {
+        return picUrl;
+    }
+
+    public void setPicUrl(String picUrl) {
+        this.picUrl = picUrl;
     }
 }

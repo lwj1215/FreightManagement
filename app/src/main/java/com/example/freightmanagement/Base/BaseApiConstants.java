@@ -40,10 +40,13 @@ public class BaseApiConstants {
      * 获取驾驶员信息
      */
     public static final String API_DRIVERINFORMATION = "/cccc/driver/getID/";
-    /**
-     * 获取驾驶员上岗证信息
-     */
+
     public static final String API_WROKID = "/cccc/examination/getExaminationDriverDatas/";
+    /**
+     * 获取答题结果记录
+     */
+    public static final String API_ANSWER_RESULT_LIST = "/cccc/examination/getExaminationDriverDatas/";
+
     /**
      * 获取培训结果
      */
@@ -65,7 +68,6 @@ public class BaseApiConstants {
      * 驾驶员注册
      */
     public static final String API_DRIVER_REGISTER = "/cccc/driver/addDirver";
-
 
 
 }

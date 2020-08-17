@@ -56,7 +56,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
     @Override
     protected void onLoadData2Remote() {
-
+        mPresenter.getTrainingList();
     }
 
     @Override
