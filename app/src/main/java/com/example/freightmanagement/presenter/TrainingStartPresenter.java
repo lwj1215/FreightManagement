@@ -2,7 +2,7 @@ package com.example.freightmanagement.presenter;
 
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.presenter.constract.TrainingStartConstact;
@@ -19,7 +19,7 @@ public class TrainingStartPresenter extends BasePresenter<TrainingStartConstact.
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                TrainingSelectBean trainingSelectBean = new Gson().fromJson(json, TrainingSelectBean.class);
+                TrainingStartBean trainingSelectBean = new Gson().fromJson(json, TrainingStartBean.class);
                 mView.trainingList(trainingSelectBean.getData());
             }
 

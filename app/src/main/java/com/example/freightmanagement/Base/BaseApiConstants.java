@@ -69,5 +69,9 @@ public class BaseApiConstants {
      */
     public static final String API_DRIVER_REGISTER = "/cccc/driver/addDirver";
 
+    /**
+     * 企业注册
+     */
+    public static final String API_COMPANY_REGISTER = "/cccc/enterprise/addEnterprise";
 
 }

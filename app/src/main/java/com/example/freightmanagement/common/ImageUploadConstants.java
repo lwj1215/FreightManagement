@@ -12,5 +12,7 @@ public class ImageUploadConstants {
     //驾驶证照片
     public static final int UPLOAD_DRIVER = 2;
     //营业执照
-//    public static final int UPLOAD_DRIVER = 2;
+    public static final int UPLOAD_BUSINESS = 3;
+    //道路运输许可证
+    public static final int UPLOAD_ROAD_TRANSPORT_PERMIT = 4;
 }

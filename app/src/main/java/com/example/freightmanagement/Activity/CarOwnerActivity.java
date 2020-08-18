@@ -31,6 +31,7 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
+import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
@@ -93,6 +94,8 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
     private Dialog bottomDialog;
     private View bottomView;
     private ElectronicSignature vSignView;
+    private String idCardFrontUrl = "";
+    private String idCardBackUrl = "";
     @Override
     public int setLayoutResource() {
         return R.layout.activity_car_owner;
@@ -176,9 +179,7 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
             case R.id.re_pic_reverse:
                 takeIDCardReverse();
                 break;
-            case R.id.tv_srue:
 
-                break;
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);
                 break;
@@ -195,6 +196,28 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
                 Bitmap bitmap = vSignView.save();
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
+                break;
+
+            case R.id.tv_srue:
+                if(StringUtils.isEmpty(idCardFrontUrl)){
+                    ToastUtils.popUpToast("请选择身份证正面照片");
+                    return;
+                }
+                if(StringUtils.isEmpty(idCardBackUrl)){
+                    ToastUtils.popUpToast("请选择身份证反面照片");
+                    return;
+                }
+                String userName = mEtRealName.getText().toString();
+                if(StringUtils.isEmpty(userName)){
+                    ToastUtils.popUpToast("姓名不得为空");
+                    return;
+                }
+                String idCardNum = mEtCardNum.getText().toString();
+                if(StringUtils.isEmpty(idCardNum)){
+                    ToastUtils.popUpToast("身份证号不得为空");
+                    return;
+                }
+
                 break;
         }
     }

@@ -1,7 +1,6 @@
 package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
-import com.example.freightmanagement.model.DriverInfoSubmitParam;
 import com.example.freightmanagement.model.company.CompanySubmitParam;
 
 import java.io.File;
@@ -10,7 +9,7 @@ import java.io.File;
  * Created by songdechuan on 2020/8/13.
  */
 
-public interface CompanyRegisterConstact {
+public interface CarOwnerConstact {
 
     void submit(CompanySubmitParam submitParam);
 

@@ -3,7 +3,7 @@ package com.example.freightmanagement.Bean;
 import java.util.List;
 import java.util.Map;
 
-public class TrainingSelectBean {
+public class TrainingStartBean {
 
     /**
      * code : 0

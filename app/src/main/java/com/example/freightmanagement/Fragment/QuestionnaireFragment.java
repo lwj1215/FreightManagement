@@ -10,7 +10,7 @@ import android.widget.ScrollView;
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseViewPageFragment;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.RadioCallBack;
 import com.example.freightmanagement.Utils.StateCallBack;
@@ -38,7 +38,7 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
     private ScrollView scrollView;
     private LinearLayout linearLayout;
     /*问卷及答案实体*/
-    private static List<TrainingSelectBean.DataBean> mQuestionList;
+    private static List<TrainingStartBean.DataBean> mQuestionList;
     /*题目序号*/
     private int titleNum;
     public static Map<Integer, View> mViews = new TreeMap<>();
@@ -50,7 +50,7 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
     private int pagination;// 页码
     private QuestionnaireContentView mContentView;
 
-    public static QuestionnaireFragment newInstance(List<TrainingSelectBean.DataBean> questionList, int titleNum ,int pagination) {
+    public static QuestionnaireFragment newInstance(List<TrainingStartBean.DataBean> questionList, int titleNum , int pagination) {
         mQuestionList = questionList;
         QuestionnaireFragment fragment = new QuestionnaireFragment();
         Bundle mBundle = new Bundle();
@@ -113,7 +113,7 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
     @Override
     public void stateCallBack(int pagination) {
         for (int i = 0, h = 0; i < mQuestionList.size(); i++) {
-            TrainingSelectBean.DataBean questionEntity = mQuestionList.get(i);
+            TrainingStartBean.DataBean questionEntity = mQuestionList.get(i);
             if (questionEntity.getId() == pagination) {
             } else if (questionEntity.getId() > pagination) {
                 break;

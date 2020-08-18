@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,25 +28,34 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
+import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
+import com.example.freightmanagement.model.IDCardParam;
+import com.example.freightmanagement.model.company.CertificateBusiness;
+import com.example.freightmanagement.model.company.CertificateTransport;
+import com.example.freightmanagement.model.company.CompanySubmitParam;
 import com.example.freightmanagement.presenter.CompanyRegisterPresenter;
 import com.example.freightmanagement.presenter.constract.CompanyRegisterConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
 
+import cn.qqtheme.framework.picker.DatePicker;
+import cn.qqtheme.framework.util.ConvertUtils;
+
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
-import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_BUSINESS;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ROAD_TRANSPORT_PERMIT;
 
 /**
  * Created by songdechuan on 2020/8/10.
  */
 
-public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresenter> implements CompanyRegisterConstact.View,View.OnClickListener {
+public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresenter> implements CompanyRegisterConstact.View, View.OnClickListener {
 
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
@@ -56,6 +64,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
     private final String FRONT = "front";
     private final String BACK = "back";
+    private final int TYPE_CHENG_LI = 0;
+    private final int TYPE_YOU_XIAO_QI = 1;
+
     private View mLine;
     /**
      * 上传身份证正面照片
@@ -140,6 +151,18 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
      * 请填写您的住所
      */
     private EditText mEtAddress;
+    private String idCardFrontUrl = "1";
+    private String idCardBackUrl = "2";
+    private String businessUrl = "3";
+    private String roadTransportPermit = "4";
+    /**
+     * 请填写您的许可证号
+     */
+    private EditText mEtXuke;
+    /**
+     * 请选择您的证件有效期
+     */
+    private TextView mTvZhengJianYouXiaoQi;
 
     @Override
     public int setLayoutResource() {
@@ -187,7 +210,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mTvSrue = (TextView) findViewById(R.id.tv_srue);
         mTvSrue.setOnClickListener(this);
         mActivityNewDoctorSignProtocol = (RelativeLayout) findViewById(R.id.activity_new_doctor_sign_protocol);
-
         bottomView = LayoutInflater.from(this).inflate(R.layout.inflate_pop_item, null);
         bottomView.findViewById(R.id.btn_no).setOnClickListener(this);
         bottomView.findViewById(R.id.btn_yes).setOnClickListener(this);
@@ -199,6 +221,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mTvChengli = (TextView) findViewById(R.id.tv_chengli);
         mTvChengli.setOnClickListener(this);
         mEtAddress = (EditText) findViewById(R.id.et_address);
+        mEtXuke = (EditText) findViewById(R.id.et_xuke);
+        mTvZhengJianYouXiaoQi = (TextView) findViewById(R.id.tv_zheng_jian_you_xiao_qi);
+        mTvZhengJianYouXiaoQi.setOnClickListener(this);
     }
 
     @Override
@@ -212,9 +237,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             case R.id.re_pic_reverse:
                 takeIDCardReverse();
                 break;
-            case R.id.tv_srue:
 
-                break;
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);
                 break;
@@ -235,8 +258,148 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             case R.id.tv_business1:
                 break;
             case R.id.tv_chengli:
+                onYearMonthDayPicker(TYPE_CHENG_LI);
+                break;
+            case R.id.tv_srue:
+                if (StringUtils.isEmpty(idCardFrontUrl)) {
+                    ToastUtils.popUpToast("请选择身份证正面照片");
+                    return;
+                }
+                if (StringUtils.isEmpty(idCardBackUrl)) {
+                    ToastUtils.popUpToast("请选择身份证反面照片");
+                    return;
+                }
+                String userName = mEtRealName.getText().toString();
+                if (StringUtils.isEmpty(userName)) {
+                    ToastUtils.popUpToast("姓名不得为空");
+                    return;
+                }
+                String idCardNum = mEtCardNum.getText().toString();
+                if (StringUtils.isEmpty(idCardNum)) {
+                    ToastUtils.popUpToast("身份证号不得为空");
+                    return;
+                }
+                String mCode = mEtCode.getText().toString();
+                if (StringUtils.isEmpty(mCode)) {
+                    ToastUtils.popUpToast("信用代码不得为空");
+                    return;
+                }
+                String mName = mEtName.getText().toString();
+                if (StringUtils.isEmpty(mName)) {
+                    ToastUtils.popUpToast("从业资格类别不得为空");
+                    return;
+                }
+                String mFading = mEtFading.getText().toString();
+                if (StringUtils.isEmpty(mFading)) {
+                    ToastUtils.popUpToast("法定代表人不得为空");
+                    return;
+                }
+                String mJingYing = mEtJing.getText().toString();
+                if (StringUtils.isEmpty(mFading)) {
+                    ToastUtils.popUpToast("经营范围不得为空");
+                    return;
+                }
+                String mChengli = mTvChengli.getText().toString();
+                if (StringUtils.isEmpty(mChengli)) {
+                    ToastUtils.popUpToast("成立日期不得为空");
+                    return;
+                }
+                String mAddress = mEtAddress.getText().toString();
+                if (StringUtils.isEmpty(mFading)) {
+                    ToastUtils.popUpToast("住所不得为空");
+                    return;
+                }
+                if (StringUtils.isEmpty(businessUrl)) {
+                    ToastUtils.popUpToast("营业执照照片不得为空");
+                    return;
+                }
+                if (StringUtils.isEmpty(roadTransportPermit)) {
+                    ToastUtils.popUpToast("道路运输许可证不得为空不得为空");
+                    return;
+                }
+                String mXuKe = mEtXuke.getText().toString();
+                if (StringUtils.isEmpty(mXuKe)) {
+                    ToastUtils.popUpToast("许可证不得为空");
+                    return;
+                }
+                String mYouXiaoQi = mTvZhengJianYouXiaoQi.getText().toString();
+                if (StringUtils.isEmpty(mYouXiaoQi)) {
+                    ToastUtils.popUpToast("证件有效期不得为空");
+                    return;
+                }
+                CompanySubmitParam submitParam = new CompanySubmitParam();
+
+                IDCardParam idCardParam = new IDCardParam();
+                idCardParam.setIDNo(idCardNum);
+                idCardParam.setName(userName);
+                idCardParam.setPicUrl(idCardFrontUrl);
+                idCardParam.setPicUrl2(idCardBackUrl);
+                submitParam.setIdBo(idCardParam);
+
+                CertificateBusiness certificateBusiness = new CertificateBusiness();
+                certificateBusiness.setName(mName);
+                certificateBusiness.setLegalPerson(mFading);
+                certificateBusiness.setScope(mJingYing);
+                certificateBusiness.setEstablishmentDate(mChengli);
+                certificateBusiness.setRegistrationAuthority(mAddress);
+                certificateBusiness.setPicUrl(businessUrl);
+                submitParam.setCertificateBusinessBo(certificateBusiness);
+
+                CertificateTransport certificateOperation = new CertificateTransport();
+                certificateOperation.setGrantNo(mXuKe);
+                certificateOperation.setValidityDate(mYouXiaoQi);
+                certificateOperation.setPicUrl(roadTransportPermit);
+                submitParam.setCertificateOperationBo(certificateOperation);
+                mPresenter.submit(submitParam);
+                break;
+            case R.id.tv_zheng_jian_you_xiao_qi:
+                onYearMonthDayPicker(TYPE_YOU_XIAO_QI);
+
                 break;
         }
+    }
+
+    public void onYearMonthDayPicker(final int type) {
+        final DatePicker picker = new DatePicker(this);
+        picker.setCanceledOnTouchOutside(true);
+        picker.setTextSize(20);
+        picker.setUseWeight(true);
+        picker.setTopPadding(ConvertUtils.toPx(this, 10));
+        picker.setRangeEnd(2111, 1, 11);
+        picker.setRangeStart(2016, 8, 29);
+        picker.setSelectedItem(2050, 10, 14);
+        picker.setResetWhileWheel(false);
+        picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
+            @Override
+            public void onDatePicked(String year, String month, String day) {
+                String time = year + "年" + month + "月" + day + "日";
+                switch (type){
+                    case TYPE_CHENG_LI:
+                        mTvChengli.setText(time);
+                        break;
+                    case TYPE_YOU_XIAO_QI:
+                        mTvZhengJianYouXiaoQi.setText(time);
+                        break;
+                }
+            }
+        });
+        picker.setOnWheelListener(new DatePicker.OnWheelListener() {
+            @Override
+            public void onYearWheeled(int index, String year) {
+                picker.setTitleText(year + "-" + picker.getSelectedMonth() + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onMonthWheeled(int index, String month) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + month + "-" + picker.getSelectedDay());
+            }
+
+            @Override
+            public void onDayWheeled(int index, String day) {
+                picker.setTitleText(picker.getSelectedYear() + "-" + picker.getSelectedMonth() + "-" + day);
+            }
+        });
+        picker.show();
     }
 
     /**
@@ -292,12 +455,12 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
-                        if(idCardInfoFrontBean == null){
+                        if (idCardInfoFrontBean == null) {
                             ToastUtils.popUpToast("身份证选择失败，请重新选择");
                             break;
 
                         }
-                        if(!idCardInfoFrontBean.getImageStatus().equals("normal")){
+                        if (!idCardInfoFrontBean.getImageStatus().equals("normal")) {
                             ToastUtils.popUpToast("身份证照片不正常，请重新选择");
                             break;
                         }
@@ -307,10 +470,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
-                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_FRONT);
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_FRONT);
                         break;
                     case BACK:
-                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_BACK);
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_BACK);
 
                         break;
                 }
@@ -409,20 +572,23 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
     @Override
     public void success() {
-
+        ToastUtils.popUpToast("注册成功");
     }
 
     @Override
     public void imageUrl(String url, int type) {
-        switch (type){
+        switch (type) {
             case UPLOAD_ID_CARD_FRONT:
-//                idCardFrontUrl = IMAGE_BASE_URL+url;
+                idCardFrontUrl = IMAGE_BASE_URL + url;
                 break;
             case UPLOAD_ID_CARD_BACK:
-//                idCardBackUrl = IMAGE_BASE_URL+url;
+                idCardBackUrl = IMAGE_BASE_URL + url;
                 break;
-            case UPLOAD_DRIVER:
-//                driverUrl = IMAGE_BASE_URL+url;
+            case UPLOAD_BUSINESS:
+                businessUrl = IMAGE_BASE_URL + url;
+                break;
+            case UPLOAD_ROAD_TRANSPORT_PERMIT:
+                roadTransportPermit = IMAGE_BASE_URL + url;
                 break;
         }
     }

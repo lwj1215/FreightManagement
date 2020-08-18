@@ -6,11 +6,10 @@ import android.widget.TextView;
 
 import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
-import com.example.freightmanagement.presenter.TrainingStartPresenter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -91,7 +90,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
 
     @Override
-    public void trainingList(List<TrainingSelectBean.DataBean> data) {
+    public void trainingList(List<TrainingStartBean.DataBean> data) {
 
     }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Adapter.QusetionnaireAdapter;
 import com.example.freightmanagement.Bean.AnswerBean;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.FullyGridLayoutManager;
@@ -33,7 +33,7 @@ public class QuestionnaireContentView extends View  {
     private TextView question;
     private ScrollView scrollView;
     /*问卷及答案实体*/
-    private TrainingSelectBean.DataBean questionEntity;
+    private TrainingStartBean.DataBean questionEntity;
     /*题目序号*/
     private int titleNum;
 
@@ -48,7 +48,7 @@ public class QuestionnaireContentView extends View  {
     private int age;
 //    private List<NewHealthAnswerAll> answerList;
     private EditText editText;
-//    private TrainingSelectBean.DataBean answerList;
+//    private TrainingStartBean.DataBean answerList;
     private Map<String, String> answerList;
     private List<AnswerBean> answerBeanList;
     private QuestionnaireContentView(Context context) {
@@ -56,7 +56,7 @@ public class QuestionnaireContentView extends View  {
         this.context = context;
     }
 
-    public QuestionnaireContentView(TrainingSelectBean.DataBean questionEntity, int titleNum, String id, String mage, Activity activity, RadioCallBack callBack,
+    public QuestionnaireContentView(TrainingStartBean.DataBean questionEntity, int titleNum, String id, String mage, Activity activity, RadioCallBack callBack,
                                     QuestionnaireFragment fragment) {
         super(activity);
 //        String birthDate = PrefUtilsData.getBirthDate();

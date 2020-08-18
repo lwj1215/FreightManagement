@@ -2,11 +2,11 @@ package com.example.freightmanagement.presenter;
 
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainAnswerListBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.presenter.constract.TrainingSelectConstact;
-import com.example.freightmanagement.presenter.constract.TrainingStartConstact;
 import com.google.gson.Gson;
 
 /**
@@ -20,8 +20,8 @@ public class TrainingSelectPresenter extends BasePresenter<TrainingSelectConstac
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                TrainingSelectBean trainingSelectBean = new Gson().fromJson(json, TrainingSelectBean.class);
-                mView.trainingList(trainingSelectBean.getData());
+                TrainAnswerListBean trainAnswerListBean = new Gson().fromJson(json, TrainAnswerListBean.class);
+//                mView.trainingList(trainAnswerListBean.getData());
             }
 
             @Override

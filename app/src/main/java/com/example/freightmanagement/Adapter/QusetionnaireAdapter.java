@@ -1,23 +1,17 @@
 package com.example.freightmanagement.Adapter;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Bean.AnswerBean;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.R;
-import com.example.freightmanagement.Utils.StringUtils;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  *

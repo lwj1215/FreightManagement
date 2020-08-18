@@ -9,7 +9,7 @@ import androidx.collection.ArraySet;
 import com.example.freightmanagement.Adapter.QuestionnaireAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Base.BaseViewPageFragment;
-import com.example.freightmanagement.Bean.TrainingSelectBean;
+import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.View.HomeWorkViewPager;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> implements TrainingStartPresenter.View, View.OnClickListener {
     private HomeWorkViewPager viewPager;
-    private ArraySet<TrainingSelectBean.DataBean> answerList;
+    private ArraySet<TrainingStartBean.DataBean> answerList;
     /**
      * 上一页
      */
@@ -60,7 +60,7 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
     }
 
     @Override
-    public void trainingList(List<TrainingSelectBean.DataBean> data) {
+    public void trainingList(List<TrainingStartBean.DataBean> data) {
         createFragmentList(data);
         pagerAdapter = new QuestionnaireAdapter(getSupportFragmentManager(), fragmentList);
         viewPager.setAdapter(pagerAdapter);
@@ -95,7 +95,7 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
     }
     private List<Integer> mPagers = new ArrayList<>();//页
     /*分不同类型  创建不同的Fragment*/
-    private void createFragmentList(List<TrainingSelectBean.DataBean> data) {
+    private void createFragmentList(List<TrainingStartBean.DataBean> data) {
         fragmentList = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             BaseViewPageFragment baseFragment = null;
