@@ -11,4 +11,6 @@ public class ImageUploadConstants {
     public static final int UPLOAD_ID_CARD_BACK = 1;
     //驾驶证照片
     public static final int UPLOAD_DRIVER = 2;
+    //营业执照
+//    public static final int UPLOAD_DRIVER = 2;
 }

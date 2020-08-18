@@ -6,9 +6,9 @@ import com.example.freightmanagement.Bean.TrainingSelectBean;
 import java.util.List;
 
 
-public interface TrainingSelectConstact {
+public interface TrainingStartConstact {
 
-    void getAnswerResultList(String driverId);
+    void getTrainingList();
 
     interface View extends BaseView{
 

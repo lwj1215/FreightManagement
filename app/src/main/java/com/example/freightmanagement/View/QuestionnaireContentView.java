@@ -11,12 +11,15 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Adapter.QusetionnaireAdapter;
+import com.example.freightmanagement.Bean.AnswerBean;
 import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.FullyGridLayoutManager;
 import com.example.freightmanagement.Utils.RadioCallBack;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -47,7 +50,7 @@ public class QuestionnaireContentView extends View  {
     private EditText editText;
 //    private TrainingSelectBean.DataBean answerList;
     private Map<String, String> answerList;
-
+    private List<AnswerBean> answerBeanList;
     private QuestionnaireContentView(Context context) {
         super(context);
         this.context = context;
@@ -76,6 +79,15 @@ public class QuestionnaireContentView extends View  {
         mRecyclerView = new RecyclerView(mActivity);
         mRecyclerView.setLayoutManager(new FullyGridLayoutManager(mActivity, 2));
         answerList = questionEntity.getOptionsMap();
+        answerBeanList = new ArrayList<>();
+        for(Map.Entry<String ,String > entry :answerList.entrySet()){
+            String key = entry.getKey();
+            String msg = entry.getValue();
+            AnswerBean answerBean = new AnswerBean();
+            answerBean.setKey(key);
+            answerBean.setAnswer(msg);
+            answerBeanList.add(answerBean);
+        }
         showViewDatas();
     }
 
@@ -95,14 +107,13 @@ public class QuestionnaireContentView extends View  {
 
     }
 
-
     /*3*/
     private void createMoreEditTextView() {
         View view3 = LayoutInflater.from(getContext()).inflate(R.layout.item_health_questionnaire2, null);
         ListView listView = (ListView) view3.findViewById(R.id.listView);
         QusetionnaireAdapter listAdapter = new QusetionnaireAdapter(getContext());
         listView.setAdapter(listAdapter);
-        listAdapter.setData(answerList);
+        listAdapter.setData(answerBeanList);
         scrollView.addView(view3);
     }
 

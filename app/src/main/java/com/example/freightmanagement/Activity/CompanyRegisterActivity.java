@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -31,15 +32,22 @@ import com.example.freightmanagement.Utils.IDCardUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
+import com.example.freightmanagement.presenter.CompanyRegisterPresenter;
+import com.example.freightmanagement.presenter.constract.CompanyRegisterConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
+
+import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
 
 /**
  * Created by songdechuan on 2020/8/10.
  */
 
-public class CompanyRegisterActivity extends BaseActivity implements View.OnClickListener {
+public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresenter> implements CompanyRegisterConstact.View,View.OnClickListener {
 
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
@@ -108,6 +116,31 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
     private Dialog bottomDialog;
     private View bottomView;
     private ElectronicSignature vSignView;
+    /**
+     * 请填写您统一社会信用代码
+     */
+    private EditText mEtCode;
+    /**
+     * 请填写您的公司名称
+     */
+    private EditText mEtName;
+    /**
+     * 请填写您的法定代表人
+     */
+    private EditText mEtFading;
+    /**
+     * 请填写您的经营范围
+     */
+    private EditText mEtJing;
+    /**
+     * 请填写您统一社会信用代码
+     */
+    private TextView mTvChengli;
+    /**
+     * 请填写您的住所
+     */
+    private EditText mEtAddress;
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_company_register;
@@ -159,6 +192,13 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
         bottomView.findViewById(R.id.btn_no).setOnClickListener(this);
         bottomView.findViewById(R.id.btn_yes).setOnClickListener(this);
         vSignView = (ElectronicSignature) bottomView.findViewById(R.id.sign_view);
+        mEtCode = (EditText) findViewById(R.id.et_code);
+        mEtName = (EditText) findViewById(R.id.et_name);
+        mEtFading = (EditText) findViewById(R.id.et_fading);
+        mEtJing = (EditText) findViewById(R.id.et_jing);
+        mTvChengli = (TextView) findViewById(R.id.tv_chengli);
+        mTvChengli.setOnClickListener(this);
+        mEtAddress = (EditText) findViewById(R.id.et_address);
     }
 
     @Override
@@ -194,13 +234,15 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
                 break;
             case R.id.tv_business1:
                 break;
+            case R.id.tv_chengli:
+                break;
         }
     }
 
     /**
      * 正面身份证拍照
      */
-    private void takeIDCard(){
+    private void takeIDCard() {
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication()).getAbsolutePath());
@@ -231,9 +273,10 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
                 if (result != null) {
                     result.getAddress();
 //                    alertText(idCardSide, new Gson().toJson(result));
-                    setIDCardInfo(idCardSide,new Gson().toJson(result),filePath);
+                    setIDCardInfo(idCardSide, new Gson().toJson(result), filePath);
                 }
             }
+
             @Override
             public void onError(OCRError error) {
                 alertText("", error.getMessage());
@@ -241,22 +284,34 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
         });
     }
 
-    private void setIDCardInfo(final String idCardSide, final String result, String filePath) {
+    private void setIDCardInfo(final String idCardSide, final String result, final String filePath) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                switch (idCardSide){
+                switch (idCardSide) {
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
+                        if(idCardInfoFrontBean == null){
+                            ToastUtils.popUpToast("身份证选择失败，请重新选择");
+                            break;
+
+                        }
+                        if(!idCardInfoFrontBean.getImageStatus().equals("normal")){
+                            ToastUtils.popUpToast("身份证照片不正常，请重新选择");
+                            break;
+                        }
                         mEtRealName.setText(idCardInfoFrontBean.getName().getWords());
                         mEtDetailAddress.setText(idCardInfoFrontBean.getGender().getWords());
                         String number = idCardInfoFrontBean.getIdNumber().getWords();
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
+                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_FRONT);
                         break;
                     case BACK:
+                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_BACK);
+
                         break;
                 }
 
@@ -264,10 +319,11 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
         });
 
     }
+
     /**
      * 反面身份证扫描
      */
-    private void takeIDCardReverse(){
+    private void takeIDCardReverse() {
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication()).getAbsolutePath());
@@ -344,10 +400,30 @@ public class CompanyRegisterActivity extends BaseActivity implements View.OnClic
                 ToastUtils.popUpToast(title);
 
                 ToastUtils.popUpToast(message);
-                Log.d("title",title);
-                Log.d("message",message);
+                Log.d("title", title);
+                Log.d("message", message);
 
             }
         });
+    }
+
+    @Override
+    public void success() {
+
+    }
+
+    @Override
+    public void imageUrl(String url, int type) {
+        switch (type){
+            case UPLOAD_ID_CARD_FRONT:
+//                idCardFrontUrl = IMAGE_BASE_URL+url;
+                break;
+            case UPLOAD_ID_CARD_BACK:
+//                idCardBackUrl = IMAGE_BASE_URL+url;
+                break;
+            case UPLOAD_DRIVER:
+//                driverUrl = IMAGE_BASE_URL+url;
+                break;
+        }
     }
 }

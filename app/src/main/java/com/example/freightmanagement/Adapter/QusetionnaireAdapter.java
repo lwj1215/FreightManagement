@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.freightmanagement.Bean.AnswerBean;
 import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.StringUtils;
@@ -27,14 +28,13 @@ public class QusetionnaireAdapter extends BaseAdapter {
     private TextView textView;
 
     private int selectorPosition;
-    private Map<String, String> mDatas;
+    private List<AnswerBean>  mDatas;
 
     public QusetionnaireAdapter(Context context) {
         this.mContext = context;
     }
 
-
-    public void setData(Map<String, String> answerList) {
+    public void setData(List<AnswerBean> answerList) {
         this.mDatas = answerList;
         notifyDataSetChanged();
     }
@@ -87,8 +87,7 @@ public class QusetionnaireAdapter extends BaseAdapter {
         } else {
             viewHodler = (QusetionnaireAdapter.ViewHodler) convertView.getTag();
         }
-
-//        viewHodler.text.setText(mDatas.get(position).getContent());
+        viewHodler.text.setText(mDatas.get(position).getAnswer());
 //        if (!StringUtils.isEmpty(item.getAnswerValue()) && item.getAnswerValue().equals(String.valueOf(item.getUpload_id()))) {
 //            item.setSelect(true);
 //        }

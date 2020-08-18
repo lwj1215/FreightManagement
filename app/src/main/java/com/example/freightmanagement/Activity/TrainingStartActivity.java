@@ -5,7 +5,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.collection.ArraySet;
-import androidx.fragment.app.Fragment;
 
 import com.example.freightmanagement.Adapter.QuestionnaireAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
@@ -14,8 +13,7 @@ import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.View.HomeWorkViewPager;
-import com.example.freightmanagement.presenter.TrainingSelectPresenter;
-import com.example.freightmanagement.presenter.constract.TrainingSelectConstact;
+import com.example.freightmanagement.presenter.TrainingStartPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +22,7 @@ import java.util.List;
  * Created by songdechuan on 2020/8/10.
  */
 
-public class TrainingStartActivity extends BaseActivity<TrainingSelectPresenter> implements TrainingSelectPresenter.View, View.OnClickListener {
+public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> implements TrainingStartPresenter.View, View.OnClickListener {
     private HomeWorkViewPager viewPager;
     private ArraySet<TrainingSelectBean.DataBean> answerList;
     /**

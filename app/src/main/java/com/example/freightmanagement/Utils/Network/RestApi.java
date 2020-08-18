@@ -62,9 +62,6 @@ public class RestApi {
      */
     public void post(String url, String jsonValue, @Nullable final OnRequestResult callback) {
         Log.i(TAG, "post: "+jsonValue+url);
-//        RequestBody formBody = new FormBody.Builder()
-//                .add("", jsonValue)
-//                .build();
         RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
 //        RequestBody formBody = FormBody.create(MediaType.parse("application/json"), jsonValue);
 

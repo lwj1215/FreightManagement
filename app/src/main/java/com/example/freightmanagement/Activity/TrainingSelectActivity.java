@@ -8,8 +8,9 @@ import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.TrainingSelectBean;
 import com.example.freightmanagement.R;
-import com.example.freightmanagement.presenter.TrainingPresenter;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
+import com.example.freightmanagement.presenter.TrainingStartPresenter;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -56,7 +57,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
     @Override
     protected void onLoadData2Remote() {
-        mPresenter.getTrainingList();
+        mPresenter.getAnswerResultList(PrefUtilsData.getDriverId());
     }
 
     @Override
@@ -94,10 +95,6 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
     }
 
-//    @Override
-//    public void testResult(String msg) {
-//
-//    }
 
 
 }
