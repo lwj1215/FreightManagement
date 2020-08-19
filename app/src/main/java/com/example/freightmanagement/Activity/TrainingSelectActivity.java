@@ -4,15 +4,12 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.freightmanagement.Adapter.TrainingAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.TrainAnswerListBean;
 import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ import java.util.List;
 
 public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter> implements TrainingSelectPresenter.View,View.OnClickListener {
 
-    private RecyclerView mTrainingList;
+
     /**
      * 开始培训
      */
@@ -42,16 +39,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
     protected void onInitView() {
         setDefaultTitle("岗前培训");
         initView();
-        initAdapter();
-    }
 
-    private void initAdapter() {
-
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mTrainingList.setLayoutManager(linearLayoutManager);
-        TrainingAdapter trainingAdapter = new TrainingAdapter(this);
-        mTrainingList.setAdapter(trainingAdapter);
     }
 
     @Override
@@ -65,7 +53,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
     }
 
     public void initView() {
-        mTrainingList =  findViewById(R.id.training_list);
+
         mTvStartTraining =  findViewById(R.id.tv_start_training);
         mTvStartTraining.setOnClickListener(this);
         mTvStartAnswer =  findViewById(R.id.tv_start_answer);
@@ -87,13 +75,8 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
         }
     }
 
-
-
     @Override
-    public void trainingList(List<TrainingStartBean.DataBean> data) {
+    public void trainingList(TrainAnswerListBean.DataBean data) {
 
     }
-
-
-
 }

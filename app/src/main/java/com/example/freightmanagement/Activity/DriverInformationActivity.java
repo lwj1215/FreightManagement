@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.DriverInformationBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
@@ -75,9 +75,9 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
             tv_workid.setText(certificateWorkBo.getGrantNo());
             tv_time.setText(certificateWorkBo.getCreateTime() + "");
             if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())){
-                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
+//                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
             } if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())){
-                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
+//                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
             }
         } else if (PrefUtilsData.getType().equals("2")) {
             name.setText(certificateIDBo.getName());

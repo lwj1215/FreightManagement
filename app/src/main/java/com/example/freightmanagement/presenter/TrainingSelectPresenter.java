@@ -21,7 +21,7 @@ public class TrainingSelectPresenter extends BasePresenter<TrainingSelectConstac
             public void onSuccess(String json) {
                 super.onSuccess(json);
                 TrainAnswerListBean trainAnswerListBean = new Gson().fromJson(json, TrainAnswerListBean.class);
-//                mView.trainingList(trainAnswerListBean.getData());
+                mView.trainingList(trainAnswerListBean.getData());
             }
 
             @Override

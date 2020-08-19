@@ -51,4 +51,6 @@ dependencies {
     compile('com.github.gzu-liyujiang.AndroidPicker:WheelPicker:1.5.6') {
         exclude group: 'com.android.support'
     }
+    implementation 'com.github.Giftedcat:DynamicPublishing:1.0.0'
+
 }
