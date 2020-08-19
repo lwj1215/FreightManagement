@@ -52,5 +52,8 @@ dependencies {
         exclude group: 'com.android.support'
     }
     implementation 'com.github.Giftedcat:DynamicPublishing:1.0.0'
+    //气泡弹窗
+    implementation 'me.kareluo.ui:popmenu:1.1.0'
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
 
 }

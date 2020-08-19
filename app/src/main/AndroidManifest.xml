@@ -79,6 +79,9 @@
             android:name=".Activity.ChangePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activity.WeiXiuJiLuActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activity.MaintenanceRecordsActivity"
             android:screenOrientation="portrait" >
             <intent-filter>

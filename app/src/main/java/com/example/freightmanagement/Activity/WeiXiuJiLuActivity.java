@@ -1,9 +1,6 @@
 package com.example.freightmanagement.Activity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -26,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by songdechuan on 2020/8/19.
  */
 
-public class MaintenanceRecordsActivity extends BaseActivity implements View.OnClickListener {
+public class WeiXiuJiLuActivity extends BaseActivity implements View.OnClickListener {
     /**
      * 请输入您的行驶里程
      */
@@ -41,10 +38,6 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     private TextView mTvBaoYangShiJian;
     private LinearLayout mLlCurrentAddress;
     /**
-     * 添加照片
-     */
-    private TextView mTvAddPhoto;
-    /**
      * 提交
      */
     private TextView mTvSrue;
@@ -55,23 +48,25 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     private static final  int REQUEST_IMAGE = 101;
     @Override
     public int setLayoutResource() {
-        return R.layout.activity_maintenance_records;
+        return R.layout.activity_wei_xiu_ji_lu;
     }
 
     @Override
     protected void onInitView() {
-        setDefaultTitle("添加保养记录");
+        setDefaultTitle("添加维修记录");
         initView();
+        mSelect = new ArrayList<>();
         helpr = PictureUseHelpr.init(this).
                 setMaxNum(9).
                 origin(mSelect).
                 bindRecyclerView(mRvImages, R.id.iv_thum);
+        initAdapter();
+
     }
 
     @Override
     protected void onLoadData2Remote() {
-        mSelect = new ArrayList<>();
-        initAdapter();
+
     }
 
     private void initAdapter() {
@@ -99,7 +94,6 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
         mTvBaoYangShiJian.setOnClickListener(this);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
 //        mTvAddPhoto = (TextView) findViewById(R.id.tv_add_photo);
-        mTvAddPhoto.setOnClickListener(this);
         mTvSrue = (TextView) findViewById(R.id.tv_srue);
         mTvSrue.setOnClickListener(this);
         mRvImages = (RecyclerView) findViewById(R.id.rv_images);
@@ -112,10 +106,6 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
                 break;
             case R.id.tv_bao_yang_shi_jian:
                 break;
-//            case R.id.tv_add_photo:
-//                // 自由配置选项
-//
-//                break;
             case R.id.tv_srue:
                 break;
         }
