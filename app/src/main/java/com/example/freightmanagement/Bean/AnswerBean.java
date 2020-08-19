@@ -8,6 +8,15 @@ public class AnswerBean {
     private String key;
 
     private String answer;
+    private boolean isSelect;
+
+    public boolean getIsSelect() {
+        return isSelect;
+    }
+
+    public void setIsSelect(boolean isSelect) {
+        this.isSelect = isSelect;
+    }
 
     public String getKey() {
         return key;

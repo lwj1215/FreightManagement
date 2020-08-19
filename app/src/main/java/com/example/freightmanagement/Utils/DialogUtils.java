@@ -57,5 +57,39 @@ public class DialogUtils extends BaseDialogUtils {
         window.setAttributes(params);
         return myDialog;
     }
-
+    /***
+     * 选择提示对话框Dialog
+     */
+    public static Dialog showTipsSelectDialog(Context context, String content, String button1, String button2,
+                                              final View.OnClickListener cl, final View.OnClickListener cr, boolean isTouchClose) {
+        final Dialog dialog = new Dialog(context, R.style.dialog_anim);
+        View view = LayoutInflater.from(context).inflate(R.layout.tips_select_dialog, null);
+        dialog.setContentView(view);
+        ((TextView) view.findViewById(R.id.content)).setText(content);
+        if (button1 != null && !button1.equals(""))
+            ((TextView) view.findViewById(R.id.button1)).setText(button1);
+        if (button2 != null && !button2.equals(""))
+            ((TextView) view.findViewById(R.id.button2)).setText(button2);
+        view.findViewById(R.id.button1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+                if (cl != null) {
+                    cl.onClick(arg0);
+                }
+            }
+        });
+        view.findViewById(R.id.button2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                dialog.dismiss();
+                if (cr != null) {
+                    cr.onClick(arg0);
+                }
+            }
+        });
+        dialog.setCanceledOnTouchOutside(isTouchClose);
+        dialog.show();
+        return dialog;
+    }
 }

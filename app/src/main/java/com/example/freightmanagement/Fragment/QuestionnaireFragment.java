@@ -82,11 +82,11 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
         mImags.put(pagination, list);
         scrollView.removeAllViews();
         for (int i = 0, h = 0; i < mQuestionList.size(); i++) {
-           if (mQuestionList.get(i).getIndex() > pagination) {
-                break;
+           if (mQuestionList.get(i).getIndex()== pagination) {
+
+               mContentView = new QuestionnaireContentView(mQuestionList.get(i), titleNum + h++, id,age, activity, callBack, this);
+               linearLayout.addView(mContentView.getCurrentView());
             }else{
-                mContentView = new QuestionnaireContentView(mQuestionList.get(i), titleNum + h++, id,age, activity, callBack, this);
-                linearLayout.addView(mContentView.getCurrentView());
             }
         }
         scrollView.addView(linearLayout);

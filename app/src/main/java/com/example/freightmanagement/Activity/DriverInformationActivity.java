@@ -1,8 +1,11 @@
 package com.example.freightmanagement.Activity;
 
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.DriverInformationBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
@@ -13,6 +16,7 @@ import com.example.freightmanagement.presenter.DriverInformationPresenter;
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
     private TextView name, age, sex, tv_card, tv_workid, tv_time,tv_sign_date,tv_sign_fen;
+    private ImageView iv_card_front1,iv_card_front2;
 
     @Override
     public int setLayoutResource() {
@@ -37,6 +41,8 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         tv_time = bindView(R.id.tv_time);
         tv_sign_date = bindView(R.id.tv_sign_date);
         tv_sign_fen = bindView(R.id.tv_sign_fen);
+        iv_card_front1 = bindView(R.id.iv_card_front);
+        iv_card_front2 = bindView(R.id.iv_card_revers);
     }
 
     @Override
@@ -68,6 +74,11 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
 
             tv_workid.setText(certificateWorkBo.getGrantNo());
             tv_time.setText(certificateWorkBo.getCreateTime() + "");
+            if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())){
+                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
+            } if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())){
+                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
+            }
         } else if (PrefUtilsData.getType().equals("2")) {
             name.setText(certificateIDBo.getName());
             if (certificateIDBo.getSix().equals("0")) {

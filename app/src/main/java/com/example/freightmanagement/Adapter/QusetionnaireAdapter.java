@@ -1,6 +1,8 @@
 package com.example.freightmanagement.Adapter;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ public class QusetionnaireAdapter extends BaseAdapter {
     private TextView textView;
 
     private int selectorPosition;
-    private List<AnswerBean>  mDatas;
+    private List<AnswerBean> mDatas;
 
     public QusetionnaireAdapter(Context context) {
         this.mContext = context;
@@ -34,25 +36,25 @@ public class QusetionnaireAdapter extends BaseAdapter {
     }
 
     /*保存单选题、多选题答案*/
-//    private void saveCurrentSelectValue(String value, String answerName) {
-//        for(Map.Entry<String ,String > entry :mDatas.entrySet()){
+    private void saveCurrentSelectValue(String value, String answerName) {
+//        for(Map.Entry<String ,String > entry :mDatas){
 //            String key = entry.getKey();
 //            String msg = entry.getValue();
 //                answerEntity.setAnswerValue(msg);
 //
 //        }
-////        for (int i = 0; i < mDatas.size(); i++) {
-////            String s = mDatas.get(i);
-////            if (answerEntity.getContent().equals(answerName)) {
-////            }
-////
-////        }
+//        for (int i = 0; i < mDatas.size(); i++) {
+//            String s = mDatas.get(i);
+//            if (answerEntity.getContent().equals(answerName)) {
+//            }
 //
-//    }
+//        }
+
+    }
 
     @Override
     public int getCount() {
-         return mDatas != null && mDatas.size() > 0 ? mDatas.size() : 0;
+        return mDatas != null && mDatas.size() > 0 ? mDatas.size() : 0;
     }
 
     @Override
@@ -82,35 +84,42 @@ public class QusetionnaireAdapter extends BaseAdapter {
             viewHodler = (QusetionnaireAdapter.ViewHodler) convertView.getTag();
         }
         viewHodler.text.setText(mDatas.get(position).getAnswer());
+
+        if (mDatas == null) {
+
+        } else {
+            viewHodler.text.setText(mDatas.get(position).getKey() + ":" + mDatas.get(position).getAnswer());
 //        if (!StringUtils.isEmpty(item.getAnswerValue()) && item.getAnswerValue().equals(String.valueOf(item.getUpload_id()))) {
 //            item.setSelect(true);
 //        }
-        viewHodler.ll.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                for (int i = 0; i < mDatas.size(); i++) {
-//                    mDatas.get(i).setSelect(false);
-//                }
-//                item.setSelect(true);
-//                notifyDataSetChanged();
-//                saveCurrentSelectValue(String.valueOf(mDatas.get(position).getUpload_id()), mDatas.get(position).getBean_name());
-            }
-        });
+            viewHodler.ll.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    for (int i = 0; i < mDatas.size(); i++) {
+                        mDatas.get(i).setIsSelect(false);
+                    }
+                    mDatas.get(position).setIsSelect(true);
+                    notifyDataSetChanged();
+//                    saveCurrentSelectValue(String.valueOf(mDatas.get(position).getUpload_id()), mDatas.get(position).getBean_name());
+                }
+            });
 
-//        if (item.isSelect()) {
-//            viewHodler.ll.setBackgroundResource(R.color.blue_079EEB);
-//            textView.setTextColor(Color.WHITE);
-//            Drawable rightDrawable = mContext.getResources().getDrawable(R.drawable.yuanjiao20);
-//            rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
-//            textView.setCompoundDrawables(rightDrawable, null, null, null);
-//
-//        } else {
-//            viewHodler.ll.setBackgroundResource(R.color.white);
-//            textView.setTextColor(Color.parseColor("#333333"));
-//            Drawable rightDrawable = mContext.getResources().getDrawable(R.drawable.yuanjiao20);
-//            rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
-//            textView.setCompoundDrawables(rightDrawable, null, null, null);
-//        }
+        if (mDatas.get(position).getIsSelect()) {
+            viewHodler.ll.setBackgroundResource(R.color.blue_079EEB);
+            viewHodler.text.setTextColor(Color.WHITE);
+            Drawable rightDrawable = mContext.getResources().getDrawable(R.drawable.yuanjiao20);
+            rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
+            viewHodler.text.setCompoundDrawables(rightDrawable, null, null, null);
+
+        } else {
+            viewHodler.ll.setBackgroundResource(R.color.white);
+            viewHodler.text.setTextColor(Color.parseColor("#333333"));
+            Drawable rightDrawable = mContext.getResources().getDrawable(R.drawable.yuanjiao20);
+            rightDrawable.setBounds(0, 0, rightDrawable.getMinimumWidth(), rightDrawable.getMinimumHeight());
+            viewHodler.text.setCompoundDrawables(rightDrawable, null, null, null);
+        }
+        }
+
         return convertView;
     }
 

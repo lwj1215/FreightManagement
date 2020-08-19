@@ -364,10 +364,10 @@ public class WrodIdBean {
             private int isActive;
             private long createTime;
             private long updateTime;
-            private Object picUrl;
-            private Object picUrl2;
-            private Object file;
-            private Object file2;
+            private String picUrl;
+            private String picUrl2;
+            private String file;
+            private String file2;
             private String idno;
 
             public int getId() {
@@ -442,35 +442,35 @@ public class WrodIdBean {
                 this.updateTime = updateTime;
             }
 
-            public Object getPicUrl() {
+            public String getPicUrl() {
                 return picUrl;
             }
 
-            public void setPicUrl(Object picUrl) {
+            public void setPicUrl(String picUrl) {
                 this.picUrl = picUrl;
             }
 
-            public Object getPicUrl2() {
+            public String getPicUrl2() {
                 return picUrl2;
             }
 
-            public void setPicUrl2(Object picUrl2) {
+            public void setPicUrl2(String picUrl2) {
                 this.picUrl2 = picUrl2;
             }
 
-            public Object getFile() {
+            public String getFile() {
                 return file;
             }
 
-            public void setFile(Object file) {
+            public void setFile(String file) {
                 this.file = file;
             }
 
-            public Object getFile2() {
+            public String getFile2() {
                 return file2;
             }
 
-            public void setFile2(Object file2) {
+            public void setFile2(String file2) {
                 this.file2 = file2;
             }
 
