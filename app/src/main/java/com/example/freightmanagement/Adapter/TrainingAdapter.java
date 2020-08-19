@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.freightmanagement.R;
+import com.pili.pldroid.player.widget.PLVideoView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,12 +29,13 @@ public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.Train
     }
     @Override
     public TrainingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TrainingAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.training_item_layout, parent, false));
+        return new TrainingAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.item_training_video, parent, false));
     }
 
     @Override
     public void onBindViewHolder(TrainingViewHolder holder, int position) {
-
+//        MediaController mMediaController = new MediaController(this);
+//        mVideoView.setMediaController(mMediaController);
     }
 
     @Override
@@ -43,15 +45,13 @@ public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.Train
     }
 
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_score;
-        TextView tv_date;
+        PLVideoView videoView;
         private View itemView;
 
         public TrainingViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            tv_date = itemView.findViewById(R.id.tv_date);
-            tv_score = itemView.findViewById(R.id.tv_score);
+            videoView = itemView.findViewById(R.id.PLVideoView);
         }
     }
 }
