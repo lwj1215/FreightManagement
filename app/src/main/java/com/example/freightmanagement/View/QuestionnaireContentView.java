@@ -80,6 +80,9 @@ public class QuestionnaireContentView extends View  {
         mRecyclerView.setLayoutManager(new FullyGridLayoutManager(mActivity, 2));
         answerList = questionEntity.getOptionsMap();
         answerBeanList = new ArrayList<>();
+        if (answerList==null){
+            return;
+        }
         for(Map.Entry<String ,String > entry :answerList.entrySet()){
             String key = entry.getKey();
             String msg = entry.getValue();

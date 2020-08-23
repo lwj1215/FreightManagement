@@ -62,16 +62,17 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     protected void onInitView() {
         setDefaultTitle("添加保养记录");
         initView();
+        mSelect = new ArrayList<>();
         helpr = PictureUseHelpr.init(this).
                 setMaxNum(9).
                 origin(mSelect).
                 bindRecyclerView(mRvImages, R.id.iv_thum);
+        initAdapter();
     }
 
     @Override
     protected void onLoadData2Remote() {
-        mSelect = new ArrayList<>();
-        initAdapter();
+
     }
 
     private void initAdapter() {
@@ -99,7 +100,7 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
         mTvBaoYangShiJian.setOnClickListener(this);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
 //        mTvAddPhoto = (TextView) findViewById(R.id.tv_add_photo);
-        mTvAddPhoto.setOnClickListener(this);
+//        mTvAddPhoto.setOnClickListener(this);
         mTvSrue = (TextView) findViewById(R.id.tv_srue);
         mTvSrue.setOnClickListener(this);
         mRvImages = (RecyclerView) findViewById(R.id.rv_images);

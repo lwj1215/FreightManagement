@@ -90,8 +90,8 @@ public class WeiXiuJiLuActivity extends BaseActivity implements View.OnClickList
     public void initView() {
         mEtXingShiLiCheng = (EditText) findViewById(R.id.et_xing_shi_li_cheng);
         mEtBaoYangNeiRong = (EditText) findViewById(R.id.et_bao_yang_nei_rong);
-        mTvBaoYangShiJian = (TextView) findViewById(R.id.tv_bao_yang_shi_jian);
-        mTvBaoYangShiJian.setOnClickListener(this);
+//        mTvBaoYangShiJian = (TextView) findViewById(R.id.tv_bao_yang_shi_jian);
+//        mTvBaoYangShiJian.setOnClickListener(this);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
 //        mTvAddPhoto = (TextView) findViewById(R.id.tv_add_photo);
         mTvSrue = (TextView) findViewById(R.id.tv_srue);

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.listener.OnPicturesClickListener;
 
@@ -69,7 +70,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder>{
             ivThum.setVisibility(View.VISIBLE);
             ivAdd.setVisibility(View.GONE);
         }
-//        Glide.with(mContext).load(item).into(ivThum);
+        Glide.with(context).load(item).into(ivThum);
         ivThum.setOnClickListener(new PicturesClickListener(position));
         ivAdd.setOnClickListener(new PicturesClickListener(position));
 

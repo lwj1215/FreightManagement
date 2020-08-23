@@ -6,7 +6,6 @@ import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.presenter.constract.TrainingConstact;
 
-import static com.example.freightmanagement.BuildConfig.BASE_URL;
 
 /**
  * Created by songdechuan on 2020/8/6.

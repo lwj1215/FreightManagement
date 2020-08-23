@@ -73,5 +73,9 @@ public class BaseApiConstants {
      * 企业注册
      */
     public static final String API_COMPANY_REGISTER = "/cccc/enterprise/addEnterprise";
+    /**
+     * 获取检测项
+     */
+    public static final String API_JIANCEXIANG = "/cccc/check/getCheckDatas";
 
 }

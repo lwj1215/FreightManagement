@@ -248,11 +248,12 @@
                         android:layout_height="@dimen/x100">
 
                         <TextView
+                            android:id="@+id/tv_cljc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="点击查看车辆检查情况"
+                            android:text=""
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>
@@ -274,11 +275,12 @@
                         android:layout_height="@dimen/x100">
 
                         <TextView
+                            android:id="@+id/tv_clwx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="点击查看车辆维修情况"
+                            android:text=""
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>
@@ -300,11 +302,12 @@
                         android:layout_height="@dimen/x100">
 
                         <TextView
+                            android:id="@+id/tv_clby"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="点击查看车辆保养情况"
+                            android:text=""
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
                     </LinearLayout>
