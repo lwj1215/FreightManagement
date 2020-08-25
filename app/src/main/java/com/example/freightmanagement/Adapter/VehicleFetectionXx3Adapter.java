@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.OnItemClickListener;
 
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class VehicleFetectionXx3Adapter extends RecyclerView.Adapter<VehicleFete
     private Context context;
     private List<String> dataList;
     private List<VehicleDetectionBean.DataBean.Type3Bean> pages;
+    private OnItemClickListener listener;
 
     public VehicleFetectionXx3Adapter(Context context) {
         this.context = context;
@@ -34,9 +36,17 @@ public class VehicleFetectionXx3Adapter extends RecyclerView.Adapter<VehicleFete
     }
 
     @Override
-    public void onBindViewHolder(TrainingViewHolder holder, int position) {
+    public void onBindViewHolder(TrainingViewHolder holder, final int position) {
         if (pages != null) {
             holder.tv_date.setText(pages.get(position).getItem());
+            holder.tv_date.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onItemClick(v, position);
+                    }
+                }
+            });
         }
     }
 
@@ -61,5 +71,7 @@ public class VehicleFetectionXx3Adapter extends RecyclerView.Adapter<VehicleFete
         this.pages = type3;
         notifyDataSetChanged();
     }
-
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
 }

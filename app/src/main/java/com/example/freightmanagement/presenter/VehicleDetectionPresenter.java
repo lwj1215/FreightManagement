@@ -9,6 +9,7 @@ import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.presenter.constract.VehicleDetectionConstact;
 import com.example.freightmanagement.presenter.constract.VehicleInformationConstact;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 public class VehicleDetectionPresenter extends BasePresenter<VehicleDetectionConstact.View> implements VehicleDetectionConstact {
 
@@ -20,6 +21,27 @@ public class VehicleDetectionPresenter extends BasePresenter<VehicleDetectionCon
                 super.onSuccess(json);
                 VehicleDetectionBean vehicleDetectionBean = new Gson().fromJson(json, VehicleDetectionBean.class);
                 mView.trainingList(vehicleDetectionBean);
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
+    @Override
+    public void addVehicleData(String json) {
+        RestApi.getInstance().post(BaseApiConstants.API_ADDJIANCEXIANG, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+                mView.addVehicleDataSuc();
             }
 
             @Override

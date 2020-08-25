@@ -1,12 +1,9 @@
 package com.example.freightmanagement.Adapter;
 
 import android.content.Context;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Bean.VehicleDetectionBean;
+import com.example.freightmanagement.Bean.VerAddBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.OnItemClickListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +27,10 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
     private Context context;
     private List<String> dataList;
     private VehicleDetectionBean.DataBean pages;
+    private VerAddBean verAddBean=new VerAddBean();
+    private VerAddBean.CompleteBosBean completeBosBean=new VerAddBean.CompleteBosBean();
+    private List<VerAddBean.CompleteBosBean>     lisBean=new ArrayList<>();
+    private OnHdListener listener;
 
     public VehicleFetectionAdapter(Context context) {
         this.context = context;
@@ -50,6 +54,21 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                     VehicleFetectionXxAdapter vehicleFetectionAdapter = new VehicleFetectionXxAdapter(context);
                     holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                     vehicleFetectionAdapter.setPages(pages.getType1());
+                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+
+                            completeBosBean.setChechDataId(pages.getType1().get(position).getId());
+                            completeBosBean.setState(1);
+                            completeBosBean.setReslut("");
+                            lisBean.add(completeBosBean);
+                            verAddBean.setCompleteBos(lisBean);
+
+                            if (listener != null) {
+                                listener.onItemClick(verAddBean);
+                            }
+                        }
+                    });
                 }
             }else if (position==1) {
                 holder.tv_date.setText("(2) 行车中");
@@ -60,6 +79,20 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                     VehicleFetectionXx2Adapter vehicleFetectionAdapter = new VehicleFetectionXx2Adapter(context);
                     holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                     vehicleFetectionAdapter.setPages(pages.getType2());
+                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(View view, int position) {
+
+                            completeBosBean.setChechDataId(pages.getType2().get(position).getId());
+                            completeBosBean.setState(1);
+                            completeBosBean.setReslut("");
+                            lisBean.add(completeBosBean);
+                            verAddBean.setCompleteBos(lisBean);
+                            if (listener != null) {
+                                listener.onItemClick(verAddBean);
+                            }
+                        }
+                    });
                 }
             } else {
                 holder.tv_date.setText("(3) 行车后");
@@ -69,6 +102,20 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                 VehicleFetectionXx3Adapter vehicleFetectionAdapter = new VehicleFetectionXx3Adapter(context);
                 holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                 vehicleFetectionAdapter.setPages(pages.getType3());
+                vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        completeBosBean.setChechDataId(pages.getType3().get(position).getId());
+                        completeBosBean.setState(1);
+                        completeBosBean.setReslut("");
+                        lisBean.add(completeBosBean);
+                        verAddBean.setCompleteBos(lisBean);
+                        if (listener != null) {
+                            listener.onItemClick(verAddBean);
+                        }
+                    }
+                });
                 }
             }
     }
@@ -97,4 +144,11 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
         notifyDataSetChanged();
     }
 
+    public void setOnHdListener(OnHdListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnHdListener {
+        void onItemClick(VerAddBean verAddBean);
+    }
 }

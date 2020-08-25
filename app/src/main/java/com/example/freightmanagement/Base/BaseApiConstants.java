@@ -73,9 +73,36 @@ public class BaseApiConstants {
      * 企业注册
      */
     public static final String API_COMPANY_REGISTER = "/cccc/enterprise/addEnterprise";
+
     /**
-     * 获取检测项
+     * 获取车俩检测项
      */
     public static final String API_JIANCEXIANG = "/cccc/check/getCheckDatas";
+
+    /**
+     * 提交车俩检测项
+     */
+    public static final String API_ADDJIANCEXIANG = "/cccc/check/submit";
+    /**
+     * 提交车俩维修记录
+     */
+    public static final String API_ADDWEIXIU = "/cccc/repair/addrepair";
+    /**
+     * 提交车俩保养记录
+     */
+    public static final String API_ADDBAOYANG = "/cccc/maintain/addMaintain";
+
+    /**
+     * 查看车俩检测列表
+     */
+    public static final String API_CHEJIANCE = "/cccc/check/getCheckHistorys/";
+    /**
+     * 查看保养记录
+     */
+    public static final String API_CHEBAOYANG = "/cccc/maintain/getMaintainList/";
+    /**
+     * 查看维修记录
+     */
+    public static final String API_CHEWEIXIU = "/cccc/repair/getrepairList/";
 
 }

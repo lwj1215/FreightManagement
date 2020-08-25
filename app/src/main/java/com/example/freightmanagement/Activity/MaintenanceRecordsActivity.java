@@ -13,6 +13,7 @@ import com.example.freightmanagement.Adapter.GridAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.listener.OnPicturesClickListener;
+import com.example.freightmanagement.presenter.BaoYangPresenter;
 import com.giftedcat.picture.lib.PictureUseHelpr;
 import com.giftedcat.picture.lib.selector.MultiImageSelector;
 
@@ -26,7 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Created by songdechuan on 2020/8/19.
  */
 
-public class MaintenanceRecordsActivity extends BaseActivity implements View.OnClickListener {
+public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> implements BaoYangPresenter.View, View.OnClickListener {
     /**
      * 请输入您的行驶里程
      */
@@ -38,7 +39,7 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     /**
      * 请选择您的保养时间
      */
-    private TextView mTvBaoYangShiJian;
+    private EditText mTvBaoYangShiJian;
     private LinearLayout mLlCurrentAddress;
     /**
      * 添加照片
@@ -52,7 +53,9 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     private RecyclerView mRvImages;
     private GridAdapter adapter;
     private PictureUseHelpr helpr;
-    private static final  int REQUEST_IMAGE = 101;
+    private static final int REQUEST_IMAGE = 101;
+    private String url = "";
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_maintenance_records;
@@ -96,7 +99,7 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
     public void initView() {
         mEtXingShiLiCheng = (EditText) findViewById(R.id.et_xing_shi_li_cheng);
         mEtBaoYangNeiRong = (EditText) findViewById(R.id.et_bao_yang_nei_rong);
-        mTvBaoYangShiJian = (TextView) findViewById(R.id.tv_bao_yang_shi_jian);
+        mTvBaoYangShiJian = (EditText) findViewById(R.id.tv_bao_yang_shi_jian);
         mTvBaoYangShiJian.setOnClickListener(this);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
 //        mTvAddPhoto = (TextView) findViewById(R.id.tv_add_photo);
@@ -118,6 +121,11 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
 //
 //                break;
             case R.id.tv_srue:
+                if (mSelect.size() > 0) {
+                    url = mSelect.get(0).toString();
+                }
+                mPresenter.getTrainingList("", mEtBaoYangNeiRong.getText().toString(), Double.parseDouble(mEtXingShiLiCheng.getText().toString()), url, mTvBaoYangShiJian.getText().toString());
+                finish();
                 break;
         }
     }
@@ -135,4 +143,13 @@ public class MaintenanceRecordsActivity extends BaseActivity implements View.OnC
         }
     }
 
+    @Override
+    public void trainingList() {
+
+    }
+
+    @Override
+    protected BaoYangPresenter onInitLogicImpl() {
+        return new BaoYangPresenter();
+    }
 }

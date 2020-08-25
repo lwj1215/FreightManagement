@@ -69,7 +69,7 @@ public class RestApi {
                 .url(Host.BASE_URL + url)
                 .post(formBody)
                 .build();
-        enqueue("", request, new OnRequestResult() {
+        enqueue("", request, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 //保存token
@@ -109,7 +109,7 @@ public class RestApi {
 //                .addHeader("content-type", "application/json;charset:utf-8")
                 .post(formBody)
                 .build();
-        enqueue("", request, new OnRequestResult() {
+        enqueue("", request, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 //保存token
@@ -136,13 +136,13 @@ public class RestApi {
     /**
      * 请求公共方法
      */
-    public  void get(final String url, @Nullable final OnRequestResult callback) {
+    public  void get(final String url, @Nullable final OnRequestResultForCommon callback) {
         new Thread(new Runnable() {
             @Override
             public void run() {
                 Request request = new Request.Builder().url(Host.BASE_URL+url).build(); //添加头部信息
                 mClient.newCall(request);
-                enqueue("", request, new OnRequestResult() {
+                enqueue("", request, new OnRequestResultForCommon() {
                     @Override
                     public void onSuccess(String json) {
 //                        //保存token
@@ -170,7 +170,7 @@ public class RestApi {
     /**
      * 添加到请求队列请求
      */
-    public void enqueue(final String tag, Request request, @Nullable final OnRequestResult callback) {
+    public void enqueue(final String tag, Request request, @Nullable final OnRequestResultForCommon callback) {
         if (BaseAppUtils.isDebug()) {
             RequestBody body = request.body();
             if (body == null) {
@@ -240,7 +240,7 @@ public class RestApi {
      * 图片上传
      */
 
-    public void postImage(String url, File file, @Nullable final OnRequestResult callback) {
+    public void postImage(String url, File file, @Nullable final OnRequestResultForCommon callback) {
         String encode = "";
         try {
             encode = URLEncoder.encode(file.getName(), "UTF-8");
@@ -256,7 +256,7 @@ public class RestApi {
                 .url(Host.BASE_URL + url)
                 .post(requestBody)
                 .build();
-        enqueue("", request, new OnRequestResult() {
+        enqueue("", request, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 //保存token
@@ -295,7 +295,7 @@ public class RestApi {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
-        enqueue("第三方登录", request, new OnRequestResult() {
+        enqueue("第三方登录", request, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 if (callback != null) callback.onSuccess(json);

@@ -96,6 +96,16 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="@dimen/x30"
         android:layout_marginRight="@dimen/x30"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
+
+    <TextView
+        android:id="@+id/tv_srue"
+        style="@style/bottom_button_style"
+        android:layout_below="@+id/inputEdit_phone"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x90"
+        android:layout_marginTop="@dimen/x150"
+        android:layout_marginRight="@dimen/x90"
+        android:text="提交" />
 </LinearLayout>

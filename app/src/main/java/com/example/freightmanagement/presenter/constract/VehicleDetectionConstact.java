@@ -8,8 +8,11 @@ public interface VehicleDetectionConstact {
 
     void VehicleInformationData();
 
+    void  addVehicleData(String json);
     interface View extends BaseView{
 
         void trainingList(VehicleDetectionBean vehicleDetectionBean);
+
+        void addVehicleDataSuc();
     }
 }
