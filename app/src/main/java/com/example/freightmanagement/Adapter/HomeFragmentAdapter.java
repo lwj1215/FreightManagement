@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
 import com.example.freightmanagement.Utils.PrefUtilsData;
@@ -25,6 +26,7 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     private Context context;
     private final LayoutInflater layoutInflater;
     private List<String> dataList;
+    private int[] mName = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_peixun, R.mipmap.img_hetong, R.mipmap.img_chengnuoshu, R.mipmap.img_zerenshu, R.mipmap.img_lihui, R.mipmap.img_mima, R.mipmap.img_guanyu};
     private OnItemClickListener listener;
     private int selectorPosition;
     private int playcount;
@@ -49,19 +51,19 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     @Override
     public void onBindViewHolder(final HomeViewHolder holder, final int position) {
         if (dataList != null && dataList.size() > 0) {
-            if (position==0){
-                if (PrefUtilsData.getType().equals("1")){
+            if (position == 0) {
+                if (PrefUtilsData.getType().equals("1")) {
                     holder.tv_name.setText("驾驶员信息");
-                }else if (PrefUtilsData.getType().equals("2")){
+                } else if (PrefUtilsData.getType().equals("2")) {
                     holder.tv_name.setText("车主信息");
-                }else {
+                } else {
                     holder.tv_name.setText("企业信息");
                 }
-            }else {
+            } else {
 
-            holder.tv_name.setText(dataList.get(position).toString());
+                holder.tv_name.setText(dataList.get(position).toString());
             }
-
+            holder.img.setImageResource(mName[position]);
         } else {
         }
 

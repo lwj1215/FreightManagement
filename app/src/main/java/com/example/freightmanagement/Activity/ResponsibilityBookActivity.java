@@ -27,6 +27,7 @@ public class ResponsibilityBookActivity extends BaseActivity {
 
     @Override
     protected void onLoadData2Remote() {
+        setDefaultTitle("签订责任书");
         mWebView.setClickable(true);
         WebSettings settings = mWebView.getSettings();
         // 设置WebView支持JavaScript

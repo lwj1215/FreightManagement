@@ -3,6 +3,7 @@ package com.example.freightmanagement.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -109,6 +110,7 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
         mRvImages = (RecyclerView) findViewById(R.id.rv_images);
     }
 
+    private     double v1=0.0;
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -124,7 +126,10 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
                 if (mSelect.size() > 0) {
                     url = mSelect.get(0).toString();
                 }
-                mPresenter.getTrainingList("", mEtBaoYangNeiRong.getText().toString(), Double.parseDouble(mEtXingShiLiCheng.getText().toString()), url, mTvBaoYangShiJian.getText().toString());
+                if (!TextUtils.isEmpty(mEtXingShiLiCheng.getText().toString())){
+                     v1 = Double.parseDouble(mEtXingShiLiCheng.getText().toString());
+                }
+                mPresenter.getTrainingList("", mEtBaoYangNeiRong.getText().toString(), v1, url, mTvBaoYangShiJian.getText().toString());
                 finish();
                 break;
         }

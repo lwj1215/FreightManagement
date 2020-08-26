@@ -30,6 +30,7 @@ public class EmploymentContractActivity extends BaseActivity implements View.OnC
 
     @Override
     protected void onInitView() {
+        setDefaultTitle("签订承诺书");
         bindView(R.id.tv_qz).setOnClickListener(this);
         vSignImg = (ImageView) bindView(R.id.img_sign);
         mWebView = (WebView) bindView(R.id.webView);

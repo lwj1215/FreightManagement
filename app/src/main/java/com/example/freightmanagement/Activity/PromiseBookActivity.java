@@ -27,6 +27,7 @@ public class PromiseBookActivity extends BaseActivity {
 
     @Override
     protected void onLoadData2Remote() {
+        setDefaultTitle("聘用合同");
         mWebView.setClickable(true);
         WebSettings settings = mWebView.getSettings();
         // 设置WebView支持JavaScript

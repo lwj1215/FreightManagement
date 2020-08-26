@@ -78,6 +78,7 @@ public class VehicleDetectionActivity extends BaseActivity<VehicleDetectionPrese
                     String json = new Gson().toJson(mList);
                     mPresenter.addVehicleData(json);
                 }
+                finish();
                 break;
         }
     }
