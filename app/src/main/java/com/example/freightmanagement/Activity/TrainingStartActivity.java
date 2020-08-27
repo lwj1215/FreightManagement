@@ -3,10 +3,13 @@ package com.example.freightmanagement.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
 import com.example.freightmanagement.Adapter.QuestionnaireAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Base.BaseViewPageFragment;
 import com.example.freightmanagement.Bean.TrainingStartBean;
+import com.example.freightmanagement.Bean.VerAddBean;
+import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
@@ -14,6 +17,7 @@ import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.HomeWorkViewPager;
 import com.example.freightmanagement.presenter.TrainingStartPresenter;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +42,9 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
     private TextView question_now_number;
     private String wenjuanFlag = "1";
     private List<TrainingStartBean.DataBean> questList;
+    public static WenJuanAnserBean wenJuanAnserBean = new WenJuanAnserBean();
+    public static WenJuanAnserBean.DriverDataBosBean driverDataBosBean = new WenJuanAnserBean.DriverDataBosBean();
+    public static List<WenJuanAnserBean.DriverDataBosBean>     lisBean=new ArrayList<>();
 
     @Override
     public int setLayoutResource() {
@@ -118,7 +125,8 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
                         }, new View.OnClickListener() {
                             @Override
                             public void onClick(View arg0) {
-//                                    conversionBeanToJson(1);
+                                String json = new Gson().toJson(wenJuanAnserBean);
+                                mPresenter.subWenJuan(json);
                                 finish();
                             }
                         }, true);
@@ -244,31 +252,31 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
         }
     }
 
-        /**
-         * 根据页面显示上一页下一页
-         */
-        private void showPageText () {
-            if (currentPage == 1) {
-                question_back.setText("上一页");
-                question_next.setText("下一页");
-                question_next.setBackgroundResource(R.drawable.yuanjiao20);
-                question_next.setTextColor(getResources().getColor(R.color.white));
-                question_back.setBackgroundResource(R.drawable.yuanjiao20);
-                question_back.setTextColor(getResources().getColor(R.color.color_333));
-            } else if (currentPage > 1 && currentPage < fragmentList.size()) {
-                question_back.setText("上一页");
-                question_back.setBackgroundResource(R.drawable.yuanjiao20);
-                question_back.setTextColor(getResources().getColor(R.color.white));
+    /**
+     * 根据页面显示上一页下一页
+     */
+    private void showPageText() {
+        if (currentPage == 1) {
+            question_back.setText("上一页");
+            question_next.setText("下一页");
+            question_next.setBackgroundResource(R.drawable.yuanjiao20);
+            question_next.setTextColor(getResources().getColor(R.color.white));
+            question_back.setBackgroundResource(R.drawable.yuanjiao20);
+            question_back.setTextColor(getResources().getColor(R.color.color_333));
+        } else if (currentPage > 1 && currentPage < fragmentList.size()) {
+            question_back.setText("上一页");
+            question_back.setBackgroundResource(R.drawable.yuanjiao20);
+            question_back.setTextColor(getResources().getColor(R.color.white));
 
-                question_next.setText("下一页");
-                question_next.setBackgroundResource(R.drawable.yuanjiao20);
-                question_next.setTextColor(getResources().getColor(R.color.white));
-            } else if (currentPage == fragmentList.size()) {
-                    question_next.setText("提交");
-                    question_next.setBackgroundResource(R.drawable.yuanjiao20);
-                    question_next.setTextColor(getResources().getColor(R.color.blue_079EEB));
-            }
+            question_next.setText("下一页");
+            question_next.setBackgroundResource(R.drawable.yuanjiao20);
+            question_next.setTextColor(getResources().getColor(R.color.white));
+        } else if (currentPage == fragmentList.size()) {
+            question_next.setText("提交");
+            question_next.setBackgroundResource(R.drawable.yuanjiao20);
+            question_next.setTextColor(getResources().getColor(R.color.blue_079EEB));
         }
+    }
 
 
 }

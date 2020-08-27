@@ -33,10 +33,28 @@ public class TrainingStartPresenter extends BasePresenter<TrainingStartConstact.
                 super.netUnlink();
             }
         });
+
     }
 
-//    @Override
-//    public void getTestList(int id) {
-//
-//    }
+    @Override
+    public void subWenJuan(String  json) {
+        RestApi.getInstance().post(BaseApiConstants.API_TIJIAOWENJUAN,json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+
+    }
+
 }

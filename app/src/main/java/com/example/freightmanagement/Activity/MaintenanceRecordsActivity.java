@@ -13,6 +13,9 @@ import android.widget.TextView;
 import com.example.freightmanagement.Adapter.GridAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.DatePickerDialog;
+import com.example.freightmanagement.Utils.DateUtil;
+import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.listener.OnPicturesClickListener;
 import com.example.freightmanagement.presenter.BaoYangPresenter;
 import com.giftedcat.picture.lib.PictureUseHelpr;
@@ -40,7 +43,7 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
     /**
      * 请选择您的保养时间
      */
-    private EditText mTvBaoYangShiJian;
+    private TextView mTvBaoYangShiJian;
     private LinearLayout mLlCurrentAddress;
     /**
      * 添加照片
@@ -56,6 +59,7 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
     private PictureUseHelpr helpr;
     private static final int REQUEST_IMAGE = 101;
     private String url = "";
+    private DatePickerDialog dateDialog;
 
     @Override
     public int setLayoutResource() {
@@ -100,7 +104,7 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
     public void initView() {
         mEtXingShiLiCheng = (EditText) findViewById(R.id.et_xing_shi_li_cheng);
         mEtBaoYangNeiRong = (EditText) findViewById(R.id.et_bao_yang_nei_rong);
-        mTvBaoYangShiJian = (EditText) findViewById(R.id.tv_bao_yang_shi_jian);
+        mTvBaoYangShiJian = (TextView) findViewById(R.id.tv_bao_yang_shi_jian);
         mTvBaoYangShiJian.setOnClickListener(this);
         mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
 //        mTvAddPhoto = (TextView) findViewById(R.id.tv_add_photo);
@@ -110,13 +114,15 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
         mRvImages = (RecyclerView) findViewById(R.id.rv_images);
     }
 
-    private     double v1=0.0;
+    private double v1 = 0.0;
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             default:
                 break;
             case R.id.tv_bao_yang_shi_jian:
+                showDateDialog(DateUtil.getDateForString("1990-01-01"));
                 break;
 //            case R.id.tv_add_photo:
 //                // 自由配置选项
@@ -126,11 +132,22 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
                 if (mSelect.size() > 0) {
                     url = mSelect.get(0).toString();
                 }
-                if (!TextUtils.isEmpty(mEtXingShiLiCheng.getText().toString())){
-                     v1 = Double.parseDouble(mEtXingShiLiCheng.getText().toString());
+                if (TextUtils.isEmpty(mEtBaoYangNeiRong.getText().toString())) {
+                    ToastUtils.popUpToast("请补全信息");
+                    return;
+                }
+                if (TextUtils.isEmpty(mTvBaoYangShiJian.getText().toString())) {
+                    ToastUtils.popUpToast("请补全信息");
+                    return;
+                }
+
+                if (!TextUtils.isEmpty(mEtXingShiLiCheng.getText().toString())) {
+                    v1 = Double.parseDouble(mEtXingShiLiCheng.getText().toString());
+                } else {
+                    ToastUtils.popUpToast("请补全信息");
+                    return;
                 }
                 mPresenter.getTrainingList("", mEtBaoYangNeiRong.getText().toString(), v1, url, mTvBaoYangShiJian.getText().toString());
-                finish();
                 break;
         }
     }
@@ -149,12 +166,41 @@ public class MaintenanceRecordsActivity extends BaseActivity<BaoYangPresenter> i
     }
 
     @Override
-    public void trainingList() {
+    protected BaoYangPresenter onInitLogicImpl() {
+        return new BaoYangPresenter();
+    }
 
+    /**
+     * 选择生日
+     */
+    private void showDateDialog(List<Integer> date) {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+        builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int[] dates) {
+                mTvBaoYangShiJian.setText(dates[0] + "." + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "."
+                        + (dates[2] > 9 ? dates[2] : ("0" + dates[2])));
+
+            }
+
+            @Override
+            public void onCancel() {
+            }
+        })
+                .setSelectYear(date.get(0) - 1)
+                .setSelectMonth(date.get(1) - 1)
+                .setSelectDay(date.get(2) - 1);
+
+        builder.setMaxYear(DateUtil.getYear());
+        builder.setMaxMonth(DateUtil.getDateForString(DateUtil.getToday()).get(1));
+        builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
+        dateDialog = builder.create();
+        dateDialog.show();
     }
 
     @Override
-    protected BaoYangPresenter onInitLogicImpl() {
-        return new BaoYangPresenter();
+    public void mSuc() {
+        ToastUtils.popUpToast("提交成功");
+        finish();
     }
 }

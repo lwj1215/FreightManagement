@@ -2,14 +2,11 @@ package com.example.freightmanagement.presenter;
 
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
-import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.presenter.constract.VehicleDetectionConstact;
-import com.example.freightmanagement.presenter.constract.VehicleInformationConstact;
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 
 public class VehicleDetectionPresenter extends BasePresenter<VehicleDetectionConstact.View> implements VehicleDetectionConstact {
 
@@ -41,7 +38,7 @@ public class VehicleDetectionPresenter extends BasePresenter<VehicleDetectionCon
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                mView.addVehicleDataSuc();
+                mView.mSuc();
             }
 
             @Override

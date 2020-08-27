@@ -17,13 +17,6 @@ import java.util.List;
 /**
  * 驾驶员 是可以上报车辆检查情况  维修情况  和保养情况
  * 车主和企业 是可以查看
- *   if (PrefUtilsData.getType().equals("1")) {
- *             setDefaultTitle("驾驶员信息");
- *         } else if (PrefUtilsData.getType().equals("2")) {
- *             setDefaultTitle("车主信息");
- *         } else {
- *             setDefaultTitle("企业信息");
- *         }
  */
 public class VehicleInformationActivity extends BaseActivity<VehicleInformationPresenter> implements VehicleInformationPresenter.View, View.OnClickListener {
 

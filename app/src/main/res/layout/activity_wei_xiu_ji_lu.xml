@@ -55,6 +55,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
+                            android:inputType="number"
                             android:hint="请输入您的行驶里程"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
@@ -198,7 +199,7 @@
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x30" />
 
-                        <EditText
+                        <TextView
                             android:id="@+id/tv_wei_xiu_shi_jian"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

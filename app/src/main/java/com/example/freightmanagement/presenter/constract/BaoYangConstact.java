@@ -14,7 +14,7 @@ public interface BaoYangConstact {
 
     interface View extends BaseView{
 
-        void trainingList();
+        void  mSuc();
 
     }
 }

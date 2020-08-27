@@ -12,8 +12,14 @@ import android.widget.TextView;
 
 import com.example.freightmanagement.Bean.AnswerBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.example.freightmanagement.Activity.TrainingStartActivity.driverDataBosBean;
+import static com.example.freightmanagement.Activity.TrainingStartActivity.lisBean;
+import static com.example.freightmanagement.Activity.TrainingStartActivity.wenJuanAnserBean;
 
 /**
  *
@@ -33,23 +39,6 @@ public class QusetionnaireAdapter extends BaseAdapter {
     public void setData(List<AnswerBean> answerList) {
         this.mDatas = answerList;
         notifyDataSetChanged();
-    }
-
-    /*保存单选题、多选题答案*/
-    private void saveCurrentSelectValue(String value, String answerName) {
-//        for(Map.Entry<String ,String > entry :mDatas){
-//            String key = entry.getKey();
-//            String msg = entry.getValue();
-//                answerEntity.setAnswerValue(msg);
-//
-//        }
-//        for (int i = 0; i < mDatas.size(); i++) {
-//            String s = mDatas.get(i);
-//            if (answerEntity.getContent().equals(answerName)) {
-//            }
-//
-//        }
-
     }
 
     @Override
@@ -100,7 +89,11 @@ public class QusetionnaireAdapter extends BaseAdapter {
                     }
                     mDatas.get(position).setIsSelect(true);
                     notifyDataSetChanged();
-//                    saveCurrentSelectValue(String.valueOf(mDatas.get(position).getUpload_id()), mDatas.get(position).getBean_name());
+                    wenJuanAnserBean.setDirverId(Integer.parseInt(PrefUtilsData.getUserId()));
+                    driverDataBosBean.setAnswer(mDatas.get(position).getAnswer());
+                    driverDataBosBean.setDriverId(Integer.parseInt(PrefUtilsData.getUserId()));
+                    lisBean.add(driverDataBosBean);
+                    wenJuanAnserBean.setDriverDataBos(lisBean);
                 }
             });
 

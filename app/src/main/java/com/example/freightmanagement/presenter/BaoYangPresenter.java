@@ -30,7 +30,7 @@ public class BaoYangPresenter extends BasePresenter<BaoYangConstact.View> implem
         RestApi.getInstance().post(BaseApiConstants.API_ADDBAOYANG, jsonObject.toString(), new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
-                mView.trainingList();
+                mView.mSuc();
             }
 
             @Override

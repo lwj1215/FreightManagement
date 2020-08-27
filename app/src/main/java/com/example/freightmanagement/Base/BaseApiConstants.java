@@ -46,7 +46,6 @@ public class BaseApiConstants {
      * 获取答题结果记录
      */
     public static final String API_ANSWER_RESULT_LIST = "/cccc/examination/getExaminationDriverDatas/";
-
     /**
      * 获取培训结果
      */
@@ -104,5 +103,9 @@ public class BaseApiConstants {
      * 查看维修记录
      */
     public static final String API_CHEWEIXIU = "/cccc/repair/getrepairList/";
+    /**
+     * 提交培训
+     */
+    public static final String API_TIJIAOWENJUAN = "/cccc/examination/submit";
 
 }

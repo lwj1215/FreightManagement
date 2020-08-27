@@ -6,20 +6,13 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseApplication;
-import com.example.freightmanagement.Base.TokenHeaderInterceptor;
-import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.Utils.NetUtils;
-import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
-import com.google.gson.Gson;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -37,13 +30,12 @@ public class RestApi {
     private OkHttpClient mClient;
     private static final MediaType MEDIA_TYPE_BODY = MediaType.parse("application/json; charset=utf-8");
 
-    public RestApi() {
+    private RestApi() {
         if (mClient == null) {
             mClient = new OkHttpClient.Builder()
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
-                    .addNetworkInterceptor(new TokenHeaderInterceptor())
                     .build();
         }
         mDelivery = new Handler(Looper.getMainLooper());
@@ -57,26 +49,20 @@ public class RestApi {
         return sRestApi;
     }
 
+
     /**
      * 请求公共方法
      */
     public void post(String url, String jsonValue, @Nullable final OnRequestResult callback) {
-        Log.i(TAG, "post: "+jsonValue+url);
+        Log.i("提交", "post: " + jsonValue + url);
         RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
-//        RequestBody formBody = FormBody.create(MediaType.parse("application/json"), jsonValue);
-
         Request request = new Request.Builder()
                 .url(Host.BASE_URL + url)
                 .post(formBody)
                 .build();
-        enqueue("", request, new OnRequestResultForCommon() {
+        enqueue("", request, new OnRequestResult() {
             @Override
             public void onSuccess(String json) {
-                //保存token
-                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-                if ("0".equals(stateBean.getCode())) {
-                    PrefUtilsData.setToken(stateBean.getData().getToken());
-                }
                 if (callback != null) callback.onSuccess(json);
             }
 
@@ -93,84 +79,10 @@ public class RestApi {
         });
     }
 
-    /**
-     * 请求公共方法
-     */
-    public void postJson(String url, String jsonValue, @Nullable final OnRequestResult callback) {
-        Log.i(TAG, "post: "+jsonValue+url);
-//        RequestBody formBody = new FormBody.Builder()
-//                .add("", jsonValue)
-//                .build();
-        RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
-//        RequestBody formBody = FormBody.create(MediaType.parse("application/json"), jsonValue);
-
-        Request request = new Request.Builder()
-                .url(Host.BASE_URL + url)
-//                .addHeader("content-type", "application/json;charset:utf-8")
-                .post(formBody)
-                .build();
-        enqueue("", request, new OnRequestResultForCommon() {
-            @Override
-            public void onSuccess(String json) {
-                //保存token
-                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-                if ("0".equals(stateBean.getCode())) {
-                    PrefUtilsData.setToken(stateBean.getData().getToken());
-                }
-                if (callback != null) callback.onSuccess(json);
-            }
-
-            @Override
-            public void onFail() {
-                if (callback != null) callback.onFail();
-
-            }
-
-            @Override
-            public void netUnlink() {
-                if (callback != null) callback.netUnlink();
-            }
-        });
-    }
-
-    /**
-     * 请求公共方法
-     */
-    public  void get(final String url, @Nullable final OnRequestResultForCommon callback) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Request request = new Request.Builder().url(Host.BASE_URL+url).build(); //添加头部信息
-                mClient.newCall(request);
-                enqueue("", request, new OnRequestResultForCommon() {
-                    @Override
-                    public void onSuccess(String json) {
-//                        //保存token
-//                        TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-//                        if ("0".equals(stateBean.getCode())) {
-//                            PrefUtilsData.setToken(stateBean.getData().getToken());
-//                        }
-                        if (callback != null) callback.onSuccess(json);
-                    }
-
-                    @Override
-                    public void onFail() {
-                        if (callback != null) callback.onFail();
-                    }
-
-                    @Override
-                    public void netUnlink() {
-                        if (callback != null) callback.netUnlink();}
-                });
-            }
-
-        }).start();
-
-    }
     /**
      * 添加到请求队列请求
      */
-    public void enqueue(final String tag, Request request, @Nullable final OnRequestResultForCommon callback) {
+    public void enqueue(final String tag, Request request, @Nullable final OnRequestResult callback) {
         if (BaseAppUtils.isDebug()) {
             RequestBody body = request.body();
             if (body == null) {
@@ -224,8 +136,7 @@ public class RestApi {
                         public void run() {
                             try {
                                 //请求成功
-                                if (callback != null)
-                                    callback.onSuccess(body);
+                                if (callback != null) callback.onSuccess(body);
                             } catch (Exception e) {
                                 Log.e(TAG, "crashInfo: ", e);
                             }
@@ -240,7 +151,7 @@ public class RestApi {
      * 图片上传
      */
 
-    public void postImage(String url, File file, @Nullable final OnRequestResultForCommon callback) {
+    public void postImage(String url, File file, @Nullable final OnRequestResult callback) {
         String encode = "";
         try {
             encode = URLEncoder.encode(file.getName(), "UTF-8");
@@ -250,20 +161,16 @@ public class RestApi {
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("file", encode, fileBody)
+                .addFormDataPart("image1", encode, fileBody)
                 .build();
         Request request = new Request.Builder()
                 .url(Host.BASE_URL + url)
                 .post(requestBody)
                 .build();
-        enqueue("", request, new OnRequestResultForCommon() {
+        enqueue("", request, new OnRequestResult() {
             @Override
             public void onSuccess(String json) {
                 //保存token
-//                TokenBean stateBean = new Gson().fromJson(json, TokenBean.class);
-//                if (stateBean.getLoginstate()!=null&&stateBean.getLoginstate().equals("0")) {
-//                    PrefUtilsData.setToken(stateBean.getUser_token());
-//                }
                 if (callback != null) callback.onSuccess(json);
             }
 
@@ -279,38 +186,34 @@ public class RestApi {
             }
         });
     }
-    /**
-     * 微信的第三方登录  qq需要另外的一个接口
-     */
-    public void loginForThird(String thirdId, String accessToken, String thirdSource, @Nullable final OnRequestResult callback) {
-        RequestBody formBody = new FormBody.Builder()
-                .add("openId", thirdId)
-                .add("thirdSource", thirdSource)
-                .add("weChatSys", "561D5D57512C70E58C7A661A14014334")
-                .build();
-        String url = "https://api.weixin.qq.com/sns/userinfo?access_token="
-                + accessToken
-                + "&openid="
-                + thirdId;
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        enqueue("第三方登录", request, new OnRequestResultForCommon() {
+
+
+    public  void get(final String url, @Nullable final OnRequestResult callback) {
+        Log.i("提交", "post: " + url);
+        new Thread(new Runnable() {
             @Override
-            public void onSuccess(String json) {
-                if (callback != null) callback.onSuccess(json);
+            public void run() {
+                Request request = new Request.Builder().url(Host.BASE_URL+url).build(); //添加头部信息
+                mClient.newCall(request);
+                enqueue("", request, new OnRequestResult() {
+                    @Override
+                    public void onSuccess(String json) {
+                        //保存token
+                        if (callback != null) callback.onSuccess(json);
+                    }
+
+                    @Override
+                    public void onFail() {
+                        if (callback != null) callback.onFail();
+                    }
+
+                    @Override
+                    public void netUnlink() {
+                        if (callback != null) callback.netUnlink();}
+                });
             }
 
-            @Override
-            public void onFail() {
-                if (callback != null) callback.onFail();
-            }
+        }).start();
 
-            @Override
-            public void netUnlink() {
-                if (callback != null) callback.netUnlink();
-            }
-        });
     }
-
 }

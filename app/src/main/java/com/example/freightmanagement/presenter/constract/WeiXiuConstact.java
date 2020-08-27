@@ -15,7 +15,7 @@ public interface WeiXiuConstact {
 
     interface View extends BaseView{
 
-        void trainingList();
+        void mSuc();
 
         void testResult(String msg);
 

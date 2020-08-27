@@ -13,6 +13,6 @@ public interface VehicleDetectionConstact {
 
         void trainingList(VehicleDetectionBean vehicleDetectionBean);
 
-        void addVehicleDataSuc();
+        void mSuc();
     }
 }

@@ -10,6 +10,8 @@ public interface TrainingStartConstact {
 
     void getTrainingList();
 
+    void subWenJuan(String  json);
+
     interface View extends BaseView{
 
         void trainingList(List<TrainingStartBean.DataBean> data);
