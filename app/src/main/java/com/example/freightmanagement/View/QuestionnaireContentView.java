@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Adapter.QusetionnaireAdapter;
 import com.example.freightmanagement.Bean.AnswerBean;
 import com.example.freightmanagement.Bean.TrainingStartBean;
+import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.Fragment.QuestionnaireFragment;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.FullyGridLayoutManager;
@@ -51,6 +52,7 @@ public class QuestionnaireContentView extends View  {
 //    private TrainingStartBean.DataBean answerList;
     private Map<String, String> answerList;
     private List<AnswerBean> answerBeanList;
+
     private QuestionnaireContentView(Context context) {
         super(context);
         this.context = context;
@@ -114,12 +116,11 @@ public class QuestionnaireContentView extends View  {
     private void createMoreEditTextView() {
         View view3 = LayoutInflater.from(getContext()).inflate(R.layout.item_health_questionnaire2, null);
         ListView listView = (ListView) view3.findViewById(R.id.listView);
-        QusetionnaireAdapter listAdapter = new QusetionnaireAdapter(getContext());
+        QusetionnaireAdapter listAdapter = new QusetionnaireAdapter(getContext(),questionEntity.getId());
         listView.setAdapter(listAdapter);
         listAdapter.setData(answerBeanList);
         scrollView.addView(view3);
     }
-
 
     /*保存单选题、多选题答案*/
     private void saveCurrentSelectValue(String value, String answerName) {

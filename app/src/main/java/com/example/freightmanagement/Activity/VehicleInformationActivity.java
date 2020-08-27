@@ -22,7 +22,7 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
 
     private TextView et_real_name, et_detail_address, tv_current_address, tv_sign_hint, tv_mobile;
     private LinearLayout lin_celiang, lin_celiangwx, lin_chebaoyang;
-    private TextView tv_cljc,tv_clwx,tv_clby;
+    private TextView tv_cljc, tv_clwx, tv_clby;
 
     @Override
     public int setLayoutResource() {
@@ -66,7 +66,12 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
 
     @Override
     protected void onLoadData2Remote() {
+        mPresenter.VehicleInformationData();
+    }
 
+    @Override
+    protected VehicleInformationPresenter onInitLogicImpl() {
+        return new VehicleInformationPresenter();
     }
 
     @Override

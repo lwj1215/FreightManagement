@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseViewPageFragment;
 import com.example.freightmanagement.Bean.TrainingStartBean;
+import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.RadioCallBack;
 import com.example.freightmanagement.Utils.StateCallBack;
@@ -50,7 +51,7 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
     private int pagination;// 页码
     private QuestionnaireContentView mContentView;
 
-    public static QuestionnaireFragment newInstance(List<TrainingStartBean.DataBean> questionList, int titleNum , int pagination) {
+    public static QuestionnaireFragment newInstance(List<TrainingStartBean.DataBean> questionList, int titleNum, int pagination) {
         mQuestionList = questionList;
         QuestionnaireFragment fragment = new QuestionnaireFragment();
         Bundle mBundle = new Bundle();
@@ -82,11 +83,11 @@ public class QuestionnaireFragment extends BaseViewPageFragment implements State
         mImags.put(pagination, list);
         scrollView.removeAllViews();
         for (int i = 0, h = 0; i < mQuestionList.size(); i++) {
-           if (mQuestionList.get(i).getIndex()== pagination) {
+            if (mQuestionList.get(i).getIndex() == pagination) {
 
-               mContentView = new QuestionnaireContentView(mQuestionList.get(i), titleNum + h++, id,age, activity, callBack, this);
-               linearLayout.addView(mContentView.getCurrentView());
-            }else{
+                mContentView = new QuestionnaireContentView(mQuestionList.get(i), titleNum + h++, id, age, activity, callBack, this);
+                linearLayout.addView(mContentView.getCurrentView());
+            } else {
             }
         }
         scrollView.addView(linearLayout);

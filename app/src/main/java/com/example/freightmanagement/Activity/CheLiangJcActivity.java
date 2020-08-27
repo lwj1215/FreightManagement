@@ -44,10 +44,10 @@ public class CheLiangJcActivity extends BaseActivity<CheLiangJcPresenter> implem
         }else if (type.equals("2")){
             setDefaultTitle("车辆维修情况");
             cheLiangWxAdapter = new CheLiangWxAdapter(this);
+            recyclerView1.setAdapter(cheLiangWxAdapter);
             mPresenter.getData2();
         }else {
             setDefaultTitle("车辆保养情况");
-            recyclerView1.setAdapter(cheLiangWxAdapter);
             cheLiangByAdapter = new CheLiangByAdapter(this);
             recyclerView1.setAdapter(cheLiangByAdapter);
             mPresenter.getData3();

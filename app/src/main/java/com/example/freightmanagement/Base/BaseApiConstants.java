@@ -107,5 +107,9 @@ public class BaseApiConstants {
      * 提交培训
      */
     public static final String API_TIJIAOWENJUAN = "/cccc/examination/submit";
+    /**
+     * 车辆信息
+     */
+    public static final String API_CLXINXI = "/cccc/carOwner/getOwner/";
 
 }

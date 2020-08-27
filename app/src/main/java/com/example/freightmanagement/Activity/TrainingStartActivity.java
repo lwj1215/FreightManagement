@@ -19,6 +19,9 @@ import com.example.freightmanagement.View.HomeWorkViewPager;
 import com.example.freightmanagement.presenter.TrainingStartPresenter;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +45,8 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
     private TextView question_now_number;
     private String wenjuanFlag = "1";
     private List<TrainingStartBean.DataBean> questList;
-    public static WenJuanAnserBean wenJuanAnserBean = new WenJuanAnserBean();
-    public static WenJuanAnserBean.DriverDataBosBean driverDataBosBean = new WenJuanAnserBean.DriverDataBosBean();
-    public static List<WenJuanAnserBean.DriverDataBosBean>     lisBean=new ArrayList<>();
+    private WenJuanAnserBean wenJuanAnserBean = new WenJuanAnserBean();
+    private List<WenJuanAnserBean.DriverDataBosBean> mDatas = new ArrayList<>();
 
     @Override
     public int setLayoutResource() {
@@ -63,6 +65,7 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
 
     @Override
     protected void onLoadData2Remote() {
+        EventBus.getDefault().register(this);
         mPresenter.getTrainingList();
     }
 
@@ -278,5 +281,15 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
         }
     }
 
+    @Subscribe
+    public void onEventMainThread(WenJuanAnserBean.DriverDataBosBean event) {
+        mDatas.add(event);
+        wenJuanAnserBean.setDriverDataBos(mDatas);
+    }
 
+    @Override
+    public void onDestroy() {
+        EventBus.getDefault().unregister(this);
+        super.onDestroy();
+    }
 }

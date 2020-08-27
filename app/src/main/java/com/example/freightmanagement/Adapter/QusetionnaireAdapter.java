@@ -11,15 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Bean.AnswerBean;
+import com.example.freightmanagement.Bean.VerAddBean;
+import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.DownloadStatusChanged;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 
-import java.util.List;
-import java.util.Map;
+import org.greenrobot.eventbus.EventBus;
 
-import static com.example.freightmanagement.Activity.TrainingStartActivity.driverDataBosBean;
-import static com.example.freightmanagement.Activity.TrainingStartActivity.lisBean;
-import static com.example.freightmanagement.Activity.TrainingStartActivity.wenJuanAnserBean;
+import java.util.List;
 
 /**
  *
@@ -27,13 +27,16 @@ import static com.example.freightmanagement.Activity.TrainingStartActivity.wenJu
 public class QusetionnaireAdapter extends BaseAdapter {
 
     private final Context mContext;
+    private final int mId;
     private TextView textView;
-
     private int selectorPosition;
     private List<AnswerBean> mDatas;
+    private WenJuanAnserBean.DriverDataBosBean driverDataBosBean = new WenJuanAnserBean.DriverDataBosBean();
 
-    public QusetionnaireAdapter(Context context) {
+    public QusetionnaireAdapter(Context context, int id) {
         this.mContext = context;
+        this.mId = id;
+
     }
 
     public void setData(List<AnswerBean> answerList) {
@@ -89,11 +92,10 @@ public class QusetionnaireAdapter extends BaseAdapter {
                     }
                     mDatas.get(position).setIsSelect(true);
                     notifyDataSetChanged();
-                    wenJuanAnserBean.setDirverId(Integer.parseInt(PrefUtilsData.getUserId()));
-                    driverDataBosBean.setAnswer(mDatas.get(position).getAnswer());
+                    driverDataBosBean.setAnswer(mDatas.get(position).getKey());
                     driverDataBosBean.setDriverId(Integer.parseInt(PrefUtilsData.getUserId()));
-                    lisBean.add(driverDataBosBean);
-                    wenJuanAnserBean.setDriverDataBos(lisBean);
+                    driverDataBosBean.setExaminationDataId(mId);
+                    EventBus.getDefault().post(driverDataBosBean);
                 }
             });
 
@@ -121,4 +123,5 @@ public class QusetionnaireAdapter extends BaseAdapter {
         TextView text;
         LinearLayout ll;
     }
+
 }

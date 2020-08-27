@@ -30,13 +30,17 @@ public class CheLiangWxAdapter extends RecyclerView.Adapter<CheLiangWxAdapter.Tr
 
     @Override
     public TrainingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CheLiangWxAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.cheliang_item_layout, parent, false));
+        return new CheLiangWxAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.wei_xiu_ji_lu, parent, false));
     }
 
     @Override
     public void onBindViewHolder(TrainingViewHolder holder, int position) {
         if (pages != null) {
-            holder.tv_date.setText(pages.get(position).getContent()+"");
+            holder.et_xing_shi_li_cheng.setText(pages.get(position).getPartMaker()+"");
+            holder.et_wei_xiu_dan_wei.setText(pages.get(position).getServicer()+"");
+            holder.et_wei_xiu_nei_rong.setText(pages.get(position).getContent()+"");
+            holder.et_bu_jian_chang_jia.setText(pages.get(position).getBillPicUrl()+"");
+            holder.tv_wei_xiu_shi_jian.setText(pages.get(position).getTime()+"");
         }
     }
 
@@ -47,13 +51,17 @@ public class CheLiangWxAdapter extends RecyclerView.Adapter<CheLiangWxAdapter.Tr
     }
 
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_date;
+        TextView et_xing_shi_li_cheng,et_wei_xiu_dan_wei,et_wei_xiu_nei_rong,et_bu_jian_chang_jia,tv_wei_xiu_shi_jian;
         private View itemView;
 
         public TrainingViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            tv_date = itemView.findViewById(R.id.tv_date);
+            et_xing_shi_li_cheng = itemView.findViewById(R.id.et_xing_shi_li_cheng);
+            et_wei_xiu_dan_wei = itemView.findViewById(R.id.et_wei_xiu_dan_wei);
+            et_wei_xiu_nei_rong = itemView.findViewById(R.id.et_wei_xiu_nei_rong);
+            et_bu_jian_chang_jia = itemView.findViewById(R.id.et_bu_jian_chang_jia);
+            tv_wei_xiu_shi_jian = itemView.findViewById(R.id.tv_wei_xiu_shi_jian);
         }
     }
 

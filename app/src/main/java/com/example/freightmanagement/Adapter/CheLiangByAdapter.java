@@ -30,13 +30,15 @@ public class CheLiangByAdapter extends RecyclerView.Adapter<CheLiangByAdapter.Tr
 
     @Override
     public TrainingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CheLiangByAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.cheliang_item_layout, parent, false));
+        return new CheLiangByAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.bao_yang_ji_lu, parent, false));
     }
 
     @Override
     public void onBindViewHolder(TrainingViewHolder holder, int position) {
         if (pages != null) {
-            holder.tv_date.setText(pages.get(position).getCreateTime()+"");
+            holder.et_xing_shi_li_cheng.setText(pages.get(position).getMileage()+"");
+            holder.et_bao_yang_nei_rong.setText(pages.get(position).getContent()+"");
+            holder.tv_bao_yang_shi_jian.setText(pages.get(position).getTime()+"");
         }
     }
 
@@ -47,13 +49,15 @@ public class CheLiangByAdapter extends RecyclerView.Adapter<CheLiangByAdapter.Tr
     }
 
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_date;
+        TextView et_xing_shi_li_cheng,et_bao_yang_nei_rong,tv_bao_yang_shi_jian;
         private View itemView;
 
         public TrainingViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
-            tv_date = itemView.findViewById(R.id.tv_date);
+            et_xing_shi_li_cheng = itemView.findViewById(R.id.et_xing_shi_li_cheng);
+            et_bao_yang_nei_rong = itemView.findViewById(R.id.et_bao_yang_nei_rong);
+            tv_bao_yang_shi_jian = itemView.findViewById(R.id.tv_bao_yang_shi_jian);
         }
     }
 
