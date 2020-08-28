@@ -11,10 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Bean.AnswerBean;
-import com.example.freightmanagement.Bean.VerAddBean;
 import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.R;
-import com.example.freightmanagement.Utils.DownloadStatusChanged;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 
 import org.greenrobot.eventbus.EventBus;

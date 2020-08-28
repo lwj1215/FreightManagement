@@ -1,6 +1,7 @@
 package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
+import com.example.freightmanagement.Bean.CheliangBean;
 import com.example.freightmanagement.Bean.TrainingStartBean;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public interface VehicleInformationConstact {
 
     interface View extends BaseView{
 
-        void trainingList(List<TrainingStartBean.DataBean> data);
+        void  mSuc(CheliangBean cheliangBean);
     }
 }

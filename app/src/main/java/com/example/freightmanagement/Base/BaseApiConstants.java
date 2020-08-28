@@ -110,6 +110,5 @@ public class BaseApiConstants {
     /**
      * 车辆信息
      */
-    public static final String API_CLXINXI = "/cccc/carOwner/getOwner/";
-
+    public static final String API_CLXINXI = "/cccc/carOwner/getOwner//";
 }

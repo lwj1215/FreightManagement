@@ -2,6 +2,7 @@ package com.example.freightmanagement.Activity;
 
 
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,8 @@ public class VehicleDetectionActivity extends BaseActivity<VehicleDetectionPrese
     private RecyclerView recyclerView1;
     private VehicleFetectionAdapter vehicleFetectionAdapter;
     private VerAddBean mList;
+    private TextView et_real_name,et_siji_name;
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_vehicle_detection;
@@ -37,10 +40,14 @@ public class VehicleDetectionActivity extends BaseActivity<VehicleDetectionPrese
         vehicleFetectionAdapter = new VehicleFetectionAdapter(this);
         recyclerView1.setAdapter(vehicleFetectionAdapter);
         bindView(R.id.tv_srue).setOnClickListener(this);
+        et_real_name = bindView(R.id.et_real_name);
+        et_siji_name = bindView(R.id.et_siji_name);
     }
 
     @Override
     protected void onLoadData2Remote() {
+        et_real_name.setText(getIntent().getStringExtra("name1"));
+        et_siji_name.setText(getIntent().getStringExtra("name2"));
         mPresenter.VehicleInformationData();
     }
 

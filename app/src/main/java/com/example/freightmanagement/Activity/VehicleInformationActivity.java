@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.CheliangBean;
 import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
@@ -23,6 +24,8 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
     private TextView et_real_name, et_detail_address, tv_current_address, tv_sign_hint, tv_mobile;
     private LinearLayout lin_celiang, lin_celiangwx, lin_chebaoyang;
     private TextView tv_cljc, tv_clwx, tv_clby;
+    private String owner;
+    private String owner2;
 
     @Override
     public int setLayoutResource() {
@@ -74,10 +77,6 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
         return new VehicleInformationPresenter();
     }
 
-    @Override
-    public void trainingList(List<TrainingStartBean.DataBean> data) {
-
-    }
 
     @Override
     public void onClick(View v) {
@@ -85,6 +84,8 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
             case R.id.lin_celiang:
                 if (PrefUtilsData.getType().equals("1")) {
                     Intent intent = new Intent(VehicleInformationActivity.this, VehicleDetectionActivity.class);
+                    intent.putExtra("name1",owner);
+                    intent.putExtra("name2",owner2);
                     startActivity(intent);
                 } else if (PrefUtilsData.getType().equals("2")) {
                     getTz("1");
@@ -123,5 +124,16 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
         Intent intent = new Intent(VehicleInformationActivity.this, CheLiangJcActivity.class);
         intent.putExtra("type", type);
         startActivity(intent);
+    }
+
+    @Override
+    public void mSuc(CheliangBean cheliangBean) {
+        owner = cheliangBean.getData().getCertificateRegistrationBo().getOwner();
+        owner2 = cheliangBean.getData().getCertificateIDBo().getName();
+        et_real_name.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarModel()+"");
+        et_detail_address.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarBrand()+"");
+        tv_current_address.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarType()+"");
+        tv_sign_hint.setText(cheliangBean.getData().getCertificateTransportBo().getPlateNo()+"");
+        tv_mobile.setText(cheliangBean.getData().getCertificateTransportBo().getGrantDate()+"");
     }
 }
