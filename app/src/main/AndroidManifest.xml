@@ -36,6 +36,12 @@
             android:name=".Activity.VehicleInformationActivity"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".Activity.CommonHtmlActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CommonVideoActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".Activity.DriverInformationActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -49,7 +55,13 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.DriverConfigActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activity.TrainingSelectActivity"
             android:screenOrientation="portrait" />
@@ -71,11 +83,7 @@
         <activity
             android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.SignUpActivity"

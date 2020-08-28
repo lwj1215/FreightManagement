@@ -17,7 +17,7 @@ public class TrainingPresenter extends BasePresenter<TrainingConstact.View> impl
 
     @Override
     public void getTrainingList() {
-        RestApi.getInstance().post(BaseApiConstants.API_TRAINING, "", new OnRequestResultForCommon() {
+        RestApi.getInstance().get(BaseApiConstants.API_TRAINING, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 mView.trainingList(json);

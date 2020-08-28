@@ -116,7 +116,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     return;
                 }
                 smsCode = mEdtTxtYzmPhone.getText().toString();
-                smsCode = "123456";
+//                smsCode = "123456";
                 if(StringUtils.isEmpty(smsCode)){
                     ToastUtils.popUpToast(R.string.sms_code_cannot_be_empty);
                     return;
@@ -137,7 +137,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void smsCode(String msg) {
-        String smsCode = "123456";
+//        String smsCode = "123456";
         this.smsCode = smsCode;
 
     }

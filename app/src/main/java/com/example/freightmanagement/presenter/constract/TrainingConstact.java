@@ -15,7 +15,7 @@ public interface TrainingConstact {
 
     interface View extends BaseView{
 
-        String trainingList(String msg);
+        void trainingList(String msg);
 
         void testResult(String msg);
 

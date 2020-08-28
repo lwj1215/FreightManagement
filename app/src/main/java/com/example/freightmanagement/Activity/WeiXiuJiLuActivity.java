@@ -157,8 +157,7 @@ public class WeiXiuJiLuActivity extends BaseActivity<WeiXiuPresenter> implements
                 bean.setBillPicUrl(et_bu_jian_chang_jia.getText().toString());
                 bean.setTime(tv_wei_xiu_shi_jian.getText().toString());
                 String json = new Gson().toJson(bean);
-                mPresenter.getTrainingList(json);
-
+                mPresenter.addWeiXiu(json);
                 break;
         }
     }

@@ -4,13 +4,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.R;
 import com.pili.pldroid.player.widget.PLVideoView;
-
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -18,18 +16,18 @@ import java.util.List;
  * Created by songdechuan on 2020/8/6.
  */
 
-public class TrainingAdapter  extends RecyclerView.Adapter<TrainingAdapter.TrainingViewHolder> {
+public class TrainingVideoAdapter extends RecyclerView.Adapter<TrainingVideoAdapter.TrainingViewHolder> {
     private final LayoutInflater layoutInflater;
     private Context context;
     private List<String> dataList;
 
-    public TrainingAdapter(Context context) {
+    public TrainingVideoAdapter(Context context) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
     @Override
     public TrainingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new TrainingAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.item_training_video, parent, false));
+        return new TrainingVideoAdapter.TrainingViewHolder(layoutInflater.inflate(R.layout.item_training_video, parent, false));
     }
 
     @Override

@@ -13,8 +13,9 @@ import com.example.freightmanagement.presenter.constract.WeiXiuConstact;
  */
 
 public class WeiXiuPresenter extends BasePresenter<WeiXiuConstact.View> implements WeiXiuConstact {
+
     @Override
-    public void getTrainingList(String json) {
+    public void addWeiXiu(String json) {
         RestApi.getInstance().post(BaseApiConstants.API_ADDWEIXIU, json, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {

@@ -17,7 +17,7 @@ public interface DriverConfigConstact {
     void upload(File file,int type);
 
     interface View extends BaseView {
-        void success();
+        void success(String json);
         void imageUrl(String url,int type);
 
     }

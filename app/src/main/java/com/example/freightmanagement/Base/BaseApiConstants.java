@@ -57,7 +57,7 @@ public class BaseApiConstants {
     public static final String API_XUNLIANTIMU = "/cccc/examination/getExaminationDatas";
 
 
-    public static final String API_TRAINING = "/train/getTrainDatas";
+    public static final String API_TRAINING = "/cccc/train/getTrainDatas";
     /**
      * 上传图片
      */

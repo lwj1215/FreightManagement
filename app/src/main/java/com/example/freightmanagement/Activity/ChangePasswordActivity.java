@@ -49,7 +49,12 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                     ToastUtils.popUpToast("请确认密码");
                     return;
                 }
-                finish();
+                if(!s1.equals(s2)){
+                    ToastUtils.popUpToast("两次密码不一致");
+                    return;
+                }
+
+//                finish();
                 break;
         }
     }

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -228,7 +227,7 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
     private void takeIDCard(){
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -295,7 +294,7 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
     private void takeIDCardReverse(){
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -326,7 +325,7 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
-                String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();
+                String filePath = FileUtil.getSaveFile(getApplicationContext(), "front").getAbsolutePath();
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);

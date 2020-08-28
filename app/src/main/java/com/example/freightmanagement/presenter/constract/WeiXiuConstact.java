@@ -9,7 +9,7 @@ import com.example.freightmanagement.Base.BaseView;
 
 public interface WeiXiuConstact {
 
-    void getTrainingList(String json);
+    void addWeiXiu(String json);
 
     void getTestList(int id);
 

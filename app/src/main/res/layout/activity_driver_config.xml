@@ -270,16 +270,16 @@
                         android:background="@color/gray_background" />
                 </LinearLayout>
                 <LinearLayout
+                    android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x280"
-                    android:padding="@dimen/x30">
+                    >
 
                     <RelativeLayout
                         android:id="@+id/re_driver_pic"
-                        android:layout_width="@dimen/x0"
+                        android:layout_width="@dimen/x400"
                         android:layout_height="match_parent"
                         android:layout_marginRight="@dimen/x16"
-                        android:layout_weight="1"
                         android:background="@drawable/inflate_txt_bg_white">
 
                         <TextView

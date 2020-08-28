@@ -25,7 +25,7 @@ public class DriverConfigPresenter extends BasePresenter<DriverConfigConstact.Vi
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-
+                mView.success(json);
             }
 
             @Override

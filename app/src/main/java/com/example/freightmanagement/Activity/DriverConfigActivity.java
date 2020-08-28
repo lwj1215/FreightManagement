@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
@@ -29,7 +28,9 @@ import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.DriverLicenseBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
@@ -194,6 +195,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     private String endTime;
     private String firstReceiveTime;
     private String effectiveTime;
+    private String frontPath;
+    private String backPath;
+    private String driverPath;
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_driver_config;
@@ -246,7 +251,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
         return true;
     }
-
 
     public void initView() {
         mTvCard1 = (TextView) findViewById(R.id.tv_card1);
@@ -344,10 +348,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case R.id.close_driver_Font:
                 break;
             case R.id.re_driver_pic:
-
+                driverPath = "driver_"+ System.currentTimeMillis();
                 Intent intent = new Intent(this, CameraActivity.class);
                 intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                        FileUtil.getSaveFile(getApplication(),driverPath).getAbsolutePath());
                 intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
                         CameraActivity.CONTENT_TYPE_GENERAL);
                 startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
@@ -450,9 +454,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
      * 正面身份证拍照
      */
     private void takeIDCard() {
+        frontPath = FRONT +"_"+ System.currentTimeMillis();
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(),frontPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -529,9 +534,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
      * 反面身份证扫描
      */
     private void takeIDCardReverse() {
+        backPath = BACK +"_"+ System.currentTimeMillis();
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication()).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(),backPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -551,6 +557,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         if (requestCode == REQUEST_CODE_PICK_IMAGE_FRONT && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             String filePath = getRealPathFromURI(uri);
+            mIvCardFront.setVisibility(View.VISIBLE);
+            Glide.with(this).load(filePath).into(mIvCardFront);
+            mTvCard1.setVisibility(View.GONE);
             recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
         }
         //身份证反面返回
@@ -558,16 +567,29 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             Uri uri = data.getData();
             String filePath = getRealPathFromURI(uri);
             recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
+            Glide.with(this).load(filePath).into(mIvCardRevers);
+            mIvCardRevers.setVisibility(View.VISIBLE);
+            mTvCard2.setVisibility(View.GONE);
         }
         //
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
-                String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();
+                String filePath = "";
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(),frontPath).getAbsolutePath();
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
+                        Glide.with(this).load(filePath).into(mIvCardFront);
+                        mTvCard1.setVisibility(View.GONE);
+                        mIvCardFront.setVisibility(View.VISIBLE);
+
                     } else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(),backPath).getAbsolutePath();
+
+                        Glide.with(this).load(filePath).into(mIvCardRevers);
+                        mTvCard2.setVisibility(View.GONE);
+                        mIvCardRevers.setVisibility(View.VISIBLE);
                         recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
                     }
                 }
@@ -575,9 +597,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
         // 识别成功回调，驾驶证识别
         if (requestCode == REQUEST_CODE_DRIVING_LICENSE && resultCode == Activity.RESULT_OK) {
-            final String filePath = FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath();
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(),driverPath).getAbsolutePath();
 
-            RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext()).getAbsolutePath(),
+            RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext(),driverPath).getAbsolutePath(),
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
@@ -592,6 +614,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             mTvStartDate.setText(有效期限.getWords());
                             startTime = 有效期限.getWords();
 //                            mEtEndDate.setText(至.getWords());
+                            mIvDriverFront.setVisibility(View.VISIBLE);
+                            mTvDriver.setVisibility(View.GONE);
+                            Glide.with(getContext()).load(filePath).into(mIvDriverFront);
 
                         }
             });
@@ -701,7 +726,12 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     }
 
     @Override
-    public void success() {
+    public void success(String json) {
+        BaseResponse baseResponse = new Gson().fromJson(json, BaseResponse.class);
+        int code = baseResponse.getCode();
+        if(code == 0){
+            ToastUtils.popUpToast("提交成功");
+        }
 
     }
 
