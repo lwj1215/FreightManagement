@@ -1,0 +1,1576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_doctor_sign_protocol"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="@color/gray_background" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/line">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x280"
+                    android:padding="@dimen/x30">
+
+                    <RelativeLayout
+                        android:id="@+id/re_pic"
+                        android:layout_width="@dimen/x0"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x16"
+                        android:layout_weight="1"
+                        android:background="@drawable/inflate_txt_bg_white">
+
+                        <TextView
+                            android:id="@+id/tv_card1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableTop="@mipmap/upload_identity"
+                            android:drawablePadding="@dimen/x16"
+                            android:text="上传行驶证正页照片"
+                            android:textSize="@dimen/x28"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/iv_card_front"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/closeImageViewFont"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/icon_oreder_remark_delete"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/re_pic_reverse"
+                        android:layout_width="@dimen/x0"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/x16"
+                        android:layout_weight="1"
+                        android:background="@drawable/inflate_txt_bg_white">
+
+                        <TextView
+                            android:id="@+id/tv_card2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableTop="@mipmap/upload_identity"
+                            android:drawablePadding="@dimen/x16"
+                            android:text="上传行驶证副页照片"
+                            android:textSize="@dimen/x28" />
+
+                        <ImageView
+                            android:id="@+id/iv_card_revers"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/closeImageViewReverse"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/icon_oreder_remark_delete"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x2"
+                    android:background="@color/gray_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="号牌号码"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_car_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的号牌号码"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆类型"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_car_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的车辆类型"
+                            android:paddingRight="@dimen/x30"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <!---->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/ll_current_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="使用性质"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_xing_zhi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的使用性质"
+                            android:paddingRight="@dimen/x30"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="品牌型号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_brand_xing_hao"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的品牌性质"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="注册日期"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/tv_date_zhuce"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="选择日期"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="发证日期"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/tv_date_send"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="选择日期"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="档案编号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_dang_an"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的档案编号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="总质量"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_zong_zhi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的总质量"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="kg"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="核定载质量"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_he_ding"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的核定载质量"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="kg"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:layout_gravity="bottom"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="@dimen/x280"
+                    android:padding="@dimen/x10">
+
+                    <RelativeLayout
+                        android:id="@+id/re_yun_shu_pic"
+                        android:layout_width="@dimen/x400"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/inflate_txt_bg_white">
+
+                        <TextView
+                            android:id="@+id/tv_card_yun_shu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableTop="@mipmap/upload_identity"
+                            android:drawablePadding="@dimen/x16"
+                            android:text="上传道路运输证"
+                            android:textSize="@dimen/x28"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/iv_card_yun_shu"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/close_yun_shu"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/icon_oreder_remark_delete"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x2"
+                    android:background="@color/gray_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="运营号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_yun_ying_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的运营号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="业户名称"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_ye_hu_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的业户名称"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆号牌"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_cheliang_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的车辆号牌"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="经营许可证号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_jing_ying_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的经营许可证号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="经营范围"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_yun_ying_fan_wei"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的经营范围"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="发证日期"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/tv_send_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请选择"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_height="@dimen/x280"
+                    android:padding="@dimen/x10">
+
+                    <RelativeLayout
+                        android:id="@+id/re_ji_dong_pic"
+                        android:layout_width="@dimen/x400"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/inflate_txt_bg_white">
+
+                        <TextView
+                            android:id="@+id/tv_card_ji_dong"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableTop="@mipmap/upload_identity"
+                            android:drawablePadding="@dimen/x16"
+                            android:text="上传机动车登记证书"
+                            android:textSize="@dimen/x28"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/iv_card_ji_dong"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:visibility="gone" />
+
+                        <ImageView
+                            android:id="@+id/close_ji_dong"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentRight="true"
+                            android:src="@mipmap/icon_oreder_remark_delete"
+                            android:visibility="gone" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x2"
+                    android:background="@color/gray_background" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="@dimen/x150"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="机动车所有人/身份证明名称/号码"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_owner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="登记机关"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_ji_guan"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的登记机关"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="登记日期"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/tv_deng_ji_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请选择"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="机动车登记编号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的登记编号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆类型"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_car_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的车辆类型"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆品牌"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_car_brand"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的车辆品牌"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆型号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_car_model"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的车辆型号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="@dimen/x150"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="车辆识别代号/车架号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_car_code"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="发动机号"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_car_engine"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的发动机号"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="燃料种类"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_ran_liao"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的燃料种类"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="排量/功率"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_pai_liang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的排量/功率"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="制造厂名称"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_build_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的制造厂名称"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="轮胎数"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_tires"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的轮胎数"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="外廊尺寸"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="长"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                        <EditText
+                            android:id="@+id/et_deng_ji_chang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="长度"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="宽"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                        <EditText
+                            android:id="@+id/et_deng_ji_kuan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="宽度"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="高"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                        <EditText
+                            android:id="@+id/et_deng_ji_gao"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="高度"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="mm"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="准牵引总质量"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_qian_yin"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的准牵引总质量"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="kg"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="驾驶室载客"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_jia_shi_shi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的驾驶室载客"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="人"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="使用性质"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <EditText
+                            android:id="@+id/et_deng_ji_use_xing_zhi"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请填写您的使用性质"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x100">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:text="发证日期"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/et_deng_ji_send_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:hint="请选择"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x2"
+                        android:background="@color/gray_background" />
+                </LinearLayout>
+                <RelativeLayout
+                    android:id="@+id/rl_sign"
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x300">
+
+                    <TextView
+                        android:id="@+id/tv_sign"
+                        android:textStyle="bold"
+                        android:text="电子签名"
+                        android:layout_centerInParent="true"
+                        android:textSize="@dimen/x50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                    <ImageView
+                        android:id="@+id/iv_sign"
+                        android:layout_marginLeft="@dimen/x90"
+                        android:layout_marginRight="@dimen/x90"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </RelativeLayout>
+                <TextView
+                    android:id="@+id/tv_srue"
+                    style="@style/bottom_button_style"
+                    android:layout_marginBottom="@dimen/x100"
+                    android:layout_below="@+id/inputEdit_phone"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x90"
+                    android:text="提交" />
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+</RelativeLayout>

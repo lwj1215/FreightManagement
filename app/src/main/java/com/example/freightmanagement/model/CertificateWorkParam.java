@@ -1,14 +1,14 @@
 package com.example.freightmanagement.model;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by songdechuan on 2020/8/13.
  */
 
-public class CertificateWorkParam {
-    private File file;
+public class CertificateWorkParam implements Serializable {
 
     private String name;
 
@@ -22,7 +22,7 @@ public class CertificateWorkParam {
 
     private String grantNo;
 
-    private String classs;
+    private String classs;//准假类型
 
     private String category;
 
@@ -35,14 +35,6 @@ public class CertificateWorkParam {
     private String fileNumber;
 
     private String picUrl;
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
-    }
 
     public String getName() {
         return name;

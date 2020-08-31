@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseApplication;
+import com.example.freightmanagement.Base.TokenHeaderInterceptor;
 import com.example.freightmanagement.Utils.NetUtils;
 import com.example.freightmanagement.Utils.StringUtils;
 import java.io.File;
@@ -36,6 +37,7 @@ public class RestApi {
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(10, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(new TokenHeaderInterceptor())
                     .build();
         }
         mDelivery = new Handler(Looper.getMainLooper());
@@ -161,7 +163,7 @@ public class RestApi {
         RequestBody fileBody = RequestBody.create(MediaType.parse("application/octet-stream"), file);
         RequestBody requestBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
-                .addFormDataPart("image1", encode, fileBody)
+                .addFormDataPart("file", encode, fileBody)
                 .build();
         Request request = new Request.Builder()
                 .url(Host.BASE_URL + url)

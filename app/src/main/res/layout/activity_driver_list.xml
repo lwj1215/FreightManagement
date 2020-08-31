@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_new_doctor_sign_protocol"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_driver"
+        android:layout_above="@id/tv_srue"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/tv_srue"
+        android:layout_alignParentBottom="true"
+        style="@style/bottom_button_style"
+        android:layout_below="@+id/inputEdit_phone"
+        android:layout_centerVertical="true"
+        android:text="添加车辆" />
+</RelativeLayout>

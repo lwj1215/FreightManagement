@@ -1,12 +1,11 @@
 package com.example.freightmanagement.model;
-
-import java.io.File;
+import java.io.Serializable;
 
 /**
  * Created by songdechuan on 2020/8/13.
  */
 
-public class IDCardParam {
+public class IDCardParam implements Serializable {
 
     private String picUrl;
 

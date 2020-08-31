@@ -195,8 +195,9 @@ public class RecognizeService {
         });
     }
 
-    public static void recVehicleLicense(Context ctx, String filePath, final ServiceListener listener) {
+    public static void recVehicleLicense(Context ctx, String filePath, String side,final ServiceListener listener) {
         OcrRequestParams param = new OcrRequestParams();
+        param.putParam("vehicle_license_side",side);
         param.setImageFile(new File(filePath));
         OCR.getInstance(ctx).recognizeVehicleLicense(param, new OnResultListener<OcrResponseResult>() {
             @Override
@@ -388,10 +389,10 @@ public class RecognizeService {
         });
     }
 
-    public static void recCustom(Context ctx, String filePath, final ServiceListener listener) {
+    public static void recCustom(Context ctx, String filePath,String templateSign,int classifierId, final ServiceListener listener) {
         OcrRequestParams param = new OcrRequestParams();
-        param.putParam("templateSign", "");
-        param.putParam("classifierId", 0);
+        param.putParam("templateSign", templateSign);
+        param.putParam("classifierId", classifierId);
         param.setImageFile(new File(filePath));
         OCR.getInstance(ctx).recognizeCustom(param, new OnResultListener<OcrResponseResult>() {
             @Override

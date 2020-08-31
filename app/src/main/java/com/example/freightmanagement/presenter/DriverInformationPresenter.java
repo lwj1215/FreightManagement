@@ -14,6 +14,7 @@ public class DriverInformationPresenter extends BasePresenter<DriverInfomationCo
 
     @Override
     public void getPeixunData() {
+        String userId = PrefUtilsData.getUserId();
         RestApi.getInstance().get(BaseApiConstants.API_PEIXUNJIEGUO+ PrefUtilsData.getUserId(), new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String msg) {

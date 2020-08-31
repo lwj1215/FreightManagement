@@ -13,6 +13,8 @@ import android.view.View;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.freightmanagement.R;
+
 public class ElectronicSignature extends View {
     private Paint gesturePaint;
     private Path gesturePath;

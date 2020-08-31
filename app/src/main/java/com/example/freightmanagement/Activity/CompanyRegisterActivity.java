@@ -1,8 +1,10 @@
 package com.example.freightmanagement.Activity;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,13 +19,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
 import com.baidu.ocr.sdk.model.IDCardParams;
 import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
+import com.baidu.ocr.ui.camera.CameraNativeHelper;
+import com.baidu.ocr.ui.camera.CameraView;
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.BusinessLicenseBean;
+import com.example.freightmanagement.Bean.RoadManagerBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
@@ -41,6 +50,7 @@ import com.example.freightmanagement.presenter.constract.CompanyRegisterConstact
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.List;
 
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -61,7 +71,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
     private static final int REQUEST_CODE_CAMERA = 102;
     private static final int REQUEST_CODE_BUSINESS_LICENSE = 123;
+    private static final int REQUEST_CODE_ROAD_MANAGER_LICENSE = 124;
 
+    private static final String TEMPLATE_COMPANY_ROAD = "bfa90c13251df75350437d83f41f57d6";
     private final String FRONT = "front";
     private final String BACK = "back";
     private final int TYPE_CHENG_LI = 0;
@@ -87,14 +99,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
      */
     private EditText mEtRealName;
     /**
-     * 请填写您的性别
-     */
-    private EditText mEtDetailAddress;
-    /**
      * 请填写您的年龄
      */
-    private EditText mTvCurrentAddress;
-    private LinearLayout mLlCurrentAddress;
+//    private EditText mTvCurrentAddress;
+//    private LinearLayout mLlCurrentAddress;
     /**
      * 请填写您的身份证号
      */
@@ -151,10 +159,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
      * 请填写您的住所
      */
     private EditText mEtAddress;
-    private String idCardFrontUrl = "1";
-    private String idCardBackUrl = "2";
-    private String businessUrl = "3";
-    private String roadTransportPermit = "4";
+    private String idCardFrontUrl = "";
+    private String idCardBackUrl = "";
+    private String businessUrl = "";
+    private String roadTransportPermit = "";
     /**
      * 请填写您的许可证号
      */
@@ -163,6 +171,14 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
      * 请选择您的证件有效期
      */
     private TextView mTvZhengJianYouXiaoQi;
+    private String frontPath;
+    private String backPath;
+    private String businessPath;
+    private RelativeLayout mReRoad;
+    private String roadManagerPath;
+    private TextView mTvRoad;
+    private ImageView mIvRoad;
+    private ImageView mCloseRoad;
 
     @Override
     public int setLayoutResource() {
@@ -171,13 +187,49 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
     @Override
     protected void onInitView() {
+        checkGalleryPermission();
         initView();
+    }
 
+    private boolean checkGalleryPermission() {
+        int ret = ActivityCompat.checkSelfPermission(this, Manifest.permission
+                .READ_EXTERNAL_STORAGE);
+        int wet = ActivityCompat.checkSelfPermission(this, Manifest.permission
+                .WRITE_EXTERNAL_STORAGE);
+        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1000);
+            return false;
+        }
+        return true;
     }
 
     @Override
     protected void onLoadData2Remote() {
-
+        //  初始化本地质量控制模型,释放代码在onDestory中
+        //  调用身份证扫描必须加上 intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL, true); 关闭自动初始化和释放本地模型
+        CameraNativeHelper.init(this, OCR.getInstance(this).getLicense(),
+                new CameraNativeHelper.CameraNativeInitCallback() {
+                    @Override
+                    public void onError(int errorCode, Throwable e) {
+                        String msg;
+                        switch (errorCode) {
+                            case CameraView.NATIVE_SOLOAD_FAIL:
+                                msg = "加载so失败，请确保apk中存在ui部分的so";
+                                break;
+                            case CameraView.NATIVE_AUTH_FAIL:
+                                msg = "授权本地质量控制token获取失败";
+                                break;
+                            case CameraView.NATIVE_INIT_FAIL:
+                                msg = "本地质量控制";
+                                break;
+                            default:
+                                msg = String.valueOf(errorCode);
+                        }
+//                        infoTextView.setText("本地质量控制初始化错误，错误原因： " + msg);
+                    }
+                });
     }
 
     public void initView() {
@@ -193,9 +245,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mRePicReverse = (RelativeLayout) findViewById(R.id.re_pic_reverse);
         mRePicReverse.setOnClickListener(this);
         mEtRealName = (EditText) findViewById(R.id.et_real_name);
-        mEtDetailAddress = (EditText) findViewById(R.id.et_detail_address);
-        mTvCurrentAddress = (EditText) findViewById(R.id.tv_current_address);
-        mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
+//        mEtDetailAddress = (EditText) findViewById(R.id.et_detail_address);
+//        mTvCurrentAddress = (EditText) findViewById(R.id.tv_current_address);
+//        mLlCurrentAddress = (LinearLayout) findViewById(R.id.ll_current_address);
         mEtCardNum = (EditText) findViewById(R.id.et_card_num);
         mTvBusiness1 = (TextView) findViewById(R.id.tv_business1);
         mIvBusinessFront = (ImageView) findViewById(R.id.iv_business_front);
@@ -224,6 +276,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mEtXuke = (EditText) findViewById(R.id.et_xuke);
         mTvZhengJianYouXiaoQi = (TextView) findViewById(R.id.tv_zheng_jian_you_xiao_qi);
         mTvZhengJianYouXiaoQi.setOnClickListener(this);
+        mReRoad = findViewById(R.id.re_road);
+        mReRoad.setOnClickListener(this);
+        mTvRoad = findViewById(R.id.tv_road);
+        mIvRoad = findViewById(R.id.iv_road);
+        mCloseRoad = findViewById(R.id.close_road);
     }
 
     @Override
@@ -237,7 +294,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             case R.id.re_pic_reverse:
                 takeIDCardReverse();
                 break;
-
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);
                 break;
@@ -247,6 +303,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             case R.id.btn_no:
                 vSignView.clearCanvas();
                 break;
+            case R.id.re_road:
+                roadManagerPath = "road_" + System.currentTimeMillis();
+                takeRoadManagerPhoto(roadManagerPath);
+                break;
             case R.id.btn_yes:
                 if (bottomDialog != null) {
                     bottomDialog.dismiss();
@@ -255,7 +315,12 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
                 break;
+            case R.id.re_business:
+                businessPath = FRONT + "_" + System.currentTimeMillis();
+                takeBusinessPhoto(businessPath);
+                break;
             case R.id.tv_business1:
+
                 break;
             case R.id.tv_chengli:
                 onYearMonthDayPicker(TYPE_CHENG_LI);
@@ -354,9 +419,26 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 break;
             case R.id.tv_zheng_jian_you_xiao_qi:
                 onYearMonthDayPicker(TYPE_YOU_XIAO_QI);
-
                 break;
         }
+    }
+
+    private void takeRoadManagerPhoto(String roadManagerPath) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), roadManagerPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_ROAD_MANAGER_LICENSE);
+    }
+
+    private void takeBusinessPhoto(String path) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), path).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_BUSINESS_LICENSE);
     }
 
     public void onYearMonthDayPicker(final int type) {
@@ -373,7 +455,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             @Override
             public void onDatePicked(String year, String month, String day) {
                 String time = year + "年" + month + "月" + day + "日";
-                switch (type){
+                switch (type) {
                     case TYPE_CHENG_LI:
                         mTvChengli.setText(time);
                         break;
@@ -405,10 +487,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     /**
      * 正面身份证拍照
      */
-    private void takeIDCard() {
+    private void takeIDCard(){
+        frontPath = FRONT+"_"+System.currentTimeMillis();
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), frontPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -419,7 +502,31 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
         startActivityForResult(intent, REQUEST_CODE_CAMERA);
     }
+    /**
+     * 反面身份证扫描
+     */
+    private void takeIDCardReverse() {
+        backPath = BACK + "_" + System.currentTimeMillis();
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), backPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
+                true);
+        // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
+        // 请手动使用CameraNativeHelper初始化和释放模型
+        // 推荐这样做，可以避免一些activity切换导致的不必要的异常
+        intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
+                true);
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
+        startActivityForResult(intent, REQUEST_CODE_CAMERA);
+    }
 
+    /**
+     * 身份证扫描返回结果
+     *
+     * @param idCardSide
+     * @param filePath
+     */
     private void recIDCard(final String idCardSide, final String filePath) {
         IDCardParams param = new IDCardParams();
         param.setImageFile(new File(filePath));
@@ -465,10 +572,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             break;
                         }
                         mEtRealName.setText(idCardInfoFrontBean.getName().getWords());
-                        mEtDetailAddress.setText(idCardInfoFrontBean.getGender().getWords());
+//                        mEtDetailAddress.setText(idCardInfoFrontBean.getGender().getWords());
                         String number = idCardInfoFrontBean.getIdNumber().getWords();
                         int age = IDCardUtils.IdNOToAge(number);
-                        mTvCurrentAddress.setText(String.valueOf(age));
+//                        mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
                         mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_FRONT);
                         break;
@@ -483,60 +590,99 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
     }
 
-    /**
-     * 反面身份证扫描
-     */
-    private void takeIDCardReverse() {
-        Intent intent = new Intent(this, CameraActivity.class);
-        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
-        intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
-                true);
-        // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
-        // 请手动使用CameraNativeHelper初始化和释放模型
-        // 推荐这样做，可以避免一些activity切换导致的不必要的异常
-        intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
-                true);
-        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
-        startActivityForResult(intent, REQUEST_CODE_CAMERA);
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_PICK_IMAGE_FRONT && resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
-            String filePath = getRealPathFromURI(uri);
-            recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
-        }
-
-        if (requestCode == REQUEST_CODE_PICK_IMAGE_BACK && resultCode == Activity.RESULT_OK) {
-            Uri uri = data.getData();
-            String filePath = getRealPathFromURI(uri);
-            recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
-        }
 
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
-                String filePath = FileUtil.getSaveFile(getApplicationContext(), "front").getAbsolutePath();
+                String filePath = "";
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), frontPath).getAbsolutePath();
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
+                        Glide.with(this).load(filePath).into(mIvCardFront);
+                        mTvCard1.setVisibility(View.GONE);
+                        mIvCardFront.setVisibility(View.VISIBLE);
                     } else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), backPath).getAbsolutePath();
+
+                        Glide.with(this).load(filePath).into(mIvCardRevers);
+                        mTvCard2.setVisibility(View.GONE);
+                        mIvCardRevers.setVisibility(View.VISIBLE);
                         recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
+
                     }
                 }
             }
         }
         // 识别成功回调，营业执照识别
         if (requestCode == REQUEST_CODE_BUSINESS_LICENSE && resultCode == Activity.RESULT_OK) {
-            RecognizeService.recBusinessLicense(this, FileUtil.getSaveFile(getApplicationContext(), "front").getAbsolutePath(),
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), businessPath).getAbsolutePath();
+            RecognizeService.recBusinessLicense(this, filePath,
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
-
+                            BusinessLicenseBean businessLicenseBean = new Gson().fromJson(result, BusinessLicenseBean.class);
+                            if (businessLicenseBean == null) {
+                                ToastUtils.popUpToast("营业执照识别失败，请重试");
+                                return;
+                            }
+                            BusinessLicenseBean.WordsResultBean words_result = businessLicenseBean.getWords_result();
+                            BusinessLicenseBean.WordsResultBean.社会信用代码Bean 社会信用代码 = words_result.get社会信用代码();
+                            String code = 社会信用代码.getWords();
+                            BusinessLicenseBean.WordsResultBean.单位名称Bean 单位名称 = words_result.get单位名称();
+                            String companyName = 单位名称.getWords();
+                            BusinessLicenseBean.WordsResultBean.经营范围Bean 经营范围 = words_result.get经营范围();
+                            String jingying = 经营范围.getWords();
+                            BusinessLicenseBean.WordsResultBean.成立日期Bean 成立日期 = words_result.get成立日期();
+                            String chengli = 成立日期.getWords();
+                            BusinessLicenseBean.WordsResultBean.地址Bean 地址 = words_result.get地址();
+                            String address = 地址.getWords();
+                            mEtCode.setText(code);
+                            mEtName.setText(companyName);
+                            mEtJing.setText(jingying);
+                            mTvChengli.setText(chengli);
+                            mEtAddress.setText(address);
+                            mPresenter.upload(new File(filePath), UPLOAD_BUSINESS);
+                            mIvBusinessFront.setVisibility(View.VISIBLE);
+                            mTvBusiness1.setVisibility(View.GONE);
+                            Glide.with(getContext()).load(filePath).into(mIvBusinessFront);
+                        }
+                    });
+        }
+        // 识别成功回调，道路运输许可证
+        if (requestCode == REQUEST_CODE_ROAD_MANAGER_LICENSE && resultCode == Activity.RESULT_OK) {
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), roadManagerPath).getAbsolutePath();
+            RecognizeService.recCustom(this, filePath, TEMPLATE_COMPANY_ROAD, 0,
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+                            ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
+                            RoadManagerBean roadManagerBean = new Gson().fromJson(result,RoadManagerBean.class);
+                            if (roadManagerBean == null) {
+                                ToastUtils.popUpToast("识别失败请重新上传");
+                                return;
+                            }
+                            RoadManagerBean.DataBean roadManagerBeanData = roadManagerBean.getData();
+                            List<RoadManagerBean.DataBean.RetBean> ret = roadManagerBeanData.getRet();
+                            if (ret != null) {
+                                for (RoadManagerBean.DataBean.RetBean retBean : ret) {
+                                    String word_name = retBean.getWord_name();
+                                    String word = retBean.getWord();
+                                    if (word_name.equals("number")) {
+                                        mEtXuke.setText(word);
+                                    } else if (word_name.equals("date")) {
+                                        mTvZhengJianYouXiaoQi.setText(word);
+                                    }
+                                }
+                            }
+                            mIvRoad.setVisibility(View.VISIBLE);
+                            mTvRoad.setVisibility(View.GONE);
+                            mPresenter.upload(new File(filePath), UPLOAD_ROAD_TRANSPORT_PERMIT);
+                            Glide.with(getContext()).load(filePath).into(mIvRoad);
                         }
                     });
         }

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.TokenBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.enums.AdminTypeEnum;
@@ -122,6 +123,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 accountParam.setTel(tel);
                 accountParam.setType(type);
                 mPresenter.login(accountParam);
+                PrefUtilsData.setType(type);
                 break;
         }
     }
@@ -131,20 +133,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
         if (data != null) {
             TokenBean.DataBean dataBean = data.getData();
             TokenBean.DataBean.UserBean user = dataBean.getUser();
-//            int driverCertificateId = user.getDriverCertificateId();
-//            int idcertificateId = user.getIdcertificateId();
-//            int workCertificateId = user.getWorkCertificateId();
-//            if (driverCertificateId != 0) {
-//                startActivity(driverCertificateId, MainActivity.class,code);
-//            } else if (idcertificateId != 0) {
-//                startActivity(idcertificateId, MainActivity.class, code);
-//            } else if (workCertificateId != 0) {
-//                startActivity(workCertificateId, MainActivity.class,code);
-//            } else {
-//                startActivity(new Intent(this, RoleSelectActivity.class));
-//            }
             int type = dataBean.getType();
-//            type = 0;
             switch (type){
                 case 0:
                     if(this.code == 1){

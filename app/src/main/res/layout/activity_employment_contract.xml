@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,25 +8,62 @@
     tools:context=".Activity.EmploymentContractActivity">
 
 
-    <WebView
+    <com.example.freightmanagement.View.UserWebView
         android:id="@+id/webView"
+        android:layout_above="@id/ll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         />
-    <TextView
-        android:id="@+id/tv_qz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:textSize="@dimen/x50"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/x200"
-        android:text="点击签字"/>
+<!--    <TextView-->
+<!--        android:id="@+id/tv_qz"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:textSize="@dimen/x50"-->
+<!--        android:visibility="visible"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:text="点击签字"/>-->
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_endTime"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="合同终止日期" />
+        <TextView
+            android:id="@+id/tv_submit"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="提交" />
+        <TextView
+            android:id="@+id/tv_sign"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="点击签字" />
+    </LinearLayout>
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="@dimen/x300">-->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/x300">-->
+<!--            <ImageView-->
+<!--                android:id="@+id/img_sign"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="@dimen/x700"-->
+<!--                android:visibility="visible" />-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
 
-    <ImageView
-        android:id="@+id/img_sign"
-        android:layout_width="@dimen/x300"
-        android:layout_height="@dimen/x150"
-        android:layout_gravity="center_horizontal"
-        android:visibility="gone" />
-</LinearLayout>
+</RelativeLayout>

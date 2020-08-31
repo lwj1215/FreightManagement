@@ -6,11 +6,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 //import com.bumptech.glide.Glide;
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.DriverInformationBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
+import com.example.freightmanagement.enums.AdminTypeEnum;
 import com.example.freightmanagement.presenter.DriverInformationPresenter;
 
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
@@ -20,7 +22,13 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
 
     @Override
     public int setLayoutResource() {
-        return R.layout.activity_driver_information;
+        if (PrefUtilsData.getType().equals(AdminTypeEnum.DRIVER.getValue())) {
+            return R.layout.activity_driver_information;
+        } else if (PrefUtilsData.getType().equals(AdminTypeEnum.CAR_OWNER.getValue())) {
+            return R.layout.activity_driver_information;
+        } else {
+            return R.layout.activity_driver_information;
+        }
     }
 
     @Override
@@ -75,9 +83,9 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
             tv_workid.setText(certificateWorkBo.getGrantNo());
             tv_time.setText(certificateWorkBo.getCreateTime() + "");
             if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())){
-//                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
+                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
             } if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())){
-//                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
+                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
             }
         } else if (PrefUtilsData.getType().equals("2")) {
             name.setText(certificateIDBo.getName());

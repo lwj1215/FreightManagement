@@ -12,7 +12,7 @@ public class BaseApiConstants {
     /**
      * 图片上传后的BASE_URL
      */
-    public static final String IMAGE_BASE_URL = "aicc.ctags.cn/cccc/file/download/";
+    public static final String IMAGE_BASE_URL = "https://aicc.ctags.cn/cccc/file/download/";
 
     /**
      * 验证码
@@ -47,7 +47,7 @@ public class BaseApiConstants {
      */
     public static final String API_ANSWER_RESULT_LIST = "/cccc/examination/getExaminationDriverDatas/";
     /**
-     * 获取培训结果
+     * 获取驾驶员信息
      */
     public static final String API_PEIXUNJIEGUO = "/cccc/driver/getDirver/";
 
@@ -62,6 +62,11 @@ public class BaseApiConstants {
      * 上传图片
      */
     public static final String API_IMAGE_UPLOAD = "/cccc/file/upload";
+
+    /**
+     * 驾驶员注册
+     */
+    public static final String API_CAR_OWNER_REGISTER = "/cccc/carOwner/addOwner";
 
     /**
      * 驾驶员注册
@@ -110,5 +115,32 @@ public class BaseApiConstants {
     /**
      * 车辆信息
      */
-    public static final String API_CLXINXI = "/cccc/carOwner/getOwner//";
+    public static final String API_CLXINXI = "/cccc/carOwner/getOwner/";
+    /**
+     * 选择车辆
+     */
+    public static final String API_XUANZECHELIANG = "/cccc/carOwner/getPassedCar";
+
+    /**
+     * 提交合同
+     */
+    public static final String API_ADD_CONTRACT = "/cccc/letter/addContract";
+    /**
+     * 驾驶员列表
+     */
+    public static final String API_DRIVER_LIST = "/cccc/manager/driver/getDriverList";
+
+    /**
+     * 删除或者更改车辆
+     */
+    public static final String API_CAR_DEL = "/cccc/carOwner/editOwner";
+    /**
+     * 新增车辆
+     */
+    public static final String API_CAR_ADD = "/cccc/carOwner/addOwner";
+
+    /**
+     * 获取合同状态
+     */
+    public static final String API_CONTRACT_GET = "/cccc/letter/getContract";
 }

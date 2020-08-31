@@ -19,9 +19,6 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-        debug {
-            buildConfigField("String", "BASE_URL", "\"http://127.0.0.1:6666\"")
-        }
     }
     dexOptions{
         preDexLibraries = false
@@ -55,5 +52,6 @@ dependencies {
     //气泡弹窗
     implementation 'me.kareluo.ui:popmenu:1.1.0'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.30'
+    implementation 'com.itextpdf:itextpdf:5.5.4'
 
 }

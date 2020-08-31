@@ -27,7 +27,7 @@ public class LoginPresenter extends BasePresenter<LoginConstact.View> implements
                 if (loginBean.getCode()==ResponseCodeEnum.SUCCESS.getCode()) {
                     PrefUtilsData.setIsLogin(true);
                     PrefUtilsData.setToken(loginBean.getData().getToken());
-                    PrefUtilsData.setType(loginBean.getData().getType()+"");
+//                    PrefUtilsData.setType(loginBean.getData().getType()+"");
                     if(loginBean.getData().getUser() != null){
                         PrefUtilsData.setUserId(loginBean.getData().getUser().getId()+"");
                         PrefUtilsData.setDriverId(loginBean.getData().getUser().getDriverCertificateId()+"");

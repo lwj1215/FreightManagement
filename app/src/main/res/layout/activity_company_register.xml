@@ -194,14 +194,14 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x280"
-                    android:padding="@dimen/x30">
+                    android:gravity="center">
 
                     <RelativeLayout
                         android:id="@+id/re_business"
-                        android:layout_width="@dimen/x0"
+                        android:layout_width="@dimen/x400"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/x16"
-                        android:layout_weight="1"
+                        android:padding="@dimen/x10"
+                        android:gravity="center"
                         android:background="@drawable/inflate_txt_bg_white">
 
                         <TextView
@@ -316,34 +316,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:text="法定代表人"
-                            android:textColor="@color/color_666"
-                            android:textSize="@dimen/x28" />
-
-                        <EditText
-                            android:id="@+id/et_fading"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="@dimen/x30"
-                            android:background="@null"
-                            android:hint="请填写您的法定代表人"
-                            android:textColor="@color/color_666"
-                            android:textColorHint="@color/color_999"
-                            android:textSize="@dimen/x28" />
-
-                    </LinearLayout>
-
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x2"
@@ -421,6 +393,34 @@
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x100">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:text="法定代表人"
+                                android:textColor="@color/color_666"
+                                android:textSize="@dimen/x28" />
+
+                            <EditText
+                                android:id="@+id/et_fading"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:background="@null"
+                                android:hint="请填写您的法定代表人"
+                                android:textColor="@color/color_666"
+                                android:textColorHint="@color/color_999"
+                                android:textSize="@dimen/x28" />
+
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <View
@@ -471,14 +471,16 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x280"
+                    android:gravity="center"
+
                     android:padding="@dimen/x30">
 
                     <RelativeLayout
                         android:id="@+id/re_road"
-                        android:layout_width="@dimen/x0"
+                        android:layout_width="@dimen/x400"
                         android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/x16"
-                        android:layout_weight="1"
+                        android:padding="@dimen/x10"
+                        android:gravity="center"
                         android:background="@drawable/inflate_txt_bg_white">
 
                         <TextView
@@ -610,6 +612,7 @@
                 <TextView
                     android:id="@+id/tv_srue"
                     style="@style/bottom_button_style"
+                    android:layout_marginBottom="@dimen/x100"
                     android:layout_below="@+id/inputEdit_phone"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x90"

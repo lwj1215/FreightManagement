@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activity.PromiseBookActivity">
 
-    <WebView
+    <com.example.freightmanagement.View.UserWebView
         android:id="@+id/webView"
+        android:layout_above="@id/ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         />
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_endTime"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="终止期限" />
+        <TextView
+            android:id="@+id/tv_submit"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="提交" />
+        <TextView
+            android:id="@+id/tv_sign"
+            style="@style/bottom_button_style"
+            android:layout_below="@+id/inputEdit_phone"
+            android:layout_centerVertical="true"
+            android:layout_weight="1"
+            android:text="点击签字" />
+    </LinearLayout>
+</RelativeLayout>

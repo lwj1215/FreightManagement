@@ -2,6 +2,7 @@ package com.example.freightmanagement.Activity;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.TaskInfo;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import com.baidu.ocr.sdk.model.IDCardResult;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
@@ -33,16 +35,25 @@ import com.example.freightmanagement.Utils.IDCardUtils;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
+import com.example.freightmanagement.model.CarOwnerSubmitParam;
 import com.example.freightmanagement.model.IDCardInfoFrontBean;
+import com.example.freightmanagement.model.IDCardParam;
+import com.example.freightmanagement.presenter.CarOwnerPresenter;
 import com.google.gson.Gson;
 
 import java.io.File;
+
+import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_WORK;
 
 /**
  * Created by songdechuan on 2020/8/10.
  */
 
-public class CarOwnerActivity extends BaseActivity implements View.OnClickListener {
+public class CarOwnerActivity extends BaseActivity<CarOwnerPresenter> implements CarOwnerPresenter.View, View.OnClickListener {
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
     private static final int REQUEST_CODE_CAMERA = 102;
@@ -95,6 +106,9 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
     private ElectronicSignature vSignView;
     private String idCardFrontUrl = "";
     private String idCardBackUrl = "";
+    private String frontPath;
+    private String backPath;
+
     @Override
     public int setLayoutResource() {
         return R.layout.activity_car_owner;
@@ -216,7 +230,14 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.popUpToast("身份证号不得为空");
                     return;
                 }
-
+                CarOwnerSubmitParam submitParam = new CarOwnerSubmitParam();
+                IDCardParam idCardParam = new IDCardParam();
+                idCardParam.setIDNo(idCardNum);
+                idCardParam.setName(userName);
+                idCardParam.setPicUrl(idCardFrontUrl);
+                idCardParam.setPicUrl2(idCardBackUrl);
+                submitParam.setCertificateIDBo(idCardParam);
+                mPresenter.submit(submitParam);
                 break;
         }
     }
@@ -225,9 +246,10 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
      * 正面身份证拍照
      */
     private void takeIDCard(){
+        frontPath = FRONT+"_"+System.currentTimeMillis();
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), frontPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -238,7 +260,24 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
         intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
         startActivityForResult(intent, REQUEST_CODE_CAMERA);
     }
-
+    /**
+     * 反面身份证扫描
+     */
+    private void takeIDCardReverse() {
+        backPath = BACK + "_" + System.currentTimeMillis();
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), backPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
+                true);
+        // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
+        // 请手动使用CameraNativeHelper初始化和释放模型
+        // 推荐这样做，可以避免一些activity切换导致的不必要的异常
+        intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
+                true);
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
+        startActivityForResult(intent, REQUEST_CODE_CAMERA);
+    }
     private void recIDCard(final String idCardSide, final String filePath) {
         IDCardParams param = new IDCardParams();
         param.setImageFile(new File(filePath));
@@ -260,51 +299,46 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
             }
             @Override
             public void onError(OCRError error) {
-                alertText("", error.getMessage());
             }
         });
     }
 
-    private void setIDCardInfo(final String idCardSide, final String result, String filePath) {
+    private void setIDCardInfo(final String idCardSide, final String result, final String filePath) {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                switch (idCardSide){
+                switch (idCardSide) {
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
+                        if (idCardInfoFrontBean == null) {
+                            ToastUtils.popUpToast("身份证选择失败，请重新选择");
+                            break;
+
+                        }
+                        if (!idCardInfoFrontBean.getImageStatus().equals("normal")) {
+                            ToastUtils.popUpToast("身份证照片不正常，请重新选择");
+                            break;
+                        }
                         mEtRealName.setText(idCardInfoFrontBean.getName().getWords());
                         mEtDetailAddress.setText(idCardInfoFrontBean.getGender().getWords());
                         String number = idCardInfoFrontBean.getIdNumber().getWords();
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_FRONT);
                         break;
                     case BACK:
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_BACK);
                         break;
                 }
 
             }
         });
 
+
     }
-    /**
-     * 反面身份证扫描
-     */
-    private void takeIDCardReverse(){
-        Intent intent = new Intent(this, CameraActivity.class);
-        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(), "front").getAbsolutePath());
-        intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
-                true);
-        // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
-        // 请手动使用CameraNativeHelper初始化和释放模型
-        // 推荐这样做，可以避免一些activity切换导致的不必要的异常
-        intent.putExtra(CameraActivity.KEY_NATIVE_MANUAL,
-                true);
-        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_BACK);
-        startActivityForResult(intent, REQUEST_CODE_CAMERA);
-    }
+
 
 
     @Override
@@ -315,21 +349,30 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
             String filePath = getRealPathFromURI(uri);
             recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
         }
-
         if (requestCode == REQUEST_CODE_PICK_IMAGE_BACK && resultCode == Activity.RESULT_OK) {
             Uri uri = data.getData();
             String filePath = getRealPathFromURI(uri);
             recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
         }
-
+        //
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 String contentType = data.getStringExtra(CameraActivity.KEY_CONTENT_TYPE);
-                String filePath = FileUtil.getSaveFile(getApplicationContext(), "front").getAbsolutePath();
+                String filePath = "";
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), frontPath).getAbsolutePath();
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
+                        Glide.with(this).load(filePath).into(mIvCardFront);
+                        mTvCard1.setVisibility(View.GONE);
+                        mIvCardFront.setVisibility(View.VISIBLE);
+
                     } else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) {
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), backPath).getAbsolutePath();
+
+                        Glide.with(this).load(filePath).into(mIvCardRevers);
+                        mTvCard2.setVisibility(View.GONE);
+                        mIvCardRevers.setVisibility(View.VISIBLE);
                         recIDCard(IDCardParams.ID_CARD_SIDE_BACK, filePath);
                     }
                 }
@@ -351,17 +394,23 @@ public class CarOwnerActivity extends BaseActivity implements View.OnClickListen
         return result;
     }
 
-    private void alertText(final String title, final String message) {
-        this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                ToastUtils.popUpToast(title);
 
-                ToastUtils.popUpToast(message);
-                Log.d("title",title);
-                Log.d("message",message);
+    @Override
+    public void success() {
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
+        ToastUtils.popUpToast("提交成功");
+    }
 
-            }
-        });
+    @Override
+    public void imageUrl(String url, int type) {
+        switch (type) {
+            case UPLOAD_ID_CARD_FRONT:
+                idCardFrontUrl = IMAGE_BASE_URL + url;
+                break;
+            case UPLOAD_ID_CARD_BACK:
+                idCardBackUrl = IMAGE_BASE_URL + url;
+                break;
+        }
     }
 }

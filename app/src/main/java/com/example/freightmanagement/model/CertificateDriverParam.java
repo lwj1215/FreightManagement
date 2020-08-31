@@ -1,12 +1,13 @@
 package com.example.freightmanagement.model;
 
-import java.io.File;
+
+import java.io.Serializable;
 
 /**
  * Created by songdechuan on 2020/8/13.
  */
 
-public class CertificateDriverParam {
+public class CertificateDriverParam implements Serializable {
 
     private String name;
 

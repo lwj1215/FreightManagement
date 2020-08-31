@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
-
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
@@ -20,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.core.app.ActivityCompat;
+
 import com.baidu.ocr.sdk.OCR;
 import com.baidu.ocr.sdk.OnResultListener;
 import com.baidu.ocr.sdk.exception.OCRError;
@@ -30,12 +31,14 @@ import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
-import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.DriverLicenseBean;
+import com.example.freightmanagement.Bean.WorkBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.DateUtil;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
@@ -49,8 +52,9 @@ import com.example.freightmanagement.presenter.constract.DriverConfigConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.text.ParseException;
+import java.util.List;
 
-import androidx.core.app.ActivityCompat;
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -60,21 +64,25 @@ import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_WORK;
 
 /**
  * Created by songdechuan on 2020/8/6.
  */
 
-public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> implements DriverConfigConstact.View,View.OnClickListener {
+public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> implements DriverConfigConstact.View, View.OnClickListener {
     private static final int REQUEST_CODE_PICK_IMAGE_FRONT = 201;
     private static final int REQUEST_CODE_PICK_IMAGE_BACK = 202;
     private static final int REQUEST_CODE_CAMERA = 102;
     private static final int REQUEST_CODE_DRIVING_LICENSE = 121;
+    private static final int REQUEST_CODE_WORK_LICENSE = 122;
+
     private static final int DATE_TYPE_START_DATE = 300;
     private static final int DATE_TYPE_END_DATE = 301;
     private static final int DATE_TYPE_FIRST_RECEIVE_DATE = 302;
-    private static final int DATE_TYPE_EFFECTIVE_DATE= 303;
-
+    private static final int DATE_TYPE_EFFECTIVE_DATE = 303;
+    private static final int DATE_TYPE_VALID_DATE = 304;
+    private static final String TEMPLATE_WORK_SIGN = "be14fc9fd2d9a508fc95a3f8fbbe37d9";
 
     /**
      * 上传身份证正面照片
@@ -173,10 +181,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
      * 结束日期
      */
     private TextView mEtEndDate;
-    /**
-     * 请填写从业资格类别
-     */
-    private EditText mTvQualificationType;
+
     /**
      * 选择日期
      */
@@ -184,7 +189,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     /**
      * 选择日期
      */
-    private TextView mTvEffectiveDate;
 
     private String idCardFrontUrl = "";
     private String idCardBackUrl = "";
@@ -194,20 +198,29 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     private String startTime;
     private String endTime;
     private String firstReceiveTime;
-    private String effectiveTime;
     private String frontPath;
     private String backPath;
     private String driverPath;
+    private String driverNum;
+    private TextView mTvWork;
+    private ImageView mIvWorkFront;
+    private ImageView mCloseWorkFront;
+    private RelativeLayout mReWorkPic;
+    private String workPath;
+    private TextView mTvYouXiaoQi;
+    private String workUrl;
+    private String youxiaoqiTime;
 
     @Override
     public int setLayoutResource() {
         return R.layout.activity_driver_config;
+
     }
 
     @Override
     protected void onInitView() {
         setDefaultTitle("驾驶员注册");
-//        checkGalleryPermission();
+        checkGalleryPermission();
         initView();
     }
 
@@ -245,7 +258,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 .WRITE_EXTERNAL_STORAGE);
         if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1000);
             return false;
         }
@@ -271,14 +284,8 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         mEtPostCard = (EditText) findViewById(R.id.et_post_card);
         mImgSign = (ImageView) findViewById(R.id.img_sign);
         mLinSign = (LinearLayout) findViewById(R.id.lin_sign);
-//        mTvMobile = (TextView) findViewById(R.id.tv_mobile);
-//        mTvSignDate = (TextView) findViewById(R.id.tv_sign_date);
         mTvSure = (TextView) findViewById(R.id.tv_srue);
         mTvSure.setOnClickListener(this);
-//        mTvSignFen = (TextView) findViewById(R.id.tv_sign_fen);
-//        mTvSignCph = (TextView) findViewById(R.id.tv_sign_cph);
-//        mTvSignPp = (TextView) findViewById(R.id.tv_sign_pp);
-//        mTvSignXh = (TextView) findViewById(R.id.tv_sign_xh);
         mTvSign = (TextView) findViewById(R.id.tv_sign);
         mIvSign = (ImageView) findViewById(R.id.iv_sign);
         mRlSign = (RelativeLayout) findViewById(R.id.rl_sign);
@@ -305,12 +312,17 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         mEtPermitType = (TextView) findViewById(R.id.et_permit_type);
         mTvStartDate = (TextView) findViewById(R.id.tv_start_date);
         mEtEndDate = (TextView) findViewById(R.id.et_end_date);
-
-        mTvQualificationType = (EditText) findViewById(R.id.tv_qualification_type);
+        mTvYouXiaoQi = findViewById(R.id.tv_you_xiao_qi);
+        mTvYouXiaoQi.setOnClickListener(this);
         mTvFirstReceive = (TextView) findViewById(R.id.tv_first_receive);
+        mTvWork = findViewById(R.id.tv_work);
+        mIvWorkFront = findViewById(R.id.iv_work_front);
+        mCloseWorkFront = findViewById(R.id.close_work_front);
+        mReWorkPic = findViewById(R.id.re_work_pic);
+        mReWorkPic.setOnClickListener(this);
+
         mTvFirstReceive.setOnClickListener(this);
-        mTvEffectiveDate = (TextView) findViewById(R.id.tv_effective_date);
-        mTvEffectiveDate.setOnClickListener(this);
+
         mEtPermitType.setOnClickListener(this);
         mTvStartDate.setOnClickListener(this);
         mEtEndDate.setOnClickListener(this);
@@ -327,7 +339,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case R.id.re_pic_reverse:
                 takeIDCardReverse();
                 break;
-
             case R.id.rl_sign:
                 bottomDialog = DialogUtils.showBottomWindowDialog(this, bottomDialog, bottomView);
                 break;
@@ -345,16 +356,12 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
                 break;
-            case R.id.close_driver_Font:
+            case R.id.tv_you_xiao_qi:
+                onYearMonthDayPicker(DATE_TYPE_VALID_DATE);
                 break;
             case R.id.re_driver_pic:
-                driverPath = "driver_"+ System.currentTimeMillis();
-                Intent intent = new Intent(this, CameraActivity.class);
-                intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                        FileUtil.getSaveFile(getApplication(),driverPath).getAbsolutePath());
-                intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
-                        CameraActivity.CONTENT_TYPE_GENERAL);
-                startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
+                driverPath = "driver_" + System.currentTimeMillis();
+                takeDriverPhoto(driverPath);
                 break;
             case R.id.tv_driver2:
                 break;
@@ -365,9 +372,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case R.id.tv_first_receive:
                 onYearMonthDayPicker(DATE_TYPE_FIRST_RECEIVE_DATE);
                 break;
-            case R.id.tv_effective_date:
-                onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
-                break;
+//            case R.id.tv_effective_date:
+//                onYearMonthDayPicker(DATE_TYPE_EFFECTIVE_DATE);
+//                break;
             case R.id.et_permit_type:
                 onOptionPicker();
                 break;
@@ -377,57 +384,53 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case R.id.et_end_date:
                 onYearMonthDayPicker(DATE_TYPE_END_DATE);
                 break;
+            case R.id.re_work_pic:
+                workPath = "work_" + System.currentTimeMillis();
+                takeWorkPhoto(workPath);
+                break;
             case R.id.tv_srue:
-                if(StringUtils.isEmpty(idCardFrontUrl)){
+                if (StringUtils.isEmpty(idCardFrontUrl)) {
                     ToastUtils.popUpToast("请选择身份证正面照片");
                     return;
                 }
-                if(StringUtils.isEmpty(idCardBackUrl)){
+                if (StringUtils.isEmpty(idCardBackUrl)) {
                     ToastUtils.popUpToast("请选择身份证反面照片");
                     return;
                 }
                 String userName = mEtRealName.getText().toString();
-                if(StringUtils.isEmpty(userName)){
+                if (StringUtils.isEmpty(userName)) {
                     ToastUtils.popUpToast("姓名不得为空");
                     return;
                 }
                 String idCardNum = mEtCardNum.getText().toString();
-                if(StringUtils.isEmpty(idCardNum)){
+                if (StringUtils.isEmpty(idCardNum)) {
                     ToastUtils.popUpToast("身份证号不得为空");
                     return;
                 }
                 String postCardNum = mEtPostCard.getText().toString();
-                if(StringUtils.isEmpty(postCardNum)){
+                if (StringUtils.isEmpty(postCardNum)) {
                     ToastUtils.popUpToast("上岗证号不得为空");
                     return;
                 }
-                String qualificationType = mTvQualificationType.getText().toString();
-                if(StringUtils.isEmpty(qualificationType)){
-                    ToastUtils.popUpToast("从业资格类别不得为空");
-                    return;
-                }
-                if(StringUtils.isEmpty(permitType)){
+                if (StringUtils.isEmpty(permitType)) {
                     ToastUtils.popUpToast("准驾车型不得为空");
                     return;
                 }
-                if(StringUtils.isEmpty(startTime)){
+                if (StringUtils.isEmpty(startTime)) {
                     ToastUtils.popUpToast("开始日期不得为空");
                     return;
                 }
-                if(StringUtils.isEmpty(endTime)){
+                if (StringUtils.isEmpty(endTime)) {
                     ToastUtils.popUpToast("结束日期不得为空");
                     return;
                 }
-                if(StringUtils.isEmpty(firstReceiveTime)){
+                if (StringUtils.isEmpty(firstReceiveTime)) {
                     ToastUtils.popUpToast("初次领证日期不得为空");
-                    return;
-                }
-                if(StringUtils.isEmpty(effectiveTime)){
-                    ToastUtils.popUpToast("有效起始日期不得为空");
                     return;
                 }
                 DriverInfoSubmitParam driverInfoSubmitParam = new DriverInfoSubmitParam();
                 driverInfoSubmitParam.setName(userName);
+                driverInfoSubmitParam.setTel(PrefUtilsData.getMobile());
                 IDCardParam idCardParam = new IDCardParam();
                 idCardParam.setIDNo(idCardNum);
                 idCardParam.setName(userName);
@@ -439,25 +442,54 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 certificateDriverParam.setClasss(permitType);
                 certificateDriverParam.setStartTime(startTime);
                 certificateDriverParam.setPicUrl(driverUrl);
+                certificateDriverParam.setFileNumber(String.valueOf(driverNum));
                 driverInfoSubmitParam.setCertificateDriverBo(certificateDriverParam);
 
                 CertificateWorkParam certificateWorkParam = new CertificateWorkParam();
+                certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
                 certificateWorkParam.setFileNumber(postCardNum);
-                certificateWorkParam.setCategory(qualificationType);
+                try {
+                    certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
+                    certificateWorkParam.setFirstTime(DateUtil.string2Date(mTvFirstReceive.getText().toString()));
+                    certificateWorkParam.setValidityStartTime(DateUtil.string2Date(mTvYouXiaoQi.getText().toString()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                certificateWorkParam.setPicUrl(workUrl);
                 driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
-                mPresenter.submit(driverInfoSubmitParam);
+                Intent intent1 = new Intent(this, SelectCarActivity.class);
+                intent1.putExtra("driverInfo", driverInfoSubmitParam);
+                startActivity(intent1);
                 break;
         }
+    }
+
+    private void takeWorkPhoto(String workPath) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), workPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_WORK_LICENSE);
+    }
+
+    private void takeDriverPhoto(String driverPath) {
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), driverPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
     }
 
     /**
      * 正面身份证拍照
      */
     private void takeIDCard() {
-        frontPath = FRONT +"_"+ System.currentTimeMillis();
+        frontPath = FRONT + "_" + System.currentTimeMillis();
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(),frontPath).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), frontPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -504,12 +536,12 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                     case FRONT:
 //                        Glide.
                         IDCardInfoFrontBean idCardInfoFrontBean = new Gson().fromJson(result, IDCardInfoFrontBean.class);
-                        if(idCardInfoFrontBean == null){
+                        if (idCardInfoFrontBean == null) {
                             ToastUtils.popUpToast("身份证选择失败，请重新选择");
                             break;
 
                         }
-                        if(!idCardInfoFrontBean.getImageStatus().equals("normal")){
+                        if (!idCardInfoFrontBean.getImageStatus().equals("normal")) {
                             ToastUtils.popUpToast("身份证照片不正常，请重新选择");
                             break;
                         }
@@ -519,10 +551,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                         int age = IDCardUtils.IdNOToAge(number);
                         mTvCurrentAddress.setText(String.valueOf(age));
                         mEtCardNum.setText(number);
-                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_FRONT);
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_FRONT);
                         break;
                     case BACK:
-                        mPresenter.upload(new File(filePath),UPLOAD_ID_CARD_BACK);
+                        mPresenter.upload(new File(filePath), UPLOAD_ID_CARD_BACK);
                         break;
                 }
 
@@ -530,14 +562,15 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         });
 
     }
+
     /**
      * 反面身份证扫描
      */
     private void takeIDCardReverse() {
-        backPath = BACK +"_"+ System.currentTimeMillis();
+        backPath = BACK + "_" + System.currentTimeMillis();
         Intent intent = new Intent(DriverConfigActivity.this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
-                FileUtil.getSaveFile(getApplication(),backPath).getAbsolutePath());
+                FileUtil.getSaveFile(getApplication(), backPath).getAbsolutePath());
         intent.putExtra(CameraActivity.KEY_NATIVE_ENABLE,
                 true);
         // KEY_NATIVE_MANUAL设置了之后CameraActivity中不再自动初始化和释放模型
@@ -578,14 +611,14 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 String filePath = "";
                 if (!TextUtils.isEmpty(contentType)) {
                     if (CameraActivity.CONTENT_TYPE_ID_CARD_FRONT.equals(contentType)) {
-                        filePath = FileUtil.getSaveFile(getApplicationContext(),frontPath).getAbsolutePath();
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), frontPath).getAbsolutePath();
                         recIDCard(IDCardParams.ID_CARD_SIDE_FRONT, filePath);
                         Glide.with(this).load(filePath).into(mIvCardFront);
                         mTvCard1.setVisibility(View.GONE);
                         mIvCardFront.setVisibility(View.VISIBLE);
 
                     } else if (CameraActivity.CONTENT_TYPE_ID_CARD_BACK.equals(contentType)) {
-                        filePath = FileUtil.getSaveFile(getApplicationContext(),backPath).getAbsolutePath();
+                        filePath = FileUtil.getSaveFile(getApplicationContext(), backPath).getAbsolutePath();
 
                         Glide.with(this).load(filePath).into(mIvCardRevers);
                         mTvCard2.setVisibility(View.GONE);
@@ -597,9 +630,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
         // 识别成功回调，驾驶证识别
         if (requestCode == REQUEST_CODE_DRIVING_LICENSE && resultCode == Activity.RESULT_OK) {
-            final String filePath = FileUtil.getSaveFile(getApplicationContext(),driverPath).getAbsolutePath();
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), driverPath).getAbsolutePath();
 
-            RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext(),driverPath).getAbsolutePath(),
+            RecognizeService.recDrivingLicense(this, FileUtil.getSaveFile(getApplicationContext(), driverPath).getAbsolutePath(),
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
@@ -608,8 +641,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             DriverLicenseBean.WordsResultBean.准驾车型Bean 准驾车型 = words_result.get准驾车型();
                             DriverLicenseBean.WordsResultBean.有效期限Bean 有效期限 = words_result.get有效期限();
 //                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
+                            DriverLicenseBean.WordsResultBean.证号Bean 证号 = words_result.get证号();
+                            driverNum = 证号.getWords();
                             permitType = 准驾车型.getWords();
-                            mPresenter.upload(new File(filePath),UPLOAD_DRIVER);
+                            mPresenter.upload(new File(filePath), UPLOAD_DRIVER);
                             mEtPermitType.setText(准驾车型.getWords());
                             mTvStartDate.setText(有效期限.getWords());
                             startTime = 有效期限.getWords();
@@ -619,7 +654,51 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             Glide.with(getContext()).load(filePath).into(mIvDriverFront);
 
                         }
-            });
+                    });
+        }
+        // 识别成功回调，自定义模板上岗证回调
+        if (requestCode == REQUEST_CODE_WORK_LICENSE && resultCode == Activity.RESULT_OK) {
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), workPath).getAbsolutePath();
+
+            RecognizeService.recCustom(this, FileUtil.getSaveFile(getApplicationContext(), workPath).getAbsolutePath(), TEMPLATE_WORK_SIGN, 0,
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+                            ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
+                            boolean json = StringUtils.isJson(result);
+                            if(!json){
+                                ToastUtils.popUpToast("上传失败请重试");
+                                return;
+                            }
+                            WorkBean workBean = new Gson().fromJson(result, WorkBean.class);
+                            if (workBean != null) {
+                                WorkBean.DataBean workBeanData = workBean.getData();
+                                List<WorkBean.DataBean.RetBean> ret = workBeanData.getRet();
+                                if (ret != null) {
+                                    for (WorkBean.DataBean.RetBean retBean : ret) {
+                                        String word_name = retBean.getWord_name();
+                                        String word = retBean.getWord();
+                                        if (word_name.equals("certificateNum")) {
+                                            mEtPostCard.setText(word);
+                                        } else if (word_name.equals("sendTime")) {
+                                            if(word.contains("日")){
+                                                word = word.substring(0,word.indexOf("日")+1);
+                                            }
+                                            firstReceiveTime = word;
+                                            mTvFirstReceive.setText(word);
+                                        } else if (word_name.equals("validPeriod")) {
+                                            mTvYouXiaoQi.setText(word);
+                                        }
+                                    }
+                                }
+                                mIvWorkFront.setVisibility(View.VISIBLE);
+                                mTvWork.setVisibility(View.GONE);
+                                Glide.with(getContext()).load(filePath).into(mIvWorkFront);
+                            } else {
+                                ToastUtils.popUpToast("识别失败请重新上传或者手动填写");
+                            }
+                        }
+                    });
         }
     }
 
@@ -673,6 +752,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         });
         picker.show();
     }
+
     public void onYearMonthDayPicker(final int type) {
         final DatePicker picker = new DatePicker(this);
         picker.setCanceledOnTouchOutside(true);
@@ -686,22 +766,22 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                switch (type){
+                switch (type) {
                     case DATE_TYPE_START_DATE:
-                        startTime = year+"年"+month+"月"+day+"日";
+                        startTime = year + "年" + month + "月" + day + "日";
                         mTvStartDate.setText(startTime);
                         break;
                     case DATE_TYPE_END_DATE:
-                        endTime = year+"年"+month+"月"+day+"日";
+                        endTime = year + "年" + month + "月" + day + "日";
                         mEtEndDate.setText(endTime);
                         break;
                     case DATE_TYPE_FIRST_RECEIVE_DATE:
-                        firstReceiveTime = year+"年"+month+"月"+day+"日";
+                        firstReceiveTime = year + "年" + month + "月" + day + "日";
                         mTvFirstReceive.setText(firstReceiveTime);
                         break;
-                    case DATE_TYPE_EFFECTIVE_DATE:
-                        effectiveTime = year+"年"+month+"月"+day+"日";
-                        mTvEffectiveDate.setText(effectiveTime);
+                    case DATE_TYPE_VALID_DATE:
+                        youxiaoqiTime = year + "年" + month + "月" + day + "日";
+                        mTvYouXiaoQi.setText(youxiaoqiTime);
                         break;
                 }
             }
@@ -725,27 +805,21 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         picker.show();
     }
 
-    @Override
-    public void success(String json) {
-        BaseResponse baseResponse = new Gson().fromJson(json, BaseResponse.class);
-        int code = baseResponse.getCode();
-        if(code == 0){
-            ToastUtils.popUpToast("提交成功");
-        }
-
-    }
 
     @Override
-    public void imageUrl(String url,int type) {
-        switch (type){
+    public void imageUrl(String url, int type) {
+        switch (type) {
             case UPLOAD_ID_CARD_FRONT:
-                idCardFrontUrl = IMAGE_BASE_URL+url;
+                idCardFrontUrl = IMAGE_BASE_URL + url;
                 break;
             case UPLOAD_ID_CARD_BACK:
-                idCardBackUrl = IMAGE_BASE_URL+url;
+                idCardBackUrl = IMAGE_BASE_URL + url;
                 break;
             case UPLOAD_DRIVER:
-                driverUrl = IMAGE_BASE_URL+url;
+                driverUrl = IMAGE_BASE_URL + url;
+                break;
+            case UPLOAD_WORK:
+                workUrl = IMAGE_BASE_URL + url;
                 break;
         }
     }
@@ -755,4 +829,5 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 //        }
 //        return hasGotToken;
 //    }
+
 }

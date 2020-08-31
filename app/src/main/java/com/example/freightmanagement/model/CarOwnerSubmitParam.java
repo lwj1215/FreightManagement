@@ -7,5 +7,11 @@ package com.example.freightmanagement.model;
 public class CarOwnerSubmitParam {
     private IDCardParam certificateIDBo;
 
+    public IDCardParam getCertificateIDBo() {
+        return certificateIDBo;
+    }
 
+    public void setCertificateIDBo(IDCardParam certificateIDBo) {
+        this.certificateIDBo = certificateIDBo;
+    }
 }

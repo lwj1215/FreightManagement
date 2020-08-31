@@ -2,11 +2,14 @@ package com.example.freightmanagement.Utils;
 
 import android.util.Log;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by ztc on 19/8/15.
@@ -15,6 +18,27 @@ public class DateUtil {
 
     public static final String ymdhms = "yyyy-MM-dd HH:mm:ss";
     public static final String ymd = "yyyy-MM-dd";
+    private static String TEMPLATE = "yyyy-MM-dd HH:mm:ss";
+
+    public static Date string2Date(String date) throws ParseException {
+        return string2Date(date, null);
+    }
+
+    public static String date2String(Date date) {
+        return date2String(date, null);
+    }
+
+    public static Date string2Date(String date, String pattern) throws ParseException {
+        SimpleDateFormat sf = new SimpleDateFormat(StringUtil.isEmpty(pattern) ? TEMPLATE : pattern, Locale.CHINA);
+        sf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        return sf.parse(date);
+    }
+
+    public static String date2String(Date date, String pattern) {
+        SimpleDateFormat sf = new SimpleDateFormat(StringUtil.isEmpty(pattern) ? TEMPLATE : pattern, Locale.CHINA);
+        sf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        return sf.format(date);
+    }
 
     public static String monthNumToMonthName(String month) {
         String m = month;

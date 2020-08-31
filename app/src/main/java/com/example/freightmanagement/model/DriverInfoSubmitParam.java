@@ -1,12 +1,12 @@
 package com.example.freightmanagement.model;
 
-import java.io.File;
+import java.io.Serializable;
 
 /**
  * Created by songdechuan on 2020/8/13.
  */
 
-public class DriverInfoSubmitParam {
+public class DriverInfoSubmitParam implements Serializable {
 
     private String name;
 
@@ -14,13 +14,21 @@ public class DriverInfoSubmitParam {
 
     private String enterpriseId;
 
-    private File file;
+    private Integer carId;
 
     private CertificateWorkParam certificateWorkBo;
 
     private CertificateDriverParam certificateDriverBo;
 
     private IDCardParam certificateIDBo;
+
+    public Integer getCarId() {
+        return carId;
+    }
+
+    public void setCarId(Integer carId) {
+        this.carId = carId;
+    }
 
     public String getName() {
         return name;
@@ -44,14 +52,6 @@ public class DriverInfoSubmitParam {
 
     public void setEnterpriseId(String enterpriseId) {
         this.enterpriseId = enterpriseId;
-    }
-
-    public File getFile() {
-        return file;
-    }
-
-    public void setFile(File file) {
-        this.file = file;
     }
 
     public CertificateWorkParam getCertificateWorkBo() {
