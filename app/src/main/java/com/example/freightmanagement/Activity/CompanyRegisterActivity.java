@@ -354,13 +354,13 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     ToastUtils.popUpToast("从业资格类别不得为空");
                     return;
                 }
-                String mFading = mEtFading.getText().toString();
-                if (StringUtils.isEmpty(mFading)) {
-                    ToastUtils.popUpToast("法定代表人不得为空");
-                    return;
-                }
+//                String mFading = mEtFading.getText().toString();
+//                if (StringUtils.isEmpty(mFading)) {
+//                    ToastUtils.popUpToast("法定代表人不得为空");
+//                    return;
+//                }
                 String mJingYing = mEtJing.getText().toString();
-                if (StringUtils.isEmpty(mFading)) {
+                if (StringUtils.isEmpty(mJingYing)) {
                     ToastUtils.popUpToast("经营范围不得为空");
                     return;
                 }
@@ -370,7 +370,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     return;
                 }
                 String mAddress = mEtAddress.getText().toString();
-                if (StringUtils.isEmpty(mFading)) {
+                if (StringUtils.isEmpty(mAddress)) {
                     ToastUtils.popUpToast("住所不得为空");
                     return;
                 }
@@ -403,7 +403,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
                 CertificateBusiness certificateBusiness = new CertificateBusiness();
                 certificateBusiness.setName(mName);
-                certificateBusiness.setLegalPerson(mFading);
+                certificateBusiness.setLegalPerson(userName);
                 certificateBusiness.setScope(mJingYing);
                 certificateBusiness.setEstablishmentDate(mChengli);
                 certificateBusiness.setRegistrationAuthority(mAddress);
@@ -649,7 +649,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             mPresenter.upload(new File(filePath), UPLOAD_BUSINESS);
                             mIvBusinessFront.setVisibility(View.VISIBLE);
                             mTvBusiness1.setVisibility(View.GONE);
-                            Glide.with(getContext()).load(filePath).into(mIvBusinessFront);
+
                         }
                     });
         }
@@ -660,6 +660,13 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
+                            mPresenter.upload(new File(filePath), UPLOAD_ROAD_TRANSPORT_PERMIT);
+                            Glide.with(getContext()).load(filePath).into(mIvRoad);
+                            boolean json = StringUtils.isJson(result);
+                            if(!json){
+                                ToastUtils.popUpToast("识别错误，请重新上传");
+                                return;
+                            }
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
                             RoadManagerBean roadManagerBean = new Gson().fromJson(result,RoadManagerBean.class);
                             if (roadManagerBean == null) {
@@ -681,8 +688,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             }
                             mIvRoad.setVisibility(View.VISIBLE);
                             mTvRoad.setVisibility(View.GONE);
-                            mPresenter.upload(new File(filePath), UPLOAD_ROAD_TRANSPORT_PERMIT);
-                            Glide.with(getContext()).load(filePath).into(mIvRoad);
+
                         }
                     });
         }
@@ -719,6 +725,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     @Override
     public void success() {
         ToastUtils.popUpToast("注册成功");
+        finish();
     }
 
     @Override

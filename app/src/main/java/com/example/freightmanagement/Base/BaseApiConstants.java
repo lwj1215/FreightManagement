@@ -49,7 +49,7 @@ public class BaseApiConstants {
     /**
      * 获取驾驶员信息
      */
-    public static final String API_PEIXUNJIEGUO = "/cccc/driver/getDirver/";
+    public static final String API_PEIXUNJIEGUO = "/cccc/driver/getDirver";
 
     /**
      * 获取训练题目

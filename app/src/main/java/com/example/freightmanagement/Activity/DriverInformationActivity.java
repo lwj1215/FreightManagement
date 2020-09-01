@@ -17,17 +17,18 @@ import com.example.freightmanagement.presenter.DriverInformationPresenter;
 
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
-    private TextView name, age, sex, tv_card, tv_workid, tv_time,tv_sign_date,tv_sign_fen;
-    private ImageView iv_card_front1,iv_card_front2;
+    private TextView name, age, sex, tv_card, tv_workid, tv_time,tv_sign_date,tv_sign_fen,et_real_name_qy,et_real_name_cz,et_card_num_cz,et_card_num_qy,
+            et_code_qy,et_name_qy,et_jing_qy,tv_chengli_qy,et_fading_qy,et_address_qy;
+    private ImageView iv_card_front1,iv_card_front2,iv_card_revers_cz,iv_card_front_qy,iv_card_front_cz,iv_card_revers_qy,iv_business_front,iv_driver_front;
 
     @Override
     public int setLayoutResource() {
         if (PrefUtilsData.getType().equals(AdminTypeEnum.DRIVER.getValue())) {
             return R.layout.activity_driver_information;
         } else if (PrefUtilsData.getType().equals(AdminTypeEnum.CAR_OWNER.getValue())) {
-            return R.layout.activity_driver_information;
+            return R.layout.activity_car_owner2;
         } else {
-            return R.layout.activity_driver_information;
+            return R.layout.activity_company_register2;
         }
     }
 
@@ -51,6 +52,22 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         tv_sign_fen = bindView(R.id.tv_sign_fen);
         iv_card_front1 = bindView(R.id.iv_card_front);
         iv_card_front2 = bindView(R.id.iv_card_revers);
+        iv_card_front_cz = bindView(R.id.iv_card_front_cz);
+        iv_card_revers_cz = bindView(R.id.iv_card_revers_cz);
+        et_real_name_cz = bindView(R.id.et_real_name_cz);
+        et_card_num_cz = bindView(R.id.et_card_num_cz);
+        iv_card_front_qy = bindView(R.id.iv_card_front_qy);
+        iv_card_revers_qy = bindView(R.id.iv_card_revers_qy);
+        et_real_name_qy = bindView(R.id.et_real_name_qy);
+        et_card_num_qy = bindView(R.id.et_card_num_qy);
+        iv_business_front = bindView(R.id.iv_business_front);
+        et_code_qy = bindView(R.id.et_code_qy);
+        et_name_qy = bindView(R.id.et_name_qy);
+        et_jing_qy = bindView(R.id.et_jing_qy);
+        tv_chengli_qy = bindView(R.id.tv_chengli_qy);
+        et_fading_qy = bindView(R.id.et_fading_qy);
+        et_address_qy = bindView(R.id.et_address_qy);
+        iv_driver_front = bindView(R.id.iv_driver_front);
     }
 
     @Override
@@ -87,6 +104,9 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
             } if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())){
                 Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
             }
+            Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_driver_front);
+
+
         } else if (PrefUtilsData.getType().equals("2")) {
             name.setText(certificateIDBo.getName());
             if (certificateIDBo.getSix().equals("0")) {

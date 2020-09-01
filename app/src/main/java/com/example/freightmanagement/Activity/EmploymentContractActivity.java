@@ -160,7 +160,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 break;
             case R.id.tv_endTime:
 //                Glide.with(getContext()).load(file).into(mImgSign);
-                showDateDialog(DateUtil.getDateForString("2020-08-29"));
+                showDateDialog(DateUtil.getDateForString("2018-08-29"));
                 break;
             case R.id.btn_yes:
                 if (bottomDialog != null) {
