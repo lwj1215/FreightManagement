@@ -9,17 +9,23 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.DriverInformationBean;
+import com.example.freightmanagement.Bean.QiYeBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.enums.AdminTypeEnum;
 import com.example.freightmanagement.presenter.DriverInformationPresenter;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
-    private TextView name, age, sex, tv_card, tv_workid, tv_time,tv_sign_date,tv_sign_fen,et_real_name_qy,et_real_name_cz,et_card_num_cz,et_card_num_qy,
-            et_code_qy,et_name_qy,et_jing_qy,tv_chengli_qy,et_fading_qy,et_address_qy;
-    private ImageView iv_card_front1,iv_card_front2,iv_card_revers_cz,iv_card_front_qy,iv_card_front_cz,iv_card_revers_qy,iv_business_front,iv_driver_front;
+    private TextView name, tv_card, tv_sign_date, tv_sign_fen, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,
+            et_code_qy, et_name_qy, et_jing_qy, tv_chengli_qy, et_fading_qy, et_address_qy, et_permit_type, tv_start_date, et_end_date,et_xuke_qy,
+            tv_zheng_jian_you_xiao_qi;
+    private ImageView iv_card_front1, iv_card_front2, iv_card_revers_cz, iv_card_front_qy, iv_card_front_cz, iv_card_revers_qy, iv_business_front, iv_driver_front,
+            iv_work_front,iv_road_qy;
 
     @Override
     public int setLayoutResource() {
@@ -43,11 +49,7 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         }
 
         name = bindView(R.id.tv_real_name);
-        sex = bindView(R.id.tv_detail_sex);
-        age = bindView(R.id.tv_age);
-        tv_card = bindView(R.id.tv_card);
-        tv_workid = bindView(R.id.tv_workid);
-        tv_time = bindView(R.id.tv_time);
+        tv_card = bindView(R.id.et_card_num);
         tv_sign_date = bindView(R.id.tv_sign_date);
         tv_sign_fen = bindView(R.id.tv_sign_fen);
         iv_card_front1 = bindView(R.id.iv_card_front);
@@ -68,12 +70,25 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         et_fading_qy = bindView(R.id.et_fading_qy);
         et_address_qy = bindView(R.id.et_address_qy);
         iv_driver_front = bindView(R.id.iv_driver_front);
+        et_permit_type = bindView(R.id.et_permit_type);
+        tv_start_date = bindView(R.id.tv_start_date);
+        et_end_date = bindView(R.id.et_end_date);
+        iv_work_front = bindView(R.id.iv_work_front);
+        iv_road_qy = bindView(R.id.iv_road_qy);
+        et_xuke_qy = bindView(R.id.et_xuke_qy);
+        tv_zheng_jian_you_xiao_qi = bindView(R.id.tv_zheng_jian_you_xiao_qi);
     }
 
     @Override
     protected void onLoadData2Remote() {
-        mPresenter.getPeixunData();
-        mPresenter.getPeixun2Data();
+        if (PrefUtilsData.getType().equals("1")) {
+            mPresenter.getPeixunData();
+        } else if (PrefUtilsData.getType().equals("2")) {
+            mPresenter.getCzData();
+        } else {
+            mPresenter.getQyData();
+        }
+//        mPresenter.getPeixun2Data();
     }
 
     @Override
@@ -86,59 +101,61 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         WrodIdBean.DataBean.CertificateDriverBoBean certificateDriverBo = data.getData().getCertificateDriverBo();
         WrodIdBean.DataBean.CertificateIDBoBean certificateIDBo = data.getData().getCertificateIDBo();
         WrodIdBean.DataBean.CertificateWorkBoBean certificateWorkBo = data.getData().getCertificateWorkBo();
+        name.setText(certificateIDBo.getName());
+        tv_card.setText(certificateIDBo.getIdno());
+        et_permit_type.setText(certificateDriverBo.getClasss() + "");
+        tv_start_date.setText(timeStampToDate(certificateDriverBo.getCreateTime()) + "");
+        et_end_date.setText(timeStampToDate(certificateDriverBo.getUpdateTime()) + "");
 
-        if (PrefUtilsData.getType().equals("1")) {
-            name.setText(certificateIDBo.getName());
-            if (certificateIDBo.getSix().equals("0")) {
-                sex.setText("女");
-            } else {
-                sex.setText("男");
-            }
-            age.setText(certificateIDBo.getBirthDay());
-            tv_card.setText(certificateIDBo.getIdno());
-
-            tv_workid.setText(certificateWorkBo.getGrantNo());
-            tv_time.setText(certificateWorkBo.getCreateTime() + "");
-            if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())){
-                Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
-            } if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())){
-                Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
-            }
-            Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_driver_front);
-
-
-        } else if (PrefUtilsData.getType().equals("2")) {
-            name.setText(certificateIDBo.getName());
-            if (certificateIDBo.getSix().equals("0")) {
-                sex.setText("女");
-            } else {
-                sex.setText("男");
-            }
-            age.setText(certificateIDBo.getBirthDay());
-            tv_card.setText(certificateIDBo.getIdno());
-
-            tv_workid.setText(certificateWorkBo.getGrantNo());
-            tv_time.setText(certificateWorkBo.getCreateTime() + "");
-        } else {
-            name.setText(certificateIDBo.getName());
-            if (certificateIDBo.getSix().equals("0")) {
-                sex.setText("女");
-            } else {
-                sex.setText("男");
-            }
-            age.setText(certificateIDBo.getBirthDay());
-            tv_card.setText(certificateIDBo.getIdno());
-
-            tv_workid.setText(certificateWorkBo.getGrantNo());
-            tv_time.setText(certificateWorkBo.getCreateTime() + "");
-
+        if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())) {
+            Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front1);
         }
+        if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())) {
+            Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
+        }
+        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_driver_front);
+        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_work_front);
+        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
     }
 
     @Override
     public void getWrokIdData2Suc(DriverInformationBean.DataBean data) {
-        tv_sign_date.setText(data.getCreateTime()+"");
-        tv_sign_fen.setText(data.getScore()+"");
+        tv_sign_date.setText(data.getCreateTime() + "");
+        tv_sign_fen.setText(data.getScore() + "");
     }
 
+    @Override
+    public void qiyeSuc(QiYeBean.DataBean data) {
+        QiYeBean.DataBean.CertificateBusinessBoBean certificateBusinessBo = data.getCertificateBusinessBo();
+        QiYeBean.DataBean.CertificateIDBoBean certificateIDBo = data.getCertificateIDBo();
+        QiYeBean.DataBean.CertificateOperationBoBean certificateOperationBo = data.getCertificateOperationBo();
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front_qy);
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_revers_qy);
+        et_real_name_qy.setText(certificateIDBo.getName()+"");
+        et_card_num_qy.setText(certificateIDBo.getCarId()+"");
+        Glide.with(getContext()).load(certificateBusinessBo.getPicUrl()).into(iv_business_front);
+        et_code_qy.setText(certificateBusinessBo.getId()+"");
+        et_name_qy.setText(certificateBusinessBo.getName()+"");
+        et_jing_qy.setText(certificateBusinessBo.getScope()+"");
+        tv_chengli_qy.setText(timeStampToDate(certificateBusinessBo.getCreateTime())+"");
+        et_address_qy.setText(certificateBusinessBo.getRegistrationAuthority()+"");
+        Glide.with(getContext()).load(certificateOperationBo.getPicUrl()).into(iv_road_qy);
+        et_xuke_qy.setText(certificateOperationBo.getGrantNo() +"");
+        tv_zheng_jian_you_xiao_qi.setText(certificateOperationBo.getValidityDate() +"");
+    }
+
+    @Override
+    public void chezhuSuc() {
+
+    }
+
+    private String timeStampToDate(long tsp, String... format) {
+        SimpleDateFormat sdf;
+        if (format.length < 1) {
+            sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+        } else {
+            sdf = new SimpleDateFormat(format[0], Locale.getDefault());
+        }
+        return sdf.format(tsp);
+    }
 }

@@ -219,16 +219,7 @@
                             android:id="@+id/iv_business_front"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
-
-                        <ImageView
-                            android:id="@+id/close_business_font"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/icon_oreder_remark_delete"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -498,16 +489,8 @@
                             android:id="@+id/iv_road"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
-                        <ImageView
-                            android:id="@+id/close_road"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentRight="true"
-                            android:src="@mipmap/icon_oreder_remark_delete"
-                            android:visibility="gone" />
                     </RelativeLayout>
 
                 </LinearLayout>
@@ -592,6 +575,7 @@
                 <RelativeLayout
                     android:id="@+id/rl_sign"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="@dimen/x300">
 
                     <TextView

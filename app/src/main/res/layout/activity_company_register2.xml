@@ -21,6 +21,7 @@
 
         <ScrollView
             android:layout_width="match_parent"
+            android:scrollbars="none"
             android:layout_height="match_parent"
             android:layout_below="@id/line">
 
@@ -57,8 +58,7 @@
                             android:id="@+id/iv_card_front_qy"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
 
@@ -84,8 +84,7 @@
                             android:id="@+id/iv_card_revers_qy"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
                 </LinearLayout>
@@ -203,8 +202,7 @@
                             android:id="@+id/iv_business_front"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
 
@@ -235,6 +233,7 @@
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
+                            android:inputType="number"
                             android:background="@null"
                             android:textColor="@color/color_333"
                             android:textColorHint="@color/color_333"
@@ -464,11 +463,10 @@
                             android:visibility="visible" />
 
                         <ImageView
-                            android:id="@+id/iv_road"
+                            android:id="@+id/iv_road_qy"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
 
@@ -492,7 +490,7 @@
                             android:textSize="@dimen/x28" />
 
                         <TextView
-                            android:id="@+id/et_xuke"
+                            android:id="@+id/et_xuke_qy"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -549,35 +547,6 @@
                         android:layout_gravity="bottom"
                         android:background="@color/gray_background" />
                 </LinearLayout>
-                <RelativeLayout
-                    android:id="@+id/rl_sign"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x300">
-
-                    <TextView
-                        android:id="@+id/tv_sign"
-                        android:textStyle="bold"
-                        android:text="电子签名"
-                        android:layout_centerInParent="true"
-                        android:textSize="@dimen/x50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <ImageView
-                        android:id="@+id/iv_sign"
-                        android:layout_marginLeft="@dimen/x90"
-                        android:layout_marginRight="@dimen/x90"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-                </RelativeLayout>
-                <TextView
-                    android:id="@+id/tv_srue"
-                    style="@style/bottom_button_style"
-                    android:layout_marginBottom="@dimen/x100"
-                    android:layout_below="@+id/inputEdit_phone"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x90"
-                    android:layout_marginRight="@dimen/x90"
-                    android:text="提交" />
             </LinearLayout>
         </ScrollView>
 

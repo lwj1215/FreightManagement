@@ -478,16 +478,8 @@
                         android:id="@+id/iv_work_front"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:visibility="gone" />
+                        android:scaleType="centerCrop" />
 
-                    <ImageView
-                        android:id="@+id/close_work_front"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/icon_oreder_remark_delete"
-                        android:visibility="gone" />
                 </RelativeLayout>
             </LinearLayout>
 

@@ -3,17 +3,24 @@ package com.example.freightmanagement.Utils.Network;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.example.freightmanagement.Base.BaseApplication;
 import com.example.freightmanagement.Base.TokenHeaderInterceptor;
 import com.example.freightmanagement.Utils.NetUtils;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -139,6 +146,11 @@ public class RestApi {
                             try {
                                 //请求成功
                                 if (callback != null) callback.onSuccess(body);
+
+                                JSONObject jsonObject = new JSONObject(body);
+                                String token = jsonObject.getString("token");
+                                PrefUtilsData.setToken(token);
+
                             } catch (Exception e) {
                                 Log.e(TAG, "crashInfo: ", e);
                             }
@@ -190,12 +202,12 @@ public class RestApi {
     }
 
 
-    public  void get(final String url, @Nullable final OnRequestResult callback) {
+    public void get(final String url, @Nullable final OnRequestResult callback) {
         Log.i("提交", "post: " + url);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Request request = new Request.Builder().url(Host.BASE_URL+url).build(); //添加头部信息
+                Request request = new Request.Builder().url(Host.BASE_URL + url).build(); //添加头部信息
                 mClient.newCall(request);
                 enqueue("", request, new OnRequestResult() {
                     @Override
@@ -211,7 +223,8 @@ public class RestApi {
 
                     @Override
                     public void netUnlink() {
-                        if (callback != null) callback.netUnlink();}
+                        if (callback != null) callback.netUnlink();
+                    }
                 });
             }
 

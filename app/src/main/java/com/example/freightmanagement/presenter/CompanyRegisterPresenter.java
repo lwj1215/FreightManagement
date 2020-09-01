@@ -28,10 +28,8 @@ public class CompanyRegisterPresenter extends BasePresenter<CompanyRegisterConst
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                BaseResponse response = new BaseResponse();
-                if(response.getCode()==0){
+
                     mView.success();
-                }
             }
 
             @Override

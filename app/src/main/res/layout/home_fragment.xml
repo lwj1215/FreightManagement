@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="临沂市货运企业信息管理平台"
+        android:text="运输企业信息管理平台"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="@dimen/x45"

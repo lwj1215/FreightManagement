@@ -112,7 +112,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
      */
     private TextView mTvBusiness1;
     private ImageView mIvBusinessFront;
-    private ImageView mCloseBusinessFont;
     private RelativeLayout mReBusiness;
     /**
      * 上传身份证反面照片
@@ -178,7 +177,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private String roadManagerPath;
     private TextView mTvRoad;
     private ImageView mIvRoad;
-    private ImageView mCloseRoad;
 
     @Override
     public int setLayoutResource() {
@@ -251,7 +249,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mEtCardNum = (EditText) findViewById(R.id.et_card_num);
         mTvBusiness1 = (TextView) findViewById(R.id.tv_business1);
         mIvBusinessFront = (ImageView) findViewById(R.id.iv_business_front);
-        mCloseBusinessFont = (ImageView) findViewById(R.id.close_business_font);
         mReBusiness = (RelativeLayout) findViewById(R.id.re_business);
         mReBusiness.setOnClickListener(this);
         mTvSign = (TextView) findViewById(R.id.tv_sign);
@@ -280,7 +277,6 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mReRoad.setOnClickListener(this);
         mTvRoad = findViewById(R.id.tv_road);
         mIvRoad = findViewById(R.id.iv_road);
-        mCloseRoad = findViewById(R.id.close_road);
     }
 
     @Override
@@ -625,6 +621,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     new RecognizeService.ServiceListener() {
                         @Override
                         public void onResult(String result) {
+                            Glide.with(getContext()).load(filePath).into(mIvBusinessFront);
                             BusinessLicenseBean businessLicenseBean = new Gson().fromJson(result, BusinessLicenseBean.class);
                             if (businessLicenseBean == null) {
                                 ToastUtils.popUpToast("营业执照识别失败，请重试");
@@ -664,7 +661,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             Glide.with(getContext()).load(filePath).into(mIvRoad);
                             boolean json = StringUtils.isJson(result);
                             if(!json){
-                                ToastUtils.popUpToast("识别错误，请重新上传");
+                                ToastUtils.popUpToast("识别错误");
                                 return;
                             }
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
@@ -686,8 +683,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                                     }
                                 }
                             }
+
                             mIvRoad.setVisibility(View.VISIBLE);
-                            mTvRoad.setVisibility(View.GONE);
+//                            mTvRoad.setVisibility(View.GONE);
 
                         }
                     });
@@ -725,6 +723,8 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     @Override
     public void success() {
         ToastUtils.popUpToast("注册成功");
+        Intent intent = new Intent(this,MainActivity.class);
+        startActivity(intent);
         finish();
     }
 

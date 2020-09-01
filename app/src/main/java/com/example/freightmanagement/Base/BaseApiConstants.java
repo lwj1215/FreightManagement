@@ -64,7 +64,7 @@ public class BaseApiConstants {
     public static final String API_IMAGE_UPLOAD = "/cccc/file/upload";
 
     /**
-     * 驾驶员注册
+     * chezhu注册
      */
     public static final String API_CAR_OWNER_REGISTER = "/cccc/carOwner/addOwner";
 
@@ -143,4 +143,12 @@ public class BaseApiConstants {
      * 获取合同状态
      */
     public static final String API_CONTRACT_GET = "/cccc/letter/getContract";
+    /**
+     * 获取企业信息
+     */
+    public static final String API_QIYEXINXI_GET = "/cccc/enterprise/getEenterprise";
+    /**
+     * 获取车主信息
+     */
+    public static final String API_CHEZHU_GET = "/cccc/carOwner/getOwner";
 }

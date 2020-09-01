@@ -204,7 +204,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     private String driverNum;
     private TextView mTvWork;
     private ImageView mIvWorkFront;
-    private ImageView mCloseWorkFront;
     private RelativeLayout mReWorkPic;
     private String workPath;
     private TextView mTvYouXiaoQi;
@@ -317,7 +316,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         mTvFirstReceive = (TextView) findViewById(R.id.tv_first_receive);
         mTvWork = findViewById(R.id.tv_work);
         mIvWorkFront = findViewById(R.id.iv_work_front);
-        mCloseWorkFront = findViewById(R.id.close_work_front);
         mReWorkPic = findViewById(R.id.re_work_pic);
         mReWorkPic.setOnClickListener(this);
 
@@ -665,7 +663,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                         @Override
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
+                            Glide.with(getContext()).load(filePath).into(mIvWorkFront);
                             boolean json = StringUtils.isJson(result);
+
                             if(!json){
                                 ToastUtils.popUpToast("上传失败请重试");
                                 return;
@@ -691,9 +691,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                                         }
                                     }
                                 }
-                                mIvWorkFront.setVisibility(View.VISIBLE);
-                                mTvWork.setVisibility(View.GONE);
-                                Glide.with(getContext()).load(filePath).into(mIvWorkFront);
                             } else {
                                 ToastUtils.popUpToast("识别失败请重新上传或者手动填写");
                             }

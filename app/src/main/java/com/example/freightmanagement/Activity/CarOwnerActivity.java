@@ -400,6 +400,7 @@ public class CarOwnerActivity extends BaseActivity<CarOwnerPresenter> implements
         Intent intent = new Intent(this,MainActivity.class);
         startActivity(intent);
         ToastUtils.popUpToast("提交成功");
+        finish();
     }
 
     @Override
