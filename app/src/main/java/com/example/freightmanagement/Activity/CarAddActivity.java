@@ -1,6 +1,7 @@
 package com.example.freightmanagement.Activity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
@@ -17,18 +18,26 @@ import com.example.freightmanagement.Bean.RoadCardBean;
 import com.example.freightmanagement.Bean.VehicleBackBean;
 import com.example.freightmanagement.Bean.VehicleBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.DatePickerDialog;
+import com.example.freightmanagement.Utils.DateUtil;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.StringUtil;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
+import com.example.freightmanagement.model.CarBo;
+import com.example.freightmanagement.model.CertificateDriving;
+import com.example.freightmanagement.model.CertificateRegistration;
+import com.example.freightmanagement.model.CertificateTransport;
 import com.example.freightmanagement.presenter.CarAddPresenter;
 import com.example.freightmanagement.presenter.constract.CarAddConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
+import static com.example.freightmanagement.Utils.DateUtil.ymd;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_JIDONG;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ROAD;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_VEHICLE;
@@ -109,6 +118,13 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
     private String vehicleReverseUrl;
     private EditText mEtCheliangNum;
     private TextView mTvSendDate;
+    private Dialog dateDialog;
+    private String zhuceTime;
+    private String xsSendTime;
+    private String roadSendTime;
+    private String djTime;
+    private String jdSendTime;
+    private String nowDate;
 
     @Override
     public int setLayoutResource() {
@@ -188,7 +204,8 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
 
     @Override
     protected void onLoadData2Remote() {
-
+        Date date = new Date();
+        nowDate = DateUtil.date2String(date,ymd);
     }
 
     @Override
@@ -201,10 +218,13 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 taskXingshiReversePhoto();
                 break;
             case R.id.tv_date_zhuce:
+                showDateDialog(DateUtil.getDateForString(nowDate),0);
                 break;
             case R.id.tv_send_date:
+                showDateDialog(DateUtil.getDateForString(nowDate),1);
                 break;
             case R.id.tv_date_send:
+                showDateDialog(DateUtil.getDateForString(nowDate),2);
                 break;
             case R.id.re_yun_shu_pic:
                 taskYunShuPhoto();
@@ -213,17 +233,96 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 taskJidongPhoto();
                 break;
             case R.id.tv_deng_ji_date:
+                showDateDialog(DateUtil.getDateForString(nowDate),3);
                 break;
             case R.id.et_deng_ji_send_date:
+                showDateDialog(DateUtil.getDateForString(nowDate),4);
                 break;
             case R.id.tv_srue:
                 uploadToast();
+                CarBo carBo = new CarBo();
+                CertificateDriving certificateDriving = new CertificateDriving();
+                certificateDriving.setPicUrl(vehicleUrl);
+                certificateDriving.setPlateNo(mEtCarNum.getText().toString());
+                certificateDriving.setWchicheType(mEtCarType.getText().toString());
+                certificateDriving.setUseCharacter(mEtXingZhi.getText().toString());
+                certificateDriving.setModel(mEtBrandXingHao.getText().toString());
+                String zhuceStr = mTvDateZhuce.getText().toString();
+                if(!DateUtil.isValidDate(zhuceStr)){
+                    ToastUtils.popUpToast("注册日期错误，请重新选择");
+                }
+                certificateDriving.setRegistrationDate(zhuceStr);
+                String issueDate = mTvDateSend.getText().toString();
+                if(!DateUtil.isValidDate(issueDate)){
+                    ToastUtils.popUpToast("行驶证发证日期错误，请重新选择");
+                }
+                certificateDriving.setIssueDate(issueDate);
+                certificateDriving.setFileNo(mEtDangAn.getText().toString());
+                certificateDriving.setAllWeight(mEtZongZhi.getText().toString());
+                certificateDriving.setApprovedWeight(mEtHeDing.getText().toString());
+                CertificateTransport certificateTransport = new CertificateTransport();
+                certificateTransport.setPlateNo(mEtYunYingNum.getText().toString());
+                certificateTransport.setPicUrl(roadUrl);
+                certificateTransport.setName(mEtYeHuName.getText().toString());
+                certificateTransport.setScope(mEtYunYingFanWei.getText().toString());
+//                certificateTransport.setGrantDate();
 
+                CertificateRegistration certificateRegistration = new CertificateRegistration();
+//                certificateRegistration.setPicUrl();
+//                certificateRegistration.sett
 
+                carBo.setCertificateDrivingBo(certificateDriving);
+                carBo.setCertificateRegistrationBo(certificateRegistration);
+                carBo.setCertificateTransportBo(certificateTransport);
                 break;
         }
     }
+    /**
+     * 选择生日
+     */
+    private void showDateDialog(List<Integer> date, final int type) {
+        DatePickerDialog.Builder builder = new DatePickerDialog.Builder(this);
+        builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(int[] dates) {
+                switch (type){
+                    case 0:
+                        zhuceTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
+                                + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        break;
+                    case 1:
+                        xsSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
+                                + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        break;
+                    case 2:
+                        roadSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
+                                + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        break;
+                    case 3:
+                        djTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
+                                + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        break;
+                    case 4:
+                        jdSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
+                                + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        break;
+                }
+            }
 
+            @Override
+            public void onCancel() {
+            }
+        })
+                .setSelectYear(date.get(0) - 1)
+                .setSelectMonth(date.get(1) - 1)
+                .setSelectDay(date.get(2) - 1);
+
+        builder.setMaxYear(DateUtil.getYear());
+        builder.setMaxMonth(DateUtil.getDateForString(DateUtil.getToday()).get(1));
+        builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
+        dateDialog = builder.create();
+        dateDialog.show();
+    }
     private void uploadToast() {
         /**
          * 行驶证

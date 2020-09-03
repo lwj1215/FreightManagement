@@ -790,7 +790,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                         mTvFirstReceive.setText(firstReceiveTime);
                         break;
                     case DATE_TYPE_VALID_DATE:
-                        youxiaoqiTime = year + "-" + month + "-" + day + "-";
+                        youxiaoqiTime = year + "-" + month + "-" + day ;
                         mTvYouXiaoQi.setText(youxiaoqiTime);
                         break;
                 }
