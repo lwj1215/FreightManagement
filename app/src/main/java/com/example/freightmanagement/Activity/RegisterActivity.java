@@ -137,15 +137,15 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
 
     @Override
     public void smsCode(String msg) {
-//        String smsCode = "123456";
-        this.smsCode = smsCode;
-
+        this.smsCode = msg;
     }
 
     @Override
     public void registerResult(String msg) {
         BaseResponse response = new Gson().fromJson(msg, BaseResponse.class);
         if(response.getCode() == ResponseCodeEnum.SUCCESS.getCode()){
+            ToastUtils.popUpToast("注册成功");
+
             startActivity(this,LoginActivity.class);
         }else {
             ToastUtils.popUpToast(msg);

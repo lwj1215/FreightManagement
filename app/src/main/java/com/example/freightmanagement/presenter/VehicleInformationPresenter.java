@@ -15,7 +15,7 @@ public class VehicleInformationPresenter extends BasePresenter<VehicleInformatio
 
     @Override
     public void VehicleInformationData() {
-        RestApi.getInstance().get(BaseApiConstants.API_CLXINXI+ PrefUtilsData.getUserId(), new OnRequestResultForCommon() {
+        RestApi.getInstance().get(BaseApiConstants.API_CLXINXI, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);

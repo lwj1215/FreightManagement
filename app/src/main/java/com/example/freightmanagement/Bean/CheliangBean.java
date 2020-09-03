@@ -1,13 +1,16 @@
 package com.example.freightmanagement.Bean;
 
+import java.util.List;
+
 public class CheliangBean {
+
 
     /**
      * code : 0
      * message : 成功
-     * data : {"id":1,"drivingCertificateId":1,"tel":"1","transportCertificateId":1,"registrationCertificateId":1,"isActive":1,"createTime":null,"updateTime":null,"name":"1","pass":"1","adminId":2,"enterpriseId":1,"isPass":1,"certificateDrivingBo":{"id":1,"plateNo":"行车证1102003003666","wchicheType":"1","owner":"汪凯","address":"1","useCharacter":"运货","model":"1","engineNo":"100030","registrationDate":"1","issueDate":"1","fileNo":"1","passengersCount":122,"allWeight":"1","curbWeight":"1","approvedWeight":"1","outline":"1","tractionWeight":"1","note":"1","chechRecord":"1","isActive":1,"updateTime":1597805951000,"createTime":null,"picUrl":"1","file":null,"vin":"1"},"certificateIDBo":{"id":1,"name":"李思","six":"0","nation":"中国","birthDay":"2020-08-20 10:01","address":"山东","isActive":1,"createTime":null,"updateTime":1597805972000,"picUrl":"1","picUrl2":"1","file":null,"file2":null,"idno":"车主1102003003666"},"certificateTransportBo":{"id":1,"name":"北京时尚呢供应123","address":"海淀西北旺","plateNo":"运输证10259685222122666","licence":"1","type":"货车","weight":"1000吨","size":"2000*233*965","scope":"全国123","grantDate":"2020-06-12","isActive":1,"createTime":1597805868000,"updateTime":1597807654000,"picUrl":"1","file":null},"certificateRegistrationBo":{"id":1,"owner":"张三","grantName":"车辆登记证","grantNo":"登记证110231196811095687","carType":"小车","carBrand":"奔驰","carModel":"WKJOIIO90-200352","carColor":"黑色","carNo":"300255cjh-op0","carImportType":"国产","engineNo":"100030","engineType":"100265","fuelType":"30025","power":"3000","displacement":"2000","maker":"时风集团","turnType":"方向盘","tireDistanceAhead":"12","tireDistanceHinder":"113","tireCount":"4","tireSpecs":"12","springsCount":"12","wheelbase":"50","axlesCount":"4","outline":"100*100*200*300","inline":"600*966*899*7411","allWeight":"1000","curbWeight":"100","approvedWeight":"10000","tractionWeight":"100","passengersCount":"6","useNature":"拉人","carGetType":"买","productionDate":"2020-02-05","issueDate":"2020-05-06","isActive":1,"createTime":null,"updateTime":1597805961000,"picUrl":"1","file":null},"idcertificateId":1}
+     * data : {"id":383,"driverCertificateId":411,"workCertificateId":390,"isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"tel":"13693155706","adminId":299,"enterpriseId":0,"signUrl":"","carId":82,"certificateDriverBo":{"id":411,"name":"","sex":"","country":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"address":"","birthday":"","receiveDate":"","classs":"C1","startTime":"2050年10月14日","term":"","fileNumber":"41062219960321201X","note":"","picUrl":"https://aicc.ctags.cn/cccc/file/download/ce64d582-829c-44fa-909d-03ee337273c5.jpg","driverId":0},"certificateIDBo":{"id":516,"name":"宋德川","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/c97bd398-ad2d-471b-9317-590fc75adab6.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/72f348dd-cd4b-44a1-8906-c9eb798a1c7a.jpg","driverId":0,"carId":0,"carOwnerId":0,"idno":"41062219960321201X"},"certificateWorkBo":{"id":390,"name":"","sex":"","birthday":"","nationality":"","address":"","grantNo":"3200251969160415","classs":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/c3f080f3-1f9a-4358-866c-5ebd0477df2a.jpg","category":"","firstTime":null,"validityStartTime":null,"validityEndTime":null,"fileNumber":"","driverId":0},"carBo":{"id":82,"drivingCertificateId":47,"tel":"15311871589","transportCertificateId":33,"registrationCertificateId":0,"isActive":1,"createTime":1598869939000,"updateTime":1598869939000,"adminId":1,"enterpriseId":1,"isPass":1,"carOnwerId":1,"certificateDrivingBo":{"id":47,"plateNo":"1102003003666","wchicheType":"","owner":"钱镠","address":"","useCharacter":"运货8","model":"","engineNo":"100030","registrationDate":"","issueDate":"","fileNo":"","passengersCount":1000,"allWeight":"","curbWeight":"","approvedWeight":"","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1598871780000,"createTime":1598871780000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/78c522b1-9404-4545-ad39-ec06dfb49b23.png","carId":0,"vin":""},"certificateIDBo":{"id":355,"name":"测试4","six":"1","nation":"中国","birthDay":"2020-10-26","address":"北京市朝阳区","isActive":1,"createTime":1598870205000,"updateTime":1598871717000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/5e9f9af5-2dec-4543-9980-c7fc039b4610.png","picUrl2":"","driverId":0,"carId":0,"carOwnerId":0,"idno":"1102003003666"},"certificateTransportBo":{"id":33,"name":"北京时尚呢供应","address":"海淀西北旺11","plateNo":"运输证10259685222122666传","licence":"","type":"货车12","weight":"1000吨2","size":"2000*233*9652","scope":"全国2","grantDate":"2020-06-1211","isActive":1,"createTime":1598869964000,"updateTime":1598870005000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/dab6139b-40ec-4723-85e2-3268e32d3087.png","carId":0},"certificateRegistrationBo":null,"idcertificateId":355},"trainDriverDataBos":[],"idcertificateId":516}
      * type : 1
-     * token : 2ojd68KkJQKJHEVx2TbBXz3yl7fNb+dY
+     * token : vAqc75ku04FaXdj5NVF/o2O0X5OKGGQA
      */
 
     private int code;
@@ -58,44 +61,42 @@ public class CheliangBean {
 
     public static class DataBean {
         /**
-         * id : 1
-         * drivingCertificateId : 1
-         * tel : 1
-         * transportCertificateId : 1
-         * registrationCertificateId : 1
+         * id : 383
+         * driverCertificateId : 411
+         * workCertificateId : 390
          * isActive : 1
-         * createTime : null
-         * updateTime : null
-         * name : 1
-         * pass : 1
-         * adminId : 2
-         * enterpriseId : 1
-         * isPass : 1
-         * certificateDrivingBo : {"id":1,"plateNo":"行车证1102003003666","wchicheType":"1","owner":"汪凯","address":"1","useCharacter":"运货","model":"1","engineNo":"100030","registrationDate":"1","issueDate":"1","fileNo":"1","passengersCount":122,"allWeight":"1","curbWeight":"1","approvedWeight":"1","outline":"1","tractionWeight":"1","note":"1","chechRecord":"1","isActive":1,"updateTime":1597805951000,"createTime":null,"picUrl":"1","file":null,"vin":"1"}
-         * certificateIDBo : {"id":1,"name":"李思","six":"0","nation":"中国","birthDay":"2020-08-20 10:01","address":"山东","isActive":1,"createTime":null,"updateTime":1597805972000,"picUrl":"1","picUrl2":"1","file":null,"file2":null,"idno":"车主1102003003666"}
-         * certificateTransportBo : {"id":1,"name":"北京时尚呢供应123","address":"海淀西北旺","plateNo":"运输证10259685222122666","licence":"1","type":"货车","weight":"1000吨","size":"2000*233*965","scope":"全国123","grantDate":"2020-06-12","isActive":1,"createTime":1597805868000,"updateTime":1597807654000,"picUrl":"1","file":null}
-         * certificateRegistrationBo : {"id":1,"owner":"张三","grantName":"车辆登记证","grantNo":"登记证110231196811095687","carType":"小车","carBrand":"奔驰","carModel":"WKJOIIO90-200352","carColor":"黑色","carNo":"300255cjh-op0","carImportType":"国产","engineNo":"100030","engineType":"100265","fuelType":"30025","power":"3000","displacement":"2000","maker":"时风集团","turnType":"方向盘","tireDistanceAhead":"12","tireDistanceHinder":"113","tireCount":"4","tireSpecs":"12","springsCount":"12","wheelbase":"50","axlesCount":"4","outline":"100*100*200*300","inline":"600*966*899*7411","allWeight":"1000","curbWeight":"100","approvedWeight":"10000","tractionWeight":"100","passengersCount":"6","useNature":"拉人","carGetType":"买","productionDate":"2020-02-05","issueDate":"2020-05-06","isActive":1,"createTime":null,"updateTime":1597805961000,"picUrl":"1","file":null}
-         * idcertificateId : 1
+         * createTime : 1599053922000
+         * updateTime : 1599053922000
+         * tel : 13693155706
+         * adminId : 299
+         * enterpriseId : 0
+         * signUrl :
+         * carId : 82
+         * certificateDriverBo : {"id":411,"name":"","sex":"","country":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"address":"","birthday":"","receiveDate":"","classs":"C1","startTime":"2050年10月14日","term":"","fileNumber":"41062219960321201X","note":"","picUrl":"https://aicc.ctags.cn/cccc/file/download/ce64d582-829c-44fa-909d-03ee337273c5.jpg","driverId":0}
+         * certificateIDBo : {"id":516,"name":"宋德川","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/c97bd398-ad2d-471b-9317-590fc75adab6.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/72f348dd-cd4b-44a1-8906-c9eb798a1c7a.jpg","driverId":0,"carId":0,"carOwnerId":0,"idno":"41062219960321201X"}
+         * certificateWorkBo : {"id":390,"name":"","sex":"","birthday":"","nationality":"","address":"","grantNo":"3200251969160415","classs":"","isActive":1,"createTime":1599053922000,"updateTime":1599053922000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/c3f080f3-1f9a-4358-866c-5ebd0477df2a.jpg","category":"","firstTime":null,"validityStartTime":null,"validityEndTime":null,"fileNumber":"","driverId":0}
+         * carBo : {"id":82,"drivingCertificateId":47,"tel":"15311871589","transportCertificateId":33,"registrationCertificateId":0,"isActive":1,"createTime":1598869939000,"updateTime":1598869939000,"adminId":1,"enterpriseId":1,"isPass":1,"carOnwerId":1,"certificateDrivingBo":{"id":47,"plateNo":"1102003003666","wchicheType":"","owner":"钱镠","address":"","useCharacter":"运货8","model":"","engineNo":"100030","registrationDate":"","issueDate":"","fileNo":"","passengersCount":1000,"allWeight":"","curbWeight":"","approvedWeight":"","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1598871780000,"createTime":1598871780000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/78c522b1-9404-4545-ad39-ec06dfb49b23.png","carId":0,"vin":""},"certificateIDBo":{"id":355,"name":"测试4","six":"1","nation":"中国","birthDay":"2020-10-26","address":"北京市朝阳区","isActive":1,"createTime":1598870205000,"updateTime":1598871717000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/5e9f9af5-2dec-4543-9980-c7fc039b4610.png","picUrl2":"","driverId":0,"carId":0,"carOwnerId":0,"idno":"1102003003666"},"certificateTransportBo":{"id":33,"name":"北京时尚呢供应","address":"海淀西北旺11","plateNo":"运输证10259685222122666传","licence":"","type":"货车12","weight":"1000吨2","size":"2000*233*9652","scope":"全国2","grantDate":"2020-06-1211","isActive":1,"createTime":1598869964000,"updateTime":1598870005000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/dab6139b-40ec-4723-85e2-3268e32d3087.png","carId":0},"certificateRegistrationBo":null,"idcertificateId":355}
+         * trainDriverDataBos : []
+         * idcertificateId : 516
          */
 
         private int id;
-        private int drivingCertificateId;
-        private String tel;
-        private int transportCertificateId;
-        private int registrationCertificateId;
+        private int driverCertificateId;
+        private int workCertificateId;
         private int isActive;
-        private Object createTime;
-        private Object updateTime;
-        private String name;
-        private String pass;
+        private long createTime;
+        private long updateTime;
+        private String tel;
         private int adminId;
         private int enterpriseId;
-        private int isPass;
-        private CertificateDrivingBoBean certificateDrivingBo;
+        private String signUrl;
+        private int carId;
+        private CertificateDriverBoBean certificateDriverBo;
         private CertificateIDBoBean certificateIDBo;
-        private CertificateTransportBoBean certificateTransportBo;
-        private CertificateRegistrationBoBean certificateRegistrationBo;
+        private CertificateWorkBoBean certificateWorkBo;
+        private CarBoBean carBo;
         private int idcertificateId;
+        private List<?> trainDriverDataBos;
 
         public int getId() {
             return id;
@@ -105,36 +106,20 @@ public class CheliangBean {
             this.id = id;
         }
 
-        public int getDrivingCertificateId() {
-            return drivingCertificateId;
+        public int getDriverCertificateId() {
+            return driverCertificateId;
         }
 
-        public void setDrivingCertificateId(int drivingCertificateId) {
-            this.drivingCertificateId = drivingCertificateId;
+        public void setDriverCertificateId(int driverCertificateId) {
+            this.driverCertificateId = driverCertificateId;
         }
 
-        public String getTel() {
-            return tel;
+        public int getWorkCertificateId() {
+            return workCertificateId;
         }
 
-        public void setTel(String tel) {
-            this.tel = tel;
-        }
-
-        public int getTransportCertificateId() {
-            return transportCertificateId;
-        }
-
-        public void setTransportCertificateId(int transportCertificateId) {
-            this.transportCertificateId = transportCertificateId;
-        }
-
-        public int getRegistrationCertificateId() {
-            return registrationCertificateId;
-        }
-
-        public void setRegistrationCertificateId(int registrationCertificateId) {
-            this.registrationCertificateId = registrationCertificateId;
+        public void setWorkCertificateId(int workCertificateId) {
+            this.workCertificateId = workCertificateId;
         }
 
         public int getIsActive() {
@@ -145,36 +130,28 @@ public class CheliangBean {
             this.isActive = isActive;
         }
 
-        public Object getCreateTime() {
+        public long getCreateTime() {
             return createTime;
         }
 
-        public void setCreateTime(Object createTime) {
+        public void setCreateTime(long createTime) {
             this.createTime = createTime;
         }
 
-        public Object getUpdateTime() {
+        public long getUpdateTime() {
             return updateTime;
         }
 
-        public void setUpdateTime(Object updateTime) {
+        public void setUpdateTime(long updateTime) {
             this.updateTime = updateTime;
         }
 
-        public String getName() {
-            return name;
+        public String getTel() {
+            return tel;
         }
 
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getPass() {
-            return pass;
-        }
-
-        public void setPass(String pass) {
-            this.pass = pass;
+        public void setTel(String tel) {
+            this.tel = tel;
         }
 
         public int getAdminId() {
@@ -193,20 +170,28 @@ public class CheliangBean {
             this.enterpriseId = enterpriseId;
         }
 
-        public int getIsPass() {
-            return isPass;
+        public String getSignUrl() {
+            return signUrl;
         }
 
-        public void setIsPass(int isPass) {
-            this.isPass = isPass;
+        public void setSignUrl(String signUrl) {
+            this.signUrl = signUrl;
         }
 
-        public CertificateDrivingBoBean getCertificateDrivingBo() {
-            return certificateDrivingBo;
+        public int getCarId() {
+            return carId;
         }
 
-        public void setCertificateDrivingBo(CertificateDrivingBoBean certificateDrivingBo) {
-            this.certificateDrivingBo = certificateDrivingBo;
+        public void setCarId(int carId) {
+            this.carId = carId;
+        }
+
+        public CertificateDriverBoBean getCertificateDriverBo() {
+            return certificateDriverBo;
+        }
+
+        public void setCertificateDriverBo(CertificateDriverBoBean certificateDriverBo) {
+            this.certificateDriverBo = certificateDriverBo;
         }
 
         public CertificateIDBoBean getCertificateIDBo() {
@@ -217,20 +202,20 @@ public class CheliangBean {
             this.certificateIDBo = certificateIDBo;
         }
 
-        public CertificateTransportBoBean getCertificateTransportBo() {
-            return certificateTransportBo;
+        public CertificateWorkBoBean getCertificateWorkBo() {
+            return certificateWorkBo;
         }
 
-        public void setCertificateTransportBo(CertificateTransportBoBean certificateTransportBo) {
-            this.certificateTransportBo = certificateTransportBo;
+        public void setCertificateWorkBo(CertificateWorkBoBean certificateWorkBo) {
+            this.certificateWorkBo = certificateWorkBo;
         }
 
-        public CertificateRegistrationBoBean getCertificateRegistrationBo() {
-            return certificateRegistrationBo;
+        public CarBoBean getCarBo() {
+            return carBo;
         }
 
-        public void setCertificateRegistrationBo(CertificateRegistrationBoBean certificateRegistrationBo) {
-            this.certificateRegistrationBo = certificateRegistrationBo;
+        public void setCarBo(CarBoBean carBo) {
+            this.carBo = carBo;
         }
 
         public int getIdcertificateId() {
@@ -241,60 +226,52 @@ public class CheliangBean {
             this.idcertificateId = idcertificateId;
         }
 
-        public static class CertificateDrivingBoBean {
+        public List<?> getTrainDriverDataBos() {
+            return trainDriverDataBos;
+        }
+
+        public void setTrainDriverDataBos(List<?> trainDriverDataBos) {
+            this.trainDriverDataBos = trainDriverDataBos;
+        }
+
+        public static class CertificateDriverBoBean {
             /**
-             * id : 1
-             * plateNo : 行车证1102003003666
-             * wchicheType : 1
-             * owner : 汪凯
-             * address : 1
-             * useCharacter : 运货
-             * model : 1
-             * engineNo : 100030
-             * registrationDate : 1
-             * issueDate : 1
-             * fileNo : 1
-             * passengersCount : 122
-             * allWeight : 1
-             * curbWeight : 1
-             * approvedWeight : 1
-             * outline : 1
-             * tractionWeight : 1
-             * note : 1
-             * chechRecord : 1
+             * id : 411
+             * name :
+             * sex :
+             * country :
              * isActive : 1
-             * updateTime : 1597805951000
-             * createTime : null
-             * picUrl : 1
-             * file : null
-             * vin : 1
+             * createTime : 1599053922000
+             * updateTime : 1599053922000
+             * address :
+             * birthday :
+             * receiveDate :
+             * classs : C1
+             * startTime : 2050年10月14日
+             * term :
+             * fileNumber : 41062219960321201X
+             * note :
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/ce64d582-829c-44fa-909d-03ee337273c5.jpg
+             * driverId : 0
              */
 
             private int id;
-            private String plateNo;
-            private String wchicheType;
-            private String owner;
-            private String address;
-            private String useCharacter;
-            private String model;
-            private String engineNo;
-            private String registrationDate;
-            private String issueDate;
-            private String fileNo;
-            private int passengersCount;
-            private String allWeight;
-            private String curbWeight;
-            private String approvedWeight;
-            private String outline;
-            private String tractionWeight;
-            private String note;
-            private String chechRecord;
+            private String name;
+            private String sex;
+            private String country;
             private int isActive;
+            private long createTime;
             private long updateTime;
-            private Object createTime;
+            private String address;
+            private String birthday;
+            private String receiveDate;
+            private String classs;
+            private String startTime;
+            private String term;
+            private String fileNumber;
+            private String note;
             private String picUrl;
-            private Object file;
-            private String vin;
+            private int driverId;
 
             public int getId() {
                 return id;
@@ -304,148 +281,28 @@ public class CheliangBean {
                 this.id = id;
             }
 
-            public String getPlateNo() {
-                return plateNo;
+            public String getName() {
+                return name;
             }
 
-            public void setPlateNo(String plateNo) {
-                this.plateNo = plateNo;
+            public void setName(String name) {
+                this.name = name;
             }
 
-            public String getWchicheType() {
-                return wchicheType;
+            public String getSex() {
+                return sex;
             }
 
-            public void setWchicheType(String wchicheType) {
-                this.wchicheType = wchicheType;
+            public void setSex(String sex) {
+                this.sex = sex;
             }
 
-            public String getOwner() {
-                return owner;
+            public String getCountry() {
+                return country;
             }
 
-            public void setOwner(String owner) {
-                this.owner = owner;
-            }
-
-            public String getAddress() {
-                return address;
-            }
-
-            public void setAddress(String address) {
-                this.address = address;
-            }
-
-            public String getUseCharacter() {
-                return useCharacter;
-            }
-
-            public void setUseCharacter(String useCharacter) {
-                this.useCharacter = useCharacter;
-            }
-
-            public String getModel() {
-                return model;
-            }
-
-            public void setModel(String model) {
-                this.model = model;
-            }
-
-            public String getEngineNo() {
-                return engineNo;
-            }
-
-            public void setEngineNo(String engineNo) {
-                this.engineNo = engineNo;
-            }
-
-            public String getRegistrationDate() {
-                return registrationDate;
-            }
-
-            public void setRegistrationDate(String registrationDate) {
-                this.registrationDate = registrationDate;
-            }
-
-            public String getIssueDate() {
-                return issueDate;
-            }
-
-            public void setIssueDate(String issueDate) {
-                this.issueDate = issueDate;
-            }
-
-            public String getFileNo() {
-                return fileNo;
-            }
-
-            public void setFileNo(String fileNo) {
-                this.fileNo = fileNo;
-            }
-
-            public int getPassengersCount() {
-                return passengersCount;
-            }
-
-            public void setPassengersCount(int passengersCount) {
-                this.passengersCount = passengersCount;
-            }
-
-            public String getAllWeight() {
-                return allWeight;
-            }
-
-            public void setAllWeight(String allWeight) {
-                this.allWeight = allWeight;
-            }
-
-            public String getCurbWeight() {
-                return curbWeight;
-            }
-
-            public void setCurbWeight(String curbWeight) {
-                this.curbWeight = curbWeight;
-            }
-
-            public String getApprovedWeight() {
-                return approvedWeight;
-            }
-
-            public void setApprovedWeight(String approvedWeight) {
-                this.approvedWeight = approvedWeight;
-            }
-
-            public String getOutline() {
-                return outline;
-            }
-
-            public void setOutline(String outline) {
-                this.outline = outline;
-            }
-
-            public String getTractionWeight() {
-                return tractionWeight;
-            }
-
-            public void setTractionWeight(String tractionWeight) {
-                this.tractionWeight = tractionWeight;
-            }
-
-            public String getNote() {
-                return note;
-            }
-
-            public void setNote(String note) {
-                this.note = note;
-            }
-
-            public String getChechRecord() {
-                return chechRecord;
-            }
-
-            public void setChechRecord(String chechRecord) {
-                this.chechRecord = chechRecord;
+            public void setCountry(String country) {
+                this.country = country;
             }
 
             public int getIsActive() {
@@ -456,6 +313,14 @@ public class CheliangBean {
                 this.isActive = isActive;
             }
 
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
             public long getUpdateTime() {
                 return updateTime;
             }
@@ -464,12 +329,68 @@ public class CheliangBean {
                 this.updateTime = updateTime;
             }
 
-            public Object getCreateTime() {
-                return createTime;
+            public String getAddress() {
+                return address;
             }
 
-            public void setCreateTime(Object createTime) {
-                this.createTime = createTime;
+            public void setAddress(String address) {
+                this.address = address;
+            }
+
+            public String getBirthday() {
+                return birthday;
+            }
+
+            public void setBirthday(String birthday) {
+                this.birthday = birthday;
+            }
+
+            public String getReceiveDate() {
+                return receiveDate;
+            }
+
+            public void setReceiveDate(String receiveDate) {
+                this.receiveDate = receiveDate;
+            }
+
+            public String getClasss() {
+                return classs;
+            }
+
+            public void setClasss(String classs) {
+                this.classs = classs;
+            }
+
+            public String getStartTime() {
+                return startTime;
+            }
+
+            public void setStartTime(String startTime) {
+                this.startTime = startTime;
+            }
+
+            public String getTerm() {
+                return term;
+            }
+
+            public void setTerm(String term) {
+                this.term = term;
+            }
+
+            public String getFileNumber() {
+                return fileNumber;
+            }
+
+            public void setFileNumber(String fileNumber) {
+                this.fileNumber = fileNumber;
+            }
+
+            public String getNote() {
+                return note;
+            }
+
+            public void setNote(String note) {
+                this.note = note;
             }
 
             public String getPicUrl() {
@@ -480,39 +401,32 @@ public class CheliangBean {
                 this.picUrl = picUrl;
             }
 
-            public Object getFile() {
-                return file;
+            public int getDriverId() {
+                return driverId;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
-            }
-
-            public String getVin() {
-                return vin;
-            }
-
-            public void setVin(String vin) {
-                this.vin = vin;
+            public void setDriverId(int driverId) {
+                this.driverId = driverId;
             }
         }
 
         public static class CertificateIDBoBean {
             /**
-             * id : 1
-             * name : 李思
-             * six : 0
-             * nation : 中国
-             * birthDay : 2020-08-20 10:01
-             * address : 山东
+             * id : 516
+             * name : 宋德川
+             * six :
+             * nation :
+             * birthDay :
+             * address :
              * isActive : 1
-             * createTime : null
-             * updateTime : 1597805972000
-             * picUrl : 1
-             * picUrl2 : 1
-             * file : null
-             * file2 : null
-             * idno : 车主1102003003666
+             * createTime : 1599053922000
+             * updateTime : 1599053922000
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/c97bd398-ad2d-471b-9317-590fc75adab6.jpg
+             * picUrl2 : https://aicc.ctags.cn/cccc/file/download/72f348dd-cd4b-44a1-8906-c9eb798a1c7a.jpg
+             * driverId : 0
+             * carId : 0
+             * carOwnerId : 0
+             * idno : 41062219960321201X
              */
 
             private int id;
@@ -522,12 +436,13 @@ public class CheliangBean {
             private String birthDay;
             private String address;
             private int isActive;
-            private Object createTime;
+            private long createTime;
             private long updateTime;
             private String picUrl;
             private String picUrl2;
-            private Object file;
-            private Object file2;
+            private int driverId;
+            private int carId;
+            private int carOwnerId;
             private String idno;
 
             public int getId() {
@@ -586,11 +501,11 @@ public class CheliangBean {
                 this.isActive = isActive;
             }
 
-            public Object getCreateTime() {
+            public long getCreateTime() {
                 return createTime;
             }
 
-            public void setCreateTime(Object createTime) {
+            public void setCreateTime(long createTime) {
                 this.createTime = createTime;
             }
 
@@ -618,20 +533,28 @@ public class CheliangBean {
                 this.picUrl2 = picUrl2;
             }
 
-            public Object getFile() {
-                return file;
+            public int getDriverId() {
+                return driverId;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setDriverId(int driverId) {
+                this.driverId = driverId;
             }
 
-            public Object getFile2() {
-                return file2;
+            public int getCarId() {
+                return carId;
             }
 
-            public void setFile2(Object file2) {
-                this.file2 = file2;
+            public void setCarId(int carId) {
+                this.carId = carId;
+            }
+
+            public int getCarOwnerId() {
+                return carOwnerId;
+            }
+
+            public void setCarOwnerId(int carOwnerId) {
+                this.carOwnerId = carOwnerId;
             }
 
             public String getIdno() {
@@ -643,40 +566,46 @@ public class CheliangBean {
             }
         }
 
-        public static class CertificateTransportBoBean {
+        public static class CertificateWorkBoBean {
             /**
-             * id : 1
-             * name : 北京时尚呢供应123
-             * address : 海淀西北旺
-             * plateNo : 运输证10259685222122666
-             * licence : 1
-             * type : 货车
-             * weight : 1000吨
-             * size : 2000*233*965
-             * scope : 全国123
-             * grantDate : 2020-06-12
+             * id : 390
+             * name :
+             * sex :
+             * birthday :
+             * nationality :
+             * address :
+             * grantNo : 3200251969160415
+             * classs :
              * isActive : 1
-             * createTime : 1597805868000
-             * updateTime : 1597807654000
-             * picUrl : 1
-             * file : null
+             * createTime : 1599053922000
+             * updateTime : 1599053922000
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/c3f080f3-1f9a-4358-866c-5ebd0477df2a.jpg
+             * category :
+             * firstTime : null
+             * validityStartTime : null
+             * validityEndTime : null
+             * fileNumber :
+             * driverId : 0
              */
 
             private int id;
             private String name;
+            private String sex;
+            private String birthday;
+            private String nationality;
             private String address;
-            private String plateNo;
-            private String licence;
-            private String type;
-            private String weight;
-            private String size;
-            private String scope;
-            private String grantDate;
+            private String grantNo;
+            private String classs;
             private int isActive;
             private long createTime;
             private long updateTime;
             private String picUrl;
-            private Object file;
+            private String category;
+            private Object firstTime;
+            private Object validityStartTime;
+            private Object validityEndTime;
+            private String fileNumber;
+            private int driverId;
 
             public int getId() {
                 return id;
@@ -694,6 +623,30 @@ public class CheliangBean {
                 this.name = name;
             }
 
+            public String getSex() {
+                return sex;
+            }
+
+            public void setSex(String sex) {
+                this.sex = sex;
+            }
+
+            public String getBirthday() {
+                return birthday;
+            }
+
+            public void setBirthday(String birthday) {
+                this.birthday = birthday;
+            }
+
+            public String getNationality() {
+                return nationality;
+            }
+
+            public void setNationality(String nationality) {
+                this.nationality = nationality;
+            }
+
             public String getAddress() {
                 return address;
             }
@@ -702,60 +655,20 @@ public class CheliangBean {
                 this.address = address;
             }
 
-            public String getPlateNo() {
-                return plateNo;
+            public String getGrantNo() {
+                return grantNo;
             }
 
-            public void setPlateNo(String plateNo) {
-                this.plateNo = plateNo;
+            public void setGrantNo(String grantNo) {
+                this.grantNo = grantNo;
             }
 
-            public String getLicence() {
-                return licence;
+            public String getClasss() {
+                return classs;
             }
 
-            public void setLicence(String licence) {
-                this.licence = licence;
-            }
-
-            public String getType() {
-                return type;
-            }
-
-            public void setType(String type) {
-                this.type = type;
-            }
-
-            public String getWeight() {
-                return weight;
-            }
-
-            public void setWeight(String weight) {
-                this.weight = weight;
-            }
-
-            public String getSize() {
-                return size;
-            }
-
-            public void setSize(String size) {
-                this.size = size;
-            }
-
-            public String getScope() {
-                return scope;
-            }
-
-            public void setScope(String scope) {
-                this.scope = scope;
-            }
-
-            public String getGrantDate() {
-                return grantDate;
-            }
-
-            public void setGrantDate(String grantDate) {
-                this.grantDate = grantDate;
+            public void setClasss(String classs) {
+                this.classs = classs;
             }
 
             public int getIsActive() {
@@ -790,99 +703,93 @@ public class CheliangBean {
                 this.picUrl = picUrl;
             }
 
-            public Object getFile() {
-                return file;
+            public String getCategory() {
+                return category;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setCategory(String category) {
+                this.category = category;
+            }
+
+            public Object getFirstTime() {
+                return firstTime;
+            }
+
+            public void setFirstTime(Object firstTime) {
+                this.firstTime = firstTime;
+            }
+
+            public Object getValidityStartTime() {
+                return validityStartTime;
+            }
+
+            public void setValidityStartTime(Object validityStartTime) {
+                this.validityStartTime = validityStartTime;
+            }
+
+            public Object getValidityEndTime() {
+                return validityEndTime;
+            }
+
+            public void setValidityEndTime(Object validityEndTime) {
+                this.validityEndTime = validityEndTime;
+            }
+
+            public String getFileNumber() {
+                return fileNumber;
+            }
+
+            public void setFileNumber(String fileNumber) {
+                this.fileNumber = fileNumber;
+            }
+
+            public int getDriverId() {
+                return driverId;
+            }
+
+            public void setDriverId(int driverId) {
+                this.driverId = driverId;
             }
         }
 
-        public static class CertificateRegistrationBoBean {
+        public static class CarBoBean {
             /**
-             * id : 1
-             * owner : 张三
-             * grantName : 车辆登记证
-             * grantNo : 登记证110231196811095687
-             * carType : 小车
-             * carBrand : 奔驰
-             * carModel : WKJOIIO90-200352
-             * carColor : 黑色
-             * carNo : 300255cjh-op0
-             * carImportType : 国产
-             * engineNo : 100030
-             * engineType : 100265
-             * fuelType : 30025
-             * power : 3000
-             * displacement : 2000
-             * maker : 时风集团
-             * turnType : 方向盘
-             * tireDistanceAhead : 12
-             * tireDistanceHinder : 113
-             * tireCount : 4
-             * tireSpecs : 12
-             * springsCount : 12
-             * wheelbase : 50
-             * axlesCount : 4
-             * outline : 100*100*200*300
-             * inline : 600*966*899*7411
-             * allWeight : 1000
-             * curbWeight : 100
-             * approvedWeight : 10000
-             * tractionWeight : 100
-             * passengersCount : 6
-             * useNature : 拉人
-             * carGetType : 买
-             * productionDate : 2020-02-05
-             * issueDate : 2020-05-06
+             * id : 82
+             * drivingCertificateId : 47
+             * tel : 15311871589
+             * transportCertificateId : 33
+             * registrationCertificateId : 0
              * isActive : 1
-             * createTime : null
-             * updateTime : 1597805961000
-             * picUrl : 1
-             * file : null
+             * createTime : 1598869939000
+             * updateTime : 1598869939000
+             * adminId : 1
+             * enterpriseId : 1
+             * isPass : 1
+             * carOnwerId : 1
+             * certificateDrivingBo : {"id":47,"plateNo":"1102003003666","wchicheType":"","owner":"钱镠","address":"","useCharacter":"运货8","model":"","engineNo":"100030","registrationDate":"","issueDate":"","fileNo":"","passengersCount":1000,"allWeight":"","curbWeight":"","approvedWeight":"","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1598871780000,"createTime":1598871780000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/78c522b1-9404-4545-ad39-ec06dfb49b23.png","carId":0,"vin":""}
+             * certificateIDBo : {"id":355,"name":"测试4","six":"1","nation":"中国","birthDay":"2020-10-26","address":"北京市朝阳区","isActive":1,"createTime":1598870205000,"updateTime":1598871717000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/5e9f9af5-2dec-4543-9980-c7fc039b4610.png","picUrl2":"","driverId":0,"carId":0,"carOwnerId":0,"idno":"1102003003666"}
+             * certificateTransportBo : {"id":33,"name":"北京时尚呢供应","address":"海淀西北旺11","plateNo":"运输证10259685222122666传","licence":"","type":"货车12","weight":"1000吨2","size":"2000*233*9652","scope":"全国2","grantDate":"2020-06-1211","isActive":1,"createTime":1598869964000,"updateTime":1598870005000,"picUrl":"http://aicc.ctags.cn/cccc/file/download/dab6139b-40ec-4723-85e2-3268e32d3087.png","carId":0}
+             * certificateRegistrationBo : null
+             * idcertificateId : 355
              */
 
             private int id;
-            private String owner;
-            private String grantName;
-            private String grantNo;
-            private String carType;
-            private String carBrand;
-            private String carModel;
-            private String carColor;
-            private String carNo;
-            private String carImportType;
-            private String engineNo;
-            private String engineType;
-            private String fuelType;
-            private String power;
-            private String displacement;
-            private String maker;
-            private String turnType;
-            private String tireDistanceAhead;
-            private String tireDistanceHinder;
-            private String tireCount;
-            private String tireSpecs;
-            private String springsCount;
-            private String wheelbase;
-            private String axlesCount;
-            private String outline;
-            private String inline;
-            private String allWeight;
-            private String curbWeight;
-            private String approvedWeight;
-            private String tractionWeight;
-            private String passengersCount;
-            private String useNature;
-            private String carGetType;
-            private String productionDate;
-            private String issueDate;
+            private int drivingCertificateId;
+            private String tel;
+            private int transportCertificateId;
+            private int registrationCertificateId;
             private int isActive;
-            private Object createTime;
+            private long createTime;
             private long updateTime;
-            private String picUrl;
-            private Object file;
+            private int adminId;
+            private int enterpriseId;
+            private int isPass;
+            private int carOnwerId;
+            private CertificateDrivingBoBean certificateDrivingBo;
+            private CertificateIDBoBeanX certificateIDBo;
+            private CertificateTransportBoBean certificateTransportBo;
+            private Object certificateRegistrationBo;
+            private int idcertificateId;
 
             public int getId() {
                 return id;
@@ -892,276 +799,36 @@ public class CheliangBean {
                 this.id = id;
             }
 
-            public String getOwner() {
-                return owner;
+            public int getDrivingCertificateId() {
+                return drivingCertificateId;
             }
 
-            public void setOwner(String owner) {
-                this.owner = owner;
+            public void setDrivingCertificateId(int drivingCertificateId) {
+                this.drivingCertificateId = drivingCertificateId;
             }
 
-            public String getGrantName() {
-                return grantName;
+            public String getTel() {
+                return tel;
             }
 
-            public void setGrantName(String grantName) {
-                this.grantName = grantName;
+            public void setTel(String tel) {
+                this.tel = tel;
             }
 
-            public String getGrantNo() {
-                return grantNo;
+            public int getTransportCertificateId() {
+                return transportCertificateId;
             }
 
-            public void setGrantNo(String grantNo) {
-                this.grantNo = grantNo;
+            public void setTransportCertificateId(int transportCertificateId) {
+                this.transportCertificateId = transportCertificateId;
             }
 
-            public String getCarType() {
-                return carType;
+            public int getRegistrationCertificateId() {
+                return registrationCertificateId;
             }
 
-            public void setCarType(String carType) {
-                this.carType = carType;
-            }
-
-            public String getCarBrand() {
-                return carBrand;
-            }
-
-            public void setCarBrand(String carBrand) {
-                this.carBrand = carBrand;
-            }
-
-            public String getCarModel() {
-                return carModel;
-            }
-
-            public void setCarModel(String carModel) {
-                this.carModel = carModel;
-            }
-
-            public String getCarColor() {
-                return carColor;
-            }
-
-            public void setCarColor(String carColor) {
-                this.carColor = carColor;
-            }
-
-            public String getCarNo() {
-                return carNo;
-            }
-
-            public void setCarNo(String carNo) {
-                this.carNo = carNo;
-            }
-
-            public String getCarImportType() {
-                return carImportType;
-            }
-
-            public void setCarImportType(String carImportType) {
-                this.carImportType = carImportType;
-            }
-
-            public String getEngineNo() {
-                return engineNo;
-            }
-
-            public void setEngineNo(String engineNo) {
-                this.engineNo = engineNo;
-            }
-
-            public String getEngineType() {
-                return engineType;
-            }
-
-            public void setEngineType(String engineType) {
-                this.engineType = engineType;
-            }
-
-            public String getFuelType() {
-                return fuelType;
-            }
-
-            public void setFuelType(String fuelType) {
-                this.fuelType = fuelType;
-            }
-
-            public String getPower() {
-                return power;
-            }
-
-            public void setPower(String power) {
-                this.power = power;
-            }
-
-            public String getDisplacement() {
-                return displacement;
-            }
-
-            public void setDisplacement(String displacement) {
-                this.displacement = displacement;
-            }
-
-            public String getMaker() {
-                return maker;
-            }
-
-            public void setMaker(String maker) {
-                this.maker = maker;
-            }
-
-            public String getTurnType() {
-                return turnType;
-            }
-
-            public void setTurnType(String turnType) {
-                this.turnType = turnType;
-            }
-
-            public String getTireDistanceAhead() {
-                return tireDistanceAhead;
-            }
-
-            public void setTireDistanceAhead(String tireDistanceAhead) {
-                this.tireDistanceAhead = tireDistanceAhead;
-            }
-
-            public String getTireDistanceHinder() {
-                return tireDistanceHinder;
-            }
-
-            public void setTireDistanceHinder(String tireDistanceHinder) {
-                this.tireDistanceHinder = tireDistanceHinder;
-            }
-
-            public String getTireCount() {
-                return tireCount;
-            }
-
-            public void setTireCount(String tireCount) {
-                this.tireCount = tireCount;
-            }
-
-            public String getTireSpecs() {
-                return tireSpecs;
-            }
-
-            public void setTireSpecs(String tireSpecs) {
-                this.tireSpecs = tireSpecs;
-            }
-
-            public String getSpringsCount() {
-                return springsCount;
-            }
-
-            public void setSpringsCount(String springsCount) {
-                this.springsCount = springsCount;
-            }
-
-            public String getWheelbase() {
-                return wheelbase;
-            }
-
-            public void setWheelbase(String wheelbase) {
-                this.wheelbase = wheelbase;
-            }
-
-            public String getAxlesCount() {
-                return axlesCount;
-            }
-
-            public void setAxlesCount(String axlesCount) {
-                this.axlesCount = axlesCount;
-            }
-
-            public String getOutline() {
-                return outline;
-            }
-
-            public void setOutline(String outline) {
-                this.outline = outline;
-            }
-
-            public String getInline() {
-                return inline;
-            }
-
-            public void setInline(String inline) {
-                this.inline = inline;
-            }
-
-            public String getAllWeight() {
-                return allWeight;
-            }
-
-            public void setAllWeight(String allWeight) {
-                this.allWeight = allWeight;
-            }
-
-            public String getCurbWeight() {
-                return curbWeight;
-            }
-
-            public void setCurbWeight(String curbWeight) {
-                this.curbWeight = curbWeight;
-            }
-
-            public String getApprovedWeight() {
-                return approvedWeight;
-            }
-
-            public void setApprovedWeight(String approvedWeight) {
-                this.approvedWeight = approvedWeight;
-            }
-
-            public String getTractionWeight() {
-                return tractionWeight;
-            }
-
-            public void setTractionWeight(String tractionWeight) {
-                this.tractionWeight = tractionWeight;
-            }
-
-            public String getPassengersCount() {
-                return passengersCount;
-            }
-
-            public void setPassengersCount(String passengersCount) {
-                this.passengersCount = passengersCount;
-            }
-
-            public String getUseNature() {
-                return useNature;
-            }
-
-            public void setUseNature(String useNature) {
-                this.useNature = useNature;
-            }
-
-            public String getCarGetType() {
-                return carGetType;
-            }
-
-            public void setCarGetType(String carGetType) {
-                this.carGetType = carGetType;
-            }
-
-            public String getProductionDate() {
-                return productionDate;
-            }
-
-            public void setProductionDate(String productionDate) {
-                this.productionDate = productionDate;
-            }
-
-            public String getIssueDate() {
-                return issueDate;
-            }
-
-            public void setIssueDate(String issueDate) {
-                this.issueDate = issueDate;
+            public void setRegistrationCertificateId(int registrationCertificateId) {
+                this.registrationCertificateId = registrationCertificateId;
             }
 
             public int getIsActive() {
@@ -1172,11 +839,11 @@ public class CheliangBean {
                 this.isActive = isActive;
             }
 
-            public Object getCreateTime() {
+            public long getCreateTime() {
                 return createTime;
             }
 
-            public void setCreateTime(Object createTime) {
+            public void setCreateTime(long createTime) {
                 this.createTime = createTime;
             }
 
@@ -1188,20 +855,644 @@ public class CheliangBean {
                 this.updateTime = updateTime;
             }
 
-            public String getPicUrl() {
-                return picUrl;
+            public int getAdminId() {
+                return adminId;
             }
 
-            public void setPicUrl(String picUrl) {
-                this.picUrl = picUrl;
+            public void setAdminId(int adminId) {
+                this.adminId = adminId;
             }
 
-            public Object getFile() {
-                return file;
+            public int getEnterpriseId() {
+                return enterpriseId;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setEnterpriseId(int enterpriseId) {
+                this.enterpriseId = enterpriseId;
+            }
+
+            public int getIsPass() {
+                return isPass;
+            }
+
+            public void setIsPass(int isPass) {
+                this.isPass = isPass;
+            }
+
+            public int getCarOnwerId() {
+                return carOnwerId;
+            }
+
+            public void setCarOnwerId(int carOnwerId) {
+                this.carOnwerId = carOnwerId;
+            }
+
+            public CertificateDrivingBoBean getCertificateDrivingBo() {
+                return certificateDrivingBo;
+            }
+
+            public void setCertificateDrivingBo(CertificateDrivingBoBean certificateDrivingBo) {
+                this.certificateDrivingBo = certificateDrivingBo;
+            }
+
+            public CertificateIDBoBeanX getCertificateIDBo() {
+                return certificateIDBo;
+            }
+
+            public void setCertificateIDBo(CertificateIDBoBeanX certificateIDBo) {
+                this.certificateIDBo = certificateIDBo;
+            }
+
+            public CertificateTransportBoBean getCertificateTransportBo() {
+                return certificateTransportBo;
+            }
+
+            public void setCertificateTransportBo(CertificateTransportBoBean certificateTransportBo) {
+                this.certificateTransportBo = certificateTransportBo;
+            }
+
+            public Object getCertificateRegistrationBo() {
+                return certificateRegistrationBo;
+            }
+
+            public void setCertificateRegistrationBo(Object certificateRegistrationBo) {
+                this.certificateRegistrationBo = certificateRegistrationBo;
+            }
+
+            public int getIdcertificateId() {
+                return idcertificateId;
+            }
+
+            public void setIdcertificateId(int idcertificateId) {
+                this.idcertificateId = idcertificateId;
+            }
+
+            public static class CertificateDrivingBoBean {
+                /**
+                 * id : 47
+                 * plateNo : 1102003003666
+                 * wchicheType :
+                 * owner : 钱镠
+                 * address :
+                 * useCharacter : 运货8
+                 * model :
+                 * engineNo : 100030
+                 * registrationDate :
+                 * issueDate :
+                 * fileNo :
+                 * passengersCount : 1000
+                 * allWeight :
+                 * curbWeight :
+                 * approvedWeight :
+                 * outline :
+                 * tractionWeight :
+                 * note :
+                 * chechRecord :
+                 * isActive : 1
+                 * updateTime : 1598871780000
+                 * createTime : 1598871780000
+                 * picUrl : http://aicc.ctags.cn/cccc/file/download/78c522b1-9404-4545-ad39-ec06dfb49b23.png
+                 * carId : 0
+                 * vin :
+                 */
+
+                private int id;
+                private String plateNo;
+                private String wchicheType;
+                private String owner;
+                private String address;
+                private String useCharacter;
+                private String model;
+                private String engineNo;
+                private String registrationDate;
+                private String issueDate;
+                private String fileNo;
+                private int passengersCount;
+                private String allWeight;
+                private String curbWeight;
+                private String approvedWeight;
+                private String outline;
+                private String tractionWeight;
+                private String note;
+                private String chechRecord;
+                private int isActive;
+                private long updateTime;
+                private long createTime;
+                private String picUrl;
+                private int carId;
+                private String vin;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getPlateNo() {
+                    return plateNo;
+                }
+
+                public void setPlateNo(String plateNo) {
+                    this.plateNo = plateNo;
+                }
+
+                public String getWchicheType() {
+                    return wchicheType;
+                }
+
+                public void setWchicheType(String wchicheType) {
+                    this.wchicheType = wchicheType;
+                }
+
+                public String getOwner() {
+                    return owner;
+                }
+
+                public void setOwner(String owner) {
+                    this.owner = owner;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public String getUseCharacter() {
+                    return useCharacter;
+                }
+
+                public void setUseCharacter(String useCharacter) {
+                    this.useCharacter = useCharacter;
+                }
+
+                public String getModel() {
+                    return model;
+                }
+
+                public void setModel(String model) {
+                    this.model = model;
+                }
+
+                public String getEngineNo() {
+                    return engineNo;
+                }
+
+                public void setEngineNo(String engineNo) {
+                    this.engineNo = engineNo;
+                }
+
+                public String getRegistrationDate() {
+                    return registrationDate;
+                }
+
+                public void setRegistrationDate(String registrationDate) {
+                    this.registrationDate = registrationDate;
+                }
+
+                public String getIssueDate() {
+                    return issueDate;
+                }
+
+                public void setIssueDate(String issueDate) {
+                    this.issueDate = issueDate;
+                }
+
+                public String getFileNo() {
+                    return fileNo;
+                }
+
+                public void setFileNo(String fileNo) {
+                    this.fileNo = fileNo;
+                }
+
+                public int getPassengersCount() {
+                    return passengersCount;
+                }
+
+                public void setPassengersCount(int passengersCount) {
+                    this.passengersCount = passengersCount;
+                }
+
+                public String getAllWeight() {
+                    return allWeight;
+                }
+
+                public void setAllWeight(String allWeight) {
+                    this.allWeight = allWeight;
+                }
+
+                public String getCurbWeight() {
+                    return curbWeight;
+                }
+
+                public void setCurbWeight(String curbWeight) {
+                    this.curbWeight = curbWeight;
+                }
+
+                public String getApprovedWeight() {
+                    return approvedWeight;
+                }
+
+                public void setApprovedWeight(String approvedWeight) {
+                    this.approvedWeight = approvedWeight;
+                }
+
+                public String getOutline() {
+                    return outline;
+                }
+
+                public void setOutline(String outline) {
+                    this.outline = outline;
+                }
+
+                public String getTractionWeight() {
+                    return tractionWeight;
+                }
+
+                public void setTractionWeight(String tractionWeight) {
+                    this.tractionWeight = tractionWeight;
+                }
+
+                public String getNote() {
+                    return note;
+                }
+
+                public void setNote(String note) {
+                    this.note = note;
+                }
+
+                public String getChechRecord() {
+                    return chechRecord;
+                }
+
+                public void setChechRecord(String chechRecord) {
+                    this.chechRecord = chechRecord;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public int getCarId() {
+                    return carId;
+                }
+
+                public void setCarId(int carId) {
+                    this.carId = carId;
+                }
+
+                public String getVin() {
+                    return vin;
+                }
+
+                public void setVin(String vin) {
+                    this.vin = vin;
+                }
+            }
+
+            public static class CertificateIDBoBeanX {
+                /**
+                 * id : 355
+                 * name : 测试4
+                 * six : 1
+                 * nation : 中国
+                 * birthDay : 2020-10-26
+                 * address : 北京市朝阳区
+                 * isActive : 1
+                 * createTime : 1598870205000
+                 * updateTime : 1598871717000
+                 * picUrl : http://aicc.ctags.cn/cccc/file/download/5e9f9af5-2dec-4543-9980-c7fc039b4610.png
+                 * picUrl2 :
+                 * driverId : 0
+                 * carId : 0
+                 * carOwnerId : 0
+                 * idno : 1102003003666
+                 */
+
+                private int id;
+                private String name;
+                private String six;
+                private String nation;
+                private String birthDay;
+                private String address;
+                private int isActive;
+                private long createTime;
+                private long updateTime;
+                private String picUrl;
+                private String picUrl2;
+                private int driverId;
+                private int carId;
+                private int carOwnerId;
+                private String idno;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getSix() {
+                    return six;
+                }
+
+                public void setSix(String six) {
+                    this.six = six;
+                }
+
+                public String getNation() {
+                    return nation;
+                }
+
+                public void setNation(String nation) {
+                    this.nation = nation;
+                }
+
+                public String getBirthDay() {
+                    return birthDay;
+                }
+
+                public void setBirthDay(String birthDay) {
+                    this.birthDay = birthDay;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public String getPicUrl2() {
+                    return picUrl2;
+                }
+
+                public void setPicUrl2(String picUrl2) {
+                    this.picUrl2 = picUrl2;
+                }
+
+                public int getDriverId() {
+                    return driverId;
+                }
+
+                public void setDriverId(int driverId) {
+                    this.driverId = driverId;
+                }
+
+                public int getCarId() {
+                    return carId;
+                }
+
+                public void setCarId(int carId) {
+                    this.carId = carId;
+                }
+
+                public int getCarOwnerId() {
+                    return carOwnerId;
+                }
+
+                public void setCarOwnerId(int carOwnerId) {
+                    this.carOwnerId = carOwnerId;
+                }
+
+                public String getIdno() {
+                    return idno;
+                }
+
+                public void setIdno(String idno) {
+                    this.idno = idno;
+                }
+            }
+
+            public static class CertificateTransportBoBean {
+                /**
+                 * id : 33
+                 * name : 北京时尚呢供应
+                 * address : 海淀西北旺11
+                 * plateNo : 运输证10259685222122666传
+                 * licence :
+                 * type : 货车12
+                 * weight : 1000吨2
+                 * size : 2000*233*9652
+                 * scope : 全国2
+                 * grantDate : 2020-06-1211
+                 * isActive : 1
+                 * createTime : 1598869964000
+                 * updateTime : 1598870005000
+                 * picUrl : http://aicc.ctags.cn/cccc/file/download/dab6139b-40ec-4723-85e2-3268e32d3087.png
+                 * carId : 0
+                 */
+
+                private int id;
+                private String name;
+                private String address;
+                private String plateNo;
+                private String licence;
+                private String type;
+                private String weight;
+                private String size;
+                private String scope;
+                private String grantDate;
+                private int isActive;
+                private long createTime;
+                private long updateTime;
+                private String picUrl;
+                private int carId;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public String getPlateNo() {
+                    return plateNo;
+                }
+
+                public void setPlateNo(String plateNo) {
+                    this.plateNo = plateNo;
+                }
+
+                public String getLicence() {
+                    return licence;
+                }
+
+                public void setLicence(String licence) {
+                    this.licence = licence;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
+                }
+
+                public String getWeight() {
+                    return weight;
+                }
+
+                public void setWeight(String weight) {
+                    this.weight = weight;
+                }
+
+                public String getSize() {
+                    return size;
+                }
+
+                public void setSize(String size) {
+                    this.size = size;
+                }
+
+                public String getScope() {
+                    return scope;
+                }
+
+                public void setScope(String scope) {
+                    this.scope = scope;
+                }
+
+                public String getGrantDate() {
+                    return grantDate;
+                }
+
+                public void setGrantDate(String grantDate) {
+                    this.grantDate = grantDate;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public int getCarId() {
+                    return carId;
+                }
+
+                public void setCarId(int carId) {
+                    this.carId = carId;
+                }
             }
         }
     }

@@ -217,7 +217,168 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
             case R.id.et_deng_ji_send_date:
                 break;
             case R.id.tv_srue:
+                uploadToast();
+
+
                 break;
+        }
+    }
+
+    private void uploadToast() {
+        /**
+         * 行驶证
+         */
+        if(StringUtil.isEmpty(vehicleUrl)){
+            ToastUtils.popUpToast("行驶证正页照片不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(vehicleReverseUrl)){
+            ToastUtils.popUpToast("行驶证正页照片不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtCarNum.getText().toString())){
+            ToastUtils.popUpToast("号牌号码不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtCarType.getText().toString())){
+            ToastUtils.popUpToast("车辆类型不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtXingZhi.getText().toString())){
+            ToastUtils.popUpToast("使用性质不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtBrandXingHao.getText().toString())){
+            ToastUtils.popUpToast("品牌型号不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mTvDateZhuce.getText().toString())){
+            ToastUtils.popUpToast("行驶证注册日期不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mTvDateSend.getText().toString())){
+            ToastUtils.popUpToast("行驶证发证日期不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDangAn.getText().toString())){
+            ToastUtils.popUpToast("档案编号不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtZongZhi.getText().toString())){
+            ToastUtils.popUpToast("总质量不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtHeDing.getText().toString())){
+            ToastUtils.popUpToast("核定载质量不得为空");
+            return;
+        }
+        /**
+         * 道路运输证
+         */
+        if(StringUtil.isEmpty(roadUrl)){
+            ToastUtils.popUpToast("请上传道路运输证照片");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtYunYingNum.getText().toString())){
+            ToastUtils.popUpToast("运营号不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtYeHuName.getText().toString())){
+            ToastUtils.popUpToast("业户名称不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtCheliangNum.getText().toString())){
+            ToastUtils.popUpToast("道路运输证车牌号码不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtJingYingNum.getText().toString())){
+            ToastUtils.popUpToast("经营许可证号不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtYunYingFanWei.getText().toString())){
+            ToastUtils.popUpToast("经营范围不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mTvSendDate.getText().toString())){
+            ToastUtils.popUpToast("道路运输证发证日期不得为空");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtHeDing.getText().toString())){
+            ToastUtils.popUpToast("核定载质量不得为空");
+            return;
+        }
+        /**
+         * 机动车登记证书
+         */
+        if(StringUtil.isEmpty(jidongUrl)){
+            ToastUtils.popUpToast("请上传机动车登记证书照片");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtJiGuan.getText().toString())){
+            ToastUtils.popUpToast("请填写您的登记机关");
+            return;
+        }
+        if(StringUtil.isEmpty(mTvDengJiDate.getText().toString())){
+            ToastUtils.popUpToast("请选择机动车登记日期");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiNum.getText().toString())){
+            ToastUtils.popUpToast("请填写您的登记编号");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiCarType.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车车辆类型");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiCarBrand.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车车辆品牌");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiCarModel.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车车辆型号");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiCarEngine.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车发动机号");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiRanLiao.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车燃料种类");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiPaiLiang.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车排量/功率");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiBuildName.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车制造厂名称");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiTires.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车轮胎数");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiChang.getText().toString()) ||
+                StringUtil.isEmpty(mEtDengJiKuan.getText().toString())||
+                 StringUtil.isEmpty(mEtDengJiGao.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车长/宽/高");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiQianYin.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车准牵引总质量");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiJiaShiShi.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车驾驶室载客数");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiUseXingZhi.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车使用性质");
+            return;
+        }
+        if(StringUtil.isEmpty(mEtDengJiSendDate.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车发证日期");
+            return;
         }
     }
 
@@ -514,15 +675,16 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
             case UPLOAD_VEHICLE:
                 vehicleUrl = IMAGE_BASE_URL + url;
                 break;
+            case UPLOAD_VEHICLE_REVERSE:
+                vehicleReverseUrl = IMAGE_BASE_URL + url;
+                break;
             case UPLOAD_ROAD:
                 roadUrl = IMAGE_BASE_URL + url;
                 break;
             case UPLOAD_JIDONG:
                 jidongUrl = IMAGE_BASE_URL + url;
                 break;
-            case UPLOAD_VEHICLE_REVERSE:
-                vehicleReverseUrl = IMAGE_BASE_URL + url;
-                break;
+
         }
     }
 }

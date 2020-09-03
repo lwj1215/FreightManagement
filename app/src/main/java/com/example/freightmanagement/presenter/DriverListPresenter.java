@@ -35,22 +35,6 @@ public class DriverListPresenter extends BasePresenter<DriverListConstact .View>
 
     @Override
     public void delete(CarExecuteParam param) {
-        String json = new Gson().toJson(param);
-        RestApi.getInstance().post(API_CAR_DEL,json , new OnRequestResultForCommon() {
-            @Override
-            public void onSuccess(String json) {
-                super.onSuccess(json);
-                mView.delResult(json);
-            }
-            @Override
-            public void onFail() {
-                super.onFail();
-            }
 
-            @Override
-            public void netUnlink() {
-                super.netUnlink();
-            }
-        });
     }
 }

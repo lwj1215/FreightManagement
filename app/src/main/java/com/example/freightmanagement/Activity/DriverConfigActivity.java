@@ -438,6 +438,10 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
                 CertificateDriverParam certificateDriverParam = new CertificateDriverParam();
                 certificateDriverParam.setClasss(permitType);
+                boolean isStartTime = DateUtil.isValidDate(startTime);
+                if(!isStartTime){
+                    ToastUtils.popUpToast("驾驶证有效期限错误，请重新选择");
+                }
                 certificateDriverParam.setStartTime(startTime);
                 certificateDriverParam.setPicUrl(driverUrl);
                 certificateDriverParam.setFileNumber(String.valueOf(driverNum));
@@ -447,8 +451,16 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
                 certificateWorkParam.setFileNumber(postCardNum);
                 try {
-                    certificateWorkParam.setFirstTime(DateUtil.string2Date(mTvFirstReceive.getText().toString()));
-                    certificateWorkParam.setValidityStartTime(DateUtil.string2Date(mTvYouXiaoQi.getText().toString()));
+                    String firstTimeStr = mTvFirstReceive.getText().toString();
+                    String yxqTimeStr = mTvYouXiaoQi.getText().toString();
+                    if(!DateUtil.isValidDate(firstTimeStr)){
+                        ToastUtils.popUpToast("上岗证初次领证时间错误，请重新选择");
+                    }
+                    if(!DateUtil.isValidDate(yxqTimeStr)){
+                        ToastUtils.popUpToast("上岗证有效期限时间错误，请重新选择");
+                    }
+                    certificateWorkParam.setFirstTime(DateUtil.string2Date(firstTimeStr,ymd));
+                    certificateWorkParam.setValidityStartTime(DateUtil.string2Date(yxqTimeStr,ymd));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
@@ -765,19 +777,19 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             public void onDatePicked(String year, String month, String day) {
                 switch (type) {
                     case DATE_TYPE_START_DATE:
-                        startTime = year + "年" + month + "月" + day + "日";
+                        startTime = year + "-" + month + "-" + day ;
                         mTvStartDate.setText(startTime);
                         break;
                     case DATE_TYPE_END_DATE:
-                        endTime = year + "年" + month + "月" + day + "日";
+                        endTime = year + "-" + month + "-" + day;
                         mEtEndDate.setText(endTime);
                         break;
                     case DATE_TYPE_FIRST_RECEIVE_DATE:
-                        firstReceiveTime = year + "年" + month + "月" + day + "日";
+                        firstReceiveTime = year + "-" + month + "-" + day ;
                         mTvFirstReceive.setText(firstReceiveTime);
                         break;
                     case DATE_TYPE_VALID_DATE:
-                        youxiaoqiTime = year + "年" + month + "月" + day + "日";
+                        youxiaoqiTime = year + "-" + month + "-" + day + "-";
                         mTvYouXiaoQi.setText(youxiaoqiTime);
                         break;
                 }

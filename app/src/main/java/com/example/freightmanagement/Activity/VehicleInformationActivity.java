@@ -8,12 +8,10 @@ import android.widget.TextView;
 
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.CheliangBean;
-import com.example.freightmanagement.Bean.TrainingStartBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.presenter.VehicleInformationPresenter;
-
-import java.util.List;
+import com.example.freightmanagement.presenter.constract.VehicleInformationConstact;
 
 /**
  * 驾驶员 是可以上报车辆检查情况  维修情况  和保养情况
@@ -26,10 +24,20 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
     private TextView tv_cljc, tv_clwx, tv_clby;
     private String owner;
     private String owner2;
+    private TextView mTvDriverName;
+    private TextView mTvCarNum;
+    private TextView mTvCompany;
+    private TextView mTvCarType;
+    private TextView mTvBrandXing;
+    private TextView mTvCarShibie;
+    private TextView mTvZhuceDate;
+    private TextView mTvCarYunyingNum;
+    private TextView mTvYunyingYxq;
 
     @Override
     public int setLayoutResource() {
         return R.layout.activity_vehicle_information;
+
     }
 
     @Override
@@ -46,6 +54,13 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
         tv_cljc = bindView(R.id.tv_cljc);
         tv_clwx = bindView(R.id.tv_clwx);
         tv_clby = bindView(R.id.tv_clby);
+        mTvDriverName = findViewById(R.id.tv_driver_name);
+        mTvCarNum = findViewById(R.id.tv_car_num);
+        mTvCompany = findViewById(R.id.tv_company);
+        mTvCarType = findViewById(R.id.tv_car_type);
+        mTvBrandXing = findViewById(R.id.tv_brand_xing);
+        mTvCarShibie = findViewById(R.id.tv_car_shibie);
+        mTvZhuceDate = findViewById(R.id.tv_zhuce_date);
         lin_celiang.setOnClickListener(this);
         lin_celiangwx.setOnClickListener(this);
         lin_chebaoyang.setOnClickListener(this);
@@ -65,6 +80,8 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
             tv_clwx.setText("查看车辆维修情况");
             tv_clby.setText("查看车辆保养情况");
         }
+        mTvCarYunyingNum = findViewById(R.id.tv_car_yunying_num);
+        mTvYunyingYxq = findViewById(R.id.tv_yunying_yxq);
     }
 
     @Override
@@ -84,8 +101,8 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
             case R.id.lin_celiang:
                 if (PrefUtilsData.getType().equals("1")) {
                     Intent intent = new Intent(VehicleInformationActivity.this, VehicleDetectionActivity.class);
-                    intent.putExtra("name1",owner);
-                    intent.putExtra("name2",owner2);
+                    intent.putExtra("name1", owner);
+                    intent.putExtra("name2", owner2);
                     startActivity(intent);
                 } else if (PrefUtilsData.getType().equals("2")) {
                     getTz("1");
@@ -128,12 +145,33 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
 
     @Override
     public void mSuc(CheliangBean cheliangBean) {
-        owner = cheliangBean.getData().getCertificateRegistrationBo().getOwner();
-        owner2 = cheliangBean.getData().getCertificateIDBo().getName();
-        et_real_name.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarModel()+"");
-        et_detail_address.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarBrand()+"");
-        tv_current_address.setText(cheliangBean.getData().getCertificateRegistrationBo().getCarType()+"");
-        tv_sign_hint.setText(cheliangBean.getData().getCertificateTransportBo().getPlateNo()+"");
-        tv_mobile.setText(cheliangBean.getData().getCertificateTransportBo().getGrantDate()+"");
+        CheliangBean.DataBean data = cheliangBean.getData();
+        if (data != null) {
+            CheliangBean.DataBean.CarBoBean carBo = data.getCarBo();
+            CheliangBean.DataBean.CertificateIDBoBean idCardBo = data.getCertificateIDBo();
+            if (idCardBo != null) {
+                mTvDriverName.setText(idCardBo.getName());
+            }
+            if (carBo != null) {
+                CheliangBean.DataBean.CarBoBean.CertificateTransportBoBean certificateTransportBo = carBo.getCertificateTransportBo();
+                if (certificateTransportBo != null) {
+                    mTvCarNum.setText(certificateTransportBo.getPlateNo());
+                }
+            }
+            CheliangBean.DataBean.CarBoBean.CertificateDrivingBoBean certificateDrivingBo = carBo.getCertificateDrivingBo();
+            if (certificateDrivingBo != null) {
+                mTvCarType.setText(certificateDrivingBo.getWchicheType());
+                mTvCompany.setText(certificateDrivingBo.getOwner());
+                mTvBrandXing.setText(certificateDrivingBo.getModel());
+                mTvCarShibie.setText(certificateDrivingBo.getVin());
+                mTvZhuceDate.setText(certificateDrivingBo.getRegistrationDate());
+            }
+            CheliangBean.DataBean.CarBoBean.CertificateTransportBoBean certificateTransportBo = carBo.getCertificateTransportBo();
+            if (certificateTransportBo != null) {
+                mTvCarYunyingNum.setText(certificateTransportBo.getPlateNo());
+                mTvYunyingYxq.setText(certificateTransportBo.getLicence());
+            }
+
+        }
     }
 }

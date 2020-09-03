@@ -21,7 +21,7 @@ public class IDCardParam implements Serializable {
 
     private String address;
 
-    private String IDNo;
+    private String idno;
 
     public String getPicUrl() {
         return picUrl;
@@ -80,10 +80,10 @@ public class IDCardParam implements Serializable {
     }
 
     public String getIDNo() {
-        return IDNo;
+        return idno;
     }
 
     public void setIDNo(String IDNo) {
-        this.IDNo = IDNo;
+        this.idno = IDNo;
     }
 }

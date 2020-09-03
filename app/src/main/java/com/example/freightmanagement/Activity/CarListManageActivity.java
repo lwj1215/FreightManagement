@@ -1,14 +1,9 @@
 package com.example.freightmanagement.Activity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.view.LayoutInflater;
+import android.content.Intent;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,6 +41,7 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
     @Override
     protected void onLoadData2Remote() {
         mPresenter.getList();
+
     }
 
     @Override
@@ -59,25 +55,29 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
     }
     /**
      * 两个按钮的 dialog
+     *
      * @param position
      */
-    private void showTwo(int position) {
-        builder = new AlertDialog.Builder(this).setIcon(R.mipmap.ic_launcher).setTitle("删除车辆")
-                .setMessage("是否确认删除此车辆").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //ToDo: 你想做的事情
-                        Toast.makeText(CarListManageActivity.this, "确定按钮", Toast.LENGTH_LONG).show();
-                    }
-                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        //ToDo: 你想做的事情
-                        Toast.makeText(CarListManageActivity.this, "关闭按钮", Toast.LENGTH_LONG).show();
-                        dialogInterface.dismiss();
-                    }
-                });
-        builder.create().show();
+    private void showTwo(final int position) {
+//        builder = new AlertDialog.Builder(this).setIcon(R.mipmap.ic_launcher).setTitle("删除车辆")
+//                .setMessage("是否确认删除此车辆").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        //ToDo: 你想做的事情
+//                        Toast.makeText(DriverListActivity.this, "确定按钮", Toast.LENGTH_LONG).show();
+//                        CarExecuteParam carExecuteParam = new CarExecuteParam();
+//                        carExecuteParam.setCarId(data.get(position).getCarId());
+//                        mPresenter.delete(carExecuteParam);
+//                    }
+//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialogInterface, int i) {
+//                        //ToDo: 你想做的事情
+//                        Toast.makeText(DriverListActivity.this, "关闭按钮", Toast.LENGTH_LONG).show();
+//                        dialogInterface.dismiss();
+//                    }
+//                });
+//        builder.create().show();
     }
 
 
@@ -85,13 +85,19 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_srue:
-
+                Intent intent = new Intent(this, CarAddActivity.class);
+                startActivity(intent);
                 break;
         }
     }
 
     @Override
     public void success(String url, int type) {
+
+    }
+
+    @Override
+    public void delResult(String json) {
 
     }
 

@@ -2,12 +2,15 @@ package com.example.freightmanagement.presenter;
 
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
+import com.example.freightmanagement.Bean.CarOwnerBean;
 import com.example.freightmanagement.Bean.DriverInformationBean;
 import com.example.freightmanagement.Bean.QiYeBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.Utils.PrefUtilsData;
+import com.example.freightmanagement.Utils.ToastUtils;
+import com.example.freightmanagement.enums.ResponseCodeEnum;
 import com.example.freightmanagement.presenter.constract.DriverInfomationConstact;
 import com.google.gson.Gson;
 
@@ -60,7 +63,12 @@ public class DriverInformationPresenter extends BasePresenter<DriverInfomationCo
         RestApi.getInstance().get(BaseApiConstants.API_CHEZHU_GET, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String msg) {
-
+                CarOwnerBean carOwnerBean = new Gson().fromJson(msg, CarOwnerBean.class);
+                if(carOwnerBean.getCode() == ResponseCodeEnum.SUCCESS.getCode()){
+                    mView.chezhuSuc(carOwnerBean.getData());
+                }else {
+                    ToastUtils.popUpToast("获取车主信息失败");
+                }
             }
 
             @Override

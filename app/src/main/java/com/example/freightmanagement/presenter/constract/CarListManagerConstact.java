@@ -1,6 +1,7 @@
 package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
+import com.example.freightmanagement.model.CarExecuteParam;
 
 import java.io.File;
 
@@ -12,7 +13,12 @@ public interface CarListManagerConstact {
 
     void getList();
 
+    void delete(CarExecuteParam param);
+
     interface View extends BaseView {
         void success(String url, int type);
+
+        void delResult(String json);
+
     }
 }

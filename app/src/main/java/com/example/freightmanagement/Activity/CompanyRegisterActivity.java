@@ -450,7 +450,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                String time = year + "年" + month + "月" + day + "日";
+                String time = year + "-" + month + "-" + day ;
                 switch (type) {
                     case TYPE_CHENG_LI:
                         mTvChengli.setText(time);

@@ -113,9 +113,9 @@ public class BaseApiConstants {
      */
     public static final String API_TIJIAOWENJUAN = "/cccc/examination/submit";
     /**
-     * 车辆信息
+     * 驾驶员车辆信息
      */
-    public static final String API_CLXINXI = "/cccc/carOwner/getOwner/";
+    public static final String API_CLXINXI = "/cccc/driver/getDirver/";
     /**
      * 选择车辆
      */
@@ -142,7 +142,7 @@ public class BaseApiConstants {
     /**
      * 获取合同状态
      */
-    public static final String API_CONTRACT_GET = "/cccc/letter/getContract";
+    public static final String API_CONTRACT_GET = "/cccc/letter/getContract/";
     /**
      * 获取企业信息
      */
@@ -151,4 +151,9 @@ public class BaseApiConstants {
      * 获取车主信息
      */
     public static final String API_CHEZHU_GET = "/cccc/carOwner/getOwner";
+    /**
+     * 获取车主信息
+     */
+    public static final String API_TRAIN_GET = "/cccc/train/complete/";
+
 }

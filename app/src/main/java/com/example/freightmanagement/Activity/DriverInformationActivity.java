@@ -22,10 +22,14 @@ import java.util.Locale;
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
     private TextView name, tv_card, tv_sign_date, tv_sign_fen, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,
+            et_code_qy, et_name_qy, et_jing_qy, tv_chengli_qy, et_fading_qy, et_address_qy, et_permit_type, tv_start_date, et_end_date, et_xuke_qy,
+            tv_zheng_jian_you_xiao_qi;
             et_code_qy, et_name_qy, et_jing_qy, tv_chengli_qy, et_fading_qy, et_address_qy, et_permit_type, tv_start_date, et_end_date,et_xuke_qy,
             tv_zheng_jian_you_xiao_qi,et_post_card,tv_first_receive,tv_you_xiao_qi;
     private ImageView iv_card_front1, iv_card_front2, iv_card_revers_cz, iv_card_front_qy, iv_card_front_cz, iv_card_revers_qy, iv_business_front, iv_driver_front,
-            iv_work_front,iv_road_qy;
+            iv_work_front, iv_road_qy;
+    private TextView mTvCard1;
+    private TextView mTvCard2;
 
     @Override
     public int setLayoutResource() {
@@ -80,6 +84,8 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         tv_first_receive = bindView(R.id.tv_first_receive);
         tv_you_xiao_qi = bindView(R.id.tv_you_xiao_qi);
         tv_zheng_jian_you_xiao_qi = bindView(R.id.tv_zheng_jian_you_xiao_qi);
+        mTvCard1 = findViewById(R.id.tv_card1);
+        mTvCard2 = findViewById(R.id.tv_card2);
     }
 
     @Override
@@ -137,21 +143,34 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         QiYeBean.DataBean.CertificateOperationBoBean certificateOperationBo = data.getCertificateOperationBo();
         Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front_qy);
         Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_revers_qy);
-        et_real_name_qy.setText(certificateIDBo.getName()+"");
-        et_card_num_qy.setText(certificateIDBo.getCarId()+"");
+        et_real_name_qy.setText(certificateIDBo.getName() + "");
+        et_card_num_qy.setText(certificateIDBo.getCarId() + "");
         Glide.with(getContext()).load(certificateBusinessBo.getPicUrl()).into(iv_business_front);
-        et_code_qy.setText(certificateBusinessBo.getId()+"");
-        et_name_qy.setText(certificateBusinessBo.getName()+"");
-        et_jing_qy.setText(certificateBusinessBo.getScope()+"");
-        tv_chengli_qy.setText(timeStampToDate(certificateBusinessBo.getCreateTime())+"");
-        et_address_qy.setText(certificateBusinessBo.getRegistrationAuthority()+"");
+        et_code_qy.setText(certificateBusinessBo.getId() + "");
+        et_name_qy.setText(certificateBusinessBo.getName() + "");
+        et_jing_qy.setText(certificateBusinessBo.getScope() + "");
+        tv_chengli_qy.setText(timeStampToDate(certificateBusinessBo.getCreateTime()) + "");
+        et_address_qy.setText(certificateBusinessBo.getRegistrationAuthority() + "");
         Glide.with(getContext()).load(certificateOperationBo.getPicUrl()).into(iv_road_qy);
-        et_xuke_qy.setText(certificateOperationBo.getGrantNo() +"");
-        tv_zheng_jian_you_xiao_qi.setText(certificateOperationBo.getValidityDate() +"");
+        et_xuke_qy.setText(certificateOperationBo.getGrantNo() + "");
+        tv_zheng_jian_you_xiao_qi.setText(certificateOperationBo.getValidityDate() + "");
     }
 
     @Override
-    public void chezhuSuc() {
+    public void chezhuSuc(CarOwnerBean.DataBean data) {
+        CarOwnerBean.DataBean.CertificateIDBoBean certificateIDBo = data.getCertificateIDBo();
+        if (certificateIDBo == null) {
+            return;
+        }
+        mTvCard1.setVisibility(View.GONE);
+        mTvCard2.setVisibility(View.GONE);
+
+        iv_card_front_cz.setVisibility(View.VISIBLE);
+        iv_card_revers_cz.setVisibility(View.VISIBLE);
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front_cz);
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_revers_cz);
+        et_real_name_cz.setText(certificateIDBo.getName());
+        et_card_num_cz.setText(certificateIDBo.getIdno());
 
     }
 

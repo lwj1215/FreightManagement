@@ -63,7 +63,7 @@ public class EmploymentContractPresenter extends BasePresenter<EmploymentConstac
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);
-                mView.success();
+//                mView.success();
             }
             @Override
             public void onFail() {

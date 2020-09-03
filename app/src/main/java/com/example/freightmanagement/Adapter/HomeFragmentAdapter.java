@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
 import com.example.freightmanagement.Utils.PrefUtilsData;
@@ -26,13 +27,15 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
     private Context context;
     private final LayoutInflater layoutInflater;
     private List<String> dataList;
-    private int[] mName = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_peixun, R.mipmap.img_hetong, R.mipmap.img_chengnuoshu, R.mipmap.img_zerenshu, R.mipmap.img_lihui, R.mipmap.img_mima, R.mipmap.img_guanyu};
+    private List<Integer> iconList;
+    private int[] icons = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_peixun, R.mipmap.img_hetong, R.mipmap.img_chengnuoshu, R.mipmap.img_zerenshu, R.mipmap.img_lihui, R.mipmap.img_mima, R.mipmap.img_guanyu};
     private OnItemClickListener listener;
     private int selectorPosition;
     private int playcount;
 
-    public void setData(List<String> commendarray) {
+    public void setData(List<String> commendarray,int[] icons) {
         this.dataList = commendarray;
+        this.icons = icons;
         notifyDataSetChanged();
     }
 
@@ -63,7 +66,8 @@ public class HomeFragmentAdapter extends RecyclerView.Adapter<HomeFragmentAdapte
 
                 holder.tv_name.setText(dataList.get(position).toString());
             }
-            holder.img.setImageResource(mName[position]);
+//            holder.img.setImageResource(icons[position]);
+            Glide.with(context).load(icons[position]).circleCrop().into(holder.img);
         } else {
         }
 
