@@ -61,6 +61,7 @@ import cn.qqtheme.framework.util.ConvertUtils;
 import cn.qqtheme.framework.widget.WheelView;
 
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
+import static com.example.freightmanagement.Utils.DateUtil.ymd;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
