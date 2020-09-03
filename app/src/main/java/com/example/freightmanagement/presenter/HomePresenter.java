@@ -38,6 +38,11 @@ public class HomePresenter extends BasePresenter<HomeConstact.View> implements H
                 super.netUnlink();
             }
         });
+
+    }
+
+    @Override
+    public void getContractComplete() {
         RestApi.getInstance().get(API_CONTRACT_GET.concat(PrefUtilsData.getUserId()), new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {

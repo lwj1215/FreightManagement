@@ -6,6 +6,7 @@ public interface HomeConstact {
 
     void getTrainComplete();
 
+    void getContractComplete();
 
 
     interface View extends BaseView {

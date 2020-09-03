@@ -88,7 +88,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                     startActivity(new Intent(activity, DriverInformationActivity.class));
                 }else if (position == 1) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
-
+                        mPresenter.getContractComplete();
                         startActivity(new Intent(activity, VehicleInformationActivity.class));
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                         startActivity(new Intent(activity, CarListManageActivity.class));
@@ -105,7 +105,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                     }
                 }else if (position == 3) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
-//                        mPresenter.getContractComplete();
+                        mPresenter.getContractComplete();
                         mPresenter.getTrainComplete();
                         startActivity(new Intent(activity, EmploymentContractActivity.class));
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
