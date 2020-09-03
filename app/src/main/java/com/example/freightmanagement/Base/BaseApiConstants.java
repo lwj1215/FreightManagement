@@ -155,5 +155,9 @@ public class BaseApiConstants {
      * 获取车主信息
      */
     public static final String API_TRAIN_GET = "/cccc/train/complete/";
+    /**
+     * 增加车辆
+     */
+    public static final String API_ADD_CAR = "/cccc/carOwner/addCar";
 
 }

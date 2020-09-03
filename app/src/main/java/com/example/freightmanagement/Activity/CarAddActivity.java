@@ -29,7 +29,6 @@ import com.example.freightmanagement.model.CertificateDriving;
 import com.example.freightmanagement.model.CertificateRegistration;
 import com.example.freightmanagement.model.CertificateTransport;
 import com.example.freightmanagement.presenter.CarAddPresenter;
-import com.example.freightmanagement.presenter.constract.CarAddConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -265,15 +264,28 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 certificateTransport.setPicUrl(roadUrl);
                 certificateTransport.setName(mEtYeHuName.getText().toString());
                 certificateTransport.setScope(mEtYunYingFanWei.getText().toString());
-//                certificateTransport.setGrantDate();
+                certificateTransport.setGrantDate(mTvSendDate.getText().toString());
 
                 CertificateRegistration certificateRegistration = new CertificateRegistration();
-//                certificateRegistration.setPicUrl();
-//                certificateRegistration.sett
-
+                certificateRegistration.setPicUrl(jidongUrl);
+                certificateRegistration.setOwner(mEtOwner.getText().toString());
+                certificateRegistration.setCarType(mEtDengJiCarType.getText().toString());
+                certificateRegistration.setCarBrand(mEtDengJiCarBrand.getText().toString());
+                certificateRegistration.setCarModel(mEtDengJiCarModel.getText().toString());
+                certificateRegistration.setCarNo(mEtDengJiCarBrand.getText().toString());
+                certificateRegistration.setEngineNo(mEtDengJiCarEngine.getText().toString());
+                certificateRegistration.setFuelType(mEtDengJiRanLiao.getText().toString());
+                certificateRegistration.setPower(mEtDengJiPaiLiang.getText().toString());
+                certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
+                certificateRegistration.setMaker(mEtDengJiBuildName.getText().toString());
+                certificateRegistration.setTireCount(mEtDengJiTires.getText().toString());
+                certificateRegistration.setUseNature(mEtDengJiUseXingZhi.getText().toString());
+                certificateRegistration.setIssueDate(mEtDengJiSendDate.getText().toString());
+                certificateRegistration.setPassengersCount(mEtDengJiJiaShiShi.getText().toString());
                 carBo.setCertificateDrivingBo(certificateDriving);
                 carBo.setCertificateRegistrationBo(certificateRegistration);
                 carBo.setCertificateTransportBo(certificateTransport);
+                mPresenter.submit(carBo);
                 break;
         }
     }
@@ -785,5 +797,10 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 break;
 
         }
+    }
+
+    @Override
+    public void submitResult(String msg) {
+
     }
 }
