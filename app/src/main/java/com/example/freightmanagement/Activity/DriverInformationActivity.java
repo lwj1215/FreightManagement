@@ -23,7 +23,7 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
 
     private TextView name, tv_card, tv_sign_date, tv_sign_fen, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,
             et_code_qy, et_name_qy, et_jing_qy, tv_chengli_qy, et_fading_qy, et_address_qy, et_permit_type, tv_start_date, et_end_date,et_xuke_qy,
-            tv_zheng_jian_you_xiao_qi;
+            tv_zheng_jian_you_xiao_qi,et_post_card,tv_first_receive,tv_you_xiao_qi;
     private ImageView iv_card_front1, iv_card_front2, iv_card_revers_cz, iv_card_front_qy, iv_card_front_cz, iv_card_revers_qy, iv_business_front, iv_driver_front,
             iv_work_front,iv_road_qy;
 
@@ -76,6 +76,9 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         iv_work_front = bindView(R.id.iv_work_front);
         iv_road_qy = bindView(R.id.iv_road_qy);
         et_xuke_qy = bindView(R.id.et_xuke_qy);
+        et_post_card = bindView(R.id.et_post_card);
+        tv_first_receive = bindView(R.id.tv_first_receive);
+        tv_you_xiao_qi = bindView(R.id.tv_you_xiao_qi);
         tv_zheng_jian_you_xiao_qi = bindView(R.id.tv_zheng_jian_you_xiao_qi);
     }
 
@@ -114,8 +117,11 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
             Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_front2);
         }
         Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_driver_front);
-        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_work_front);
+        Glide.with(getContext()).load(certificateWorkBo.getPicUrl()).into(iv_work_front);
         Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
+        et_post_card.setText(certificateWorkBo.getGrantNo()+"");
+        tv_first_receive.setText(certificateWorkBo.getValidityStartTime()+"");
+        tv_you_xiao_qi.setText(certificateWorkBo.getValidityEndTime()+"");
     }
 
     @Override

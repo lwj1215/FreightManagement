@@ -1,6 +1,7 @@
 package com.example.freightmanagement.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,8 +56,15 @@ public class SelectCarAdapter extends RecyclerView.Adapter<SelectCarAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.tv_name.setText(data.get(position).getCertificateDrivingBo().getOwner());
-        holder.tv_brand.setText(data.get(position).getCertificateRegistrationBo().getCarBrand());
+        if (data==null||data.get(position)==null||data.get(position).getCertificateRegistrationBo()==null){
+            return;
+        }
+        if (!TextUtils.isEmpty(data.get(position).getCertificateRegistrationBo().getOwner())){
+            holder.tv_name.setText(data.get(position).getCertificateRegistrationBo().getOwner());
+        }if (!TextUtils.isEmpty(data.get(position).getCertificateRegistrationBo().getCarBrand())){
+            holder.tv_brand.setText(data.get(position).getCertificateRegistrationBo().getCarBrand());
+        }
+
         holder.tv_brand.setText(data.get(position).getCertificateRegistrationBo().getGrantNo());
         holder.rb_check.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

@@ -447,7 +447,6 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
                 certificateWorkParam.setFileNumber(postCardNum);
                 try {
-                    certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
                     certificateWorkParam.setFirstTime(DateUtil.string2Date(mTvFirstReceive.getText().toString()));
                     certificateWorkParam.setValidityStartTime(DateUtil.string2Date(mTvYouXiaoQi.getText().toString()));
                 } catch (ParseException e) {
@@ -664,6 +663,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
                             Glide.with(getContext()).load(filePath).into(mIvWorkFront);
+                            mPresenter.upload(new File(filePath), UPLOAD_WORK);
                             boolean json = StringUtils.isJson(result);
 
                             if(!json){
