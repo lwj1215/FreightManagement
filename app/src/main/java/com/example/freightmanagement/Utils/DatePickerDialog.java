@@ -18,7 +18,7 @@ import java.util.List;
 public class DatePickerDialog extends Dialog {
 
     private static  int MIN_YEAR = 1900;
-    private static  int MAX_YEAR = 2019;
+    private static  int MAX_YEAR = 3020;
     private Params params;
 
     public DatePickerDialog(Context context, int themeResId) {

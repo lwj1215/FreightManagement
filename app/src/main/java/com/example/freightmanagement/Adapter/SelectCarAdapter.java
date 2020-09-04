@@ -11,12 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.freightmanagement.Bean.CheliangJcBean;
 import com.example.freightmanagement.Bean.SelectCarBean;
 import com.example.freightmanagement.R;
-import com.google.gson.internal.$Gson$Preconditions;
-
 import java.util.HashMap;
 import java.util.List;
 

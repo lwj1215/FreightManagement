@@ -27,9 +27,7 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
     private Context context;
     private List<String> dataList;
     private VehicleDetectionBean.DataBean pages;
-    private VerAddBean verAddBean=new VerAddBean();
-    private VerAddBean.CompleteBosBean completeBosBean=new VerAddBean.CompleteBosBean();
-    private List<VerAddBean.CompleteBosBean>     lisBean=new ArrayList<>();
+
     private OnHdListener listener;
 
     public VehicleFetectionAdapter(Context context) {
@@ -58,14 +56,10 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                         @Override
                         public void onItemClick(View view, int position) {
 
-                            completeBosBean.setChechDataId(pages.getType1().get(position).getId());
-                            completeBosBean.setState(1);
-                            completeBosBean.setReslut("");
-                            lisBean.add(completeBosBean);
-                            verAddBean.setCompleteBos(lisBean);
+
 
                             if (listener != null) {
-                                listener.onItemClick(verAddBean);
+//                                listener.onItemClick(verAddBean);
                             }
                         }
                     });
@@ -83,13 +77,9 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                         @Override
                         public void onItemClick(View view, int position) {
 
-                            completeBosBean.setChechDataId(pages.getType2().get(position).getId());
-                            completeBosBean.setState(1);
-                            completeBosBean.setReslut("");
-                            lisBean.add(completeBosBean);
-                            verAddBean.setCompleteBos(lisBean);
+
                             if (listener != null) {
-                                listener.onItemClick(verAddBean);
+//                                listener.onItemClick(verAddBean);
                             }
                         }
                     });
@@ -106,13 +96,9 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                     @Override
                     public void onItemClick(View view, int position) {
 
-                        completeBosBean.setChechDataId(pages.getType3().get(position).getId());
-                        completeBosBean.setState(1);
-                        completeBosBean.setReslut("");
-                        lisBean.add(completeBosBean);
-                        verAddBean.setCompleteBos(lisBean);
+
                         if (listener != null) {
-                            listener.onItemClick(verAddBean);
+//                            listener.onItemClick(verAddBean);
                         }
                     }
                 });

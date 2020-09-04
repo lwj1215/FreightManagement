@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
 
-    <com.example.freightmanagement.Utils.RoundImageView2
+    <com.example.freightmanagement.Utils.RoundImageView
         android:id="@+id/home_jp_img"
         android:layout_width="@dimen/x150"
         android:layout_height="@dimen/x150"
@@ -14,7 +14,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/x2"
         android:adjustViewBounds="true"
-        android:background="@drawable/yuanjiao20"
         android:scaleType="fitXY" />
 
 
@@ -24,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/home_jp_img"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/x10"
         android:layout_marginBottom="@dimen/x10"
         android:gravity="center"
         android:ellipsize="end"

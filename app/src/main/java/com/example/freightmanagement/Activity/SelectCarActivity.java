@@ -74,11 +74,11 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
         int code = baseResponse.getCode();
         if (code == 0) {
             ToastUtils.popUpToast("提交成功");
-            Intent intent = new Intent(this,EmploymentContractActivity.class);
-            intent.putExtra("name",submitParam.getCertificateIDBo().getName());
-            intent.putExtra("certificateNo",submitParam.getCertificateDriverBo().getFileNumber());
-            intent.putExtra("tel", PrefUtilsData.getMobile());
-            intent.putExtra("carId",id);
+            Intent intent = new Intent(this,MainActivity.class);
+//            intent.putExtra("name",submitParam.getCertificateIDBo().getName());
+//            intent.putExtra("certificateNo",submitParam.getCertificateDriverBo().getFileNumber());
+//            intent.putExtra("tel", PrefUtilsData.getMobile());
+//            intent.putExtra("carId",id);
             startActivity(intent);
         }
     }
