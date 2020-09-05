@@ -82,6 +82,7 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
 //            intent.putExtra("tel", PrefUtilsData.getMobile());
 //            intent.putExtra("carId",id);
             startActivity(intent);
+            finish();
         }
     }
 

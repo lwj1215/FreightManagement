@@ -72,7 +72,10 @@ public class BaseApiConstants {
      * 驾驶员注册
      */
     public static final String API_DRIVER_REGISTER = "/cccc/driver/addDirver";
-
+    /**
+     * 修改驾驶员信息
+     */
+    public static final String API_JIASHIYUANXINXIXIUGAI = "/cccc/driver/info/editDirver";
     /**
      * 企业注册
      */
@@ -168,4 +171,13 @@ public class BaseApiConstants {
      * 修改密码
      */
     public static final String API_CHANGE_PASS = "/cccc/manager/admin/editAdmin";
+    /**
+     * 修改密码
+     */
+    public static final String API_QIYEXINXIXIUGAI = "/cccc/manager/enterprise/info/editEnterprise";
+    /**
+     * 獲取車輛详情
+     */
+    public static final String API_CHELIANGXIANGQING = "/cccc/manager/car/getCar/";
+
 }

@@ -7,6 +7,25 @@ import com.example.freightmanagement.model.IDCardParam;
  */
 
 public class CompanySubmitParam {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    private String id;
+    private String signUrl;
+
+    public String getSignUrl() {
+        return signUrl;
+    }
+
+    public void setSignUrl(String signUrl) {
+        this.signUrl = signUrl;
+    }
+
     private IDCardParam certificateIDBo;
     private CertificateTransport certificateOperationBo;
     private CertificateBusiness certificateBusinessBo;

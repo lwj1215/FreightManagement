@@ -66,6 +66,7 @@ import static com.example.freightmanagement.Utils.DateUtil.ymd;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_SIGN;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_WORK;
 
 /**
@@ -220,7 +221,16 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
     @Override
     protected void onInitView() {
-        setDefaultTitle("驾驶员注册");
+        initView();
+        String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
+        if (flag.equals("0")) {
+            setDefaultTitle("驾驶员注册");
+            mRlSign.setVisibility(View.VISIBLE);
+        } else {
+            setDefaultTitle("驾驶员信息修改");
+            mRlSign.setVisibility(View.GONE);
+        }
+
         checkGalleryPermission();
         initView();
     }
@@ -259,7 +269,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 .WRITE_EXTERNAL_STORAGE);
         int camera = ActivityCompat.checkSelfPermission(this, Manifest.permission
                 .CAMERA);
-        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED  ) {
+        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1000);
@@ -357,6 +367,11 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 Bitmap bitmap = vSignView.save();
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
+                File file = FileUtil.saveImage(bitmap);
+                if (file == null) {
+                    return;
+                }
+                mPresenter.upload(new File(file.getAbsolutePath()), UPLOAD_SIGN);
                 break;
             case R.id.tv_you_xiao_qi:
                 onYearMonthDayPicker(DATE_TYPE_VALID_DATE);
@@ -443,8 +458,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 CertificateDriverParam certificateDriverParam = new CertificateDriverParam();
                 certificateDriverParam.setClasss(permitType);
                 boolean isStartTime = DateUtil.isValidDate(startTime);
-                if(!isStartTime){
+                if (!isStartTime) {
                     ToastUtils.popUpToast("驾驶证有效期限错误，请重新选择");
+                    return;
                 }
                 certificateDriverParam.setStartTime(startTime);
                 certificateDriverParam.setPicUrl(driverUrl);
@@ -457,18 +473,28 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
                 String firstTimeStr = mTvFirstReceive.getText().toString();
                 String yxqTimeStr = mTvYouXiaoQi.getText().toString();
-                if(!DateUtil.isValidDate(firstTimeStr)){
+                if (!DateUtil.isValidDate(firstTimeStr)) {
                     ToastUtils.popUpToast("上岗证初次领证时间错误，请重新选择");
+                    return;
                 }
-                if(!DateUtil.isValidDate(yxqTimeStr)){
+                if (!DateUtil.isValidDate(yxqTimeStr)) {
                     ToastUtils.popUpToast("上岗证有效期限时间错误，请重新选择");
+                    return;
                 }
                 certificateWorkParam.setFirstTime(firstTimeStr);
                 certificateWorkParam.setValidityStartTime(yxqTimeStr);
 
                 certificateWorkParam.setPicUrl(workUrl);
                 driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
-                mPresenter.submit(driverInfoSubmitParam);
+                driverInfoSubmitParam.setSealUrl(signUrl);
+                if (getIntent().getStringExtra("flag").equals("0")) {
+                    mPresenter.submit(driverInfoSubmitParam);
+                } else {
+                    driverInfoSubmitParam.setId(PrefUtilsData.getUserId());
+                    mPresenter.updata2(driverInfoSubmitParam);
+                }
+
+                finish();
                 break;
         }
     }
@@ -678,7 +704,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             mPresenter.upload(new File(filePath), UPLOAD_WORK);
                             boolean json = StringUtils.isJson(result);
 
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("上传失败请重试");
                                 return;
                             }
@@ -693,8 +719,8 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                                         if (word_name.equals("certificateNum")) {
                                             mEtPostCard.setText(word);
                                         } else if (word_name.equals("sendTime")) {
-                                            if(word.contains("日")){
-                                                word = word.substring(0,word.indexOf("日")+1);
+                                            if (word.contains("日")) {
+                                                word = word.substring(0, word.indexOf("日") + 1);
                                             }
                                             firstReceiveTime = word;
                                             mTvFirstReceive.setText(word);
@@ -757,6 +783,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             public void onOptionPicked(int index, String item) {
 //                showToast("index=" + index + ", item=" + item);
                 permitType = item;
+                mEtPermitType.setText(permitType);
             }
         });
         picker.show();
@@ -777,7 +804,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             public void onDatePicked(String year, String month, String day) {
                 switch (type) {
                     case DATE_TYPE_START_DATE:
-                        startTime = year + "-" + month + "-" + day ;
+                        startTime = year + "-" + month + "-" + day;
                         mTvStartDate.setText(startTime);
                         break;
                     case DATE_TYPE_END_DATE:
@@ -785,11 +812,11 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                         mEtEndDate.setText(endTime);
                         break;
                     case DATE_TYPE_FIRST_RECEIVE_DATE:
-                        firstReceiveTime = year + "-" + month + "-" + day ;
+                        firstReceiveTime = year + "-" + month + "-" + day;
                         mTvFirstReceive.setText(firstReceiveTime);
                         break;
                     case DATE_TYPE_VALID_DATE:
-                        youxiaoqiTime = year + "-" + month + "-" + day ;
+                        youxiaoqiTime = year + "-" + month + "-" + day;
                         mTvYouXiaoQi.setText(youxiaoqiTime);
                         break;
                 }
@@ -830,6 +857,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case UPLOAD_WORK:
                 workUrl = IMAGE_BASE_URL + url;
                 break;
+            case UPLOAD_SIGN:
+                signUrl = IMAGE_BASE_URL + url;
+                break;
         }
     }
 
@@ -839,8 +869,15 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         int code = baseResponse.getCode();
         if (code == 0) {
             ToastUtils.popUpToast("提交成功");
-            Intent intent = new Intent(this,MainActivity.class);
-            startActivity(intent);
+
+            if (getIntent().getStringExtra("flag").equals("0")) {
+                Intent intent = new Intent(this,MainActivity.class);
+                startActivity(intent);
+                finish();
+            }else {
+                finish();
+            }
+
         }
     }
 //    private boolean checkTokenStatus() {

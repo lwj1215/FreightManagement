@@ -13,6 +13,7 @@ import java.io.File;
 public interface CompanyRegisterConstact {
 
     void submit(CompanySubmitParam submitParam);
+    void updata2(CompanySubmitParam submitParam);
 
     void upload(File file, int type);
 

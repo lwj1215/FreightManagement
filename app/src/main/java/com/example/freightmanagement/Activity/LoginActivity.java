@@ -170,7 +170,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     private void startActivity(Class<?> cls, int type) {
         Intent intent = new Intent(this, cls);
-//        intent.putExtra(ID, id);
+        intent.putExtra("flag", "0");
         intent.putExtra(ADMIN_TYPE, type);
         startActivity(intent);
         finish();

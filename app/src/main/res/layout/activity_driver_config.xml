@@ -631,7 +631,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x90"
                     android:layout_marginRight="@dimen/x90"
-                    android:text="下一步" />
+                    android:text="提交" />
             </LinearLayout>
         </ScrollView>
 

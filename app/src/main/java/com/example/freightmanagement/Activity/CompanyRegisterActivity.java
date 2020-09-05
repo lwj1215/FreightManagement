@@ -37,6 +37,7 @@ import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
@@ -60,6 +61,7 @@ import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_B
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ROAD_TRANSPORT_PERMIT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_SIGN;
 
 /**
  * Created by songdechuan on 2020/8/10.
@@ -177,6 +179,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private String roadManagerPath;
     private TextView mTvRoad;
     private ImageView mIvRoad;
+    private String signUrl="";
 
     @Override
     public int setLayoutResource() {
@@ -187,6 +190,15 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     protected void onInitView() {
         checkGalleryPermission();
         initView();
+        String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
+        if (flag.equals("0")) {
+            setDefaultTitle("企业注册");
+            mRlSign.setVisibility(View.VISIBLE);
+        } else {
+            setDefaultTitle("企业信息修改");
+            mRlSign.setVisibility(View.GONE);
+        }
+
     }
 
     private boolean checkGalleryPermission() {
@@ -252,6 +264,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mReBusiness = (RelativeLayout) findViewById(R.id.re_business);
         mReBusiness.setOnClickListener(this);
         mTvSign = (TextView) findViewById(R.id.tv_sign);
+        mTvSign.setOnClickListener(this);
         mIvSign = (ImageView) findViewById(R.id.iv_sign);
         mIvSign.setOnClickListener(this);
         mRlSign = (RelativeLayout) findViewById(R.id.rl_sign);
@@ -310,6 +323,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 Bitmap bitmap = vSignView.save();
                 mTvSign.setVisibility(View.GONE);
                 mIvSign.setImageBitmap(bitmap);
+                File file = FileUtil.saveImage(bitmap);
+                if (file == null) {
+                    return;
+                }
+                mPresenter.upload(new File(file.getAbsolutePath()), UPLOAD_SIGN);
                 break;
             case R.id.re_business:
                 businessPath = FRONT + "_" + System.currentTimeMillis();
@@ -411,7 +429,13 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 certificateOperation.setValidityDate(mYouXiaoQi);
                 certificateOperation.setPicUrl(roadTransportPermit);
                 submitParam.setCertificateOperationBo(certificateOperation);
-                mPresenter.submit(submitParam);
+                submitParam.setSignUrl(signUrl);
+                if (getIntent().getStringExtra("flag").equals("0")) {
+                    mPresenter.submit(submitParam);
+                } else {
+                    submitParam.setId(PrefUtilsData.getUserId());
+                    mPresenter.updata2(submitParam);
+                }
                 break;
             case R.id.tv_zheng_jian_you_xiao_qi:
                 onYearMonthDayPicker(TYPE_YOU_XIAO_QI);
@@ -450,7 +474,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
             @Override
             public void onDatePicked(String year, String month, String day) {
-                String time = year + "-" + month + "-" + day ;
+                String time = year + "-" + month + "-" + day;
                 switch (type) {
                     case TYPE_CHENG_LI:
                         mTvChengli.setText(time);
@@ -483,8 +507,8 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     /**
      * 正面身份证拍照
      */
-    private void takeIDCard(){
-        frontPath = FRONT+"_"+System.currentTimeMillis();
+    private void takeIDCard() {
+        frontPath = FRONT + "_" + System.currentTimeMillis();
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication(), frontPath).getAbsolutePath());
@@ -498,6 +522,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         intent.putExtra(CameraActivity.KEY_CONTENT_TYPE, CameraActivity.CONTENT_TYPE_ID_CARD_FRONT);
         startActivityForResult(intent, REQUEST_CODE_CAMERA);
     }
+
     /**
      * 反面身份证扫描
      */
@@ -660,12 +685,12 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             mPresenter.upload(new File(filePath), UPLOAD_ROAD_TRANSPORT_PERMIT);
                             Glide.with(getContext()).load(filePath).into(mIvRoad);
                             boolean json = StringUtils.isJson(result);
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("识别错误");
                                 return;
                             }
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
-                            RoadManagerBean roadManagerBean = new Gson().fromJson(result,RoadManagerBean.class);
+                            RoadManagerBean roadManagerBean = new Gson().fromJson(result, RoadManagerBean.class);
                             if (roadManagerBean == null) {
                                 ToastUtils.popUpToast("识别失败请重新上传");
                                 return;
@@ -722,10 +747,16 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
     @Override
     public void success() {
-        ToastUtils.popUpToast("注册成功");
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
-        finish();
+        if (getIntent().getStringExtra("flag").equals("0")) {
+            ToastUtils.popUpToast("注册成功");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            ToastUtils.popUpToast("修改成功");
+            finish();
+        }
+
     }
 
     @Override
@@ -742,6 +773,9 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 break;
             case UPLOAD_ROAD_TRANSPORT_PERMIT:
                 roadTransportPermit = IMAGE_BASE_URL + url;
+                break;
+            case UPLOAD_SIGN:
+                signUrl = IMAGE_BASE_URL + url;
                 break;
         }
     }

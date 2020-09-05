@@ -63,6 +63,7 @@ public class RestApi {
      * 请求公共方法
      */
     public void post(String url, String jsonValue, @Nullable final OnRequestResult callback) {
+        url = url.replace("/cccc", "");
         Log.i("提交", "post: " + jsonValue + url);
         RequestBody formBody = RequestBody.create(MEDIA_TYPE_BODY, jsonValue);
         Request request = new Request.Builder()
@@ -166,6 +167,8 @@ public class RestApi {
      */
 
     public void postImage(String url, File file, @Nullable final OnRequestResult callback) {
+        url = url.replace("/cccc", "");
+
         String encode = "";
         try {
             encode = URLEncoder.encode(file.getName(), "UTF-8");
@@ -203,11 +206,13 @@ public class RestApi {
 
 
     public void get(final String url, @Nullable final OnRequestResult callback) {
+        final String  baseurl  = url.replace("/cccc", "");
+
         Log.i("提交", "post: " + url);
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Request request = new Request.Builder().url(Host.BASE_URL + url).build(); //添加头部信息
+                Request request = new Request.Builder().url(Host.BASE_URL + baseurl).build(); //添加头部信息
                 mClient.newCall(request);
                 enqueue("", request, new OnRequestResult() {
                     @Override

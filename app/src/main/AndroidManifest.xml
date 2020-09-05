@@ -63,6 +63,7 @@
         </activity>
         <activity
             android:name=".Activity.DriverConfigActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
 
         </activity>
@@ -113,6 +114,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SelectCarActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" >
 
         </activity>

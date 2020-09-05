@@ -1,5 +1,6 @@
 package com.example.freightmanagement.presenter;
 
+import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Bean.ImageUploadBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
@@ -10,7 +11,6 @@ import com.google.gson.Gson;
 
 import java.io.File;
 
-import static com.example.freightmanagement.Base.BaseApiConstants.API_DRIVER_REGISTER;
 import static com.example.freightmanagement.Base.BaseApiConstants.API_IMAGE_UPLOAD;
 
 /**
@@ -40,11 +40,32 @@ public class DriverConfigPresenter extends BasePresenter<DriverConfigConstact.Vi
             }
         });
     }
-
     @Override
     public void submit(DriverInfoSubmitParam submitParam) {
         String json = new Gson().toJson(submitParam);
-        RestApi.getInstance().post(API_DRIVER_REGISTER, json, new OnRequestResultForCommon() {
+        RestApi.getInstance().post(BaseApiConstants.API_DRIVER_REGISTER, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+                mView.success(json);
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
+    @Override
+    public void updata2(DriverInfoSubmitParam submitParam) {
+        String json = new Gson().toJson(submitParam);
+        RestApi.getInstance().post(BaseApiConstants.API_JIASHIYUANXINXIXIUGAI, json, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);

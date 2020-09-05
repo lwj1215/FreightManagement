@@ -3,6 +3,7 @@ package com.example.freightmanagement.presenter;
 import android.util.Log;
 
 import com.example.freightmanagement.Base.BasePresenter;
+import com.example.freightmanagement.Bean.CarInfoBean;
 import com.example.freightmanagement.Bean.ImageUploadBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;

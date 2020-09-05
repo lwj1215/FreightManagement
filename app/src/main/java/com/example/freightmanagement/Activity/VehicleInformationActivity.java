@@ -19,7 +19,7 @@ import com.example.freightmanagement.presenter.constract.VehicleInformationConst
  */
 public class VehicleInformationActivity extends BaseActivity<VehicleInformationPresenter> implements VehicleInformationPresenter.View, View.OnClickListener {
 
-    private TextView et_real_name, et_detail_address, tv_current_address, tv_sign_hint, tv_mobile;
+    private TextView et_real_name, et_detail_address, tv_current_address;
     private LinearLayout lin_celiang, lin_celiangwx, lin_chebaoyang;
     private TextView tv_cljc, tv_clwx, tv_clby;
     private String owner;
@@ -46,8 +46,6 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
         et_real_name = bindView(R.id.et_real_name);
         et_detail_address = bindView(R.id.et_detail_address);
         tv_current_address = bindView(R.id.tv_current_address);
-        tv_sign_hint = bindView(R.id.tv_sign_hint);
-        tv_mobile = bindView(R.id.tv_mobile);
         lin_celiang = bindView(R.id.lin_celiang);
         lin_celiangwx = bindView(R.id.lin_celiangwx);
         lin_chebaoyang = bindView(R.id.lin_chebaoyang);

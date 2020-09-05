@@ -1,5 +1,6 @@
 package com.example.freightmanagement.presenter;
 
+import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.ImageUploadBean;
@@ -25,6 +26,28 @@ public class CompanyRegisterPresenter extends BasePresenter<CompanyRegisterConst
     public void submit(CompanySubmitParam submitParam) {
         String json = new Gson().toJson(submitParam);
         RestApi.getInstance().post(API_COMPANY_REGISTER, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+
+                    mView.success();
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+    @Override
+    public void updata2(CompanySubmitParam submitParam) {
+        String json = new Gson().toJson(submitParam);
+        RestApi.getInstance().post(BaseApiConstants.API_QIYEXINXIXIUGAI, json, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);

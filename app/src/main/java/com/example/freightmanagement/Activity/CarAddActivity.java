@@ -251,11 +251,13 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 String zhuceStr = mTvDateZhuce.getText().toString();
                 if(!DateUtil.isValidDate(zhuceStr)){
                     ToastUtils.popUpToast("注册日期错误，请重新选择");
+                    return;
                 }
                 certificateDriving.setRegistrationDate(zhuceStr);
                 String issueDate = mTvDateSend.getText().toString();
                 if(!DateUtil.isValidDate(issueDate)){
                     ToastUtils.popUpToast("行驶证发证日期错误，请重新选择");
+                    return;
                 }
                 certificateDriving.setIssueDate(issueDate);
                 certificateDriving.setFileNo(mEtDangAn.getText().toString());

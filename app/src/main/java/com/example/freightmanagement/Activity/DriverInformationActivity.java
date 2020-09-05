@@ -1,5 +1,6 @@
 package com.example.freightmanagement.Activity;
 
+import android.content.Intent;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 //import com.bumptech.glide.Glide;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseTitleView;
 import com.example.freightmanagement.Bean.CarOwnerBean;
 import com.example.freightmanagement.Bean.DriverInformationBean;
 import com.example.freightmanagement.Bean.QiYeBean;
@@ -20,9 +22,11 @@ import com.example.freightmanagement.presenter.DriverInformationPresenter;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import static com.example.freightmanagement.common.Constants.ADMIN_TYPE;
+
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
-    private TextView name, tv_card, tv_sign_date, tv_sign_fen, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,
+    private TextView name, tv_card, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,
             et_code_qy, et_name_qy, et_jing_qy, tv_chengli_qy, et_fading_qy, et_address_qy, et_permit_type, tv_start_date, et_end_date, et_xuke_qy,
             tv_zheng_jian_you_xiao_qi,et_post_card,tv_first_receive,tv_you_xiao_qi;
     private ImageView iv_card_front1, iv_card_front2, iv_card_revers_cz, iv_card_front_qy, iv_card_front_cz, iv_card_revers_qy, iv_business_front, iv_driver_front,
@@ -44,17 +48,32 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
     @Override
     protected void onInitView() {
         if (PrefUtilsData.getType().equals("1")) {
-            setDefaultTitle("驾驶员信息");
+            BaseTitleView titleView = setDefaultTitle("驾驶员信息");
+            titleView.addRightTextButton("修改信息", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DriverInformationActivity.this, DriverConfigActivity.class);
+                    intent.putExtra("flag", "1");
+                    startActivity(intent);
+                    finish();
+                }
+            });
         } else if (PrefUtilsData.getType().equals("2")) {
             setDefaultTitle("车主信息");
         } else {
-            setDefaultTitle("企业信息");
+            BaseTitleView titleView =   setDefaultTitle("企业信息");
+            titleView.addRightTextButton("修改信息", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DriverInformationActivity.this, CompanyRegisterActivity.class);
+                    intent.putExtra("flag", "1");
+                    startActivity(intent);
+                    finish();     }
+            });
         }
 
         name = bindView(R.id.tv_real_name);
         tv_card = bindView(R.id.et_card_num);
-        tv_sign_date = bindView(R.id.tv_sign_date);
-        tv_sign_fen = bindView(R.id.tv_sign_fen);
         iv_card_front1 = bindView(R.id.iv_card_front);
         iv_card_front2 = bindView(R.id.iv_card_revers);
         iv_card_front_cz = bindView(R.id.iv_card_front_cz);
@@ -132,8 +151,6 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
 
     @Override
     public void getWrokIdData2Suc(DriverInformationBean.DataBean data) {
-        tv_sign_date.setText(data.getCreateTime() + "");
-        tv_sign_fen.setText(data.getScore() + "");
     }
 
     @Override

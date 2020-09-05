@@ -55,7 +55,9 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
 
     @Override
     public void onItemClick(int position) {
-
+        Intent intent = new Intent(this,CarInformationActivity.class);
+        intent.putExtra("carId",data.get(position).getId());
+        startActivity(intent);
     }
 
     @Override
