@@ -44,16 +44,19 @@ import java.util.List;
 
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_CN;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_HT;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ZR;
 
 public class EmploymentContractActivity extends BaseActivity<EmploymentContractPresenter> implements EmploymentContractPresenter.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Dialog bottomDialog;
     private View bottomView;
     private ElectronicSignature vSignView;
-    private UserWebView mWebView;
+//    private UserWebView mWebView;
     //    private ImageView mImgSign;
     private int webViewHeight;                                   //webview整体的高度
-    private File file;
+    private File htFile;
     private Dialog dateDialog;
     private String endTime;
     private TextView mTvSubmit;
@@ -62,6 +65,12 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     private int carId;
     private RadioButton mRbApply;
     private boolean apply = false;
+    private UserWebView mWebViewHt;
+    private UserWebView mWebViewZr;
+    private UserWebView mWebViewCn;
+    private File zrFile;
+    private File cnFile;
+
     @Override
     public int setLayoutResource() {
         if (judgeAndroidVersion()) {
@@ -75,38 +84,42 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     protected void onInitView() {
         setDefaultTitle("聘用合同");
         checkGalleryPermission();
-        int id = getIntent().getIntExtra("id", 0);
-        int enterpriseId = getIntent().getIntExtra("enterpriseId", 0);
-
         bindView(R.id.tv_sign).setOnClickListener(this);
         bindView(R.id.tv_endTime).setOnClickListener(this);
-
-        mWebView = (UserWebView) bindView(R.id.webView);
         bottomView = LayoutInflater.from(this).inflate(R.layout.inflate_pop_item, null);
         bottomView.findViewById(R.id.btn_no).setOnClickListener(this);
         bottomView.findViewById(R.id.btn_yes).setOnClickListener(this);
         vSignView = (ElectronicSignature) bottomView.findViewById(R.id.sign_view);
-//        mImgSign = findViewById(R.id.img_sign);
         mTvSubmit = findViewById(R.id.tv_submit);
         mRbApply = findViewById(R.id.rb_apply);
         mTvSubmit.setOnClickListener(this);
         mRbApply.setOnCheckedChangeListener(this);
+        mWebViewHt = findViewById(R.id.webView_ht);
+        mWebViewZr = findViewById(R.id.webView_zr);
+        mWebViewCn = findViewById(R.id.webView_cn);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onLoadData2Remote() {
-        final String name = getIntent().getStringExtra("name");
-        final String certificateNo = getIntent().getStringExtra("certificateNo");
-        final String tel = getIntent().getStringExtra("tel");
+        int id = getIntent().getIntExtra("id", 0);
+        int enterpriseId = getIntent().getIntExtra("enterpriseId", 0);
         carId = getIntent().getIntExtra("carId", -1);
         mPresenter.get(PrefUtilsData.getUserId());
         mPresenter.getDriver();
-        mWebView.setClickable(true);
-        WebSettings settings = mWebView.getSettings();
         if (Build.VERSION.SDK_INT >= 21) {
             enableSlowWholeDocumentDraw();
         }
+        hetongWeb();
+        cnWeb();
+        zrWeb();
+    }
+
+    /**
+     * 责任书
+     */
+    private void zrWeb() {
+        WebSettings settings = mWebViewZr.getSettings();
         // 设置WebView支持JavaScript
         settings.setJavaScriptEnabled(true);
         //支持自动适配
@@ -124,19 +137,90 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
         settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         //设置不让其跳转浏览器
-        mWebView.getSettings().setBlockNetworkImage(false); // 解决图片不显示
+        mWebViewZr.getSettings().setBlockNetworkImage(false); // 解决图片不显示
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            mWebView.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+            mWebViewCn.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
-        mWebView.setWebViewClient(new WebViewClient() {
+        mWebViewZr.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 return false;
             }
         });
         // 添加客户端支持
-        mWebView.setWebChromeClient(new WebChromeClient());
+        mWebViewZr.setWebChromeClient(new WebChromeClient());
+    }
+    /**
+     * 承诺书
+     */
+    private void cnWeb() {
+        WebSettings settings = mWebViewCn.getSettings();
+        // 设置WebView支持JavaScript
+        settings.setJavaScriptEnabled(true);
+        //支持自动适配
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(false);  //支持放大缩小
+        settings.setBuiltInZoomControls(true); //显示缩放按钮
+        settings.setSaveFormData(true);
+        settings.setGeolocationEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setAllowFileAccess(true);
+        settings.setDefaultTextEncodingName("UTF-8");
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);/// 支持通过JS打开新窗口
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //设置不让其跳转浏览器
+        mWebViewCn.getSettings().setBlockNetworkImage(false); // 解决图片不显示
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mWebViewCn.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        mWebViewCn.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+        // 添加客户端支持
+        mWebViewCn.setWebChromeClient(new WebChromeClient());
+    }
 
+    /**
+     * 聘用合同
+     */
+    private void hetongWeb() {
+        WebSettings settings = mWebViewHt.getSettings();
+        mWebViewHt.setClickable(true);
+        // 设置WebView支持JavaScript
+        settings.setJavaScriptEnabled(true);
+        //支持自动适配
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setSupportZoom(false);  //支持放大缩小
+        settings.setBuiltInZoomControls(true); //显示缩放按钮
+        settings.setSaveFormData(true);
+        settings.setGeolocationEnabled(true);
+        settings.setDomStorageEnabled(true);
+        settings.setUseWideViewPort(true);
+        settings.setAllowFileAccess(true);
+        settings.setDefaultTextEncodingName("UTF-8");
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);/// 支持通过JS打开新窗口
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+        //设置不让其跳转浏览器
+        mWebViewHt.getSettings().setBlockNetworkImage(false); // 解决图片不显示
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            mWebViewHt.getSettings().setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
+        }
+        mWebViewHt.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+        // 添加客户端支持
+        mWebViewHt.setWebChromeClient(new WebChromeClient());
     }
 
     private boolean checkGalleryPermission() {
@@ -175,7 +259,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 mPresenter.upload(new File(file.getAbsolutePath()), 0);
                 break;
             case R.id.tv_submit:
-                if(!apply){
+                if (!apply) {
                     ToastUtils.popUpToast("请先同意签署");
                     return;
                 }
@@ -195,10 +279,13 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                     ToastUtils.popUpToast("车辆不得为空");
                     return;
                 }
-                boolean b = FileUtil.fileIsExists(this.file.getAbsolutePath());
+                boolean b = FileUtil.fileIsExists(this.htFile.getAbsolutePath());
                 if (b) {
 //                    ToastUtils.popUpToast("文件存在，路径是："+this.file.getAbsolutePath());
-                    mPresenter.upload(new File(this.file.getAbsolutePath()), 1);
+                    mPresenter.upload(new File(this.htFile.getAbsolutePath()), UPLOAD_HT);
+                    mPresenter.upload(new File(this.zrFile.getAbsolutePath()), UPLOAD_ZR);
+                    mPresenter.upload(new File(this.cnFile.getAbsolutePath()), UPLOAD_CN);
+
                 } else {
 //                    ToastUtils.popUpToast("文件不存在");
                 }
@@ -218,31 +305,79 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         switch (type) {
             case 0:
                 signUrl = IMAGE_BASE_URL.concat(url);
-                mWebView.loadUrl("javascript:setSign('" + signUrl + "')");
+                mWebViewCn.loadUrl("javascript:setSign('" + signUrl + "')");
+                mWebViewZr.loadUrl("javascript:setSign('" + signUrl + "')");
+                mWebViewHt.loadUrl("javascript:setSign('" + signUrl + "')");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         if (judgeAndroidVersion()) {                                         //可以通过获取缩放，然后设置值从而控制webview快照的高度
-                            float scale = mWebView.getScale() - 1;
-                            webViewHeight = (int) (mWebView.getPageHeight() * 1);
+                            float scale = mWebViewHt.getScale() - 1;
+                            webViewHeight = (int) (mWebViewHt.getPageHeight() * 1);
                         } else {
-                            webViewHeight = mWebView.getPageHeight();
+                            webViewHeight = mWebViewHt.getPageHeight();
                         }
-                        final Bitmap bitmap = Bitmap.createBitmap(mWebView.getPageWidth(), webViewHeight, Bitmap.Config.RGB_565);
+                        final Bitmap bitmap = Bitmap.createBitmap(mWebViewHt.getPageWidth(), webViewHeight, Bitmap.Config.RGB_565);
                         Canvas canvas = new Canvas(bitmap);
-                        mWebView.draw(canvas);
+                        mWebViewHt.draw(canvas);
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 //把整体的图片保存到本地下
-                                file = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg", getContext());
+                                htFile = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg", getContext());
+                            }
+                        }).start();
+
+                    }
+                }, 1000);
+                mWebViewZr.loadUrl("javascript:setSign('" + signUrl + "')");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (judgeAndroidVersion()) {                                         //可以通过获取缩放，然后设置值从而控制webview快照的高度
+                            float scale = mWebViewZr.getScale() - 1;
+                            webViewHeight = (int) (mWebViewZr.getPageHeight() * 1);
+                        } else {
+                            webViewHeight = mWebViewZr.getPageHeight();
+                        }
+                        final Bitmap bitmap = Bitmap.createBitmap(mWebViewZr.getPageWidth(), webViewHeight, Bitmap.Config.RGB_565);
+                        Canvas canvas = new Canvas(bitmap);
+                        mWebViewZr.draw(canvas);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //把整体的图片保存到本地下
+                                zrFile = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg", getContext());
+                            }
+                        }).start();
+
+                    }
+                }, 1000);
+                mWebViewCn.loadUrl("javascript:setSign('" + signUrl + "')");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (judgeAndroidVersion()) {                                         //可以通过获取缩放，然后设置值从而控制webview快照的高度
+                            float scale = mWebViewCn.getScale() - 1;
+                            webViewHeight = (int) (mWebViewCn.getPageHeight() * 1);
+                        } else {
+                            webViewHeight = mWebViewCn.getPageHeight();
+                        }
+                        final Bitmap bitmap = Bitmap.createBitmap(mWebViewCn.getPageWidth(), webViewHeight, Bitmap.Config.RGB_565);
+                        Canvas canvas = new Canvas(bitmap);
+                        mWebViewCn.draw(canvas);
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                //把整体的图片保存到本地下
+                                cnFile = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg", getContext());
                             }
                         }).start();
 
                     }
                 }, 1000);
                 break;
-            case 1:
+            case UPLOAD_HT:
                 employmentUrl = IMAGE_BASE_URL.concat(url);
                 ContractParam contractParam = new ContractParam();
                 contractParam.setContractUrl(employmentUrl);
@@ -253,6 +388,30 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 }
                 contractParam.setCarId(carId);
                 mPresenter.submit(contractParam);
+                break;
+            case UPLOAD_CN:
+                String zrUrl = IMAGE_BASE_URL.concat(url);
+//                ContractParam contractParam = new ContractParam();
+//                contractParam.setContractUrl(employmentUrl);
+//                try {
+//                    contractParam.setEndTime(DateUtil.string2Date(endTime));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                contractParam.setCarId(carId);
+//                mPresenter.submit(contractParam);
+                break;
+            case UPLOAD_ZR:
+//                String cnUrl  = IMAGE_BASE_URL.concat(url);
+//                ContractParam contractParam = new ContractParam();
+//                contractParam.setContractUrl(employmentUrl);
+//                try {
+//                    contractParam.setEndTime(DateUtil.string2Date(endTime));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//                contractParam.setCarId(carId);
+//                mPresenter.submit(contractParam);
                 break;
         }
     }
@@ -265,17 +424,40 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
             final String name = data.getCertificateIDBo().getName();
             WrodIdBean.DataBean.CertificateDriverBoBean certificateDriverBo = data.getCertificateDriverBo();
             final String fileNumber = certificateDriverBo.getFileNumber();
-            mWebView.loadUrl("http://aicc.ctags.cn/cccc/letter/contract.html");
-            mWebView.setWebChromeClient(new WebChromeClient() {
+            mWebViewHt.loadUrl("http://aicc.ctags.cn/cccc/letter/contract.html");
+            mWebViewHt.setWebChromeClient(new WebChromeClient() {
                 public void onProgressChanged(WebView view, int progress) {
                     if (progress == 100) {
                         //加载完成
-                        mWebView.loadUrl("javascript:setName('" + name + "')");
-                        mWebView.loadUrl("javascript:setNo('" + fileNumber + "')");
-                        mWebView.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                        mWebViewHt.loadUrl("javascript:setName('" + name + "')");
+                        mWebViewHt.loadUrl("javascript:setNo('" + fileNumber + "')");
+                        mWebViewHt.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
                     }
                 }
             });
+            mWebViewZr.loadUrl("http://aicc.ctags.cn/cccc/letter/responsibility.html");
+            mWebViewZr.setWebChromeClient(new WebChromeClient() {
+                public void onProgressChanged(WebView view, int progress) {
+                    if (progress == 100) {
+                        //加载完成
+//                        mWebViewZr.loadUrl("javascript:setName('" + name + "')");
+//                        mWebViewZr.loadUrl("javascript:setNo('" + fileNumber + "')");
+//                        mWebViewZr.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                    }
+                }
+            });
+            mWebViewCn.loadUrl("http://aicc.ctags.cn/cccc/letter/commitment.html");
+            mWebViewCn.setWebChromeClient(new WebChromeClient() {
+                public void onProgressChanged(WebView view, int progress) {
+                    if (progress == 100) {
+                        //加载完成
+//                        mWebViewZr.loadUrl("javascript:setName('" + name + "')");
+//                        mWebViewZr.loadUrl("javascript:setNo('" + fileNumber + "')");
+//                        mWebViewZr.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                    }
+                }
+            });
+
         }
     }
 
@@ -305,7 +487,9 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
             public void onDateSelected(int[] dates) {
                 endTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                         + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
-                mWebView.loadUrl("javascript:setEndTime('" + endTime + "')");
+                mWebViewHt.loadUrl("javascript:setEndTime('" + endTime + "')");
+                mWebViewZr.loadUrl("javascript:setEndTime('" + endTime + "')");
+                mWebViewCn.loadUrl("javascript:setEndTime('" + endTime + "')");
 
             }
 

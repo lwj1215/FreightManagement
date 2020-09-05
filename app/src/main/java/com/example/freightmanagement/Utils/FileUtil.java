@@ -74,7 +74,7 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file)));
+//        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + file)));
 
         return file;
     }

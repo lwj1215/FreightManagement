@@ -25,6 +25,11 @@ public class ImageUploadConstants {
     public static final int UPLOAD_JIDONG = 8;
     //道路运输经营许可证
     public static final int UPLOAD_ROAD = 9;
-
+    //聘用合同
+    public static final int UPLOAD_HT = 11;
+    //承诺书
+    public static final int UPLOAD_CN = 12;
+    //责任书
+    public static final int UPLOAD_ZR = 13;
 
 }
