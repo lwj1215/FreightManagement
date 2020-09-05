@@ -7,16 +7,16 @@ import com.example.freightmanagement.model.IDCardParam;
  */
 
 public class CompanySubmitParam {
-    private IDCardParam idBo;
+    private IDCardParam certificateIDBo;
     private CertificateTransport certificateOperationBo;
     private CertificateBusiness certificateBusinessBo;
 
-    public IDCardParam getIdBo() {
-        return idBo;
+    public IDCardParam getCertificateIDBo() {
+        return certificateIDBo;
     }
 
-    public void setIdBo(IDCardParam idBo) {
-        this.idBo = idBo;
+    public void setCertificateIDBo(IDCardParam certificateIDBo) {
+        this.certificateIDBo = certificateIDBo;
     }
 
     public CertificateTransport getCertificateOperationBo() {

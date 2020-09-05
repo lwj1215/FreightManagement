@@ -26,11 +26,11 @@ public class CertificateWorkParam implements Serializable {
 
     private String category;
 
-    private Date firstTime;
+    private String firstTime;
 
-    private Date validityStartTime;
+    private String validityStartTime;
 
-    private Date validityEndTime;
+    private String validityEndTime;
 
     private String fileNumber;
 
@@ -100,27 +100,27 @@ public class CertificateWorkParam implements Serializable {
         this.category = category;
     }
 
-    public Date getFirstTime() {
+    public String getFirstTime() {
         return firstTime;
     }
 
-    public void setFirstTime(Date firstTime) {
+    public void setFirstTime(String firstTime) {
         this.firstTime = firstTime;
     }
 
-    public Date getValidityStartTime() {
+    public String getValidityStartTime() {
         return validityStartTime;
     }
 
-    public void setValidityStartTime(Date validityStartTime) {
+    public void setValidityStartTime(String validityStartTime) {
         this.validityStartTime = validityStartTime;
     }
 
-    public Date getValidityEndTime() {
+    public String getValidityEndTime() {
         return validityEndTime;
     }
 
-    public void setValidityEndTime(Date validityEndTime) {
+    public void setValidityEndTime(String validityEndTime) {
         this.validityEndTime = validityEndTime;
     }
 

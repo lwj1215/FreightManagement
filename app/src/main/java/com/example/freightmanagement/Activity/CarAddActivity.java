@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.baidu.ocr.ui.camera.CameraActivity;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.JiDongBean;
 import com.example.freightmanagement.Bean.RoadCardBean;
 import com.example.freightmanagement.Bean.VehicleBackBean;
@@ -147,7 +148,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
         mTvDateZhuce = findViewById(R.id.tv_date_zhuce);
         mTvDateZhuce.setOnClickListener(this);
         mTvDateSend = findViewById(R.id.tv_date_send);
-        mTvDateZhuce.setOnClickListener(this);
+        mTvDateSend.setOnClickListener(this);
         mEtDangAn = findViewById(R.id.et_dang_an);
         mEtZongZhi = findViewById(R.id.et_zong_zhi);
         mEtHeDing = findViewById(R.id.et_he_ding);
@@ -186,6 +187,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
         mEtDengJiJiaShiShi = findViewById(R.id.et_deng_ji_jia_shi_shi);
         mEtDengJiUseXingZhi = findViewById(R.id.et_deng_ji_use_xing_zhi);
         mEtDengJiSendDate = findViewById(R.id.et_deng_ji_send_date);
+        mEtDengJiSendDate.setOnClickListener(this);
         mTvSign = findViewById(R.id.tv_sign);
         mIvSign = findViewById(R.id.iv_sign);
         mRlSign = findViewById(R.id.rl_sign);
@@ -219,10 +221,10 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
             case R.id.tv_date_zhuce:
                 showDateDialog(DateUtil.getDateForString(nowDate),0);
                 break;
-            case R.id.tv_send_date:
+            case R.id.tv_date_send:
                 showDateDialog(DateUtil.getDateForString(nowDate),1);
                 break;
-            case R.id.tv_date_send:
+            case R.id.tv_send_date:
                 showDateDialog(DateUtil.getDateForString(nowDate),2);
                 break;
             case R.id.re_yun_shu_pic:
@@ -301,22 +303,27 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                     case 0:
                         zhuceTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        mTvDateZhuce.setText(zhuceTime);
                         break;
                     case 1:
                         xsSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        mTvDateSend.setText(xsSendTime);
                         break;
                     case 2:
                         roadSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        mTvSendDate.setText(roadSendTime);
                         break;
                     case 3:
                         djTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        mTvDengJiDate.setText(djTime);
                         break;
                     case 4:
                         jdSendTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
+                        mEtDengJiSendDate.setText(jdSendTime);
                         break;
                 }
             }
@@ -487,10 +494,10 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
             ToastUtils.popUpToast("请填写您的机动车使用性质");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiSendDate.getText().toString())){
-            ToastUtils.popUpToast("请填写您的机动车发证日期");
-            return;
-        }
+//        if(StringUtil.isEmpty(mEtDengJiSendDate.getText().toString())){
+//            ToastUtils.popUpToast("请填写您的机动车发证日期");
+//            return;
+//        }
     }
 
     /**
@@ -632,6 +639,11 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                         @Override
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
+                            Glide.with(getContext()).load(filePath).into(mIvCardYunShu);
+                            mIvCardYunShu.setVisibility(View.VISIBLE);
+                            mTvCardYunShu.setVisibility(View.GONE);
+
+                            mPresenter.upload(new File(filePath), UPLOAD_ROAD);
                             boolean json = StringUtils.isJson(result);
                             if(!json){
                                 ToastUtils.popUpToast("识别错误，请重新上传");
@@ -670,10 +682,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                                     mTvSendDate.setText(word);
                                 }
                             }
-                            mIvCardYunShu.setVisibility(View.VISIBLE);
-                            mTvCardYunShu.setVisibility(View.GONE);
-                            Glide.with(getContext()).load(filePath).into(mIvCardYunShu);
-                            mPresenter.upload(new File(filePath), UPLOAD_ROAD);
+
                         }
                     });
         }
@@ -801,6 +810,12 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
 
     @Override
     public void submitResult(String msg) {
-
+        BaseResponse response = new Gson().fromJson(msg,BaseResponse.class);
+        if(response.getCode() == 0){
+            ToastUtils.popUpToast("提交成功");
+            Intent intent = new Intent(this, CarListManageActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 }

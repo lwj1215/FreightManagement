@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 public class TrainingSelectPresenter extends BasePresenter<TrainingSelectConstact.View> implements TrainingSelectConstact {
     @Override
     public void getAnswerResultList(String driverId) {
-        RestApi.getInstance().get(BaseApiConstants.API_ANSWER_RESULT_LIST+driverId, new OnRequestResultForCommon() {
+        RestApi.getInstance().get(BaseApiConstants.API_ANSWER_RESULT_LIST, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
                 super.onSuccess(json);

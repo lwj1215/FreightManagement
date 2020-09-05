@@ -395,7 +395,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 idCardParam.setName(userName);
                 idCardParam.setPicUrl(idCardFrontUrl);
                 idCardParam.setPicUrl2(idCardBackUrl);
-                submitParam.setIdBo(idCardParam);
+                submitParam.setCertificateIDBo(idCardParam);
 
                 CertificateBusiness certificateBusiness = new CertificateBusiness();
                 certificateBusiness.setName(mName);

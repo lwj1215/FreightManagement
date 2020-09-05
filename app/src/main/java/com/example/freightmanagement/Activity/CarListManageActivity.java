@@ -1,23 +1,32 @@
 package com.example.freightmanagement.Activity;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Adapter.CarListAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.CarListBean;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.model.CarExecuteParam;
 import com.example.freightmanagement.presenter.CarListManagerPresenter;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CarListManageActivity extends BaseActivity<CarListManagerPresenter> implements CarListManagerPresenter.View,CarListAdapter.ItemClickListener, CarListAdapter.ItemLongClickListener, View.OnClickListener {
     private RecyclerView mRvCar;
     private TextView mTvSrue;
     private CarListAdapter carListAdapter;
     private AlertDialog.Builder builder;
+    private List<CarListBean.DataBean> data;
 
     @Override
     public int setLayoutResource() {
@@ -59,25 +68,27 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
      * @param position
      */
     private void showTwo(final int position) {
-//        builder = new AlertDialog.Builder(this).setIcon(R.mipmap.ic_launcher).setTitle("删除车辆")
-//                .setMessage("是否确认删除此车辆").setPositiveButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        //ToDo: 你想做的事情
-//                        Toast.makeText(DriverListActivity.this, "确定按钮", Toast.LENGTH_LONG).show();
+        builder = new AlertDialog.Builder(this).setIcon(R.mipmap.ic_launcher).setTitle("删除车辆")
+                .setMessage("是否确认删除此车辆").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //ToDo: 你想做的事情
+//                        Toast.makeText(CarListManageActivity.this, "确定按钮", Toast.LENGTH_LONG).show();
 //                        CarExecuteParam carExecuteParam = new CarExecuteParam();
-//                        carExecuteParam.setCarId(data.get(position).getCarId());
-//                        mPresenter.delete(carExecuteParam);
-//                    }
-//                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        //ToDo: 你想做的事情
-//                        Toast.makeText(DriverListActivity.this, "关闭按钮", Toast.LENGTH_LONG).show();
-//                        dialogInterface.dismiss();
-//                    }
-//                });
-//        builder.create().show();
+//                        carExecuteParam.setCarId();
+                        List<Integer> ids = new ArrayList<>();
+                        ids.add(data.get(position).getId());
+                        mPresenter.delete(ids);
+                    }
+                }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        //ToDo: 你想做的事情
+//                        Toast.makeText(CarListManageActivity.this, "关闭按钮", Toast.LENGTH_LONG).show();
+                        dialogInterface.dismiss();
+                    }
+                });
+        builder.create().show();
     }
 
 
@@ -91,9 +102,14 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
         }
     }
 
-    @Override
-    public void success(String url, int type) {
 
+    @Override
+    public void carListResult(String msg) {
+        CarListBean carListBean = new Gson().fromJson(msg, CarListBean.class);
+        if(carListBean != null){
+            data = carListBean.getData();
+            carListAdapter.setData(data);
+        }
     }
 
     @Override

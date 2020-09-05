@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.freightmanagement.Bean.CarListBean;
 import com.example.freightmanagement.Bean.SelectCarBean;
 import com.example.freightmanagement.R;
 
@@ -24,7 +25,7 @@ import java.util.List;
 public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHolder> {
     private final LayoutInflater layoutInflater;
     private Context context;
-    private List<SelectCarBean.DataBean> data;
+    private List<CarListBean.DataBean> data;
     private static int TAG_VIEW = 0;
     private String TAG = "GiftAdapter";
     private HashMap<Integer, Boolean> states = new HashMap<>();
@@ -61,9 +62,12 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
-        holder.tv_name.setText(data.get(position).getCertificateDrivingBo().getOwner());
-        holder.tv_brand.setText(data.get(position).getCertificateRegistrationBo().getCarBrand());
-        holder.tv_brand.setText(data.get(position).getCertificateRegistrationBo().getGrantNo());
+        CarListBean.DataBean.CertificateDrivingBoBean certificateDrivingBo = data.get(position).getCertificateDrivingBo();
+        CarListBean.DataBean.CertificateTransportBoBean certificateTransportBo = data.get(position).getCertificateTransportBo();
+        CarListBean.DataBean.CertificateRegistrationBoBean certificateRegistrationBo = data.get(position).getCertificateRegistrationBo();
+        holder.tv_name.setText(certificateTransportBo.getName());
+        holder.tv_number.setText(certificateDrivingBo.getPlateNo());
+        holder.tv_brand.setText(certificateRegistrationBo.getCarModel());
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
@@ -110,7 +114,7 @@ public class CarListAdapter extends RecyclerView.Adapter<CarListAdapter.ViewHold
         }
     }
 
-    public void setData(List<SelectCarBean.DataBean> data) {
+    public void setData(List<CarListBean.DataBean> data) {
         this.data = data;
         notifyDataSetChanged();
     }

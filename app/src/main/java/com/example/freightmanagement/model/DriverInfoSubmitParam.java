@@ -12,7 +12,7 @@ public class DriverInfoSubmitParam implements Serializable {
 
     private String tel;
 
-    private String enterpriseId;
+    private int enterpriseId;
 
     private Integer carId;
 
@@ -46,11 +46,11 @@ public class DriverInfoSubmitParam implements Serializable {
         this.tel = tel;
     }
 
-    public String getEnterpriseId() {
+    public int getEnterpriseId() {
         return enterpriseId;
     }
 
-    public void setEnterpriseId(String enterpriseId) {
+    public void setEnterpriseId(int enterpriseId) {
         this.enterpriseId = enterpriseId;
     }
 

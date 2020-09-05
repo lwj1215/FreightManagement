@@ -6,9 +6,12 @@ import android.widget.AutoCompleteTextView;
 
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;
+import com.example.freightmanagement.model.AdminParam;
+import com.example.freightmanagement.presenter.ChangePasswordPresenter;
 
-public class ChangePasswordActivity extends BaseActivity implements View.OnClickListener {
+public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter> implements ChangePasswordPresenter.View, View.OnClickListener {
 
     private AutoCompleteTextView edtTxt_login_password1, edtTxt_login_password2, edtTxt_login_password3;
 
@@ -53,9 +56,29 @@ public class ChangePasswordActivity extends BaseActivity implements View.OnClick
                     ToastUtils.popUpToast("两次密码不一致");
                     return;
                 }
-
+                String userId = PrefUtilsData.getUserId();
+                AdminParam adminParam = new AdminParam();
+                adminParam.setId(Integer.parseInt(userId));
+                adminParam.setPass(s1);
+//                adminParam.setTel();
 //                finish();
+                mPresenter.submit(adminParam);
                 break;
         }
+    }
+
+    @Override
+    public void success() {
+        ToastUtils.popUpToast("修改密码完成");
+    }
+
+    @Override
+    public void failed(String error) {
+        ToastUtils.popUpToast(error);
+    }
+
+    @Override
+    protected ChangePasswordPresenter onInitLogicImpl() {
+        return new ChangePasswordPresenter();
     }
 }

@@ -64,7 +64,7 @@ public class BaseApiConstants {
     public static final String API_IMAGE_UPLOAD = "/cccc/file/upload";
 
     /**
-     * chezhu注册
+     * 车主注册
      */
     public static final String API_CAR_OWNER_REGISTER = "/cccc/carOwner/addOwner";
 
@@ -129,11 +129,16 @@ public class BaseApiConstants {
      * 驾驶员列表
      */
     public static final String API_DRIVER_LIST = "/cccc/manager/driver/getDriverList";
+    /**
+     * 车辆列表
+     */
+    public static final String API_CAR_LIST = "/cccc/manager/car/getCarList";
+
 
     /**
      * 删除或者更改车辆
      */
-    public static final String API_CAR_DEL = "/cccc/carOwner/editOwner";
+    public static final String API_CAR_DEL = "/cccc/carOwner/deleteCar";
     /**
      * 新增车辆
      */
@@ -142,7 +147,7 @@ public class BaseApiConstants {
     /**
      * 获取合同状态
      */
-    public static final String API_CONTRACT_GET = "/cccc/letter/getContract/";
+    public static final String API_CONTRACT_GET = "/cccc/letter/getContract";
     /**
      * 获取企业信息
      */
@@ -159,5 +164,8 @@ public class BaseApiConstants {
      * 增加车辆
      */
     public static final String API_ADD_CAR = "/cccc/carOwner/addCar";
-
+    /**
+     * 修改密码
+     */
+    public static final String API_CHANGE_PASS = "/cccc/manager/admin/editAdmin";
 }

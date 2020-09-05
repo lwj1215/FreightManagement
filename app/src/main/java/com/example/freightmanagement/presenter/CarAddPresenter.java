@@ -1,5 +1,7 @@
 package com.example.freightmanagement.presenter;
 
+import android.util.Log;
+
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Bean.ImageUploadBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
@@ -23,6 +25,7 @@ public class CarAddPresenter extends BasePresenter<CarAddConstact.View> implemen
 
     @Override
     public void upload(File file, final int type) {
+
         RestApi.getInstance().postImage(API_IMAGE_UPLOAD, file, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {
@@ -45,6 +48,7 @@ public class CarAddPresenter extends BasePresenter<CarAddConstact.View> implemen
     @Override
     public void submit(CarBo carBo) {
         String json = new Gson().toJson(carBo);
+        Log.i("zxz",json);
         RestApi.getInstance().post(API_ADD_CAR, json, new OnRequestResultForCommon() {
             @Override
             public void onSuccess(String json) {

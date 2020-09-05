@@ -6,25 +6,23 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.freightmanagement.Activity.CarListManageActivity;
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
+import com.example.freightmanagement.Activity.CommonHtmlActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.DriverListActivity;
 import com.example.freightmanagement.Activity.EmploymentContractActivity;
-import com.example.freightmanagement.Activity.PromiseBookActivity;
-import com.example.freightmanagement.Activity.ResponsibilityBookActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
+import com.example.freightmanagement.Activity.SelectCarActivity;
 import com.example.freightmanagement.Activity.TrainingSelectActivity;
 import com.example.freightmanagement.Activity.VehicleInformationActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
-import com.example.freightmanagement.Bean.HomeInfoBean;
+import com.example.freightmanagement.Base.BaseResponse;
+import com.example.freightmanagement.Bean.TrainResultBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.CameraConfig;
 import com.example.freightmanagement.Utils.OnItemClickListener;
@@ -33,13 +31,10 @@ import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.enums.AdminTypeEnum;
 import com.example.freightmanagement.presenter.HomePresenter;
+import com.google.gson.Gson;
 import com.qiniu.pili.droid.streaming.CameraStreamingSetting;
 import com.qiniu.pili.droid.streaming.StreamingEnv;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-
 
 public class HomeFragment extends BaseFragment<HomePresenter> implements HomePresenter.View {
 
@@ -50,7 +45,8 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
     private PermissionChecker mPermissionChecker;
     private String url = "rtmp://pili-publish.qnsdk.com/sdk-live/2a9b9dae-c229-411c-bfc6-940bda942d47?e=1595833142&token=QxZugR8TAhI38AiJ_cptTl3RbzLyca3t-AAiH-Hh:ioKtdeyOnxdnEsheNQvhCbyvlBY=";
     private String type;
-
+    private boolean trainComplete = false;
+    private boolean contractComplete = false;
     @Override
     protected int getLayoutResource() {
         return R.layout.home_fragment;
@@ -88,8 +84,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                     startActivity(new Intent(activity, DriverInformationActivity.class));
                 }else if (position == 1) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
-                        mPresenter.getContractComplete();
-                        startActivity(new Intent(activity, VehicleInformationActivity.class));
+                        mPresenter.getCompleteResult();
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                         startActivity(new Intent(activity, CarListManageActivity.class));
                     }else if(type.equals(AdminTypeEnum.COMPANY.getValue())){
@@ -106,8 +101,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                 }else if (position == 3) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
                         mPresenter.getContractComplete();
-                        mPresenter.getTrainComplete();
-                        startActivity(new Intent(activity, EmploymentContractActivity.class));
+//                        mPresenter.getTrainComplete();
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                         startActivity(new Intent(activity, ChangePasswordActivity.class));
                     }else if(type.equals(AdminTypeEnum.COMPANY.getValue())){
@@ -125,13 +119,23 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                     }
                 }else if (position == 4) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
-                        startActivity(new Intent(activity, ChangePasswordActivity.class));
+                        boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
+                        if (!isPermissionOK) {
+                            return;
+                        }
+                        StreamingEnv.setLogLevel(Log.VERBOSE);
+                        Intent intent = new Intent(activity, SWCameraStreamingActivity.class);
+                        intent.putExtra("INPUT_TEXT", "");
+                        intent.putExtra("TRANSFER_MODE_QUIC", false);
+                        intent.putExtra("url", url);
+                        intent.putExtra("CameraConfig", buildCameraConfig());
+                        startActivity(intent);
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                     }else if(type.equals(AdminTypeEnum.COMPANY.getValue())){
                         startActivity(new Intent(activity, ChangePasswordActivity.class));
                     }
                 }else if (position == 5) {
-                    startActivity(new Intent(activity, ResponsibilityBookActivity.class));
+                    startActivity(new Intent(activity, ChangePasswordActivity.class));
                 }
 //                else if (position==6){
 //                    boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
@@ -180,12 +184,41 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
 
 
     @Override
-    public void notComplete() {
-
+    public void trainResult(String msg) {
+        TrainResultBean trainResultBean = new Gson().fromJson(msg, TrainResultBean.class);
+        if(trainResultBean != null){
+            TrainResultBean.DataBean data = trainResultBean.getData();
+            if(data != null){
+                int isPass = data.getIsPass();
+                if(isPass == 1){
+                    trainComplete = true;
+                }else {
+                    trainComplete = false;
+                }
+            }
+        }
     }
 
     @Override
-    public void complete() {
+    public void contractResult(String msg) {
+        BaseResponse response = new Gson().fromJson(msg, BaseResponse.class);
+        if(response != null){
+            Object data = response.getData();
+            if(data == null){
+                startActivity(new Intent(activity, CommonHtmlActivity.class));
+            }else {
+                startActivity(new Intent(activity, SelectCarActivity.class));
+            }
+        }
+    }
+
+    @Override
+    public void completeResult(boolean result) {
+        if(result){
+            startActivity(new Intent(activity, VehicleInformationActivity.class));
+        }else {
+            ToastUtils.popUpToast("聘用合同暂未签署，无法进入");
+        }
 
     }
 }

@@ -8,10 +8,13 @@ public interface HomeConstact {
 
     void getContractComplete();
 
+    void getCompleteResult();
 
     interface View extends BaseView {
-        void notComplete();
-        void complete();
+        void trainResult(String msg);
+        void contractResult(String msg);
+        void completeResult(boolean result);
+
     }
 
 

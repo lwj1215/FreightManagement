@@ -256,7 +256,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 .READ_EXTERNAL_STORAGE);
         int wet = ActivityCompat.checkSelfPermission(this, Manifest.permission
                 .WRITE_EXTERNAL_STORAGE);
-        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED) {
+        int camera = ActivityCompat.checkSelfPermission(this, Manifest.permission
+                .CAMERA);
+        if (ret != PackageManager.PERMISSION_GRANTED && wet != PackageManager.PERMISSION_GRANTED  ) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     1000);
@@ -451,20 +453,18 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 CertificateWorkParam certificateWorkParam = new CertificateWorkParam();
                 certificateWorkParam.setGrantNo(mEtPostCard.getText().toString());
                 certificateWorkParam.setFileNumber(postCardNum);
-                try {
-                    String firstTimeStr = mTvFirstReceive.getText().toString();
-                    String yxqTimeStr = mTvYouXiaoQi.getText().toString();
-                    if(!DateUtil.isValidDate(firstTimeStr)){
-                        ToastUtils.popUpToast("上岗证初次领证时间错误，请重新选择");
-                    }
-                    if(!DateUtil.isValidDate(yxqTimeStr)){
-                        ToastUtils.popUpToast("上岗证有效期限时间错误，请重新选择");
-                    }
-                    certificateWorkParam.setFirstTime(DateUtil.string2Date(firstTimeStr,ymd));
-                    certificateWorkParam.setValidityStartTime(DateUtil.string2Date(yxqTimeStr,ymd));
-                } catch (ParseException e) {
-                    e.printStackTrace();
+
+                String firstTimeStr = mTvFirstReceive.getText().toString();
+                String yxqTimeStr = mTvYouXiaoQi.getText().toString();
+                if(!DateUtil.isValidDate(firstTimeStr)){
+                    ToastUtils.popUpToast("上岗证初次领证时间错误，请重新选择");
                 }
+                if(!DateUtil.isValidDate(yxqTimeStr)){
+                    ToastUtils.popUpToast("上岗证有效期限时间错误，请重新选择");
+                }
+                certificateWorkParam.setFirstTime(firstTimeStr);
+                certificateWorkParam.setValidityStartTime(yxqTimeStr);
+
                 certificateWorkParam.setPicUrl(workUrl);
                 driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
                 Intent intent1 = new Intent(this, SelectCarActivity.class);

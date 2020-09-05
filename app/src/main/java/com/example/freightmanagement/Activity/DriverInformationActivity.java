@@ -124,7 +124,7 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         }
         Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_driver_front);
         Glide.with(getContext()).load(certificateWorkBo.getPicUrl()).into(iv_work_front);
-        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
+//        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
         et_post_card.setText(certificateWorkBo.getGrantNo()+"");
         tv_first_receive.setText(certificateWorkBo.getValidityStartTime()+"");
         tv_you_xiao_qi.setText(certificateWorkBo.getValidityEndTime()+"");
@@ -144,7 +144,7 @@ public class DriverInformationActivity extends BaseActivity<DriverInformationPre
         Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(iv_card_front_qy);
         Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(iv_card_revers_qy);
         et_real_name_qy.setText(certificateIDBo.getName() + "");
-        et_card_num_qy.setText(certificateIDBo.getCarId() + "");
+        et_card_num_qy.setText(certificateIDBo.getIdno() + "");
         Glide.with(getContext()).load(certificateBusinessBo.getPicUrl()).into(iv_business_front);
         et_code_qy.setText(certificateBusinessBo.getId() + "");
         et_name_qy.setText(certificateBusinessBo.getName() + "");

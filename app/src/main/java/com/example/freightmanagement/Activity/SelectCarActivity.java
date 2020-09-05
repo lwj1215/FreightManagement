@@ -47,8 +47,8 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
         selectCarAdapter.setOnItemClickListener(new SelectCarAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                id = data.get(position).getId();
-                submitParam.setCarId(id);
+                submitParam.setCarId(data.get(position).getId());
+                submitParam.setEnterpriseId(data.get(position).getEnterpriseId());
             }
         });
     }
