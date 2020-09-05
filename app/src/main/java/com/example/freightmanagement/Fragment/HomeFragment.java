@@ -205,9 +205,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
         if(response != null){
             Object data = response.getData();
             if(data == null){
-                startActivity(new Intent(activity, CommonHtmlActivity.class));
-            }else {
                 startActivity(new Intent(activity, SelectCarActivity.class));
+            }else {
+                startActivity(new Intent(activity, CommonHtmlActivity.class));
             }
         }
     }

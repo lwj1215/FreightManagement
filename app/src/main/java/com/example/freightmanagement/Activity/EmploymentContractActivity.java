@@ -15,12 +15,15 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DatePickerDialog;
 import com.example.freightmanagement.Utils.DateUtil;
@@ -30,6 +33,7 @@ import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
 import com.example.freightmanagement.View.UserWebView;
+import com.example.freightmanagement.enums.ResponseCodeEnum;
 import com.example.freightmanagement.model.ContractParam;
 import com.example.freightmanagement.presenter.EmploymentContractPresenter;
 import com.example.freightmanagement.presenter.constract.EmploymentConstact;
@@ -41,7 +45,7 @@ import java.util.List;
 import static android.webkit.WebView.enableSlowWholeDocumentDraw;
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
 
-public class EmploymentContractActivity extends BaseActivity<EmploymentContractPresenter> implements EmploymentContractPresenter.View, View.OnClickListener {
+public class EmploymentContractActivity extends BaseActivity<EmploymentContractPresenter> implements EmploymentContractPresenter.View, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private Dialog bottomDialog;
     private View bottomView;
@@ -56,11 +60,13 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     private String signUrl;
     private String employmentUrl;
     private int carId;
-
+    private RadioButton mRbApply;
+    private boolean apply = false;
     @Override
     public int setLayoutResource() {
-        if(judgeAndroidVersion()){                                  //如果要是5.0手机以上，必须要使用该属性,否则快照内容不全
-            WebView.enableSlowWholeDocumentDraw();
+        if (judgeAndroidVersion()) {
+            //如果要是5.0手机以上，必须要使用该属性,否则快照内容不全
+            enableSlowWholeDocumentDraw();
         }
         return R.layout.activity_employment_contract;
     }
@@ -69,6 +75,9 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     protected void onInitView() {
         setDefaultTitle("聘用合同");
         checkGalleryPermission();
+        int id = getIntent().getIntExtra("id", 0);
+        int enterpriseId = getIntent().getIntExtra("enterpriseId", 0);
+
         bindView(R.id.tv_sign).setOnClickListener(this);
         bindView(R.id.tv_endTime).setOnClickListener(this);
 
@@ -79,7 +88,9 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         vSignView = (ElectronicSignature) bottomView.findViewById(R.id.sign_view);
 //        mImgSign = findViewById(R.id.img_sign);
         mTvSubmit = findViewById(R.id.tv_submit);
+        mRbApply = findViewById(R.id.rb_apply);
         mTvSubmit.setOnClickListener(this);
+        mRbApply.setOnCheckedChangeListener(this);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -88,8 +99,9 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         final String name = getIntent().getStringExtra("name");
         final String certificateNo = getIntent().getStringExtra("certificateNo");
         final String tel = getIntent().getStringExtra("tel");
-        carId = getIntent().getIntExtra("carId",-1);
+        carId = getIntent().getIntExtra("carId", -1);
         mPresenter.get(PrefUtilsData.getUserId());
+        mPresenter.getDriver();
         mWebView.setClickable(true);
         WebSettings settings = mWebView.getSettings();
         if (Build.VERSION.SDK_INT >= 21) {
@@ -124,18 +136,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         });
         // 添加客户端支持
         mWebView.setWebChromeClient(new WebChromeClient());
-        mWebView.loadUrl("http://aicc.ctags.cn/cccc/letter/contract.html");
-//        mWebView.loadUrl("file:///android_asset/contract.html");
-        mWebView.setWebChromeClient(new WebChromeClient() {
-            public void onProgressChanged(WebView view, int progress) {
-                if (progress == 100) {
-                    //加载完成
-                    mWebView.loadUrl("javascript:setName('" + name + "')");
-                    mWebView.loadUrl("javascript:setNo('" + certificateNo + "')");
-                    mWebView.loadUrl("javascript:setTel('" + tel + "')");
-                }
-            }
-        });
+
     }
 
     private boolean checkGalleryPermission() {
@@ -174,11 +175,15 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 mPresenter.upload(new File(file.getAbsolutePath()), 0);
                 break;
             case R.id.tv_submit:
-                if(TextUtils.isEmpty(endTime)){
+                if(!apply){
+                    ToastUtils.popUpToast("请先同意签署");
+                    return;
+                }
+                if (TextUtils.isEmpty(endTime)) {
                     ToastUtils.popUpToast("请选择合同截止日期");
                     return;
                 }
-                if(TextUtils.isEmpty(signUrl)){
+                if (TextUtils.isEmpty(signUrl)) {
                     ToastUtils.popUpToast("请签名");
                     return;
                 }
@@ -186,15 +191,15 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
 //                    ToastUtils.popUpToast("合同暂未生成");
 //                    return;
 //                }
-                if(carId == -1){
+                if (carId == -1) {
                     ToastUtils.popUpToast("车辆不得为空");
                     return;
                 }
                 boolean b = FileUtil.fileIsExists(this.file.getAbsolutePath());
-                if(b){
+                if (b) {
 //                    ToastUtils.popUpToast("文件存在，路径是："+this.file.getAbsolutePath());
-                    mPresenter.upload(new File(this.file.getAbsolutePath()),1);
-                }else {
+                    mPresenter.upload(new File(this.file.getAbsolutePath()), 1);
+                } else {
 //                    ToastUtils.popUpToast("文件不存在");
                 }
                 break;
@@ -210,7 +215,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
 
     @Override
     public void imageUrl(String url, int type) {
-        switch (type){
+        switch (type) {
             case 0:
                 signUrl = IMAGE_BASE_URL.concat(url);
                 mWebView.loadUrl("javascript:setSign('" + signUrl + "')");
@@ -230,7 +235,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                             @Override
                             public void run() {
                                 //把整体的图片保存到本地下
-                                file = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg",getContext());
+                                file = FileUtil.saveBitmapFile(bitmap, "/sign_" + System.currentTimeMillis() + ".jpg", getContext());
                             }
                         }).start();
 
@@ -250,9 +255,28 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 mPresenter.submit(contractParam);
                 break;
         }
+    }
 
-
-
+    @Override
+    public void driverInfo(WrodIdBean wrodIdBean) {
+        int code = wrodIdBean.getCode();
+        if (code == ResponseCodeEnum.SUCCESS.getCode()) {
+            WrodIdBean.DataBean data = wrodIdBean.getData();
+            final String name = data.getCertificateIDBo().getName();
+            WrodIdBean.DataBean.CertificateDriverBoBean certificateDriverBo = data.getCertificateDriverBo();
+            final String fileNumber = certificateDriverBo.getFileNumber();
+            mWebView.loadUrl("http://aicc.ctags.cn/cccc/letter/contract.html");
+            mWebView.setWebChromeClient(new WebChromeClient() {
+                public void onProgressChanged(WebView view, int progress) {
+                    if (progress == 100) {
+                        //加载完成
+                        mWebView.loadUrl("javascript:setName('" + name + "')");
+                        mWebView.loadUrl("javascript:setNo('" + fileNumber + "')");
+                        mWebView.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                    }
+                }
+            });
+        }
     }
 
     @Override
@@ -298,5 +322,10 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         builder.setMaxDay(DateUtil.getDateForString(DateUtil.getToday()).get(2));
         dateDialog = builder.create();
         dateDialog.show();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        apply = b;
     }
 }

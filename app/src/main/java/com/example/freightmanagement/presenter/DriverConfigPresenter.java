@@ -40,4 +40,26 @@ public class DriverConfigPresenter extends BasePresenter<DriverConfigConstact.Vi
             }
         });
     }
+
+    @Override
+    public void submit(DriverInfoSubmitParam submitParam) {
+        String json = new Gson().toJson(submitParam);
+        RestApi.getInstance().post(API_DRIVER_REGISTER, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+                mView.success(json);
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
 }

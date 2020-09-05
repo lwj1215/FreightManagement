@@ -1,6 +1,7 @@
 package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
+import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.model.ContractParam;
 import com.example.freightmanagement.model.company.CompanySubmitParam;
 
@@ -19,9 +20,12 @@ public interface EmploymentConstact {
 
     void get(String id);
 
+    void getDriver();
+
     interface View extends BaseView {
         void success();
         void imageUrl(String url, int type);
 
+        void driverInfo(WrodIdBean wrodIdBean);
     }
 }

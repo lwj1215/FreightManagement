@@ -27,43 +27,43 @@
     <LinearLayout
         android:id="@+id/ll"
         android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_endTime"
-            style="@style/bottom_button_style"
-            android:layout_below="@+id/inputEdit_phone"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:text="合同终止日期" />
-        <TextView
-            android:id="@+id/tv_submit"
-            style="@style/bottom_button_style"
-            android:layout_below="@+id/inputEdit_phone"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:text="提交" />
-        <TextView
-            android:id="@+id/tv_sign"
-            style="@style/bottom_button_style"
-            android:layout_below="@+id/inputEdit_phone"
-            android:layout_centerVertical="true"
-            android:layout_weight="1"
-            android:text="点击签字" />
+        <RadioButton
+            android:id="@+id/rb_apply"
+            android:background="@color/blue_079EEB"
+            android:textColor="@color/white"
+            android:text="以上条款已悉知，同意签署"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_endTime"
+                style="@style/bottom_button_style"
+                android:layout_below="@+id/inputEdit_phone"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:text="合同终止日期" />
+            <TextView
+                android:id="@+id/tv_submit"
+                style="@style/bottom_button_style"
+                android:layout_below="@+id/inputEdit_phone"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:text="提交" />
+            <TextView
+                android:id="@+id/tv_sign"
+                style="@style/bottom_button_style"
+                android:layout_below="@+id/inputEdit_phone"
+                android:layout_centerVertical="true"
+                android:layout_weight="1"
+                android:text="点击签字" />
+        </LinearLayout>
+
     </LinearLayout>
-<!--    <ScrollView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="@dimen/x300">-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="@dimen/x300">-->
-<!--            <ImageView-->
-<!--                android:id="@+id/img_sign"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="@dimen/x700"-->
-<!--                android:visibility="visible" />-->
-<!--        </LinearLayout>-->
-<!--    </ScrollView>-->
+
 
 </RelativeLayout>

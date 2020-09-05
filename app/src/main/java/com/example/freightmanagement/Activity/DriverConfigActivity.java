@@ -31,6 +31,7 @@ import com.baidu.ocr.ui.camera.CameraNativeHelper;
 import com.baidu.ocr.ui.camera.CameraView;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
+import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.DriverLicenseBean;
 import com.example.freightmanagement.Bean.WorkBean;
 import com.example.freightmanagement.R;
@@ -467,9 +468,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
                 certificateWorkParam.setPicUrl(workUrl);
                 driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
-                Intent intent1 = new Intent(this, SelectCarActivity.class);
-                intent1.putExtra("driverInfo", driverInfoSubmitParam);
-                startActivity(intent1);
+                mPresenter.submit(driverInfoSubmitParam);
                 break;
         }
     }
@@ -831,6 +830,17 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
             case UPLOAD_WORK:
                 workUrl = IMAGE_BASE_URL + url;
                 break;
+        }
+    }
+
+    @Override
+    public void success(String json) {
+        BaseResponse baseResponse = new Gson().fromJson(json, BaseResponse.class);
+        int code = baseResponse.getCode();
+        if (code == 0) {
+            ToastUtils.popUpToast("提交成功");
+            Intent intent = new Intent(this,MainActivity.class);
+            startActivity(intent);
         }
     }
 //    private boolean checkTokenStatus() {

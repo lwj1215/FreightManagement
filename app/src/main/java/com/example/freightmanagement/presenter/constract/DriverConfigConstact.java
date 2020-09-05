@@ -12,11 +12,14 @@ import java.io.File;
 
 public interface DriverConfigConstact {
 
+    void submit(DriverInfoSubmitParam param);
 
     void upload(File file,int type);
 
     interface View extends BaseView {
         void imageUrl(String url,int type);
+
+        void success(String json);
 
     }
 }

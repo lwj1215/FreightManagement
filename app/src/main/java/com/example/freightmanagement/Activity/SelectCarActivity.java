@@ -14,6 +14,7 @@ import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.SelectCarBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.PrefUtilsData;
+import com.example.freightmanagement.Utils.StringUtil;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.model.DriverInfoSubmitParam;
 import com.example.freightmanagement.presenter.SelectCarPresenter;
@@ -24,10 +25,11 @@ import java.util.List;
 public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implements SelectCarPresenter.View, View.OnClickListener {
     private RecyclerView mRecyclerView;
     private TextView mTvSrue;
-    private DriverInfoSubmitParam submitParam;
+//    private DriverInfoSubmitParam submitParam;
     private SelectCarAdapter selectCarAdapter;
     private List<SelectCarBean.DataBean> data;
-    private int id;
+    private Integer id;
+    private Integer enterpriseId;
 
     @Override
     public int setLayoutResource() {
@@ -47,15 +49,15 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
         selectCarAdapter.setOnItemClickListener(new SelectCarAdapter.ItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                submitParam.setCarId(data.get(position).getId());
-                submitParam.setEnterpriseId(data.get(position).getEnterpriseId());
+                id = data.get(position).getId();
+                enterpriseId = data.get(position).getEnterpriseId();
             }
         });
     }
 
     @Override
     protected void onLoadData2Remote() {
-        submitParam = (DriverInfoSubmitParam) getIntent().getSerializableExtra("driverInfo");
+//        submitParam = (DriverInfoSubmitParam) getIntent().getSerializableExtra("driverInfo");
         mPresenter.getCar();
     }
 
@@ -64,7 +66,7 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
         SelectCarBean selectCarBean = new Gson().fromJson(msg, SelectCarBean.class);
         data = selectCarBean.getData();
         data.add(data.get(0));
-        id = data.get(0).getId();
+
         selectCarAdapter.setData(data);
     }
 
@@ -92,7 +94,13 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_srue:
-                mPresenter.submit(submitParam);
+                if(StringUtil.isEmpty(id)){
+                    ToastUtils.popUpToast("请选择一辆车");
+                }
+                Intent intent = new Intent(this, EmploymentContractActivity.class);
+                intent.putExtra("id",id);
+                intent.putExtra("enterpriseId",enterpriseId);
+                startActivity(intent);
                 break;
         }
     }
