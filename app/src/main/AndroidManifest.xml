@@ -26,14 +26,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.VehicleDetectionActivity"/>
+        <activity android:name=".Activity.DrivierxiangqingActivity"></activity>
+        <activity android:name=".Activity.DriverInfaomaionActivity" />
+        <activity android:name=".Activity.VehicleDetectionActivity" />
         <activity android:name=".Activity.CheLiangJcActivity" />
         <activity android:name=".Activity.PromiseBookActivity" />
         <activity
             android:name=".Activity.ResponsibilityBookActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.VehicleInformationActivity"
             android:screenOrientation="portrait" />
@@ -48,25 +48,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.EmploymentContractActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.CompanyRegisterActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.CarOwnerActivity"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.DriverConfigActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.TrainingSelectActivity"
             android:screenOrientation="portrait" />
@@ -99,7 +91,7 @@
         </activity>
         <activity
             android:name=".Activity.CarListManageActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.CarAddActivity"
             android:screenOrientation="portrait" />
@@ -115,13 +107,10 @@
         <activity
             android:name=".Activity.SelectCarActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait" >
-
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.MaintenanceRecordsActivity"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.SWCameraStreamingActivity"
             android:configChanges="orientation|screenSize"
@@ -129,8 +118,7 @@
         <activity
             android:name=".Activity.MainActivity"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"/>
-
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.CarInformationActivity"
             android:screenOrientation="portrait" />

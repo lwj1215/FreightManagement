@@ -178,6 +178,9 @@ public class BaseApiConstants {
     /**
      * 獲取車輛详情
      */
-    public static final String API_CHELIANGXIANGQING = "/cccc/manager/car/getCar/";
+    public static final String API_CHELIANGXIANGQING = "/cccc/manager/car/getCar/"; /**
+     * 獲取車輛详情
+     */
+    public static final String API_JIASHIYUAN = "/cccc/driver/getDirver/";
 
 }

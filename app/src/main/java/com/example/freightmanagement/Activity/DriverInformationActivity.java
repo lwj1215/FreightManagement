@@ -22,8 +22,6 @@ import com.example.freightmanagement.presenter.DriverInformationPresenter;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import static com.example.freightmanagement.common.Constants.ADMIN_TYPE;
-
 public class DriverInformationActivity extends BaseActivity<DriverInformationPresenter> implements DriverInformationPresenter.View {
 
     private TextView name, tv_card, et_real_name_qy, et_real_name_cz, et_card_num_cz, et_card_num_qy,

@@ -14,7 +14,6 @@ import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.CommonHtmlActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.DriverListActivity;
-import com.example.freightmanagement.Activity.EmploymentContractActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
 import com.example.freightmanagement.Activity.SelectCarActivity;
 import com.example.freightmanagement.Activity.TrainingSelectActivity;

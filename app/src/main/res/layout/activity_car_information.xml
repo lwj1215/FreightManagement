@@ -245,6 +245,7 @@
                         android:layout_gravity="bottom"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -283,6 +284,7 @@
                         android:layout_gravity="bottom"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -367,9 +369,9 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -391,6 +393,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -407,15 +410,16 @@
                         android:layout_gravity="bottom"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -437,6 +441,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -453,10 +458,11 @@
                         android:layout_gravity="bottom"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:gravity="center"
                     android:layout_height="@dimen/x280"
+                    android:gravity="center"
                     android:padding="@dimen/x10">
 
                     <RelativeLayout
@@ -481,7 +487,7 @@
                             android:id="@+id/iv_card_yun_shu"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
 
@@ -565,6 +571,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -601,6 +608,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -711,10 +719,11 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:gravity="center"
                     android:layout_height="@dimen/x280"
+                    android:gravity="center"
                     android:padding="@dimen/x10">
 
                     <RelativeLayout
@@ -739,7 +748,7 @@
                             android:id="@+id/iv_card_ji_dong"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"/>
+                            android:scaleType="centerCrop" />
 
                     </RelativeLayout>
 
@@ -786,6 +795,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -822,6 +832,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -858,6 +869,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -894,6 +906,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -930,6 +943,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -966,6 +980,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1002,6 +1017,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1038,6 +1054,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1074,6 +1091,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1110,6 +1128,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1124,12 +1143,33 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="排量/功率"
+                            android:text="排量"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 
                         <TextView
                             android:id="@+id/et_deng_ji_pai_liang"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x40"
+                            android:text="功率"
+                            android:textColor="@color/color_666"
+                            android:textSize="@dimen/x28" />
+
+                        <TextView
+                            android:id="@+id/et_deng_ji_gonglv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
@@ -1146,6 +1186,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1182,6 +1223,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -1218,15 +1260,16 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1236,6 +1279,7 @@
                             android:text="外廊尺寸"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1244,6 +1288,7 @@
                             android:text="长"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:id="@+id/et_deng_ji_chang"
                             android:layout_width="wrap_content"
@@ -1255,6 +1300,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1263,6 +1309,7 @@
                             android:text="宽"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:id="@+id/et_deng_ji_kuan"
                             android:layout_width="wrap_content"
@@ -1274,6 +1321,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1282,6 +1330,7 @@
                             android:text="高"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:id="@+id/et_deng_ji_gao"
                             android:layout_width="wrap_content"
@@ -1293,6 +1342,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1308,15 +1358,16 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1338,6 +1389,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1353,15 +1405,16 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1383,6 +1436,7 @@
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1398,15 +1452,16 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1435,15 +1490,16 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x100">
+                        android:layout_height="@dimen/x100"
+                        android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1462,7 +1518,6 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请选择"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
