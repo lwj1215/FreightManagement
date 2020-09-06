@@ -57,8 +57,7 @@
                             android:id="@+id/iv_card_front"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/closeImageViewFont"
@@ -92,7 +91,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            />
 
                         <ImageView
                             android:id="@+id/closeImageViewReverse"
@@ -299,8 +298,7 @@
                             android:id="@+id/iv_driver_front"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:visibility="gone" />
+                            android:scaleType="centerCrop" />
 
                         <ImageView
                             android:id="@+id/close_driver_Font"

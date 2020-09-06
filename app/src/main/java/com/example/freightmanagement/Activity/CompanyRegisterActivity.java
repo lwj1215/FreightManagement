@@ -32,6 +32,7 @@ import com.baidu.ocr.ui.camera.CameraView;
 import com.bumptech.glide.Glide;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.BusinessLicenseBean;
+import com.example.freightmanagement.Bean.QiYeBean;
 import com.example.freightmanagement.Bean.RoadManagerBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DialogUtils;
@@ -53,7 +54,9 @@ import com.google.gson.Gson;
 import org.w3c.dom.Text;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.util.ConvertUtils;
@@ -200,13 +203,14 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         checkGalleryPermission();
         initView();
         String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
-//        if (flag.equals("0")) {
-//            setDefaultTitle("企业注册");
-//            mRlSign.setVisibility(View.VISIBLE);
-//        } else {
-//            setDefaultTitle("企业信息修改");
-//            mRlSign.setVisibility(View.GONE);
-//        }
+        if (flag.equals("0")) {
+            setDefaultTitle("企业注册");
+            mRlSign.setVisibility(View.VISIBLE);
+        } else {
+            setDefaultTitle("企业信息修改");
+            mRlSign.setVisibility(View.GONE);
+            mPresenter.getQyData();
+        }
 
     }
 
@@ -820,5 +824,34 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
         }
     }
-}
 
+    @Override
+    public void qiyeSuc(QiYeBean.DataBean data) {
+        QiYeBean.DataBean.CertificateBusinessBoBean certificateBusinessBo = data.getCertificateBusinessBo();
+        QiYeBean.DataBean.CertificateIDBoBean certificateIDBo = data.getCertificateIDBo();
+        QiYeBean.DataBean.CertificateOperationBoBean certificateOperationBo = data.getCertificateOperationBo();
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(mIvCardFront);
+        Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(mIvCardRevers);
+        mEtRealName.setText(certificateIDBo.getName() + "");
+        mEtCardNum.setText(certificateIDBo.getIdno() + "");
+        Glide.with(getContext()).load(certificateBusinessBo.getPicUrl()).into(mIvBusinessFront);
+        mEtCode.setText(certificateBusinessBo.getId() + "");
+        mEtName.setText(certificateBusinessBo.getName() + "");
+        mEtJing.setText(certificateBusinessBo.getScope() + "");
+        mTvChengli.setText(timeStampToDate(certificateBusinessBo.getCreateTime()) + "");
+        mEtAddress.setText(certificateBusinessBo.getRegistrationAuthority() + "");
+        Glide.with(getContext()).load(certificateOperationBo.getPicUrl()).into(mIvRoad);
+        mEtXuke.setText(certificateOperationBo.getGrantNo() + "");
+        mTvZhengJianYouXiaoQi.setText(certificateOperationBo.getValidityDate() + "");
+    }
+
+    private String timeStampToDate(long tsp, String... format) {
+        SimpleDateFormat sdf;
+        if (format.length < 1) {
+            sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+        } else {
+            sdf = new SimpleDateFormat(format[0], Locale.getDefault());
+        }
+        return sdf.format(tsp);
+    }
+}

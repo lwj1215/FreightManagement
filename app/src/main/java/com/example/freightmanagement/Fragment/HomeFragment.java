@@ -69,13 +69,13 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
         type = PrefUtilsData.getType();
         if(type.equals(AdminTypeEnum.DRIVER.getValue())){
             mName = new String[]{"驾驶员信息", "车辆信息", "岗前培训", "聘用合同", "公司例会", "修改密码"};
-            icons = new int[]{R.mipmap.ic_xinxi, R.mipmap.ic_car, R.mipmap.ic_peixun, R.mipmap.ic_chengnuo, R.mipmap.ic_huiyi,R.mipmap.ic_password};
+            icons = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_peixun, R.mipmap.img_hetong, R.mipmap.img_lihui,R.mipmap.img_mima};
         }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
             mName = new String[]{"车主信息", "车辆信息", "驾驶员列表", "修改密码"};
-            icons = new int[]{R.mipmap.ic_xinxi, R.mipmap.ic_car, R.mipmap.ic_xinxi, R.mipmap.ic_password};
+            icons = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_jiashiyuan, R.mipmap.img_mima};
         }else if(type.equals(AdminTypeEnum.COMPANY.getValue())){
             mName = new String[]{"企业信息", "车辆信息", "驾驶员列表", "公司例会", "修改密码",};
-            icons = new int[]{R.mipmap.ic_xinxi, R.mipmap.ic_car, R.mipmap.ic_xinxi, R.mipmap.ic_huiyi, R.mipmap.ic_password};
+            icons = new int[]{R.mipmap.img_jiashiyuan, R.mipmap.img_clxx, R.mipmap.img_jiashiyuan, R.mipmap.img_lihui, R.mipmap.img_mima};
         }
         jp_adapter.setData(Arrays.asList(mName),icons);
         jp_adapter.setOnItemClickListener(new OnItemClickListener() {

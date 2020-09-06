@@ -34,6 +34,7 @@ import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.DriverLicenseBean;
 import com.example.freightmanagement.Bean.WorkBean;
+import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.DateUtil;
 import com.example.freightmanagement.Utils.DialogUtils;
@@ -55,7 +56,9 @@ import com.google.gson.Gson;
 
 import java.io.File;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import cn.qqtheme.framework.picker.DatePicker;
 import cn.qqtheme.framework.picker.OptionPicker;
@@ -228,13 +231,14 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     protected void onInitView() {
         initView();
         String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
-//        if (flag.equals("0")) {
-//            setDefaultTitle("驾驶员注册");
-//            mRlSign.setVisibility(View.VISIBLE);
-//        } else {
-//            setDefaultTitle("驾驶员信息修改");
-//            mRlSign.setVisibility(View.GONE);
-//        }
+        if (flag.equals("0")) {
+            setDefaultTitle("驾驶员注册");
+            mRlSign.setVisibility(View.VISIBLE);
+        } else {
+            setDefaultTitle("驾驶员信息修改");
+            mRlSign.setVisibility(View.GONE);
+            mPresenter.getPeixunData();
+        }
 
         checkGalleryPermission();
         initView();
@@ -714,6 +718,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                                 endTime = 至.getWords().substring(0,4)+"-"+yxWords.substring(4,6)+"-"+yxWords.substring(6,yxWords.length());
                             }
                             startTime = 有效期限.getWords();
+//                            mEtEndDate.setText(至.getWords());
                             mIvDriverFront.setVisibility(View.VISIBLE);
                             mTvDriver.setVisibility(View.GONE);
                             Glide.with(getContext()).load(filePath).into(mIvDriverFront);
@@ -911,6 +916,41 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         }
     }
 
+    @Override
+    public void getWrokIdDataSuc(WrodIdBean data) {
+        WrodIdBean.DataBean.CertificateDriverBoBean certificateDriverBo = data.getData().getCertificateDriverBo();
+        WrodIdBean.DataBean.CertificateIDBoBean certificateIDBo = data.getData().getCertificateIDBo();
+        WrodIdBean.DataBean.CertificateWorkBoBean certificateWorkBo = data.getData().getCertificateWorkBo();
+        mEtRealName.setText(certificateIDBo.getName());
+        mEtCardNum.setText(certificateIDBo.getIdno());
+
+        mEtPermitType.setText(certificateDriverBo.getClasss() + "");
+        mTvStartDate.setText(timeStampToDate(certificateDriverBo.getCreateTime()) + "");
+        mEtEndDate.setText(timeStampToDate(certificateDriverBo.getUpdateTime()) + "");
+
+        if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())) {
+            Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(mIvCardFront);
+        }
+        if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())) {
+            Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(mIvCardRevers);
+        }
+        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(mIvDriverFront);
+        Glide.with(getContext()).load(certificateWorkBo.getPicUrl()).into(mIvWorkFront);
+//        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
+        mEtPostCard.setText(certificateWorkBo.getGrantNo()+"");
+        mTvFirstReceive.setText(certificateWorkBo.getValidityStartTime()+"");
+        mTvYouXiaoQi.setText(certificateWorkBo.getValidityEndTime()+"");
+    }
+
+    private String timeStampToDate(long tsp, String... format) {
+        SimpleDateFormat sdf;
+        if (format.length < 1) {
+            sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+        } else {
+            sdf = new SimpleDateFormat(format[0], Locale.getDefault());
+        }
+        return sdf.format(tsp);
+    }
     @Override
     public void success(String json) {
         BaseResponse baseResponse = new Gson().fromJson(json, BaseResponse.class);
