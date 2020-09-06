@@ -102,9 +102,9 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onLoadData2Remote() {
-        int id = getIntent().getIntExtra("id", 0);
+        carId = getIntent().getIntExtra("id", 0);
         int enterpriseId = getIntent().getIntExtra("enterpriseId", 0);
-        carId = getIntent().getIntExtra("carId", -1);
+//        carId = getIntent().getIntExtra("carId", -1);
         mPresenter.get(PrefUtilsData.getUserId());
         mPresenter.getDriver();
         if (Build.VERSION.SDK_INT >= 21) {
@@ -221,6 +221,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         });
         // 添加客户端支持
         mWebViewHt.setWebChromeClient(new WebChromeClient());
+
     }
 
     private boolean checkGalleryPermission() {
@@ -435,6 +436,7 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                     }
                 }
             });
+
             mWebViewZr.loadUrl("http://aicc.ctags.cn/cccc/letter/responsibility.html");
             mWebViewZr.setWebChromeClient(new WebChromeClient() {
                 public void onProgressChanged(WebView view, int progress) {

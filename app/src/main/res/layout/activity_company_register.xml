@@ -573,6 +573,33 @@
                         android:background="@color/gray_background" />
                 </LinearLayout>
                 <RelativeLayout
+                    android:id="@+id/rl_zhang"
+                    android:layout_marginTop="@dimen/x20"
+                    android:layout_width="@dimen/x300"
+                    android:layout_height="@dimen/x300"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/inflate_txt_bg_white">
+
+                    <TextView
+                        android:id="@+id/tv_zhang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:drawableTop="@mipmap/upload_identity"
+                        android:drawablePadding="@dimen/x16"
+                        android:text="上传公章照片"
+                        android:textSize="@dimen/x28"
+                        android:visibility="visible" />
+
+                    <ImageView
+                        android:id="@+id/iv_zhang"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+                <RelativeLayout
                     android:id="@+id/rl_sign"
                     android:layout_width="match_parent"
                     android:visibility="gone"
@@ -596,8 +623,9 @@
                 <TextView
                     android:id="@+id/tv_srue"
                     style="@style/bottom_button_style"
+                    android:layout_marginTop="@dimen/x20"
                     android:layout_marginBottom="@dimen/x100"
-                    android:layout_below="@+id/inputEdit_phone"
+                    android:layout_below="@+id/rl_zhang"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x90"
                     android:layout_marginRight="@dimen/x90"

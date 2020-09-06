@@ -40,6 +40,7 @@ import com.example.freightmanagement.Utils.DialogUtils;
 import com.example.freightmanagement.Utils.FileUtil;
 import com.example.freightmanagement.Utils.IDCardUtils;
 import com.example.freightmanagement.Utils.PrefUtilsData;
+import com.example.freightmanagement.Utils.StringUtil;
 import com.example.freightmanagement.Utils.StringUtils;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
@@ -64,6 +65,7 @@ import cn.qqtheme.framework.widget.WheelView;
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
 import static com.example.freightmanagement.Utils.DateUtil.ymd;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_DRIVER_REVERSE;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_SIGN;
@@ -79,6 +81,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     private static final int REQUEST_CODE_CAMERA = 102;
     private static final int REQUEST_CODE_DRIVING_LICENSE = 121;
     private static final int REQUEST_CODE_WORK_LICENSE = 122;
+    private static final int REQUEST_CODE_DRIVING_REVERSE_LICENSE = 123;
 
     private static final int DATE_TYPE_START_DATE = 300;
     private static final int DATE_TYPE_END_DATE = 301;
@@ -212,6 +215,8 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     private TextView mTvYouXiaoQi;
     private String workUrl;
     private String youxiaoqiTime;
+    private String driverReversePath;
+    private String driverReverseUrl;
 
     @Override
     public int setLayoutResource() {
@@ -223,13 +228,13 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
     protected void onInitView() {
         initView();
         String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
-        if (flag.equals("0")) {
-            setDefaultTitle("驾驶员注册");
-            mRlSign.setVisibility(View.VISIBLE);
-        } else {
-            setDefaultTitle("驾驶员信息修改");
-            mRlSign.setVisibility(View.GONE);
-        }
+//        if (flag.equals("0")) {
+//            setDefaultTitle("驾驶员注册");
+//            mRlSign.setVisibility(View.VISIBLE);
+//        } else {
+//            setDefaultTitle("驾驶员信息修改");
+//            mRlSign.setVisibility(View.GONE);
+//        }
 
         checkGalleryPermission();
         initView();
@@ -377,14 +382,15 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 onYearMonthDayPicker(DATE_TYPE_VALID_DATE);
                 break;
             case R.id.re_driver_pic:
-                driverPath = "driver_" + System.currentTimeMillis();
-                takeDriverPhoto(driverPath);
+                takeDriverPhoto();
                 break;
             case R.id.tv_driver2:
+                takeDriverReversePhoto();
                 break;
             case R.id.close_driver_reverse:
                 break;
             case R.id.re_driver_reverse:
+                takeDriverReversePhoto();
                 break;
             case R.id.tv_first_receive:
                 onYearMonthDayPicker(DATE_TYPE_FIRST_RECEIVE_DATE);
@@ -508,7 +514,12 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         startActivityForResult(intent, REQUEST_CODE_WORK_LICENSE);
     }
 
-    private void takeDriverPhoto(String driverPath) {
+    /**
+     * 驾驶证正页照片
+     * @param
+     */
+    private void takeDriverPhoto() {
+        driverPath = "driver_" + System.currentTimeMillis();
         Intent intent = new Intent(this, CameraActivity.class);
         intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
                 FileUtil.getSaveFile(getApplication(), driverPath).getAbsolutePath());
@@ -517,6 +528,19 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         startActivityForResult(intent, REQUEST_CODE_DRIVING_LICENSE);
     }
 
+    /**
+     * 驾驶证副页照片
+     * @param
+     */
+    private void takeDriverReversePhoto() {
+        driverReversePath = "driver_" + System.currentTimeMillis();
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), driverReversePath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_DRIVING_REVERSE_LICENSE);
+    }
     /**
      * 正面身份证拍照
      */
@@ -675,19 +699,40 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                             DriverLicenseBean.WordsResultBean words_result = driverLicenseBean.getWords_result();
                             DriverLicenseBean.WordsResultBean.准驾车型Bean 准驾车型 = words_result.get准驾车型();
                             DriverLicenseBean.WordsResultBean.有效期限Bean 有效期限 = words_result.get有效期限();
-//                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
+                            DriverLicenseBean.WordsResultBean.至Bean 至 = words_result.get至();
                             DriverLicenseBean.WordsResultBean.证号Bean 证号 = words_result.get证号();
                             driverNum = 证号.getWords();
                             permitType = 准驾车型.getWords();
                             mPresenter.upload(new File(filePath), UPLOAD_DRIVER);
                             mEtPermitType.setText(准驾车型.getWords());
-                            mTvStartDate.setText(有效期限.getWords());
+                            String yxWords = 有效期限.getWords();
+                            if(yxWords.length() == 8){
+                                mTvStartDate.setText(yxWords.substring(0,4)+"-"+yxWords.substring(4,6)+"-"+yxWords.substring(6,yxWords.length()));
+                            }
+                            if(至 != null && StringUtil.isNotEmpty(至.getWords()) && 至.getWords().length() ==8){
+                                mEtEndDate.setText(至.getWords().substring(0,4)+"-"+yxWords.substring(4,6)+"-"+yxWords.substring(6,yxWords.length()));
+                                endTime = 至.getWords().substring(0,4)+"-"+yxWords.substring(4,6)+"-"+yxWords.substring(6,yxWords.length());
+                            }
                             startTime = 有效期限.getWords();
-//                            mEtEndDate.setText(至.getWords());
                             mIvDriverFront.setVisibility(View.VISIBLE);
                             mTvDriver.setVisibility(View.GONE);
                             Glide.with(getContext()).load(filePath).into(mIvDriverFront);
 
+                        }
+                    });
+        }
+        // 识别成功回调，驾驶证副页识别
+        if (requestCode == REQUEST_CODE_DRIVING_REVERSE_LICENSE && resultCode == Activity.RESULT_OK) {
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), driverReversePath).getAbsolutePath();
+
+            RecognizeService.recDrivingLicense(this, filePath,
+                    new RecognizeService.ServiceListener() {
+                        @Override
+                        public void onResult(String result) {
+                            mIvDriverReverse.setVisibility(View.VISIBLE);
+                            mTvDriver2.setVisibility(View.GONE);
+                            Glide.with(getContext()).load(filePath).into(mIvDriverReverse);
+                            mPresenter.upload(new File(filePath),UPLOAD_DRIVER_REVERSE);
                         }
                     });
         }
@@ -853,6 +898,9 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                 break;
             case UPLOAD_DRIVER:
                 driverUrl = IMAGE_BASE_URL + url;
+                break;
+            case UPLOAD_DRIVER_REVERSE:
+                driverReverseUrl = IMAGE_BASE_URL + url;
                 break;
             case UPLOAD_WORK:
                 workUrl = IMAGE_BASE_URL + url;

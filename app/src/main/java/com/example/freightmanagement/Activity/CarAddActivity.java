@@ -32,6 +32,8 @@ import com.example.freightmanagement.model.CertificateTransport;
 import com.example.freightmanagement.presenter.CarAddPresenter;
 import com.google.gson.Gson;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -592,8 +594,17 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                             mEtCarType.setText(车辆类型.getWords());
                             mEtXingZhi.setText(使用性质.getWords());
                             mEtBrandXingHao.setText(品牌型号.getWords());
-                            mTvDateZhuce.setText(注册日期.getWords());
-                            mTvDateSend.setText(发证日期.getWords());
+                            String regiestDate = 注册日期.getWords();
+                            if(StringUtil.isNotEmpty(注册日期.getWords()) && 注册日期.getWords().length() == 8){
+                                regiestDate = regiestDate.substring(0,4)+"-"+regiestDate.substring(4,6)+"-"+regiestDate.substring(6,regiestDate.length());
+                            }
+                            mTvDateZhuce.setText(regiestDate);
+
+                            String sendDate = 发证日期.getWords();
+                            if(StringUtil.isNotEmpty(发证日期.getWords()) && 发证日期.getWords().length() == 8){
+                                sendDate = sendDate.substring(0,4)+"-"+sendDate.substring(4,6)+"-"+sendDate.substring(6,sendDate.length());
+                            }
+                            mTvDateSend.setText(sendDate);
                             mIvCardFront.setVisibility(View.VISIBLE);
                             mTvCard1.setVisibility(View.GONE);
                             Glide.with(getContext()).load(filePath).into(mIvCardFront);
@@ -817,6 +828,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
             ToastUtils.popUpToast("提交成功");
             Intent intent = new Intent(this, CarListManageActivity.class);
             startActivity(intent);
+            EventBus.getDefault().post("addCarSuccess");
             finish();
         }
     }

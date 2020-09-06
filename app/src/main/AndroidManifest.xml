@@ -27,7 +27,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.DrivierxiangqingActivity"></activity>
-        <activity android:name=".Activity.DriverInfaomaionActivity" />
         <activity android:name=".Activity.VehicleDetectionActivity" />
         <activity android:name=".Activity.CheLiangJcActivity" />
         <activity android:name=".Activity.PromiseBookActivity" />
@@ -61,6 +60,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.TrainingSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.CommonImgActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.TrainingActivity"

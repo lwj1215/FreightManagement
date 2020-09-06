@@ -12,22 +12,24 @@
         android:layout_above="@id/ll"
         android:layout_height="match_parent">
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <com.example.freightmanagement.View.UserWebView
                 android:id="@+id/webView_ht"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 />
+
             <com.example.freightmanagement.View.UserWebView
                 android:id="@+id/webView_zr"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 />
             <com.example.freightmanagement.View.UserWebView
                 android:id="@+id/webView_cn"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 />
         </LinearLayout>
     </ScrollView>

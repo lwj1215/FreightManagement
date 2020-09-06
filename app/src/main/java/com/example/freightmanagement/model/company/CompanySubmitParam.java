@@ -16,14 +16,24 @@ public class CompanySubmitParam {
     }
 
     private String id;
-    private String signUrl;
+    private String signature;
+    private String sealUrl;
 
-    public String getSignUrl() {
-        return signUrl;
+
+    public String getSignature() {
+        return signature;
     }
 
-    public void setSignUrl(String signUrl) {
-        this.signUrl = signUrl;
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getSealUrl() {
+        return sealUrl;
+    }
+
+    public void setSealUrl(String sealUrl) {
+        this.sealUrl = sealUrl;
     }
 
     private IDCardParam certificateIDBo;

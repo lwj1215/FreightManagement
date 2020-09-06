@@ -102,9 +102,7 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
                     ToastUtils.popUpToast(R.string.tel_cannot_be_empty);
                     return;
                 }
-                Message message = mCountDownHandler.obtainMessage();
-                message.arg1 = 60;
-                mCountDownHandler.sendMessage(message);
+
                 tel = tel.trim();
                 mPresenter.getCode(tel);
 
@@ -138,6 +136,9 @@ public class RegisterActivity extends BaseActivity<RegisterPresenter> implements
     @Override
     public void smsCode(String msg) {
         this.smsCode = msg;
+        Message message = mCountDownHandler.obtainMessage();
+        message.arg1 = 60;
+        mCountDownHandler.sendMessage(message);
     }
 
     @Override

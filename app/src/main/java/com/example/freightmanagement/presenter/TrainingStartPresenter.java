@@ -13,6 +13,7 @@ import com.google.gson.Gson;
  */
 
 public class TrainingStartPresenter extends BasePresenter<TrainingStartConstact.View> implements TrainingStartConstact {
+
     @Override
     public void getTrainingList() {
         RestApi.getInstance().get(BaseApiConstants.API_XUNLIANTIMU, new OnRequestResultForCommon() {

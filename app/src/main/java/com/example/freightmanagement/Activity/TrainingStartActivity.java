@@ -55,6 +55,7 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
 
     @Override
     protected void onInitView() {
+        setDefaultTitle("答题");
         question_now_number = bindView(R.id.health_fillout_questionnare_now_number);//当前页码
         viewPager = bindView(R.id.health_fillout_questionnare_viewpager);
         question_back = bindView(R.id.health_fillout_questionnare_back);

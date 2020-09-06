@@ -50,6 +50,8 @@ import com.example.freightmanagement.presenter.CompanyRegisterPresenter;
 import com.example.freightmanagement.presenter.constract.CompanyRegisterConstact;
 import com.google.gson.Gson;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.util.List;
 
@@ -58,6 +60,7 @@ import cn.qqtheme.framework.util.ConvertUtils;
 
 import static com.example.freightmanagement.Base.BaseApiConstants.IMAGE_BASE_URL;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_BUSINESS;
+import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_GONG_ZHANG;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_BACK;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ID_CARD_FRONT;
 import static com.example.freightmanagement.common.ImageUploadConstants.UPLOAD_ROAD_TRANSPORT_PERMIT;
@@ -74,6 +77,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private static final int REQUEST_CODE_CAMERA = 102;
     private static final int REQUEST_CODE_BUSINESS_LICENSE = 123;
     private static final int REQUEST_CODE_ROAD_MANAGER_LICENSE = 124;
+    private static final int REQUEST_CODE_ZHANG_LICENSE = 125;
 
     private static final String TEMPLATE_COMPANY_ROAD = "bfa90c13251df75350437d83f41f57d6";
     private final String FRONT = "front";
@@ -180,6 +184,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private TextView mTvRoad;
     private ImageView mIvRoad;
     private String signUrl="";
+    private ImageView mIvZhang;
+    private String zhangPath;
+    private String zhangUrl;
+    private RelativeLayout mRlZhang;
+    private TextView mTvZhang;
 
     @Override
     public int setLayoutResource() {
@@ -191,13 +200,13 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         checkGalleryPermission();
         initView();
         String flag = getIntent().getStringExtra("flag");//0是提交  1是修改
-        if (flag.equals("0")) {
-            setDefaultTitle("企业注册");
-            mRlSign.setVisibility(View.VISIBLE);
-        } else {
-            setDefaultTitle("企业信息修改");
-            mRlSign.setVisibility(View.GONE);
-        }
+//        if (flag.equals("0")) {
+//            setDefaultTitle("企业注册");
+//            mRlSign.setVisibility(View.VISIBLE);
+//        } else {
+//            setDefaultTitle("企业信息修改");
+//            mRlSign.setVisibility(View.GONE);
+//        }
 
     }
 
@@ -290,6 +299,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mReRoad.setOnClickListener(this);
         mTvRoad = findViewById(R.id.tv_road);
         mIvRoad = findViewById(R.id.iv_road);
+        mIvZhang = findViewById(R.id.iv_zhang);
+        mRlZhang = findViewById(R.id.rl_zhang);
+        mTvZhang = findViewById(R.id.tv_zhang);
+        mIvZhang.setOnClickListener(this);
+        mRlZhang.setOnClickListener(this);
     }
 
     @Override
@@ -333,8 +347,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 businessPath = FRONT + "_" + System.currentTimeMillis();
                 takeBusinessPhoto(businessPath);
                 break;
-            case R.id.tv_business1:
-
+            case R.id.iv_zhang:
+                takeGongzhang();
+                break;
+            case R.id.rl_zhang:
+                takeGongzhang();
                 break;
             case R.id.tv_chengli:
                 onYearMonthDayPicker(TYPE_CHENG_LI);
@@ -429,7 +446,8 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 certificateOperation.setValidityDate(mYouXiaoQi);
                 certificateOperation.setPicUrl(roadTransportPermit);
                 submitParam.setCertificateOperationBo(certificateOperation);
-                submitParam.setSignUrl(signUrl);
+                submitParam.setSignature(signUrl);
+                submitParam.setSealUrl(zhangUrl);
                 if (getIntent().getStringExtra("flag").equals("0")) {
                     mPresenter.submit(submitParam);
                 } else {
@@ -441,6 +459,16 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                 onYearMonthDayPicker(TYPE_YOU_XIAO_QI);
                 break;
         }
+    }
+
+    private void takeGongzhang() {
+        zhangPath = "zhang_" + System.currentTimeMillis();
+        Intent intent = new Intent(this, CameraActivity.class);
+        intent.putExtra(CameraActivity.KEY_OUTPUT_FILE_PATH,
+                FileUtil.getSaveFile(getApplication(), zhangPath).getAbsolutePath());
+        intent.putExtra(CameraActivity.KEY_CONTENT_TYPE,
+                CameraActivity.CONTENT_TYPE_GENERAL);
+        startActivityForResult(intent, REQUEST_CODE_ZHANG_LICENSE);
     }
 
     private void takeRoadManagerPhoto(String roadManagerPath) {
@@ -714,6 +742,15 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
                         }
                     });
+
+        }
+        // 识别成功回调，公章
+        if (requestCode == REQUEST_CODE_ZHANG_LICENSE && resultCode == Activity.RESULT_OK) {
+            final String filePath = FileUtil.getSaveFile(getApplicationContext(), zhangPath).getAbsolutePath();
+            mPresenter.upload(new File(filePath), UPLOAD_GONG_ZHANG);
+            mIvZhang.setVisibility(View.VISIBLE);
+            mTvZhang.setVisibility(View.GONE);
+            Glide.with(getContext()).load(filePath).into(mIvZhang);
         }
     }
 
@@ -777,6 +814,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             case UPLOAD_SIGN:
                 signUrl = IMAGE_BASE_URL + url;
                 break;
+            case UPLOAD_GONG_ZHANG:
+                zhangUrl = IMAGE_BASE_URL + url;
+                break;
+
         }
     }
 }
+

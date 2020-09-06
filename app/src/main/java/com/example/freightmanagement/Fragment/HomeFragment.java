@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Activity.CarListManageActivity;
 import com.example.freightmanagement.Activity.ChangePasswordActivity;
 import com.example.freightmanagement.Activity.CommonHtmlActivity;
+import com.example.freightmanagement.Activity.CommonImgActivity;
 import com.example.freightmanagement.Activity.DriverInformationActivity;
 import com.example.freightmanagement.Activity.DriverListActivity;
 import com.example.freightmanagement.Activity.SWCameraStreamingActivity;
@@ -21,6 +22,7 @@ import com.example.freightmanagement.Activity.VehicleInformationActivity;
 import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
 import com.example.freightmanagement.Base.BaseResponse;
+import com.example.freightmanagement.Bean.ContractBean;
 import com.example.freightmanagement.Bean.TrainResultBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.CameraConfig;
@@ -200,13 +202,16 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
 
     @Override
     public void contractResult(String msg) {
-        BaseResponse response = new Gson().fromJson(msg, BaseResponse.class);
+        ContractBean response = new Gson().fromJson(msg, ContractBean.class);
         if(response != null){
             Object data = response.getData();
             if(data == null){
                 startActivity(new Intent(activity, SelectCarActivity.class));
             }else {
-                startActivity(new Intent(activity, CommonHtmlActivity.class));
+                String contractUrl = response.getData().getContractUrl();
+                Intent intent = new Intent(activity, CommonImgActivity.class);
+                intent.putExtra("url",contractUrl);
+                startActivity(intent);
             }
         }
     }

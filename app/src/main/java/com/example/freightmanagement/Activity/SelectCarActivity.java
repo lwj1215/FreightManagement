@@ -51,6 +51,7 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
             public void onItemClick(int position) {
                 id = data.get(position).getId();
                 enterpriseId = data.get(position).getEnterpriseId();
+
             }
         });
     }
@@ -65,8 +66,6 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
     public void carList(String msg) {
         SelectCarBean selectCarBean = new Gson().fromJson(msg, SelectCarBean.class);
         data = selectCarBean.getData();
-        data.add(data.get(0));
-
         selectCarAdapter.setData(data);
     }
 
@@ -97,6 +96,7 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
             case R.id.tv_srue:
                 if(StringUtil.isEmpty(id)){
                     ToastUtils.popUpToast("请选择一辆车");
+                    return;
                 }
                 Intent intent = new Intent(this, EmploymentContractActivity.class);
                 intent.putExtra("id",id);

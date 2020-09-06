@@ -13,10 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.freightmanagement.Adapter.CarListAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.CarListBean;
+import com.example.freightmanagement.Bean.WenJuanAnserBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.model.CarExecuteParam;
 import com.example.freightmanagement.presenter.CarListManagerPresenter;
 import com.google.gson.Gson;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +40,7 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
     @Override
     protected void onInitView() {
         setDefaultTitle("车辆信息");
+        EventBus.getDefault().register(this);
         mRvCar = findViewById(R.id.rv_car);
         mTvSrue = findViewById(R.id.tv_srue);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -119,8 +124,21 @@ public class CarListManageActivity extends BaseActivity<CarListManagerPresenter>
 
     }
 
+    @Subscribe
+    public void onEventMainThread(String msg) {
+        if(msg.equals("addCarSuccess")){
+            mPresenter.getList();
+        }
+    }
+
     @Override
     protected CarListManagerPresenter onInitLogicImpl() {
         return new CarListManagerPresenter();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

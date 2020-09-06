@@ -42,10 +42,12 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
         switch (v.getId()) {
 
             case R.id.tv_srue:
-                if (TextUtils.isEmpty(s)){
-                    ToastUtils.popUpToast("请输入旧密码");
-                    return;
-                } if (TextUtils.isEmpty(s1)){
+//                if (TextUtils.isEmpty(s)){
+//                    ToastUtils.popUpToast("请输入旧密码");
+//                    return;
+//                }
+
+                if (TextUtils.isEmpty(s1)){
                     ToastUtils.popUpToast("请输入新密码");
                     return;
                 } if (TextUtils.isEmpty(s2)){
