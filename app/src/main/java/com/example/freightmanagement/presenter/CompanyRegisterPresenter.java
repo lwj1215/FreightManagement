@@ -4,6 +4,7 @@ import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.ImageUploadBean;
+import com.example.freightmanagement.Bean.QiYeBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.model.CarOwnerSubmitParam;
@@ -77,6 +78,28 @@ public class CompanyRegisterPresenter extends BasePresenter<CompanyRegisterConst
                 ImageUploadBean imageUploadBean = new Gson().fromJson(json, ImageUploadBean.class);
                 mView.imageUrl(imageUploadBean.getData(),type);
             }
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
+
+    @Override
+    public void getQyData() {
+        RestApi.getInstance().post(BaseApiConstants.API_QIYEXINXI_GET, "", new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String msg) {
+                QiYeBean qiYeBean = new Gson().fromJson(msg, QiYeBean.class);
+                mView.qiyeSuc(qiYeBean.getData());
+            }
+
             @Override
             public void onFail() {
                 super.onFail();

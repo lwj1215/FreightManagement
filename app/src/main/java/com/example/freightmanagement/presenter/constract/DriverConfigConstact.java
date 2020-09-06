@@ -2,6 +2,7 @@ package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
 
+import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.model.DriverInfoSubmitParam;
 
 import java.io.File;
@@ -12,13 +13,13 @@ import java.io.File;
 
 public interface DriverConfigConstact {
     void upload(File file, int type);
-
+    void getPeixunData();
     void submit(DriverInfoSubmitParam submitParam);
     void updata2(DriverInfoSubmitParam submitParam);
 
     interface View extends BaseView {
         void imageUrl(String url, int type);
-
+        void getWrokIdDataSuc(WrodIdBean data);
         void success(String json);
     }
 }

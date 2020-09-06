@@ -3,6 +3,7 @@ package com.example.freightmanagement.presenter;
 import com.example.freightmanagement.Base.BaseApiConstants;
 import com.example.freightmanagement.Base.BasePresenter;
 import com.example.freightmanagement.Bean.ImageUploadBean;
+import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
 import com.example.freightmanagement.model.DriverInfoSubmitParam;
@@ -83,4 +84,26 @@ public class DriverConfigPresenter extends BasePresenter<DriverConfigConstact.Vi
             }
         });
     }
+
+    @Override
+    public void getPeixunData() {
+        RestApi.getInstance().get(BaseApiConstants.API_PEIXUNJIEGUO, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String msg) {
+                WrodIdBean wrodIdBean = new Gson().fromJson(msg, WrodIdBean.class);
+                mView.getWrokIdDataSuc(wrodIdBean);
+            }
+
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
 }
