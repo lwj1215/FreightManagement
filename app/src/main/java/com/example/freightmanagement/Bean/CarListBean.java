@@ -276,8 +276,8 @@ public class CarListBean {
             private int id;
             private String plateNo;
             private String wchicheType;
-            private Object owner;
-            private Object address;
+            private String owner;
+            private String address;
             private String useCharacter;
             private String model;
             private Object engineNo;
@@ -323,19 +323,19 @@ public class CarListBean {
                 this.wchicheType = wchicheType;
             }
 
-            public Object getOwner() {
+            public String getOwner() {
                 return owner;
             }
 
-            public void setOwner(Object owner) {
+            public void setOwner(String owner) {
                 this.owner = owner;
             }
 
-            public Object getAddress() {
+            public String getAddress() {
                 return address;
             }
 
-            public void setAddress(Object address) {
+            public void setAddress(String address) {
                 this.address = address;
             }
 

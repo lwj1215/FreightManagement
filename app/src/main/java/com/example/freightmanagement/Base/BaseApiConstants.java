@@ -129,6 +129,14 @@ public class BaseApiConstants {
      */
     public static final String API_ADD_CONTRACT = "/cccc/letter/addContract";
     /**
+     * 提交承诺书
+     */
+    public static final String API_ADD_COMMITMENT = "/cccc/letter/addCommitment";
+    /**
+     * 提交责任书
+     */
+    public static final String API_ADD_RESPONSIBILITY = "/cccc/letter/addResponsibility";
+    /**
      * 驾驶员列表
      */
     public static final String API_DRIVER_LIST = "/cccc/manager/driver/getDriverList";
@@ -182,5 +190,10 @@ public class BaseApiConstants {
      * 獲取車輛详情
      */
     public static final String API_JIASHIYUAN = "/cccc/driver/getDirver/";
+    /**
+     * 合同结果列表
+     */
+    public static final String API_HETONG_LIST = "/cccc/letter/getDriverLetters";
+
 
 }

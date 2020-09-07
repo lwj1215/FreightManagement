@@ -12,6 +12,9 @@ import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.presenter.TrainingSelectPresenter;
 import com.example.freightmanagement.presenter.constract.TrainingSelectConstact;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * Created by songdechuan on 2020/8/10.
  */
@@ -38,6 +41,7 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
 
     @Override
     protected void onInitView() {
+        EventBus.getDefault().register(this);
         setDefaultTitle("岗前培训");
         initView();
 
@@ -89,4 +93,15 @@ public class TrainingSelectActivity extends BaseActivity<TrainingSelectPresenter
         }
     }
 
+    @Subscribe
+    public void onEventMainThread(String msg) {
+        if(msg.equals("answerFinish")){
+            mPresenter.getAnswerResultList(PrefUtilsData.getDriverId());
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

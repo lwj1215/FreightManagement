@@ -23,6 +23,7 @@ import com.example.freightmanagement.Adapter.HomeFragmentAdapter;
 import com.example.freightmanagement.Base.BaseFragment;
 import com.example.freightmanagement.Base.BaseResponse;
 import com.example.freightmanagement.Bean.ContractBean;
+import com.example.freightmanagement.Bean.HtResultBean;
 import com.example.freightmanagement.Bean.TrainResultBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.CameraConfig;
@@ -31,6 +32,7 @@ import com.example.freightmanagement.Utils.PermissionChecker;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.enums.AdminTypeEnum;
+import com.example.freightmanagement.enums.ResponseCodeEnum;
 import com.example.freightmanagement.presenter.HomePresenter;
 import com.google.gson.Gson;
 import com.qiniu.pili.droid.streaming.CameraStreamingSetting;
@@ -101,7 +103,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                     }
                 }else if (position == 3) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){
-                        mPresenter.getContractComplete();
+                        mPresenter.getHTResult();
 //                        mPresenter.getTrainComplete();
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                         startActivity(new Intent(activity, ChangePasswordActivity.class));
@@ -138,21 +140,6 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                 }else if (position == 5) {
                     startActivity(new Intent(activity, ChangePasswordActivity.class));
                 }
-//                else if (position==6){
-//                    boolean isPermissionOK = Build.VERSION.SDK_INT < Build.VERSION_CODES.M || mPermissionChecker.checkPermission();
-//                    if (!isPermissionOK) {
-//                        return;
-//                    }
-//                    StreamingEnv.setLogLevel(Log.VERBOSE);
-//                    Intent intent = new Intent(activity, SWCameraStreamingActivity.class);
-//                    intent.putExtra("INPUT_TEXT", "");
-//                    intent.putExtra("TRANSFER_MODE_QUIC", false);
-//                    intent.putExtra("url", url);
-//                    intent.putExtra("CameraConfig", buildCameraConfig());
-//                    startActivity(intent);
-//                }else if (position == 7) {
-//                    startActivity(new Intent(activity, ChangePasswordActivity.class));
-//                }
             }
         });
     }
@@ -210,7 +197,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
             }else {
                 String contractUrl = response.getData().getContractUrl();
                 Intent intent = new Intent(activity, CommonImgActivity.class);
-                intent.putExtra("url",contractUrl);
+                intent.putExtra("htUrl",contractUrl);
+                intent.putExtra("zrUrl",contractUrl);
+                intent.putExtra("cnUrl",contractUrl);
                 startActivity(intent);
             }
         }
@@ -221,8 +210,32 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
         if(result){
             startActivity(new Intent(activity, VehicleInformationActivity.class));
         }else {
-            ToastUtils.popUpToast("聘用合同暂未签署，无法进入");
+            ToastUtils.popUpToast("聘用合同暂未签署或者暂未培训，无法进入");
         }
 
+    }
+
+    @Override
+    public void HtReResult(String msg) {
+        HtResultBean htResultBean = new Gson().fromJson(msg, HtResultBean.class);
+        if(htResultBean.getCode() == ResponseCodeEnum.SUCCESS.getCode()){
+            HtResultBean.DataBean data = htResultBean.getData();
+            HtResultBean.DataBean.LetterContractBoBean letterContractBo = data.getLetterContractBo();
+            HtResultBean.DataBean.LetterCommitmentBoBean letterCommitmentBo = data.getLetterCommitmentBo();
+            HtResultBean.DataBean.ResponsibilityBoBean responsibilityBo = data.getResponsibilityBo();
+            if(letterCommitmentBo == null || letterContractBo == null || responsibilityBo == null){
+                startActivity(new Intent(activity, SelectCarActivity.class));
+            }else {
+                String contractUrl = letterContractBo.getContractUrl();
+                String commitmentUrl = letterCommitmentBo.getCommitmentUrl();
+                String responsibilityUrl = responsibilityBo.getResponsibilityUrl();
+                Intent intent = new Intent(activity, CommonImgActivity.class);
+                intent.putExtra("htUrl",contractUrl);
+                intent.putExtra("zrUrl",responsibilityUrl);
+                intent.putExtra("cnUrl",commitmentUrl);
+                startActivity(intent);
+            }
+
+        }
     }
 }

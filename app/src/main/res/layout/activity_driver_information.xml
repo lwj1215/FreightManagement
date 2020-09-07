@@ -188,12 +188,36 @@
                             android:layout_centerInParent="true"
                             android:drawableTop="@mipmap/upload_identity"
                             android:drawablePadding="@dimen/x16"
-                            android:text="上传驾驶证正页照片"
+                            android:text="驾驶证正页照片"
                             android:textSize="@dimen/x28"
                             android:visibility="visible" />
 
                         <ImageView
                             android:id="@+id/iv_driver_front"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop" />
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:id="@+id/re_driver_reverse"
+                        android:layout_width="@dimen/x400"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/inflate_txt_bg_white">
+
+                        <TextView
+                            android:id="@+id/tv_driver_reverse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:drawableTop="@mipmap/upload_identity"
+                            android:drawablePadding="@dimen/x16"
+                            android:text="驾驶证副页照片"
+                            android:textSize="@dimen/x28"
+                            android:visibility="visible" />
+
+                        <ImageView
+                            android:id="@+id/iv_driver_reverse"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:scaleType="centerCrop" />

@@ -1187,13 +1187,47 @@
 
                         <EditText
                             android:id="@+id/et_deng_ji_pai_liang"
-                            android:layout_width="match_parent"
+                            android:layout_width="@dimen/x100"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
                             android:background="@null"
-                            android:hint="请填写您的排量/功率"
+                            android:hint="排量"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x30"
+                            android:background="@null"
+                            android:text="ml"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <EditText
+                            android:id="@+id/et_deng_ji_gong_lv"
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:background="@null"
+                            android:hint="功率"
+                            android:textColor="@color/color_666"
+                            android:textColorHint="@color/color_999"
+                            android:textSize="@dimen/x28" />
+                        <TextView
+                            android:layout_width="@dimen/x100"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="@dimen/x10"
+                            android:background="@null"
+                            android:text="kw"
                             android:textColor="@color/color_666"
                             android:textColorHint="@color/color_999"
                             android:textSize="@dimen/x28" />
@@ -1204,6 +1238,7 @@
                         android:layout_height="@dimen/x2"
                         android:background="@color/gray_background" />
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

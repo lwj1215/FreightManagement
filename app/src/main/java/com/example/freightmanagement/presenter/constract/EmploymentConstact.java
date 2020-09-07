@@ -2,7 +2,9 @@ package com.example.freightmanagement.presenter.constract;
 
 import com.example.freightmanagement.Base.BaseView;
 import com.example.freightmanagement.Bean.WrodIdBean;
+import com.example.freightmanagement.model.CommitmentParam;
 import com.example.freightmanagement.model.ContractParam;
+import com.example.freightmanagement.model.ResponsibilityParam;
 import com.example.freightmanagement.model.company.CompanySubmitParam;
 
 import java.io.File;
@@ -17,6 +19,11 @@ public interface EmploymentConstact {
     void upload(File file, int type);
 
     void submit(ContractParam contractParam);
+
+    void submitCommitment(CommitmentParam param);
+
+    void submitResponsibility(ResponsibilityParam param);
+
 
     void get(String id);
 

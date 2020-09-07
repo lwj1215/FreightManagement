@@ -439,19 +439,19 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                     ToastUtils.popUpToast("上岗证号不得为空");
                     return;
                 }
-                if (StringUtils.isEmpty(permitType)) {
+                if (StringUtils.isEmpty(mEtPermitType.getText().toString())) {
                     ToastUtils.popUpToast("准驾车型不得为空");
                     return;
                 }
-                if (StringUtils.isEmpty(startTime)) {
+                if (StringUtils.isEmpty(mTvStartDate.getText().toString())) {
                     ToastUtils.popUpToast("开始日期不得为空");
                     return;
                 }
-                if (StringUtils.isEmpty(endTime)) {
+                if (StringUtils.isEmpty(mEtEndDate.getText().toString())) {
                     ToastUtils.popUpToast("结束日期不得为空");
                     return;
                 }
-                if (StringUtils.isEmpty(firstReceiveTime)) {
+                if (StringUtils.isEmpty(mTvFirstReceive.getText().toString())) {
                     ToastUtils.popUpToast("初次领证日期不得为空");
                     return;
                 }
@@ -467,13 +467,16 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
 
                 CertificateDriverParam certificateDriverParam = new CertificateDriverParam();
                 certificateDriverParam.setClasss(permitType);
+                startTime = mTvStartDate.getText().toString();
                 boolean isStartTime = DateUtil.isValidDate(startTime);
+
                 if (!isStartTime) {
                     ToastUtils.popUpToast("驾驶证有效期限错误，请重新选择");
                     return;
                 }
                 certificateDriverParam.setStartTime(startTime);
                 certificateDriverParam.setPicUrl(driverUrl);
+                certificateDriverParam.setPicUrl2(driverReverseUrl);
                 certificateDriverParam.setFileNumber(String.valueOf(driverNum));
                 driverInfoSubmitParam.setCertificateDriverBo(certificateDriverParam);
 
@@ -492,7 +495,7 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
                     return;
                 }
                 certificateWorkParam.setFirstTime(firstTimeStr);
-                certificateWorkParam.setValidityStartTime(yxqTimeStr);
+                certificateWorkParam.setValidityEndTime(yxqTimeStr);
 
                 certificateWorkParam.setPicUrl(workUrl);
                 driverInfoSubmitParam.setCertificateWorkBo(certificateWorkParam);
@@ -929,23 +932,31 @@ public class DriverConfigActivity extends BaseActivity<DriverConfigPresenter> im
         mEtEndDate.setText(timeStampToDate(certificateDriverBo.getUpdateTime()) + "");
 
         if (!TextUtils.isEmpty(certificateIDBo.getPicUrl())) {
+            idCardFrontUrl = certificateIDBo.getPicUrl();
             Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(mIvCardFront);
         }
         if (!TextUtils.isEmpty(certificateIDBo.getPicUrl2())) {
+            idCardBackUrl = certificateIDBo.getPicUrl2();
             Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(mIvCardRevers);
         }
+        driverUrl = certificateDriverBo.getPicUrl();
+        driverReverseUrl =certificateDriverBo.getPicUrl2();
         Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(mIvDriverFront);
+        Glide.with(getContext()).load(certificateDriverBo.getPicUrl2()).into(mIvDriverReverse);
+
         Glide.with(getContext()).load(certificateWorkBo.getPicUrl()).into(mIvWorkFront);
 //        Glide.with(getContext()).load(certificateDriverBo.getPicUrl()).into(iv_card_front_qy);
-        mEtPostCard.setText(certificateWorkBo.getGrantNo()+"");
-        mTvFirstReceive.setText(certificateWorkBo.getValidityStartTime()+"");
-        mTvYouXiaoQi.setText(certificateWorkBo.getValidityEndTime()+"");
+        workUrl = certificateWorkBo.getPicUrl();
+//        signUrl = data.getData().getCertificateDriverBo().
+        mEtPostCard.setText(certificateWorkBo.getGrantNo());
+        mTvFirstReceive.setText(StringUtil.isNotEmpty(certificateWorkBo.getValidityStartTime())?certificateWorkBo.getValidityStartTime():"请选择");
+        mTvYouXiaoQi.setText(StringUtil.isNotEmpty(certificateWorkBo.getValidityEndTime())?certificateWorkBo.getValidityEndTime():"请选择");
     }
 
     private String timeStampToDate(long tsp, String... format) {
         SimpleDateFormat sdf;
         if (format.length < 1) {
-            sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         } else {
             sdf = new SimpleDateFormat(format[0], Locale.getDefault());
         }

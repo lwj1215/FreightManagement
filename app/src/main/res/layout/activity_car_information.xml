@@ -1143,7 +1143,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginLeft="@dimen/x30"
-                            android:text="排量"
+                            android:text="排量/功率"
                             android:textColor="@color/color_666"
                             android:textSize="@dimen/x28" />
 

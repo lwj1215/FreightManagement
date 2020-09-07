@@ -2,20 +2,31 @@ package com.example.freightmanagement.model;
 
 import java.util.Date;
 
-public class ContractParam {
+public class CommitmentParam {
 
-    private String contractUrl;
+    private Integer driverId;
 
     private String endTime;
 
+    private String commitmentUrl;
+
     private Integer carId;
 
-    public String getContractUrl() {
-        return contractUrl;
+
+    public Integer getDriverId() {
+        return driverId;
     }
 
-    public void setContractUrl(String contractUrl) {
-        this.contractUrl = contractUrl;
+    public void setDriverId(Integer driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getCommitmentUrl() {
+        return commitmentUrl;
+    }
+
+    public void setCommitmentUrl(String commitmentUrl) {
+        this.commitmentUrl = commitmentUrl;
     }
 
     public String getEndTime() {

@@ -9,9 +9,9 @@ public class SelectCarBean {
     /**
      * code : 0
      * message : 成功
-     * data : [{"id":1,"drivingCertificateId":1,"tel":"1","transportCertificateId":1,"registrationCertificateId":1,"isActive":1,"createTime":null,"updateTime":null,"name":"1","pass":"1","adminId":2,"enterpriseId":1,"isPass":1,"certificateDrivingBo":{"id":1,"plateNo":"行车证11020030036668","wchicheType":"1","owner":"汪凯8","address":"1","useCharacter":"运货8","model":"1","engineNo":"1000308","registrationDate":"1","issueDate":"1","fileNo":"1","passengersCount":1228,"allWeight":"1","curbWeight":"1","approvedWeight":"1","outline":"1","tractionWeight":"1","note":"1","chechRecord":"1","isActive":1,"updateTime":1598611010000,"createTime":null,"picUrl":"1","file":null,"vin":"1"},"certificateIDBo":{"id":1,"name":"李思q","six":"1","nation":"中国q","birthDay":"2020-08-04","address":"山东q","isActive":1,"createTime":null,"updateTime":1598610928000,"picUrl":"1","picUrl2":"1","file":null,"file2":null,"idno":"车主1102003003666q"},"certificateTransportBo":{"id":1,"name":"北京时尚呢供应1231","address":"海淀西北旺1","plateNo":"运输证102596852221226661","licence":"1","type":"货车1","weight":"1000吨1","size":"2000*233*9651","scope":"全国1231","grantDate":"2020-06-12","isActive":1,"createTime":1597805868000,"updateTime":1598611003000,"picUrl":"1","file":null},"certificateRegistrationBo":{"id":1,"owner":"张三1","grantName":"车辆登记证1","grantNo":"登记证1102311968110956871","carType":"小车1","carBrand":"奔驰1","carModel":"WKJOIIO90-2003521","carColor":"黑色1","carNo":"300255cjh-op01","carImportType":"国产1","engineNo":"1000301","engineType":"1002651","fuelType":"300251","power":"30001","displacement":"20001","maker":"时风集团1","turnType":"方向盘1","tireDistanceAhead":"121","tireDistanceHinder":"1131","tireCount":"41","tireSpecs":"121","springsCount":"121","wheelbase":"501","axlesCount":"41","outline":"100*100*200*3001","inline":"600*966*899*74111","allWeight":"10001","curbWeight":"1001","approvedWeight":"100001","tractionWeight":"1001","passengersCount":"61","useNature":"拉人1","carGetType":"买1","productionDate":"2020-02-05","issueDate":"2020-05-06","isActive":1,"createTime":null,"updateTime":1598610983000,"picUrl":"1","file":null},"idcertificateId":1}]
+     * data : [{"id":5,"drivingCertificateId":5,"tel":"","transportCertificateId":5,"registrationCertificateId":5,"isActive":1,"createTime":1599317586000,"updateTime":1599317586000,"adminId":19,"enterpriseId":0,"isPass":1,"carOnwerId":5,"certificateDrivingBo":{"id":5,"plateNo":"鲁L7GY(黄","wchicheType":"重集箱半挂车","owner":"","address":"","useCharacter":"非营运","model":"中集牌LJV4402TJZA","engineNo":"","registrationDate":"2020-09-05","issueDate":"2020-09-05","fileNo":"371300106970","passengersCount":0,"allWeight":"40090kg","curbWeight":"","approvedWeight":"35060kg","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1599317586000,"createTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/05bee573-6888-4e91-bcb8-b201e5793c43.jpg","carId":0,"vin":""},"certificateIDBo":null,"certificateTransportBo":{"id":5,"name":"一临诉兴盛运输存限公司","address":"","plateNo":"临字371316027号","licence":"","type":"","weight":"","size":"","scope":"专用运输保鲜设备","grantDate":"2020-09-05","isActive":1,"createTime":1599317586000,"updateTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/a8d981ef-c08d-4e4d-a5bb-a586c3bf9f1a.jpg","transportNo":"","carId":0},"certificateRegistrationBo":{"id":5,"owner":"冰县建达物流有限公司/机构代码证/05343835","grantName":"","grantNo":"","carType":"挂车","carBrand":"解","carModel":"CA4206P11Z13EAS","carColor":"","carNo":"解","carImportType":"","engineNo":"gdhdhd","engineType":"","fuelType":"hdhd","power":"kw","displacement":"kw","maker":"一放品汽车限公司","turnType":"","tireDistanceAhead":"","tireDistanceHinder":"","tireCount":"5","tireSpecs":"","springsCount":"","wheelbase":"","axlesCount":"","outline":"","inline":"","allWeight":"","curbWeight":"","approvedWeight":"","tractionWeight":"","passengersCount":"hdhdhd","useNature":"货运","carGetType":"","productionDate":"","issueDate":"2020-09-05","isActive":1,"createTime":1599317586000,"updateTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/ef437623-05a8-4bac-8b64-33104a9b6b80.jpg","carId":0},"enterpriseBo":{"id":5,"legalPerson":"","signature":"http://aicc.ctags.cn/cccc/file/download/","sealUrl":"https://aicc.ctags.cn/cccc/file/download/f99c981a-738f-4691-b4c2-94cc466f0a71.jpg","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"certificateBusinessId":5,"certificateOperationId":5,"tel":"","adminId":26,"name":"","certificateIDBo":{"id":26,"name":"郁友亮","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599318688000,"updateTime":1599318688000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/d91f0fe0-94fa-43ea-b5a7-330088dfb4cc.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/9646a2e5-ecf7-499f-a039-938b9ffafb21.jpg","driverId":0,"carId":0,"carOwnerId":0,"enterpriseId":0,"idno":"37280119770821511X"},"certificateOperationBo":{"id":5,"grantNo":"临字71316290072号","validityDate":"2023","owner":"","address":"","nature":"","scope":"","isActive":1,"updateTime":1599318689000,"createTime":1599318689000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/0f4b3f29-3256-4af1-a1c0-4c9e5e2deac8.jpg","enterpriseId":0},"certificateBusinessBo":{"id":5,"picUrl":"https://aicc.ctags.cn/cccc/file/download/995071cd-1b55-40e3-90f0-11699ed4e0f5.jpg","name":"临沂兴喜运描有限公司","capital":"","type":"","establishmentDate":"2015年06月16日","legalPerson":"郁友亮","term":"","scope":"海+训候,货物圈运服务:销售:汽车,汽车配洋,(依流须普批准的项H,经相关容门批率稻方可开碳经营活动)鲁还切验运偷,售物书面运输(参装题冷藏保鲜,域式)","address":"","registrationAuthority":"山东省借当市经落开发区芝麻给害语办事处看间路116号值信物出近内D3-12号","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"enterpriseId":0},"adminBo":{"id":26,"name":"","pass":"1","depart":"","isActive":1,"createTime":1599316309000,"updateTime":1599316309000,"type":3,"tel":"18652837645","oldPass":null,"enterpriseId":0},"idcertificateId":26},"idcertificateId":0},{"id":12,"drivingCertificateId":12,"tel":"","transportCertificateId":12,"registrationCertificateId":12,"isActive":1,"createTime":1599326220000,"updateTime":1599326220000,"adminId":40,"enterpriseId":12,"isPass":1,"carOnwerId":0,"certificateDrivingBo":{"id":12,"plateNo":"鲁Q17G(黄-","wchicheType":"重型集装箱半挂车","owner":"","address":"","useCharacter":"非营运","model":"丰田牌ZVV482TJZA","engineNo":"","registrationDate":"2014-04-11","issueDate":"2016-11-09","fileNo":"3333","passengersCount":0,"allWeight":"333","curbWeight":"","approvedWeight":"333","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1599326220000,"createTime":1599326220000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/f7886d7b-bad9-4eea-bda4-da83e864d11e.jpg","carId":0,"vin":""},"certificateIDBo":null,"certificateTransportBo":{"id":12,"name":"一临沂兴盛运输有限公司-","address":"","plateNo":"临字371316002277号","licence":"","type":"","weight":"","size":"","scope":"货物专用运输(藏保鲜设备)","grantDate":"2020-09-06","isActive":1,"createTime":1599326220000,"updateTime":1599326220000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/9cfeaa77-9c4e-44c0-99c5-97dd7fc86474.jpg","transportNo":"","carId":0},"certificateRegistrationBo":{"id":12,"owner":"县通达物流有限公司/组织机构代码证书/5343835","grantName":"","grantNo":"","carType":"型半挂牵引车","carBrand":"解册","carModel":"CA4206PIA2I3EA88","carColor":"","carNo":"解册","carImportType":"","engineNo":"253358","engineType":"","fuelType":"柴油","power":"kw","displacement":"kw","maker":"汽解放青岛汽车有限公司","turnType":"","tireDistanceAhead":"","tireDistanceHinder":"","tireCount":"33","tireSpecs":"","springsCount":"","wheelbase":"","axlesCount":"","outline":"","inline":"","allWeight":"","curbWeight":"","approvedWeight":"","tractionWeight":"","passengersCount":"9","useNature":"货运","carGetType":"","productionDate":"","issueDate":"2020-09-06","isActive":1,"createTime":1599326220000,"updateTime":1599326220000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/8cf444e6-1522-4ef1-8eca-4d2df47b30e1.jpg","carId":0},"enterpriseBo":{"id":12,"legalPerson":"","signature":"http://aicc.ctags.cn/cccc/file/download/","sealUrl":"https://aicc.ctags.cn/cccc/file/download/589abb5e-2eb8-4a89-9312-eaff6745424a.jpg","isActive":1,"createTime":1599326043000,"updateTime":1599326043000,"certificateBusinessId":12,"certificateOperationId":12,"tel":"","adminId":40,"name":"","certificateIDBo":{"id":33,"name":"宋德川","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599326043000,"updateTime":1599326043000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/75295172-2b72-41c4-a072-65dfe91318ac.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/7bed1788-65d1-408f-979c-ec8e097ad908.jpg","driverId":0,"carId":0,"carOwnerId":0,"enterpriseId":0,"idno":"41062219960321201X"},"certificateOperationBo":{"id":12,"grantNo":"临字371316290072号","validityDate":"2050-10-14","owner":"","address":"","nature":"","scope":"","isActive":1,"updateTime":1599326043000,"createTime":1599326043000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/fcae0487-2dfb-450c-9c2b-c23b3617fdae.jpg","enterpriseId":0},"certificateBusinessBo":{"id":12,"picUrl":"https://aicc.ctags.cn/cccc/file/download/32915dad-1194-49d2-9606-6a3af0fb189b.jpg","name":"无","capital":"","type":"","establishmentDate":"2050-10-14","legalPerson":"宋德川","term":"","scope":"经批准的项目,经相关部门批库后方可开测经营活动)造士蓝输:货物搬运程务:销售:汽车,汽表件。(张法","address":"","registrationAuthority":"山东省结沂市经济开发区芝麻增断道与事处西河路116号兽信物流成内D)-12号","isActive":1,"createTime":1599326043000,"updateTime":1599326043000,"enterpriseId":0},"adminBo":{"id":40,"name":"","pass":"1","depart":"","isActive":1,"createTime":1599316359000,"updateTime":1599316359000,"type":3,"tel":"13693155706","oldPass":null,"enterpriseId":0},"idcertificateId":33},"idcertificateId":0},{"id":19,"drivingCertificateId":19,"tel":"","transportCertificateId":19,"registrationCertificateId":19,"isActive":1,"createTime":1599358502000,"updateTime":1599358502000,"adminId":26,"enterpriseId":5,"isPass":1,"carOnwerId":0,"certificateDrivingBo":{"id":19,"plateNo":"鲁7黄","wchicheType":"小型轿车","owner":"","address":"","useCharacter":"非营运","model":"1111","engineNo":"","registrationDate":"2020-09-06","issueDate":"2020-09-06","fileNo":"372817082991","passengersCount":0,"allWeight":"1","curbWeight":"","approvedWeight":"1","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1599358502000,"createTime":1599358502000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/15bc9f87-a594-4d86-aac5-3a1019acfcd1.jpg","carId":0,"vin":""},"certificateIDBo":null,"certificateTransportBo":{"id":19,"name":"一临诉盛运输限公司","address":"","plateNo":"临371316002277号","licence":"","type":"","weight":"","size":"","scope":"物专用运保鲜设备","grantDate":"201913","isActive":1,"createTime":1599358502000,"updateTime":1599358502000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/f4124c07-33c5-4c69-a340-e3358ae242b3.jpg","transportNo":"","carId":0},"certificateRegistrationBo":{"id":19,"owner":"县达物流有限公司/组织机构代码证书/534335-","grantName":"","grantNo":"","carType":"本挂单车","carBrand":"yyyy","carModel":"CA4206P1Z13E42S","carColor":"","carNo":"yyyy","carImportType":"","engineNo":"hdhdh","engineType":"","fuelType":"hxhxh","power":"ml/kw","displacement":"ml/kw","maker":"一汽车限公","turnType":"","tireDistanceAhead":"","tireDistanceHinder":"","tireCount":"6","tireSpecs":"","springsCount":"","wheelbase":"","axlesCount":"","outline":"","inline":"","allWeight":"","curbWeight":"","approvedWeight":"","tractionWeight":"","passengersCount":"1","useNature":"货运","carGetType":"","productionDate":"","issueDate":"2020-09-06","isActive":1,"createTime":1599358502000,"updateTime":1599358502000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/e610c1ef-21cd-48d1-8bde-3dab420eb2fb.jpg","carId":0},"enterpriseBo":{"id":5,"legalPerson":"","signature":"http://aicc.ctags.cn/cccc/file/download/","sealUrl":"https://aicc.ctags.cn/cccc/file/download/f99c981a-738f-4691-b4c2-94cc466f0a71.jpg","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"certificateBusinessId":5,"certificateOperationId":5,"tel":"","adminId":26,"name":"","certificateIDBo":{"id":26,"name":"郁友亮","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599318688000,"updateTime":1599318688000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/d91f0fe0-94fa-43ea-b5a7-330088dfb4cc.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/9646a2e5-ecf7-499f-a039-938b9ffafb21.jpg","driverId":0,"carId":0,"carOwnerId":0,"enterpriseId":0,"idno":"37280119770821511X"},"certificateOperationBo":{"id":5,"grantNo":"临字71316290072号","validityDate":"2023","owner":"","address":"","nature":"","scope":"","isActive":1,"updateTime":1599318689000,"createTime":1599318689000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/0f4b3f29-3256-4af1-a1c0-4c9e5e2deac8.jpg","enterpriseId":0},"certificateBusinessBo":{"id":5,"picUrl":"https://aicc.ctags.cn/cccc/file/download/995071cd-1b55-40e3-90f0-11699ed4e0f5.jpg","name":"临沂兴喜运描有限公司","capital":"","type":"","establishmentDate":"2015年06月16日","legalPerson":"郁友亮","term":"","scope":"海+训候,货物圈运服务:销售:汽车,汽车配洋,(依流须普批准的项H,经相关容门批率稻方可开碳经营活动)鲁还切验运偷,售物书面运输(参装题冷藏保鲜,域式)","address":"","registrationAuthority":"山东省借当市经落开发区芝麻给害语办事处看间路116号值信物出近内D3-12号","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"enterpriseId":0},"adminBo":{"id":26,"name":"","pass":"1","depart":"","isActive":1,"createTime":1599316309000,"updateTime":1599316309000,"type":3,"tel":"18652837645","oldPass":null,"enterpriseId":0},"idcertificateId":26},"idcertificateId":0}]
      * type : 1
-     * token : 2ojd68KkJQKJHEVx2TbBXz3yl7fNb+dY
+     * token : JBDiiTmZpdc/f0YYW+0KPSMfuwndYH5f
      */
 
     private int code;
@@ -62,24 +62,24 @@ public class SelectCarBean {
 
     public static class DataBean {
         /**
-         * id : 1
-         * drivingCertificateId : 1
-         * tel : 1
-         * transportCertificateId : 1
-         * registrationCertificateId : 1
+         * id : 5
+         * drivingCertificateId : 5
+         * tel :
+         * transportCertificateId : 5
+         * registrationCertificateId : 5
          * isActive : 1
-         * createTime : null
-         * updateTime : null
-         * name : 1
-         * pass : 1
-         * adminId : 2
-         * enterpriseId : 1
+         * createTime : 1599317586000
+         * updateTime : 1599317586000
+         * adminId : 19
+         * enterpriseId : 0
          * isPass : 1
-         * certificateDrivingBo : {"id":1,"plateNo":"行车证11020030036668","wchicheType":"1","owner":"汪凯8","address":"1","useCharacter":"运货8","model":"1","engineNo":"1000308","registrationDate":"1","issueDate":"1","fileNo":"1","passengersCount":1228,"allWeight":"1","curbWeight":"1","approvedWeight":"1","outline":"1","tractionWeight":"1","note":"1","chechRecord":"1","isActive":1,"updateTime":1598611010000,"createTime":null,"picUrl":"1","file":null,"vin":"1"}
-         * certificateIDBo : {"id":1,"name":"李思q","six":"1","nation":"中国q","birthDay":"2020-08-04","address":"山东q","isActive":1,"createTime":null,"updateTime":1598610928000,"picUrl":"1","picUrl2":"1","file":null,"file2":null,"idno":"车主1102003003666q"}
-         * certificateTransportBo : {"id":1,"name":"北京时尚呢供应1231","address":"海淀西北旺1","plateNo":"运输证102596852221226661","licence":"1","type":"货车1","weight":"1000吨1","size":"2000*233*9651","scope":"全国1231","grantDate":"2020-06-12","isActive":1,"createTime":1597805868000,"updateTime":1598611003000,"picUrl":"1","file":null}
-         * certificateRegistrationBo : {"id":1,"owner":"张三1","grantName":"车辆登记证1","grantNo":"登记证1102311968110956871","carType":"小车1","carBrand":"奔驰1","carModel":"WKJOIIO90-2003521","carColor":"黑色1","carNo":"300255cjh-op01","carImportType":"国产1","engineNo":"1000301","engineType":"1002651","fuelType":"300251","power":"30001","displacement":"20001","maker":"时风集团1","turnType":"方向盘1","tireDistanceAhead":"121","tireDistanceHinder":"1131","tireCount":"41","tireSpecs":"121","springsCount":"121","wheelbase":"501","axlesCount":"41","outline":"100*100*200*3001","inline":"600*966*899*74111","allWeight":"10001","curbWeight":"1001","approvedWeight":"100001","tractionWeight":"1001","passengersCount":"61","useNature":"拉人1","carGetType":"买1","productionDate":"2020-02-05","issueDate":"2020-05-06","isActive":1,"createTime":null,"updateTime":1598610983000,"picUrl":"1","file":null}
-         * idcertificateId : 1
+         * carOnwerId : 5
+         * certificateDrivingBo : {"id":5,"plateNo":"鲁L7GY(黄","wchicheType":"重集箱半挂车","owner":"","address":"","useCharacter":"非营运","model":"中集牌LJV4402TJZA","engineNo":"","registrationDate":"2020-09-05","issueDate":"2020-09-05","fileNo":"371300106970","passengersCount":0,"allWeight":"40090kg","curbWeight":"","approvedWeight":"35060kg","outline":"","tractionWeight":"","note":"","chechRecord":"","isActive":1,"updateTime":1599317586000,"createTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/05bee573-6888-4e91-bcb8-b201e5793c43.jpg","carId":0,"vin":""}
+         * certificateIDBo : null
+         * certificateTransportBo : {"id":5,"name":"一临诉兴盛运输存限公司","address":"","plateNo":"临字371316027号","licence":"","type":"","weight":"","size":"","scope":"专用运输保鲜设备","grantDate":"2020-09-05","isActive":1,"createTime":1599317586000,"updateTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/a8d981ef-c08d-4e4d-a5bb-a586c3bf9f1a.jpg","transportNo":"","carId":0}
+         * certificateRegistrationBo : {"id":5,"owner":"冰县建达物流有限公司/机构代码证/05343835","grantName":"","grantNo":"","carType":"挂车","carBrand":"解","carModel":"CA4206P11Z13EAS","carColor":"","carNo":"解","carImportType":"","engineNo":"gdhdhd","engineType":"","fuelType":"hdhd","power":"kw","displacement":"kw","maker":"一放品汽车限公司","turnType":"","tireDistanceAhead":"","tireDistanceHinder":"","tireCount":"5","tireSpecs":"","springsCount":"","wheelbase":"","axlesCount":"","outline":"","inline":"","allWeight":"","curbWeight":"","approvedWeight":"","tractionWeight":"","passengersCount":"hdhdhd","useNature":"货运","carGetType":"","productionDate":"","issueDate":"2020-09-05","isActive":1,"createTime":1599317586000,"updateTime":1599317586000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/ef437623-05a8-4bac-8b64-33104a9b6b80.jpg","carId":0}
+         * enterpriseBo : {"id":5,"legalPerson":"","signature":"http://aicc.ctags.cn/cccc/file/download/","sealUrl":"https://aicc.ctags.cn/cccc/file/download/f99c981a-738f-4691-b4c2-94cc466f0a71.jpg","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"certificateBusinessId":5,"certificateOperationId":5,"tel":"","adminId":26,"name":"","certificateIDBo":{"id":26,"name":"郁友亮","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599318688000,"updateTime":1599318688000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/d91f0fe0-94fa-43ea-b5a7-330088dfb4cc.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/9646a2e5-ecf7-499f-a039-938b9ffafb21.jpg","driverId":0,"carId":0,"carOwnerId":0,"enterpriseId":0,"idno":"37280119770821511X"},"certificateOperationBo":{"id":5,"grantNo":"临字71316290072号","validityDate":"2023","owner":"","address":"","nature":"","scope":"","isActive":1,"updateTime":1599318689000,"createTime":1599318689000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/0f4b3f29-3256-4af1-a1c0-4c9e5e2deac8.jpg","enterpriseId":0},"certificateBusinessBo":{"id":5,"picUrl":"https://aicc.ctags.cn/cccc/file/download/995071cd-1b55-40e3-90f0-11699ed4e0f5.jpg","name":"临沂兴喜运描有限公司","capital":"","type":"","establishmentDate":"2015年06月16日","legalPerson":"郁友亮","term":"","scope":"海+训候,货物圈运服务:销售:汽车,汽车配洋,(依流须普批准的项H,经相关容门批率稻方可开碳经营活动)鲁还切验运偷,售物书面运输(参装题冷藏保鲜,域式)","address":"","registrationAuthority":"山东省借当市经落开发区芝麻给害语办事处看间路116号值信物出近内D3-12号","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"enterpriseId":0},"adminBo":{"id":26,"name":"","pass":"1","depart":"","isActive":1,"createTime":1599316309000,"updateTime":1599316309000,"type":3,"tel":"18652837645","oldPass":null,"enterpriseId":0},"idcertificateId":26}
+         * idcertificateId : 0
          */
 
         private int id;
@@ -88,17 +88,17 @@ public class SelectCarBean {
         private int transportCertificateId;
         private int registrationCertificateId;
         private int isActive;
-        private Object createTime;
-        private Object updateTime;
-        private String name;
-        private String pass;
+        private long createTime;
+        private long updateTime;
         private int adminId;
         private int enterpriseId;
         private int isPass;
+        private int carOnwerId;
         private CertificateDrivingBoBean certificateDrivingBo;
-        private CertificateIDBoBean certificateIDBo;
+        private Object certificateIDBo;
         private CertificateTransportBoBean certificateTransportBo;
         private CertificateRegistrationBoBean certificateRegistrationBo;
+        private EnterpriseBoBean enterpriseBo;
         private int idcertificateId;
 
         public int getId() {
@@ -149,36 +149,20 @@ public class SelectCarBean {
             this.isActive = isActive;
         }
 
-        public Object getCreateTime() {
+        public long getCreateTime() {
             return createTime;
         }
 
-        public void setCreateTime(Object createTime) {
+        public void setCreateTime(long createTime) {
             this.createTime = createTime;
         }
 
-        public Object getUpdateTime() {
+        public long getUpdateTime() {
             return updateTime;
         }
 
-        public void setUpdateTime(Object updateTime) {
+        public void setUpdateTime(long updateTime) {
             this.updateTime = updateTime;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getPass() {
-            return pass;
-        }
-
-        public void setPass(String pass) {
-            this.pass = pass;
         }
 
         public int getAdminId() {
@@ -205,6 +189,14 @@ public class SelectCarBean {
             this.isPass = isPass;
         }
 
+        public int getCarOnwerId() {
+            return carOnwerId;
+        }
+
+        public void setCarOnwerId(int carOnwerId) {
+            this.carOnwerId = carOnwerId;
+        }
+
         public CertificateDrivingBoBean getCertificateDrivingBo() {
             return certificateDrivingBo;
         }
@@ -213,11 +205,11 @@ public class SelectCarBean {
             this.certificateDrivingBo = certificateDrivingBo;
         }
 
-        public CertificateIDBoBean getCertificateIDBo() {
+        public Object getCertificateIDBo() {
             return certificateIDBo;
         }
 
-        public void setCertificateIDBo(CertificateIDBoBean certificateIDBo) {
+        public void setCertificateIDBo(Object certificateIDBo) {
             this.certificateIDBo = certificateIDBo;
         }
 
@@ -237,6 +229,14 @@ public class SelectCarBean {
             this.certificateRegistrationBo = certificateRegistrationBo;
         }
 
+        public EnterpriseBoBean getEnterpriseBo() {
+            return enterpriseBo;
+        }
+
+        public void setEnterpriseBo(EnterpriseBoBean enterpriseBo) {
+            this.enterpriseBo = enterpriseBo;
+        }
+
         public int getIdcertificateId() {
             return idcertificateId;
         }
@@ -247,31 +247,31 @@ public class SelectCarBean {
 
         public static class CertificateDrivingBoBean {
             /**
-             * id : 1
-             * plateNo : 行车证11020030036668
-             * wchicheType : 1
-             * owner : 汪凯8
-             * address : 1
-             * useCharacter : 运货8
-             * model : 1
-             * engineNo : 1000308
-             * registrationDate : 1
-             * issueDate : 1
-             * fileNo : 1
-             * passengersCount : 1228
-             * allWeight : 1
-             * curbWeight : 1
-             * approvedWeight : 1
-             * outline : 1
-             * tractionWeight : 1
-             * note : 1
-             * chechRecord : 1
+             * id : 5
+             * plateNo : 鲁L7GY(黄
+             * wchicheType : 重集箱半挂车
+             * owner :
+             * address :
+             * useCharacter : 非营运
+             * model : 中集牌LJV4402TJZA
+             * engineNo :
+             * registrationDate : 2020-09-05
+             * issueDate : 2020-09-05
+             * fileNo : 371300106970
+             * passengersCount : 0
+             * allWeight : 40090kg
+             * curbWeight :
+             * approvedWeight : 35060kg
+             * outline :
+             * tractionWeight :
+             * note :
+             * chechRecord :
              * isActive : 1
-             * updateTime : 1598611010000
-             * createTime : null
-             * picUrl : 1
-             * file : null
-             * vin : 1
+             * updateTime : 1599317586000
+             * createTime : 1599317586000
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/05bee573-6888-4e91-bcb8-b201e5793c43.jpg
+             * carId : 0
+             * vin :
              */
 
             private int id;
@@ -295,9 +295,9 @@ public class SelectCarBean {
             private String chechRecord;
             private int isActive;
             private long updateTime;
-            private Object createTime;
+            private long createTime;
             private String picUrl;
-            private Object file;
+            private int carId;
             private String vin;
 
             public int getId() {
@@ -468,11 +468,11 @@ public class SelectCarBean {
                 this.updateTime = updateTime;
             }
 
-            public Object getCreateTime() {
+            public long getCreateTime() {
                 return createTime;
             }
 
-            public void setCreateTime(Object createTime) {
+            public void setCreateTime(long createTime) {
                 this.createTime = createTime;
             }
 
@@ -484,12 +484,12 @@ public class SelectCarBean {
                 this.picUrl = picUrl;
             }
 
-            public Object getFile() {
-                return file;
+            public int getCarId() {
+                return carId;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setCarId(int carId) {
+                this.carId = carId;
             }
 
             public String getVin() {
@@ -501,169 +501,24 @@ public class SelectCarBean {
             }
         }
 
-        public static class CertificateIDBoBean {
-            /**
-             * id : 1
-             * name : 李思q
-             * six : 1
-             * nation : 中国q
-             * birthDay : 2020-08-04
-             * address : 山东q
-             * isActive : 1
-             * createTime : null
-             * updateTime : 1598610928000
-             * picUrl : 1
-             * picUrl2 : 1
-             * file : null
-             * file2 : null
-             * idno : 车主1102003003666q
-             */
-
-            private int id;
-            private String name;
-            private String six;
-            private String nation;
-            private String birthDay;
-            private String address;
-            private int isActive;
-            private Object createTime;
-            private long updateTime;
-            private String picUrl;
-            private String picUrl2;
-            private Object file;
-            private Object file2;
-            private String idno;
-
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
-            public String getName() {
-                return name;
-            }
-
-            public void setName(String name) {
-                this.name = name;
-            }
-
-            public String getSix() {
-                return six;
-            }
-
-            public void setSix(String six) {
-                this.six = six;
-            }
-
-            public String getNation() {
-                return nation;
-            }
-
-            public void setNation(String nation) {
-                this.nation = nation;
-            }
-
-            public String getBirthDay() {
-                return birthDay;
-            }
-
-            public void setBirthDay(String birthDay) {
-                this.birthDay = birthDay;
-            }
-
-            public String getAddress() {
-                return address;
-            }
-
-            public void setAddress(String address) {
-                this.address = address;
-            }
-
-            public int getIsActive() {
-                return isActive;
-            }
-
-            public void setIsActive(int isActive) {
-                this.isActive = isActive;
-            }
-
-            public Object getCreateTime() {
-                return createTime;
-            }
-
-            public void setCreateTime(Object createTime) {
-                this.createTime = createTime;
-            }
-
-            public long getUpdateTime() {
-                return updateTime;
-            }
-
-            public void setUpdateTime(long updateTime) {
-                this.updateTime = updateTime;
-            }
-
-            public String getPicUrl() {
-                return picUrl;
-            }
-
-            public void setPicUrl(String picUrl) {
-                this.picUrl = picUrl;
-            }
-
-            public String getPicUrl2() {
-                return picUrl2;
-            }
-
-            public void setPicUrl2(String picUrl2) {
-                this.picUrl2 = picUrl2;
-            }
-
-            public Object getFile() {
-                return file;
-            }
-
-            public void setFile(Object file) {
-                this.file = file;
-            }
-
-            public Object getFile2() {
-                return file2;
-            }
-
-            public void setFile2(Object file2) {
-                this.file2 = file2;
-            }
-
-            public String getIdno() {
-                return idno;
-            }
-
-            public void setIdno(String idno) {
-                this.idno = idno;
-            }
-        }
-
         public static class CertificateTransportBoBean {
             /**
-             * id : 1
-             * name : 北京时尚呢供应1231
-             * address : 海淀西北旺1
-             * plateNo : 运输证102596852221226661
-             * licence : 1
-             * type : 货车1
-             * weight : 1000吨1
-             * size : 2000*233*9651
-             * scope : 全国1231
-             * grantDate : 2020-06-12
+             * id : 5
+             * name : 一临诉兴盛运输存限公司
+             * address :
+             * plateNo : 临字371316027号
+             * licence :
+             * type :
+             * weight :
+             * size :
+             * scope : 专用运输保鲜设备
+             * grantDate : 2020-09-05
              * isActive : 1
-             * createTime : 1597805868000
-             * updateTime : 1598611003000
-             * picUrl : 1
-             * file : null
+             * createTime : 1599317586000
+             * updateTime : 1599317586000
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/a8d981ef-c08d-4e4d-a5bb-a586c3bf9f1a.jpg
+             * transportNo :
+             * carId : 0
              */
 
             private int id;
@@ -680,7 +535,8 @@ public class SelectCarBean {
             private long createTime;
             private long updateTime;
             private String picUrl;
-            private Object file;
+            private String transportNo;
+            private int carId;
 
             public int getId() {
                 return id;
@@ -794,57 +650,65 @@ public class SelectCarBean {
                 this.picUrl = picUrl;
             }
 
-            public Object getFile() {
-                return file;
+            public String getTransportNo() {
+                return transportNo;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setTransportNo(String transportNo) {
+                this.transportNo = transportNo;
+            }
+
+            public int getCarId() {
+                return carId;
+            }
+
+            public void setCarId(int carId) {
+                this.carId = carId;
             }
         }
 
         public static class CertificateRegistrationBoBean {
             /**
-             * id : 1
-             * owner : 张三1
-             * grantName : 车辆登记证1
-             * grantNo : 登记证1102311968110956871
-             * carType : 小车1
-             * carBrand : 奔驰1
-             * carModel : WKJOIIO90-2003521
-             * carColor : 黑色1
-             * carNo : 300255cjh-op01
-             * carImportType : 国产1
-             * engineNo : 1000301
-             * engineType : 1002651
-             * fuelType : 300251
-             * power : 30001
-             * displacement : 20001
-             * maker : 时风集团1
-             * turnType : 方向盘1
-             * tireDistanceAhead : 121
-             * tireDistanceHinder : 1131
-             * tireCount : 41
-             * tireSpecs : 121
-             * springsCount : 121
-             * wheelbase : 501
-             * axlesCount : 41
-             * outline : 100*100*200*3001
-             * inline : 600*966*899*74111
-             * allWeight : 10001
-             * curbWeight : 1001
-             * approvedWeight : 100001
-             * tractionWeight : 1001
-             * passengersCount : 61
-             * useNature : 拉人1
-             * carGetType : 买1
-             * productionDate : 2020-02-05
-             * issueDate : 2020-05-06
+             * id : 5
+             * owner : 冰县建达物流有限公司/机构代码证/05343835
+             * grantName :
+             * grantNo :
+             * carType : 挂车
+             * carBrand : 解
+             * carModel : CA4206P11Z13EAS
+             * carColor :
+             * carNo : 解
+             * carImportType :
+             * engineNo : gdhdhd
+             * engineType :
+             * fuelType : hdhd
+             * power : kw
+             * displacement : kw
+             * maker : 一放品汽车限公司
+             * turnType :
+             * tireDistanceAhead :
+             * tireDistanceHinder :
+             * tireCount : 5
+             * tireSpecs :
+             * springsCount :
+             * wheelbase :
+             * axlesCount :
+             * outline :
+             * inline :
+             * allWeight :
+             * curbWeight :
+             * approvedWeight :
+             * tractionWeight :
+             * passengersCount : hdhdhd
+             * useNature : 货运
+             * carGetType :
+             * productionDate :
+             * issueDate : 2020-09-05
              * isActive : 1
-             * createTime : null
-             * updateTime : 1598610983000
-             * picUrl : 1
-             * file : null
+             * createTime : 1599317586000
+             * updateTime : 1599317586000
+             * picUrl : https://aicc.ctags.cn/cccc/file/download/ef437623-05a8-4bac-8b64-33104a9b6b80.jpg
+             * carId : 0
              */
 
             private int id;
@@ -883,10 +747,10 @@ public class SelectCarBean {
             private String productionDate;
             private String issueDate;
             private int isActive;
-            private Object createTime;
+            private long createTime;
             private long updateTime;
             private String picUrl;
-            private Object file;
+            private int carId;
 
             public int getId() {
                 return id;
@@ -1176,11 +1040,11 @@ public class SelectCarBean {
                 this.isActive = isActive;
             }
 
-            public Object getCreateTime() {
+            public long getCreateTime() {
                 return createTime;
             }
 
-            public void setCreateTime(Object createTime) {
+            public void setCreateTime(long createTime) {
                 this.createTime = createTime;
             }
 
@@ -1200,12 +1064,752 @@ public class SelectCarBean {
                 this.picUrl = picUrl;
             }
 
-            public Object getFile() {
-                return file;
+            public int getCarId() {
+                return carId;
             }
 
-            public void setFile(Object file) {
-                this.file = file;
+            public void setCarId(int carId) {
+                this.carId = carId;
+            }
+        }
+
+        public static class EnterpriseBoBean {
+            /**
+             * id : 5
+             * legalPerson :
+             * signature : http://aicc.ctags.cn/cccc/file/download/
+             * sealUrl : https://aicc.ctags.cn/cccc/file/download/f99c981a-738f-4691-b4c2-94cc466f0a71.jpg
+             * isActive : 1
+             * createTime : 1599318689000
+             * updateTime : 1599318689000
+             * certificateBusinessId : 5
+             * certificateOperationId : 5
+             * tel :
+             * adminId : 26
+             * name :
+             * certificateIDBo : {"id":26,"name":"郁友亮","six":"","nation":"","birthDay":"","address":"","isActive":1,"createTime":1599318688000,"updateTime":1599318688000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/d91f0fe0-94fa-43ea-b5a7-330088dfb4cc.jpg","picUrl2":"https://aicc.ctags.cn/cccc/file/download/9646a2e5-ecf7-499f-a039-938b9ffafb21.jpg","driverId":0,"carId":0,"carOwnerId":0,"enterpriseId":0,"idno":"37280119770821511X"}
+             * certificateOperationBo : {"id":5,"grantNo":"临字71316290072号","validityDate":"2023","owner":"","address":"","nature":"","scope":"","isActive":1,"updateTime":1599318689000,"createTime":1599318689000,"picUrl":"https://aicc.ctags.cn/cccc/file/download/0f4b3f29-3256-4af1-a1c0-4c9e5e2deac8.jpg","enterpriseId":0}
+             * certificateBusinessBo : {"id":5,"picUrl":"https://aicc.ctags.cn/cccc/file/download/995071cd-1b55-40e3-90f0-11699ed4e0f5.jpg","name":"临沂兴喜运描有限公司","capital":"","type":"","establishmentDate":"2015年06月16日","legalPerson":"郁友亮","term":"","scope":"海+训候,货物圈运服务:销售:汽车,汽车配洋,(依流须普批准的项H,经相关容门批率稻方可开碳经营活动)鲁还切验运偷,售物书面运输(参装题冷藏保鲜,域式)","address":"","registrationAuthority":"山东省借当市经落开发区芝麻给害语办事处看间路116号值信物出近内D3-12号","isActive":1,"createTime":1599318689000,"updateTime":1599318689000,"enterpriseId":0}
+             * adminBo : {"id":26,"name":"","pass":"1","depart":"","isActive":1,"createTime":1599316309000,"updateTime":1599316309000,"type":3,"tel":"18652837645","oldPass":null,"enterpriseId":0}
+             * idcertificateId : 26
+             */
+
+            private int id;
+            private String legalPerson;
+            private String signature;
+            private String sealUrl;
+            private int isActive;
+            private long createTime;
+            private long updateTime;
+            private int certificateBusinessId;
+            private int certificateOperationId;
+            private String tel;
+            private int adminId;
+            private String name;
+            private CertificateIDBoBean certificateIDBo;
+            private CertificateOperationBoBean certificateOperationBo;
+            private CertificateBusinessBoBean certificateBusinessBo;
+            private AdminBoBean adminBo;
+            private int idcertificateId;
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getLegalPerson() {
+                return legalPerson;
+            }
+
+            public void setLegalPerson(String legalPerson) {
+                this.legalPerson = legalPerson;
+            }
+
+            public String getSignature() {
+                return signature;
+            }
+
+            public void setSignature(String signature) {
+                this.signature = signature;
+            }
+
+            public String getSealUrl() {
+                return sealUrl;
+            }
+
+            public void setSealUrl(String sealUrl) {
+                this.sealUrl = sealUrl;
+            }
+
+            public int getIsActive() {
+                return isActive;
+            }
+
+            public void setIsActive(int isActive) {
+                this.isActive = isActive;
+            }
+
+            public long getCreateTime() {
+                return createTime;
+            }
+
+            public void setCreateTime(long createTime) {
+                this.createTime = createTime;
+            }
+
+            public long getUpdateTime() {
+                return updateTime;
+            }
+
+            public void setUpdateTime(long updateTime) {
+                this.updateTime = updateTime;
+            }
+
+            public int getCertificateBusinessId() {
+                return certificateBusinessId;
+            }
+
+            public void setCertificateBusinessId(int certificateBusinessId) {
+                this.certificateBusinessId = certificateBusinessId;
+            }
+
+            public int getCertificateOperationId() {
+                return certificateOperationId;
+            }
+
+            public void setCertificateOperationId(int certificateOperationId) {
+                this.certificateOperationId = certificateOperationId;
+            }
+
+            public String getTel() {
+                return tel;
+            }
+
+            public void setTel(String tel) {
+                this.tel = tel;
+            }
+
+            public int getAdminId() {
+                return adminId;
+            }
+
+            public void setAdminId(int adminId) {
+                this.adminId = adminId;
+            }
+
+            public String getName() {
+                return name;
+            }
+
+            public void setName(String name) {
+                this.name = name;
+            }
+
+            public CertificateIDBoBean getCertificateIDBo() {
+                return certificateIDBo;
+            }
+
+            public void setCertificateIDBo(CertificateIDBoBean certificateIDBo) {
+                this.certificateIDBo = certificateIDBo;
+            }
+
+            public CertificateOperationBoBean getCertificateOperationBo() {
+                return certificateOperationBo;
+            }
+
+            public void setCertificateOperationBo(CertificateOperationBoBean certificateOperationBo) {
+                this.certificateOperationBo = certificateOperationBo;
+            }
+
+            public CertificateBusinessBoBean getCertificateBusinessBo() {
+                return certificateBusinessBo;
+            }
+
+            public void setCertificateBusinessBo(CertificateBusinessBoBean certificateBusinessBo) {
+                this.certificateBusinessBo = certificateBusinessBo;
+            }
+
+            public AdminBoBean getAdminBo() {
+                return adminBo;
+            }
+
+            public void setAdminBo(AdminBoBean adminBo) {
+                this.adminBo = adminBo;
+            }
+
+            public int getIdcertificateId() {
+                return idcertificateId;
+            }
+
+            public void setIdcertificateId(int idcertificateId) {
+                this.idcertificateId = idcertificateId;
+            }
+
+            public static class CertificateIDBoBean {
+                /**
+                 * id : 26
+                 * name : 郁友亮
+                 * six :
+                 * nation :
+                 * birthDay :
+                 * address :
+                 * isActive : 1
+                 * createTime : 1599318688000
+                 * updateTime : 1599318688000
+                 * picUrl : https://aicc.ctags.cn/cccc/file/download/d91f0fe0-94fa-43ea-b5a7-330088dfb4cc.jpg
+                 * picUrl2 : https://aicc.ctags.cn/cccc/file/download/9646a2e5-ecf7-499f-a039-938b9ffafb21.jpg
+                 * driverId : 0
+                 * carId : 0
+                 * carOwnerId : 0
+                 * enterpriseId : 0
+                 * idno : 37280119770821511X
+                 */
+
+                private int id;
+                private String name;
+                private String six;
+                private String nation;
+                private String birthDay;
+                private String address;
+                private int isActive;
+                private long createTime;
+                private long updateTime;
+                private String picUrl;
+                private String picUrl2;
+                private int driverId;
+                private int carId;
+                private int carOwnerId;
+                private int enterpriseId;
+                private String idno;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getSix() {
+                    return six;
+                }
+
+                public void setSix(String six) {
+                    this.six = six;
+                }
+
+                public String getNation() {
+                    return nation;
+                }
+
+                public void setNation(String nation) {
+                    this.nation = nation;
+                }
+
+                public String getBirthDay() {
+                    return birthDay;
+                }
+
+                public void setBirthDay(String birthDay) {
+                    this.birthDay = birthDay;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public String getPicUrl2() {
+                    return picUrl2;
+                }
+
+                public void setPicUrl2(String picUrl2) {
+                    this.picUrl2 = picUrl2;
+                }
+
+                public int getDriverId() {
+                    return driverId;
+                }
+
+                public void setDriverId(int driverId) {
+                    this.driverId = driverId;
+                }
+
+                public int getCarId() {
+                    return carId;
+                }
+
+                public void setCarId(int carId) {
+                    this.carId = carId;
+                }
+
+                public int getCarOwnerId() {
+                    return carOwnerId;
+                }
+
+                public void setCarOwnerId(int carOwnerId) {
+                    this.carOwnerId = carOwnerId;
+                }
+
+                public int getEnterpriseId() {
+                    return enterpriseId;
+                }
+
+                public void setEnterpriseId(int enterpriseId) {
+                    this.enterpriseId = enterpriseId;
+                }
+
+                public String getIdno() {
+                    return idno;
+                }
+
+                public void setIdno(String idno) {
+                    this.idno = idno;
+                }
+            }
+
+            public static class CertificateOperationBoBean {
+                /**
+                 * id : 5
+                 * grantNo : 临字71316290072号
+                 * validityDate : 2023
+                 * owner :
+                 * address :
+                 * nature :
+                 * scope :
+                 * isActive : 1
+                 * updateTime : 1599318689000
+                 * createTime : 1599318689000
+                 * picUrl : https://aicc.ctags.cn/cccc/file/download/0f4b3f29-3256-4af1-a1c0-4c9e5e2deac8.jpg
+                 * enterpriseId : 0
+                 */
+
+                private int id;
+                private String grantNo;
+                private String validityDate;
+                private String owner;
+                private String address;
+                private String nature;
+                private String scope;
+                private int isActive;
+                private long updateTime;
+                private long createTime;
+                private String picUrl;
+                private int enterpriseId;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getGrantNo() {
+                    return grantNo;
+                }
+
+                public void setGrantNo(String grantNo) {
+                    this.grantNo = grantNo;
+                }
+
+                public String getValidityDate() {
+                    return validityDate;
+                }
+
+                public void setValidityDate(String validityDate) {
+                    this.validityDate = validityDate;
+                }
+
+                public String getOwner() {
+                    return owner;
+                }
+
+                public void setOwner(String owner) {
+                    this.owner = owner;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public String getNature() {
+                    return nature;
+                }
+
+                public void setNature(String nature) {
+                    this.nature = nature;
+                }
+
+                public String getScope() {
+                    return scope;
+                }
+
+                public void setScope(String scope) {
+                    this.scope = scope;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public int getEnterpriseId() {
+                    return enterpriseId;
+                }
+
+                public void setEnterpriseId(int enterpriseId) {
+                    this.enterpriseId = enterpriseId;
+                }
+            }
+
+            public static class CertificateBusinessBoBean {
+                /**
+                 * id : 5
+                 * picUrl : https://aicc.ctags.cn/cccc/file/download/995071cd-1b55-40e3-90f0-11699ed4e0f5.jpg
+                 * name : 临沂兴喜运描有限公司
+                 * capital :
+                 * type :
+                 * establishmentDate : 2015年06月16日
+                 * legalPerson : 郁友亮
+                 * term :
+                 * scope : 海+训候,货物圈运服务:销售:汽车,汽车配洋,(依流须普批准的项H,经相关容门批率稻方可开碳经营活动)鲁还切验运偷,售物书面运输(参装题冷藏保鲜,域式)
+                 * address :
+                 * registrationAuthority : 山东省借当市经落开发区芝麻给害语办事处看间路116号值信物出近内D3-12号
+                 * isActive : 1
+                 * createTime : 1599318689000
+                 * updateTime : 1599318689000
+                 * enterpriseId : 0
+                 */
+
+                private int id;
+                private String picUrl;
+                private String name;
+                private String capital;
+                private String type;
+                private String establishmentDate;
+                private String legalPerson;
+                private String term;
+                private String scope;
+                private String address;
+                private String registrationAuthority;
+                private int isActive;
+                private long createTime;
+                private long updateTime;
+                private int enterpriseId;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getPicUrl() {
+                    return picUrl;
+                }
+
+                public void setPicUrl(String picUrl) {
+                    this.picUrl = picUrl;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getCapital() {
+                    return capital;
+                }
+
+                public void setCapital(String capital) {
+                    this.capital = capital;
+                }
+
+                public String getType() {
+                    return type;
+                }
+
+                public void setType(String type) {
+                    this.type = type;
+                }
+
+                public String getEstablishmentDate() {
+                    return establishmentDate;
+                }
+
+                public void setEstablishmentDate(String establishmentDate) {
+                    this.establishmentDate = establishmentDate;
+                }
+
+                public String getLegalPerson() {
+                    return legalPerson;
+                }
+
+                public void setLegalPerson(String legalPerson) {
+                    this.legalPerson = legalPerson;
+                }
+
+                public String getTerm() {
+                    return term;
+                }
+
+                public void setTerm(String term) {
+                    this.term = term;
+                }
+
+                public String getScope() {
+                    return scope;
+                }
+
+                public void setScope(String scope) {
+                    this.scope = scope;
+                }
+
+                public String getAddress() {
+                    return address;
+                }
+
+                public void setAddress(String address) {
+                    this.address = address;
+                }
+
+                public String getRegistrationAuthority() {
+                    return registrationAuthority;
+                }
+
+                public void setRegistrationAuthority(String registrationAuthority) {
+                    this.registrationAuthority = registrationAuthority;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public int getEnterpriseId() {
+                    return enterpriseId;
+                }
+
+                public void setEnterpriseId(int enterpriseId) {
+                    this.enterpriseId = enterpriseId;
+                }
+            }
+
+            public static class AdminBoBean {
+                /**
+                 * id : 26
+                 * name :
+                 * pass : 1
+                 * depart :
+                 * isActive : 1
+                 * createTime : 1599316309000
+                 * updateTime : 1599316309000
+                 * type : 3
+                 * tel : 18652837645
+                 * oldPass : null
+                 * enterpriseId : 0
+                 */
+
+                private int id;
+                private String name;
+                private String pass;
+                private String depart;
+                private int isActive;
+                private long createTime;
+                private long updateTime;
+                private int type;
+                private String tel;
+                private Object oldPass;
+                private int enterpriseId;
+
+                public int getId() {
+                    return id;
+                }
+
+                public void setId(int id) {
+                    this.id = id;
+                }
+
+                public String getName() {
+                    return name;
+                }
+
+                public void setName(String name) {
+                    this.name = name;
+                }
+
+                public String getPass() {
+                    return pass;
+                }
+
+                public void setPass(String pass) {
+                    this.pass = pass;
+                }
+
+                public String getDepart() {
+                    return depart;
+                }
+
+                public void setDepart(String depart) {
+                    this.depart = depart;
+                }
+
+                public int getIsActive() {
+                    return isActive;
+                }
+
+                public void setIsActive(int isActive) {
+                    this.isActive = isActive;
+                }
+
+                public long getCreateTime() {
+                    return createTime;
+                }
+
+                public void setCreateTime(long createTime) {
+                    this.createTime = createTime;
+                }
+
+                public long getUpdateTime() {
+                    return updateTime;
+                }
+
+                public void setUpdateTime(long updateTime) {
+                    this.updateTime = updateTime;
+                }
+
+                public int getType() {
+                    return type;
+                }
+
+                public void setType(int type) {
+                    this.type = type;
+                }
+
+                public String getTel() {
+                    return tel;
+                }
+
+                public void setTel(String tel) {
+                    this.tel = tel;
+                }
+
+                public Object getOldPass() {
+                    return oldPass;
+                }
+
+                public void setOldPass(Object oldPass) {
+                    this.oldPass = oldPass;
+                }
+
+                public int getEnterpriseId() {
+                    return enterpriseId;
+                }
+
+                public void setEnterpriseId(int enterpriseId) {
+                    this.enterpriseId = enterpriseId;
+                }
             }
         }
     }

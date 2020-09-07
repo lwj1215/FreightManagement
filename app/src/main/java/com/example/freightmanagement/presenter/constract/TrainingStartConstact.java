@@ -15,5 +15,7 @@ public interface TrainingStartConstact {
     interface View extends BaseView{
 
         void trainingList(List<TrainingStartBean.DataBean> data);
+
+        void answerFinish();
     }
 }

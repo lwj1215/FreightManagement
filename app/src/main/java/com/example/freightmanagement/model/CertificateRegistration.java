@@ -72,6 +72,10 @@ public class CertificateRegistration {
 
     private String picUrl;
 
+    private String departments;
+
+    private String registrationDate;
+
     public String getOwner() {
         return owner;
     }
@@ -350,5 +354,21 @@ public class CertificateRegistration {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(String departments) {
+        this.departments = departments;
+    }
+
+    public String getRegistrationDate() {
+        return registrationDate;
+    }
+
+    public void setRegistrationDate(String registrationDate) {
+        this.registrationDate = registrationDate;
     }
 }

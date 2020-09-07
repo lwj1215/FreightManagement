@@ -62,6 +62,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
     private RadioGroup mLoginRg;
     private String type = "1";
     private int code = 1;
+    private String tel;
 
     @Override
     public int setLayoutResource() {
@@ -106,7 +107,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
                 startActivity(this, ForgetPasswordActivity.class);
                 break;
             case R.id.tv_srue:
-                String tel = mEdtTxtYzmImg.getText().toString();
+                tel = mEdtTxtYzmImg.getText().toString();
                 if (StringUtils.isEmpty(tel)) {
                     ToastUtils.popUpToast(R.string.tel_cannot_be_empty);
                     return;
@@ -130,6 +131,7 @@ public class LoginActivity extends BaseActivity<LoginPresenter> implements Login
 
     @Override
     public void getDataSuc(TokenBean data) {
+        PrefUtilsData.setMobile(tel);
         if (data != null) {
             TokenBean.DataBean dataBean = data.getData();
             TokenBean.DataBean.UserBean user = dataBean.getUser();

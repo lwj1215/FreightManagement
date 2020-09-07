@@ -30,6 +30,7 @@ import com.example.freightmanagement.model.CertificateDriving;
 import com.example.freightmanagement.model.CertificateRegistration;
 import com.example.freightmanagement.model.CertificateTransport;
 import com.example.freightmanagement.presenter.CarAddPresenter;
+import com.example.freightmanagement.presenter.constract.CarAddConstact;
 import com.google.gson.Gson;
 
 import org.greenrobot.eventbus.EventBus;
@@ -127,6 +128,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
     private String djTime;
     private String jdSendTime;
     private String nowDate;
+    private EditText mEtDengJiGongLv;
 
     @Override
     public int setLayoutResource() {
@@ -203,12 +205,14 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
         mEtCheliangNum = findViewById(R.id.et_cheliang_num);
         mTvSendDate = findViewById(R.id.tv_send_date);
         mTvSendDate.setOnClickListener(this);
+        mEtDengJiGongLv = findViewById(R.id.et_deng_ji_gong_lv);
+
     }
 
     @Override
     protected void onLoadData2Remote() {
         Date date = new Date();
-        nowDate = DateUtil.date2String(date,ymd);
+        nowDate = DateUtil.date2String(date, ymd);
     }
 
     @Override
@@ -221,13 +225,13 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 taskXingshiReversePhoto();
                 break;
             case R.id.tv_date_zhuce:
-                showDateDialog(DateUtil.getDateForString(nowDate),0);
+                showDateDialog(DateUtil.getDateForString(nowDate), 0);
                 break;
             case R.id.tv_date_send:
-                showDateDialog(DateUtil.getDateForString(nowDate),1);
+                showDateDialog(DateUtil.getDateForString(nowDate), 1);
                 break;
             case R.id.tv_send_date:
-                showDateDialog(DateUtil.getDateForString(nowDate),2);
+                showDateDialog(DateUtil.getDateForString(nowDate), 2);
                 break;
             case R.id.re_yun_shu_pic:
                 taskYunShuPhoto();
@@ -236,10 +240,10 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 taskJidongPhoto();
                 break;
             case R.id.tv_deng_ji_date:
-                showDateDialog(DateUtil.getDateForString(nowDate),3);
+                showDateDialog(DateUtil.getDateForString(nowDate), 3);
                 break;
             case R.id.et_deng_ji_send_date:
-                showDateDialog(DateUtil.getDateForString(nowDate),4);
+                showDateDialog(DateUtil.getDateForString(nowDate), 4);
                 break;
             case R.id.tv_srue:
                 uploadToast();
@@ -251,13 +255,13 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 certificateDriving.setUseCharacter(mEtXingZhi.getText().toString());
                 certificateDriving.setModel(mEtBrandXingHao.getText().toString());
                 String zhuceStr = mTvDateZhuce.getText().toString();
-                if(!DateUtil.isValidDate(zhuceStr)){
+                if (!DateUtil.isValidDate(zhuceStr)) {
                     ToastUtils.popUpToast("注册日期错误，请重新选择");
                     return;
                 }
                 certificateDriving.setRegistrationDate(zhuceStr);
                 String issueDate = mTvDateSend.getText().toString();
-                if(!DateUtil.isValidDate(issueDate)){
+                if (!DateUtil.isValidDate(issueDate)) {
                     ToastUtils.popUpToast("行驶证发证日期错误，请重新选择");
                     return;
                 }
@@ -277,17 +281,22 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 certificateRegistration.setOwner(mEtOwner.getText().toString());
                 certificateRegistration.setCarType(mEtDengJiCarType.getText().toString());
                 certificateRegistration.setCarBrand(mEtDengJiCarBrand.getText().toString());
+                certificateRegistration.setGrantNo(mEtDengJiNum.getText().toString());
                 certificateRegistration.setCarModel(mEtDengJiCarModel.getText().toString());
                 certificateRegistration.setCarNo(mEtDengJiCarBrand.getText().toString());
                 certificateRegistration.setEngineNo(mEtDengJiCarEngine.getText().toString());
                 certificateRegistration.setFuelType(mEtDengJiRanLiao.getText().toString());
-                certificateRegistration.setPower(mEtDengJiPaiLiang.getText().toString());
+                certificateRegistration.setPower(mEtDengJiGongLv.getText().toString());
+                certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
                 certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
                 certificateRegistration.setMaker(mEtDengJiBuildName.getText().toString());
                 certificateRegistration.setTireCount(mEtDengJiTires.getText().toString());
                 certificateRegistration.setUseNature(mEtDengJiUseXingZhi.getText().toString());
                 certificateRegistration.setIssueDate(mEtDengJiSendDate.getText().toString());
                 certificateRegistration.setPassengersCount(mEtDengJiJiaShiShi.getText().toString());
+                certificateRegistration.setDepartments(mEtJiGuan.getText().toString());
+                certificateRegistration.setRegistrationDate(mTvDengJiDate.getText().toString());
+                certificateRegistration.setOutline(mEtDengJiChang.getText().toString().concat(",").concat(mEtDengJiKuan.getText().toString()).concat(",").concat(mEtDengJiGao.getText().toString()));
                 carBo.setCertificateDrivingBo(certificateDriving);
                 carBo.setCertificateRegistrationBo(certificateRegistration);
                 carBo.setCertificateTransportBo(certificateTransport);
@@ -295,6 +304,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 break;
         }
     }
+
     /**
      * 选择生日
      */
@@ -303,7 +313,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
         builder.setOnDateSelectedListener(new DatePickerDialog.OnDateSelectedListener() {
             @Override
             public void onDateSelected(int[] dates) {
-                switch (type){
+                switch (type) {
                     case 0:
                         zhuceTime = dates[0] + "-" + (dates[1] > 9 ? dates[1] : ("0" + dates[1])) + "-"
                                 + (dates[2] > 9 ? dates[2] : ("0" + dates[2]));
@@ -346,162 +356,167 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
         dateDialog = builder.create();
         dateDialog.show();
     }
+
     private void uploadToast() {
         /**
          * 行驶证
          */
-        if(StringUtil.isEmpty(vehicleUrl)){
+        if (StringUtil.isEmpty(vehicleUrl)) {
             ToastUtils.popUpToast("行驶证正页照片不得为空");
             return;
         }
-        if(StringUtil.isEmpty(vehicleReverseUrl)){
+        if (StringUtil.isEmpty(vehicleReverseUrl)) {
             ToastUtils.popUpToast("行驶证正页照片不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtCarNum.getText().toString())){
+        if (StringUtil.isEmpty(mEtCarNum.getText().toString())) {
             ToastUtils.popUpToast("号牌号码不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtCarType.getText().toString())){
+        if (StringUtil.isEmpty(mEtCarType.getText().toString())) {
             ToastUtils.popUpToast("车辆类型不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtXingZhi.getText().toString())){
+        if (StringUtil.isEmpty(mEtXingZhi.getText().toString())) {
             ToastUtils.popUpToast("使用性质不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtBrandXingHao.getText().toString())){
+        if (StringUtil.isEmpty(mEtBrandXingHao.getText().toString())) {
             ToastUtils.popUpToast("品牌型号不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mTvDateZhuce.getText().toString())){
+        if (StringUtil.isEmpty(mTvDateZhuce.getText().toString())) {
             ToastUtils.popUpToast("行驶证注册日期不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mTvDateSend.getText().toString())){
+        if (StringUtil.isEmpty(mTvDateSend.getText().toString())) {
             ToastUtils.popUpToast("行驶证发证日期不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtDangAn.getText().toString())){
+        if (StringUtil.isEmpty(mEtDangAn.getText().toString())) {
             ToastUtils.popUpToast("档案编号不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtZongZhi.getText().toString())){
+        if (StringUtil.isEmpty(mEtZongZhi.getText().toString())) {
             ToastUtils.popUpToast("总质量不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtHeDing.getText().toString())){
+        if (StringUtil.isEmpty(mEtHeDing.getText().toString())) {
             ToastUtils.popUpToast("核定载质量不得为空");
             return;
         }
         /**
          * 道路运输证
          */
-        if(StringUtil.isEmpty(roadUrl)){
+        if (StringUtil.isEmpty(roadUrl)) {
             ToastUtils.popUpToast("请上传道路运输证照片");
             return;
         }
-        if(StringUtil.isEmpty(mEtYunYingNum.getText().toString())){
+        if (StringUtil.isEmpty(mEtYunYingNum.getText().toString())) {
             ToastUtils.popUpToast("运营号不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtYeHuName.getText().toString())){
+        if (StringUtil.isEmpty(mEtYeHuName.getText().toString())) {
             ToastUtils.popUpToast("业户名称不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtCheliangNum.getText().toString())){
+        if (StringUtil.isEmpty(mEtCheliangNum.getText().toString())) {
             ToastUtils.popUpToast("道路运输证车牌号码不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtJingYingNum.getText().toString())){
+        if (StringUtil.isEmpty(mEtJingYingNum.getText().toString())) {
             ToastUtils.popUpToast("经营许可证号不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtYunYingFanWei.getText().toString())){
+        if (StringUtil.isEmpty(mEtYunYingFanWei.getText().toString())) {
             ToastUtils.popUpToast("经营范围不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mTvSendDate.getText().toString())){
+        if (StringUtil.isEmpty(mTvSendDate.getText().toString())) {
             ToastUtils.popUpToast("道路运输证发证日期不得为空");
             return;
         }
-        if(StringUtil.isEmpty(mEtHeDing.getText().toString())){
+        if (StringUtil.isEmpty(mEtHeDing.getText().toString())) {
             ToastUtils.popUpToast("核定载质量不得为空");
             return;
         }
         /**
          * 机动车登记证书
          */
-        if(StringUtil.isEmpty(jidongUrl)){
+        if (StringUtil.isEmpty(jidongUrl)) {
             ToastUtils.popUpToast("请上传机动车登记证书照片");
             return;
         }
-        if(StringUtil.isEmpty(mEtJiGuan.getText().toString())){
+        if (StringUtil.isEmpty(mEtJiGuan.getText().toString())) {
             ToastUtils.popUpToast("请填写您的登记机关");
             return;
         }
-        if(StringUtil.isEmpty(mTvDengJiDate.getText().toString())){
+        if (StringUtil.isEmpty(mTvDengJiDate.getText().toString())) {
             ToastUtils.popUpToast("请选择机动车登记日期");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiNum.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiNum.getText().toString())) {
             ToastUtils.popUpToast("请填写您的登记编号");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiCarType.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiCarType.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车车辆类型");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiCarBrand.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiCarBrand.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车车辆品牌");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiCarModel.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiCarModel.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车车辆型号");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiCarEngine.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiCarEngine.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车发动机号");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiRanLiao.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiRanLiao.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车燃料种类");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiPaiLiang.getText().toString())){
-            ToastUtils.popUpToast("请填写您的机动车排量/功率");
+        if (StringUtil.isEmpty(mEtDengJiPaiLiang.getText().toString())) {
+            ToastUtils.popUpToast("请填写您的排量");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiBuildName.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiGongLv.getText().toString())) {
+            ToastUtils.popUpToast("请填写您的功率");
+            return;
+        }
+        if (StringUtil.isEmpty(mEtDengJiBuildName.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车制造厂名称");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiTires.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiTires.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车轮胎数");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiChang.getText().toString()) ||
-                StringUtil.isEmpty(mEtDengJiKuan.getText().toString())||
-                 StringUtil.isEmpty(mEtDengJiGao.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiChang.getText().toString()) ||
+                StringUtil.isEmpty(mEtDengJiKuan.getText().toString()) ||
+                StringUtil.isEmpty(mEtDengJiGao.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车长/宽/高");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiQianYin.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiQianYin.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车准牵引总质量");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiJiaShiShi.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiJiaShiShi.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车驾驶室载客数");
             return;
         }
-        if(StringUtil.isEmpty(mEtDengJiUseXingZhi.getText().toString())){
+        if (StringUtil.isEmpty(mEtDengJiUseXingZhi.getText().toString())) {
             ToastUtils.popUpToast("请填写您的机动车使用性质");
             return;
         }
-//        if(StringUtil.isEmpty(mEtDengJiSendDate.getText().toString())){
-//            ToastUtils.popUpToast("请填写您的机动车发证日期");
-//            return;
-//        }
+        if(StringUtil.isEmpty(mEtDengJiSendDate.getText().toString())){
+            ToastUtils.popUpToast("请填写您的机动车发证日期");
+            return;
+        }
     }
 
     /**
@@ -570,7 +585,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
                             boolean json = StringUtils.isJson(result);
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("识别错误，请重新上传");
                                 return;
                             }
@@ -595,14 +610,14 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                             mEtXingZhi.setText(使用性质.getWords());
                             mEtBrandXingHao.setText(品牌型号.getWords());
                             String regiestDate = 注册日期.getWords();
-                            if(StringUtil.isNotEmpty(注册日期.getWords()) && 注册日期.getWords().length() == 8){
-                                regiestDate = regiestDate.substring(0,4)+"-"+regiestDate.substring(4,6)+"-"+regiestDate.substring(6,regiestDate.length());
+                            if (StringUtil.isNotEmpty(注册日期.getWords()) && 注册日期.getWords().length() == 8) {
+                                regiestDate = regiestDate.substring(0, 4) + "-" + regiestDate.substring(4, 6) + "-" + regiestDate.substring(6, regiestDate.length());
                             }
                             mTvDateZhuce.setText(regiestDate);
 
                             String sendDate = 发证日期.getWords();
-                            if(StringUtil.isNotEmpty(发证日期.getWords()) && 发证日期.getWords().length() == 8){
-                                sendDate = sendDate.substring(0,4)+"-"+sendDate.substring(4,6)+"-"+sendDate.substring(6,sendDate.length());
+                            if (StringUtil.isNotEmpty(发证日期.getWords()) && 发证日期.getWords().length() == 8) {
+                                sendDate = sendDate.substring(0, 4) + "-" + sendDate.substring(4, 6) + "-" + sendDate.substring(6, sendDate.length());
                             }
                             mTvDateSend.setText(sendDate);
                             mIvCardFront.setVisibility(View.VISIBLE);
@@ -621,7 +636,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
                             boolean json = StringUtils.isJson(result);
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("识别错误，请重新上传");
                                 return;
                             }
@@ -658,7 +673,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
 
                             mPresenter.upload(new File(filePath), UPLOAD_ROAD);
                             boolean json = StringUtils.isJson(result);
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("识别错误，请重新上传");
                                 return;
                             }
@@ -709,7 +724,7 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                         public void onResult(String result) {
                             ToastUtils.popUpToast("此识别结果仅供参考，请仔细比对检查");
                             boolean json = StringUtils.isJson(result);
-                            if(!json){
+                            if (!json) {
                                 ToastUtils.popUpToast("识别错误，请重新上传");
                                 return;
                             }
@@ -761,7 +776,6 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                                 if (word_name.equals("排量功率")) {
                                     mEtDengJiPaiLiang.setText(word);
                                 }
-
                                 if (word_name.equals("制造厂名称")) {
                                     mEtDengJiBuildName.setText(word);
                                 }
@@ -823,8 +837,8 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
 
     @Override
     public void submitResult(String msg) {
-        BaseResponse response = new Gson().fromJson(msg,BaseResponse.class);
-        if(response.getCode() == 0){
+        BaseResponse response = new Gson().fromJson(msg, BaseResponse.class);
+        if (response.getCode() == 0) {
             ToastUtils.popUpToast("提交成功");
             Intent intent = new Intent(this, CarListManageActivity.class);
             startActivity(intent);

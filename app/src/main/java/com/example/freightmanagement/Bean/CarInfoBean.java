@@ -739,6 +739,10 @@ public class CarInfoBean {
             private String picUrl;
             private int carId;
 
+            private String departments;
+
+            private String registrationDate;
+
             public int getId() {
                 return id;
             }
@@ -1057,6 +1061,22 @@ public class CarInfoBean {
 
             public void setCarId(int carId) {
                 this.carId = carId;
+            }
+
+            public String getDepartments() {
+                return departments;
+            }
+
+            public void setDepartments(String departments) {
+                this.departments = departments;
+            }
+
+            public String getRegistrationDate() {
+                return registrationDate;
+            }
+
+            public void setRegistrationDate(String registrationDate) {
+                this.registrationDate = registrationDate;
             }
         }
     }

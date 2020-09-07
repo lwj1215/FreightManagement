@@ -31,6 +31,8 @@ public class CertificateDriverParam implements Serializable {
 
     private String picUrl;
 
+    private String picUrl2;
+
 
     public String getName() {
         return name;
@@ -118,5 +120,13 @@ public class CertificateDriverParam implements Serializable {
 
     public void setPicUrl(String picUrl) {
         this.picUrl = picUrl;
+    }
+
+    public String getPicUrl2() {
+        return picUrl2;
+    }
+
+    public void setPicUrl2(String picUrl2) {
+        this.picUrl2 = picUrl2;
     }
 }

@@ -206,7 +206,8 @@ public class WrodIdBean {
             private Object term;
             private String fileNumber;
             private String note;
-            private Object picUrl;
+            private String picUrl;
+            private String picUrl2;
 
             public int getId() {
                 return id;
@@ -328,12 +329,20 @@ public class WrodIdBean {
                 this.note = note;
             }
 
-            public Object getPicUrl() {
+            public String getPicUrl() {
                 return picUrl;
             }
 
-            public void setPicUrl(Object picUrl) {
+            public void setPicUrl(String picUrl) {
                 this.picUrl = picUrl;
+            }
+
+            public String getPicUrl2() {
+                return picUrl2;
+            }
+
+            public void setPicUrl2(String picUrl2) {
+                this.picUrl2 = picUrl2;
             }
         }
 
@@ -515,12 +524,12 @@ public class WrodIdBean {
             private int isActive;
             private long createTime;
             private long updateTime;
-            private Object picUrl;
+            private String picUrl;
             private Object category;
-            private Object firstTime;
-            private Object validityStartTime;
-            private Object validityEndTime;
-            private Object fileNumber;
+            private String firstTime;
+            private String validityStartTime;
+            private String validityEndTime;
+            private String fileNumber;
 
             public int getId() {
                 return id;
@@ -610,11 +619,11 @@ public class WrodIdBean {
                 this.updateTime = updateTime;
             }
 
-            public Object getPicUrl() {
+            public String getPicUrl() {
                 return picUrl;
             }
 
-            public void setPicUrl(Object picUrl) {
+            public void setPicUrl(String picUrl) {
                 this.picUrl = picUrl;
             }
 
@@ -626,35 +635,35 @@ public class WrodIdBean {
                 this.category = category;
             }
 
-            public Object getFirstTime() {
+            public String getFirstTime() {
                 return firstTime;
             }
 
-            public void setFirstTime(Object firstTime) {
+            public void setFirstTime(String firstTime) {
                 this.firstTime = firstTime;
             }
 
-            public Object getValidityStartTime() {
+            public String getValidityStartTime() {
                 return validityStartTime;
             }
 
-            public void setValidityStartTime(Object validityStartTime) {
+            public void setValidityStartTime(String validityStartTime) {
                 this.validityStartTime = validityStartTime;
             }
 
-            public Object getValidityEndTime() {
+            public String getValidityEndTime() {
                 return validityEndTime;
             }
 
-            public void setValidityEndTime(Object validityEndTime) {
+            public void setValidityEndTime(String validityEndTime) {
                 this.validityEndTime = validityEndTime;
             }
 
-            public Object getFileNumber() {
+            public String getFileNumber() {
                 return fileNumber;
             }
 
-            public void setFileNumber(Object fileNumber) {
+            public void setFileNumber(String fileNumber) {
                 this.fileNumber = fileNumber;
             }
         }

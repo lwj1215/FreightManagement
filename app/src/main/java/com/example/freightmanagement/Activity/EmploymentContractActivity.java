@@ -15,6 +15,7 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -34,7 +35,9 @@ import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.View.ElectronicSignature;
 import com.example.freightmanagement.View.UserWebView;
 import com.example.freightmanagement.enums.ResponseCodeEnum;
+import com.example.freightmanagement.model.CommitmentParam;
 import com.example.freightmanagement.model.ContractParam;
+import com.example.freightmanagement.model.ResponsibilityParam;
 import com.example.freightmanagement.presenter.EmploymentContractPresenter;
 import com.example.freightmanagement.presenter.constract.EmploymentConstact;
 
@@ -63,13 +66,18 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
     private String signUrl;
     private String employmentUrl;
     private int carId;
-    private RadioButton mRbApply;
+    private CheckBox mRbApply;
     private boolean apply = false;
     private UserWebView mWebViewHt;
     private UserWebView mWebViewZr;
     private UserWebView mWebViewCn;
     private File zrFile;
     private File cnFile;
+    private String address;
+    private String legalPerson;
+    private String sealUrl;
+    private String signature;
+    private String companyName;
 
     @Override
     public int setLayoutResource() {
@@ -105,6 +113,12 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
         carId = getIntent().getIntExtra("id", 0);
         int enterpriseId = getIntent().getIntExtra("enterpriseId", 0);
 //        carId = getIntent().getIntExtra("carId", -1);
+        address = getIntent().getStringExtra("address");
+        legalPerson = getIntent().getStringExtra("legalPerson");
+        sealUrl = getIntent().getStringExtra("sealUrl");
+        signature = getIntent().getStringExtra("signature");
+        companyName = getIntent().getStringExtra("companyName");
+
         mPresenter.get(PrefUtilsData.getUserId());
         mPresenter.getDriver();
         if (Build.VERSION.SDK_INT >= 21) {
@@ -382,37 +396,25 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                 employmentUrl = IMAGE_BASE_URL.concat(url);
                 ContractParam contractParam = new ContractParam();
                 contractParam.setContractUrl(employmentUrl);
-                try {
-                    contractParam.setEndTime(DateUtil.string2Date(endTime));
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                contractParam.setEndTime(endTime);
                 contractParam.setCarId(carId);
                 mPresenter.submit(contractParam);
                 break;
             case UPLOAD_CN:
                 String zrUrl = IMAGE_BASE_URL.concat(url);
-//                ContractParam contractParam = new ContractParam();
-//                contractParam.setContractUrl(employmentUrl);
-//                try {
-//                    contractParam.setEndTime(DateUtil.string2Date(endTime));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                contractParam.setCarId(carId);
-//                mPresenter.submit(contractParam);
+                CommitmentParam commitmentParam = new CommitmentParam();
+                commitmentParam.setCommitmentUrl(zrUrl);
+                commitmentParam.setEndTime(endTime);
+                commitmentParam.setCarId(carId);
+                mPresenter.submitCommitment(commitmentParam);
                 break;
             case UPLOAD_ZR:
-//                String cnUrl  = IMAGE_BASE_URL.concat(url);
-//                ContractParam contractParam = new ContractParam();
-//                contractParam.setContractUrl(employmentUrl);
-//                try {
-//                    contractParam.setEndTime(DateUtil.string2Date(endTime));
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//                contractParam.setCarId(carId);
-//                mPresenter.submit(contractParam);
+                String cnUrl  = IMAGE_BASE_URL.concat(url);
+                ResponsibilityParam responsibilityParam = new ResponsibilityParam();
+                responsibilityParam.setResponsibilityUrl(cnUrl);
+                responsibilityParam.setEndTime(endTime);
+                responsibilityParam.setCarId(carId);
+                mPresenter.submitResponsibility(responsibilityParam);
                 break;
         }
     }
@@ -433,6 +435,14 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
                         mWebViewHt.loadUrl("javascript:setName('" + name + "')");
                         mWebViewHt.loadUrl("javascript:setNo('" + fileNumber + "')");
                         mWebViewHt.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                        mWebViewHt.loadUrl("javascript:setEnAddress('" + address + "')");
+                        mWebViewHt.loadUrl("javascript:signEnImg('" + sealUrl + "')");
+                        mWebViewHt.loadUrl("javascript:setEnName('" + legalPerson + "')");
+                        mWebViewHt.loadUrl("javascript:signleaderImg('" + signature + "')");
+                        mWebViewHt.loadUrl("javascript:setLegalPerson('" + legalPerson + "')");
+
+
+
                     }
                 }
             });
@@ -445,6 +455,10 @@ public class EmploymentContractActivity extends BaseActivity<EmploymentContractP
 //                        mWebViewZr.loadUrl("javascript:setName('" + name + "')");
 //                        mWebViewZr.loadUrl("javascript:setNo('" + fileNumber + "')");
 //                        mWebViewZr.loadUrl("javascript:setTel('" + PrefUtilsData.getMobile() + "')");
+                        mWebViewZr.loadUrl("javascript:setEnName('" + companyName + "')");
+                        mWebViewZr.loadUrl("javascript:signleaderImg('" + signature + "')");
+                        mWebViewZr.loadUrl("javascript:signEnImg('" + sealUrl + "')");
+
                     }
                 }
             });

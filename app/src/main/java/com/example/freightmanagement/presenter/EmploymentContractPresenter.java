@@ -6,13 +6,17 @@ import com.example.freightmanagement.Bean.ImageUploadBean;
 import com.example.freightmanagement.Bean.WrodIdBean;
 import com.example.freightmanagement.Utils.Network.OnRequestResultForCommon;
 import com.example.freightmanagement.Utils.Network.RestApi;
+import com.example.freightmanagement.model.CommitmentParam;
 import com.example.freightmanagement.model.ContractParam;
+import com.example.freightmanagement.model.ResponsibilityParam;
 import com.example.freightmanagement.presenter.constract.EmploymentConstact;
 import com.google.gson.Gson;
 
 import java.io.File;
 
+import static com.example.freightmanagement.Base.BaseApiConstants.API_ADD_COMMITMENT;
 import static com.example.freightmanagement.Base.BaseApiConstants.API_ADD_CONTRACT;
+import static com.example.freightmanagement.Base.BaseApiConstants.API_ADD_RESPONSIBILITY;
 import static com.example.freightmanagement.Base.BaseApiConstants.API_CONTRACT_GET;
 import static com.example.freightmanagement.Base.BaseApiConstants.API_IMAGE_UPLOAD;
 
@@ -46,6 +50,48 @@ public class EmploymentContractPresenter extends BasePresenter<EmploymentConstac
             public void onSuccess(String json) {
                 super.onSuccess(json);
                 mView.success();
+            }
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
+    @Override
+    public void submitCommitment(CommitmentParam param) {
+        String json = new Gson().toJson(param);
+        RestApi.getInstance().post(API_ADD_COMMITMENT, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+//                mView.success();
+            }
+            @Override
+            public void onFail() {
+                super.onFail();
+            }
+
+            @Override
+            public void netUnlink() {
+                super.netUnlink();
+            }
+        });
+    }
+
+    @Override
+    public void submitResponsibility(ResponsibilityParam param) {
+        String json = new Gson().toJson(param);
+        RestApi.getInstance().post(API_ADD_RESPONSIBILITY, json, new OnRequestResultForCommon() {
+            @Override
+            public void onSuccess(String json) {
+                super.onSuccess(json);
+//                mView.success();
             }
             @Override
             public void onFail() {

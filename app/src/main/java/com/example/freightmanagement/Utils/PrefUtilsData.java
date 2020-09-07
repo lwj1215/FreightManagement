@@ -71,6 +71,13 @@ public abstract class PrefUtilsData {
         SP.putString(PrefConstants.USERID, user);
     }
 
+    public static String getAdminId() {
+        return SP.getString(PrefConstants.ADMINID, "");
+    }
+
+    public static void setAdminId(String admin) {
+        SP.putString(PrefConstants.ADMINID, admin);
+    }
 
     public static String getPwd() {
         return SP.getString(PrefConstants.PASSWORD, "");

@@ -95,6 +95,12 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
     }
 
     @Override
+    public void answerFinish() {
+        EventBus.getDefault().post("answerFinish");
+        finish();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.health_fillout_questionnare_back:
@@ -131,7 +137,6 @@ public class TrainingStartActivity extends BaseActivity<TrainingStartPresenter> 
                             public void onClick(View arg0) {
                                 String json = new Gson().toJson(wenJuanAnserBean);
                                 mPresenter.subWenJuan(json);
-                                finish();
                             }
                         }, true);
                     }

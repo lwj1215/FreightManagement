@@ -1,6 +1,7 @@
 package com.example.freightmanagement.Activity;
 
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ public class CarInformationActivity extends BaseActivity<CarInformationPresenter
     private TextView mEtBrandXingHao,mEtYunYingNum,mEtYeHuName,mEtCheliangNum,mEtJiGuan,mEtDengJiCarType,mEtDengJiCarCode;
     private TextView mTvDateZhuce,mTvDateSend,mEtDangAn,mEtZongZhi,mEtHeDing,et_car_type,mTvDengJiDate,mEtDengJiCarBrand,mEtDengJiTires,
             et_deng_ji_chang,et_deng_ji_kuan,et_deng_ji_gao,mEtDengJiQianYin,mEtDengJiJiaShiShi,mEtDengJiUseXingZhi,mEtDengJiSendDate;
+    private EditText mEtDengJiGongLv;
 
     @Override
     public int setLayoutResource() {
@@ -60,6 +62,7 @@ public class CarInformationActivity extends BaseActivity<CarInformationPresenter
         mEtDengJiCarEngine = findViewById(R.id.et_deng_ji_car_engine);
         mEtDengJiRanLiao = findViewById(R.id.et_deng_ji_ran_liao);
         mEtDengJiPaiLiang = findViewById(R.id.et_deng_ji_pai_liang);
+        mEtDengJiGongLv = findViewById(R.id.et_deng_ji_gong_lv);
         mEtDengJiBuildName = findViewById(R.id.et_deng_ji_build_name);
         mEtDengJiTires = findViewById(R.id.et_deng_ji_tires);
         mEtDengJiQianYin = findViewById(R.id.et_deng_ji_qian_yin);
@@ -110,8 +113,8 @@ public class CarInformationActivity extends BaseActivity<CarInformationPresenter
 
         Glide.with(getContext()).load(certificateRegistrationBo.getPicUrl()).into(mIvCardJiDong);
         mEtOwner.setText(certificateRegistrationBo.getOwner()+"");
-        mEtJiGuan.setText(certificateRegistrationBo.getOwner()+"");
-        mTvDengJiDate.setText(certificateRegistrationBo.getOwner()+"");
+        mEtJiGuan.setText(certificateRegistrationBo.getDepartments());
+        mTvDengJiDate.setText(certificateRegistrationBo.getRegistrationDate());
         mEtDengJiNum.setText(certificateRegistrationBo.getGrantNo()+"");
         mEtDengJiCarType.setText(certificateRegistrationBo.getCarType()+"");
         mEtDengJiCarBrand.setText(certificateRegistrationBo.getCarBrand()+"");
@@ -119,17 +122,20 @@ public class CarInformationActivity extends BaseActivity<CarInformationPresenter
         mEtDengJiCarCode.setText(certificateRegistrationBo.getCarNo()+"");
         mEtDengJiCarEngine.setText(certificateRegistrationBo.getEngineNo()+"");
         mEtDengJiRanLiao.setText(certificateRegistrationBo.getFuelType()+"");
-        mEtDengJiPaiLiang.setText(certificateRegistrationBo.getDisplacement()+"");
+        mEtDengJiPaiLiang.setText(certificateRegistrationBo.getDisplacement()+"ml"+certificateRegistrationBo.getPower()+"kw");
         et_deng_ji_gonglv.setText(certificateRegistrationBo.getPower()+"");
+        String outline = certificateRegistrationBo.getOutline();
+        String[] split = outline.split(",");
         mEtDengJiBuildName.setText(certificateRegistrationBo.getMaker()+"");
         mEtDengJiTires.setText(certificateRegistrationBo.getTireCount()+"");
-        et_deng_ji_chang.setText(certificateRegistrationBo.getTireCount()+"");
-        et_deng_ji_kuan.setText(certificateRegistrationBo.getTireCount()+"");
-        et_deng_ji_gao.setText(certificateRegistrationBo.getTireCount()+"");
+        et_deng_ji_chang.setText(split[0]);
+        et_deng_ji_kuan.setText(split[1]);
+        et_deng_ji_gao.setText(split[2]);
         mEtDengJiQianYin.setText(certificateRegistrationBo.getApprovedWeight()+"");
         mEtDengJiJiaShiShi.setText(certificateRegistrationBo.getPassengersCount()+"");
         mEtDengJiUseXingZhi.setText(certificateRegistrationBo.getUseNature()+"");
         mEtDengJiSendDate.setText(certificateRegistrationBo.getIssueDate()+"");
+
     }
 
 }

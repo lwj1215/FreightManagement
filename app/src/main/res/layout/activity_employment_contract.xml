@@ -41,7 +41,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <RadioButton
+        <CheckBox
             android:id="@+id/rb_apply"
             android:background="@color/blue_079EEB"
             android:textColor="@color/white"

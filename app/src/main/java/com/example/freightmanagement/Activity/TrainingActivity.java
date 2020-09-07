@@ -89,7 +89,7 @@ public class TrainingActivity extends BaseActivity<TrainingPresenter> implements
             htmlList.add(content);
 
         }
-        htmlList.add("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
+//        htmlList.add("http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4");
         trainingAdapter.setData(htmlList);
 
     }

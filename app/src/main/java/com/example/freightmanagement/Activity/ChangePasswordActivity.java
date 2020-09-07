@@ -22,6 +22,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
 
     @Override
     protected void onInitView() {
+        setDefaultTitle("修改密码");
         edtTxt_login_password1 = (AutoCompleteTextView) bindView(R.id.edtTxt_login_password1);
         edtTxt_login_password2 = (AutoCompleteTextView) bindView(R.id.edtTxt_login_password2);
         edtTxt_login_password3 = (AutoCompleteTextView) bindView(R.id.edtTxt_login_password3);
@@ -58,12 +59,10 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
                     ToastUtils.popUpToast("两次密码不一致");
                     return;
                 }
-                String userId = PrefUtilsData.getUserId();
+                String adminId = PrefUtilsData.getAdminId();
                 AdminParam adminParam = new AdminParam();
-                adminParam.setId(Integer.parseInt(userId));
+                adminParam.setId(Integer.parseInt(adminId));
                 adminParam.setPass(s1);
-//                adminParam.setTel();
-//                finish();
                 mPresenter.submit(adminParam);
                 break;
         }
@@ -72,6 +71,7 @@ public class ChangePasswordActivity extends BaseActivity<ChangePasswordPresenter
     @Override
     public void success() {
         ToastUtils.popUpToast("修改密码完成");
+        finish();
     }
 
     @Override

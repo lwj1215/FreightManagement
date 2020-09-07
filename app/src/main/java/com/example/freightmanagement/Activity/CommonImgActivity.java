@@ -1,13 +1,22 @@
 package com.example.freightmanagement.Activity;
 
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.freightmanagement.Adapter.ImageListAdapter;
 import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.R;
+import com.example.freightmanagement.Utils.StringUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommonImgActivity extends BaseActivity {
-    private ImageView mImg;
+
+    private RecyclerView mRv;
+    private List<String> list = new ArrayList<>();
+    private ImageListAdapter imageListAdapter;
 
     @Override
     public int setLayoutResource() {
@@ -17,14 +26,27 @@ public class CommonImgActivity extends BaseActivity {
     @Override
     protected void onInitView() {
         setDefaultTitle("合同");
-        mImg = findViewById(R.id.img);
-
+        mRv = findViewById(R.id.rv);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        mRv.setLayoutManager(linearLayoutManager);
+        imageListAdapter = new ImageListAdapter(this);
+        mRv.setAdapter(imageListAdapter);
     }
 
     @Override
     protected void onLoadData2Remote() {
-        String url = getIntent().getStringExtra("url");
-        Glide.with(this).load(url).into(mImg);
-
+        String htUrl = getIntent().getStringExtra("htUrl");
+        String zrUrl = getIntent().getStringExtra("zrUrl");
+        String cnUrl = getIntent().getStringExtra("cnUrl");
+        if(StringUtil.isNotEmpty(htUrl)){
+            list.add(htUrl);
+        }
+        if(StringUtil.isNotEmpty(zrUrl)){
+            list.add(zrUrl);
+        }
+        if(StringUtil.isNotEmpty(cnUrl)){
+            list.add(cnUrl);
+        }
+        imageListAdapter.setData(list);
     }
 }

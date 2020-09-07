@@ -30,6 +30,11 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
     private List<SelectCarBean.DataBean> data;
     private Integer id;
     private Integer enterpriseId;
+    private String sealUrl;
+    private String address;
+    private String legalPerson;
+    private String signature;
+    private String companyName;
 
     @Override
     public int setLayoutResource() {
@@ -51,6 +56,16 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
             public void onItemClick(int position) {
                 id = data.get(position).getId();
                 enterpriseId = data.get(position).getEnterpriseId();
+                SelectCarBean.DataBean.EnterpriseBoBean enterpriseBo = data.get(position).getEnterpriseBo();
+                if(enterpriseBo != null){
+                    sealUrl = enterpriseBo.getSealUrl();
+                    SelectCarBean.DataBean.EnterpriseBoBean.CertificateBusinessBoBean certificateBusinessBo = enterpriseBo.getCertificateBusinessBo();
+                    address = certificateBusinessBo.getRegistrationAuthority();
+                    legalPerson = certificateBusinessBo.getLegalPerson();
+                    signature = enterpriseBo.getSignature();
+                    companyName = certificateBusinessBo.getName();
+                }
+
 
             }
         });
@@ -101,6 +116,12 @@ public class SelectCarActivity extends BaseActivity<SelectCarPresenter> implemen
                 Intent intent = new Intent(this, EmploymentContractActivity.class);
                 intent.putExtra("id",id);
                 intent.putExtra("enterpriseId",enterpriseId);
+                intent.putExtra("address",address);
+                intent.putExtra("legalPerson",legalPerson);
+                intent.putExtra("sealUrl",sealUrl);
+                intent.putExtra("signature",signature);
+                intent.putExtra("companyName",companyName);
+
                 startActivity(intent);
                 break;
         }

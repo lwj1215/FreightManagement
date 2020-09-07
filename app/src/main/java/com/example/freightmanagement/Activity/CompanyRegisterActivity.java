@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -50,8 +49,6 @@ import com.example.freightmanagement.model.company.CompanySubmitParam;
 import com.example.freightmanagement.presenter.CompanyRegisterPresenter;
 import com.example.freightmanagement.presenter.constract.CompanyRegisterConstact;
 import com.google.gson.Gson;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -186,12 +183,13 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
     private String roadManagerPath;
     private TextView mTvRoad;
     private ImageView mIvRoad;
-    private String signUrl="";
+    private String signUrl = "";
     private ImageView mIvZhang;
     private String zhangPath;
     private String zhangUrl;
     private RelativeLayout mRlZhang;
     private TextView mTvZhang;
+    private EditText mEtFaren;
 
     @Override
     public int setLayoutResource() {
@@ -208,7 +206,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
             mRlSign.setVisibility(View.VISIBLE);
         } else {
             setDefaultTitle("企业信息修改");
-            mRlSign.setVisibility(View.GONE);
+            mRlSign.setVisibility(View.VISIBLE);
             mPresenter.getQyData();
         }
 
@@ -308,6 +306,8 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         mTvZhang = findViewById(R.id.tv_zhang);
         mIvZhang.setOnClickListener(this);
         mRlZhang.setOnClickListener(this);
+        mEtFaren = findViewById(R.id.et_faren);
+
     }
 
     @Override
@@ -384,6 +384,11 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                     ToastUtils.popUpToast("信用代码不得为空");
                     return;
                 }
+                String mFaren = mEtFaren.getText().toString();
+                if (StringUtils.isEmpty(mFaren)) {
+                    ToastUtils.popUpToast("法人不得为空");
+                    return;
+                }
                 String mName = mEtName.getText().toString();
                 if (StringUtils.isEmpty(mName)) {
                     ToastUtils.popUpToast("从业资格类别不得为空");
@@ -438,7 +443,7 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
 
                 CertificateBusiness certificateBusiness = new CertificateBusiness();
                 certificateBusiness.setName(mName);
-                certificateBusiness.setLegalPerson(userName);
+                certificateBusiness.setLegalPerson(mEtFaren.getText().toString());
                 certificateBusiness.setScope(mJingYing);
                 certificateBusiness.setEstablishmentDate(mChengli);
                 certificateBusiness.setRegistrationAuthority(mAddress);
@@ -695,7 +700,10 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
                             String chengli = 成立日期.getWords();
                             BusinessLicenseBean.WordsResultBean.地址Bean 地址 = words_result.get地址();
                             String address = 地址.getWords();
+                            BusinessLicenseBean.WordsResultBean.法人Bean 法人 = words_result.get法人();
+                            String faren = 法人.getWords();
                             mEtCode.setText(code);
+                            mEtFaren.setText(faren);
                             mEtName.setText(companyName);
                             mEtJing.setText(jingying);
                             mTvChengli.setText(chengli);
@@ -831,24 +839,35 @@ public class CompanyRegisterActivity extends BaseActivity<CompanyRegisterPresent
         QiYeBean.DataBean.CertificateIDBoBean certificateIDBo = data.getCertificateIDBo();
         QiYeBean.DataBean.CertificateOperationBoBean certificateOperationBo = data.getCertificateOperationBo();
         Glide.with(getContext()).load(certificateIDBo.getPicUrl()).into(mIvCardFront);
+        idCardFrontUrl = certificateIDBo.getPicUrl();
         Glide.with(getContext()).load(certificateIDBo.getPicUrl2()).into(mIvCardRevers);
+        idCardBackUrl = certificateIDBo.getPicUrl2();
         mEtRealName.setText(certificateIDBo.getName() + "");
         mEtCardNum.setText(certificateIDBo.getIdno() + "");
         Glide.with(getContext()).load(certificateBusinessBo.getPicUrl()).into(mIvBusinessFront);
+        businessUrl = certificateBusinessBo.getPicUrl();
         mEtCode.setText(certificateBusinessBo.getId() + "");
         mEtName.setText(certificateBusinessBo.getName() + "");
         mEtJing.setText(certificateBusinessBo.getScope() + "");
         mTvChengli.setText(timeStampToDate(certificateBusinessBo.getCreateTime()) + "");
         mEtAddress.setText(certificateBusinessBo.getRegistrationAuthority() + "");
         Glide.with(getContext()).load(certificateOperationBo.getPicUrl()).into(mIvRoad);
+        roadTransportPermit = certificateOperationBo.getPicUrl();
         mEtXuke.setText(certificateOperationBo.getGrantNo() + "");
         mTvZhengJianYouXiaoQi.setText(certificateOperationBo.getValidityDate() + "");
+        mIvZhang.setVisibility(View.VISIBLE);
+        mTvZhang.setVisibility(View.GONE);
+        String sealUrl = data.getSealUrl();
+        Glide.with(getContext()).load(sealUrl).into(mIvZhang);
+        zhangUrl = sealUrl;
+        Glide.with(getContext()).load(signUrl).into(mIvSign);
+        signUrl = data.getSignature();
     }
 
     private String timeStampToDate(long tsp, String... format) {
         SimpleDateFormat sdf;
         if (format.length < 1) {
-            sdf = new SimpleDateFormat("yyyy年MM月dd日", Locale.getDefault());
+            sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         } else {
             sdf = new SimpleDateFormat(format[0], Locale.getDefault());
         }

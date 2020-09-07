@@ -23,6 +23,8 @@ public interface PrefConstants {
     String NICKNAME = "nickname";
     //登录时的用户Id
     String USERID = "userId";
+    //登录时的用户Id
+    String ADMINID = "adminId";
     //wrokId
     String WROKID = "wrokId";
     //身份证id

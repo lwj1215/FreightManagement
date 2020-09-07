@@ -16,18 +16,18 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content">
                      <TextView
-                         android:text="姓名:"
+                         android:text="所属人:"
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"/>
                      <TextView
                          android:id="@+id/tv_name"
-                         android:text="姓名"
+                         android:text=""
                          android:layout_width="wrap_content"
                          android:layout_height="wrap_content"/>
               </LinearLayout>
               <LinearLayout
                   android:layout_marginTop="@dimen/x10"
-
+                  android:visibility="gone"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content">
                      <TextView
