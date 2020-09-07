@@ -90,8 +90,12 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomePre
                         mPresenter.getCompleteResult();
                     }else if(type.equals(AdminTypeEnum.CAR_OWNER.getValue())){
                         startActivity(new Intent(activity, CarListManageActivity.class));
+//                        startActivity(new Intent(activity, VehicleInformationActivity.class));
+
                     }else if(type.equals(AdminTypeEnum.COMPANY.getValue())){
                         startActivity(new Intent(activity, CarListManageActivity.class));
+//                        startActivity(new Intent(activity, VehicleInformationActivity.class));
+
                     }
                 }else if (position == 2) {
                     if(type.equals(AdminTypeEnum.DRIVER.getValue())){

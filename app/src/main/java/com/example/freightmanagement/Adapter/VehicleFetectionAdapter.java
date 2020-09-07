@@ -14,6 +14,7 @@ import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.Bean.VerAddBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
+import com.example.freightmanagement.Utils.OnItemClickListener2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,17 +53,27 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                     VehicleFetectionXxAdapter vehicleFetectionAdapter = new VehicleFetectionXxAdapter(context);
                     holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                     vehicleFetectionAdapter.setPages(pages.getType1());
-                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-
-
-
-                            if (listener != null) {
+//                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener2() {
+//                        @Override
+//                        public void onItemClick(View view, int position, String edte) {
+//
+//                            if (listener != null) {
 //                                listener.onItemClick(verAddBean);
-                            }
-                        }
-                    });
+//                            }
+//                        }
+//                    });
+
+//                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(View view, int position) {
+//
+//
+//
+//                            if (listener != null) {
+////                                listener.onItemClick(verAddBean);
+//                            }
+//                        }
+//                    });
                 }
             }else if (position==1) {
                 holder.tv_date.setText("(2) 行车中");
@@ -73,16 +84,16 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                     VehicleFetectionXx2Adapter vehicleFetectionAdapter = new VehicleFetectionXx2Adapter(context);
                     holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                     vehicleFetectionAdapter.setPages(pages.getType2());
-                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(View view, int position) {
-
-
-                            if (listener != null) {
-//                                listener.onItemClick(verAddBean);
-                            }
-                        }
-                    });
+//                    vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                        @Override
+//                        public void onItemClick(View view, int position) {
+//
+//
+//                            if (listener != null) {
+////                                listener.onItemClick(verAddBean);
+//                            }
+//                        }
+//                    });
                 }
             } else {
                 holder.tv_date.setText("(3) 行车后");
@@ -92,16 +103,16 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
                 VehicleFetectionXx3Adapter vehicleFetectionAdapter = new VehicleFetectionXx3Adapter(context);
                 holder.recyclerView1.setAdapter(vehicleFetectionAdapter);
                 vehicleFetectionAdapter.setPages(pages.getType3());
-                vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-
-
-                        if (listener != null) {
-//                            listener.onItemClick(verAddBean);
-                        }
-                    }
-                });
+//                vehicleFetectionAdapter.setOnItemClickListener(new OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//
+//
+//                        if (listener != null) {
+////                            listener.onItemClick(verAddBean);
+//                        }
+//                    }
+//                });
                 }
             }
     }
