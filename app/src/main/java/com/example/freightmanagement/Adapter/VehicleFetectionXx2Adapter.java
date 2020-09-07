@@ -5,12 +5,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
+import com.example.freightmanagement.Utils.OnItemClickListener2;
 
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class VehicleFetectionXx2Adapter extends RecyclerView.Adapter<VehicleFete
     private Context context;
     private List<String> dataList;
     private List<VehicleDetectionBean.DataBean.Type2Bean> pages;
-    private OnItemClickListener listener;
+    private OnItemClickListener2 listener;
 
     public VehicleFetectionXx2Adapter(Context context) {
         this.context = context;
@@ -36,15 +38,21 @@ public class VehicleFetectionXx2Adapter extends RecyclerView.Adapter<VehicleFete
     }
 
     @Override
-    public void onBindViewHolder(TrainingViewHolder holder, final int position) {
+    public void onBindViewHolder(final TrainingViewHolder holder, final int position) {
         if (pages != null) {
             holder.tv_date.setText(pages.get(position).getItem());
+
+            if (position == pages.size() - 1) {
+                holder.edy_text.setVisibility(View.VISIBLE);
+            } else {
+                holder.edy_text.setVisibility(View.GONE);
+            }
             holder.tv_date.setOnClickListener(new View.OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onItemClick(v, position);
+                        listener.onItemClick(v, position,holder.edy_text.getText().toString());
                     }
                 }
             });
@@ -60,11 +68,12 @@ public class VehicleFetectionXx2Adapter extends RecyclerView.Adapter<VehicleFete
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
         CheckBox tv_date;
         private View itemView;
-
+        private EditText edy_text;
         public TrainingViewHolder(View itemView) {
             super(itemView);
             this.itemView = itemView;
             tv_date = itemView.findViewById(R.id.tv_date);
+            edy_text = itemView.findViewById(R.id.edy_text);
         }
     }
 
@@ -73,7 +82,7 @@ public class VehicleFetectionXx2Adapter extends RecyclerView.Adapter<VehicleFete
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnItemClickListener2 listener) {
         this.listener = listener;
     }
 

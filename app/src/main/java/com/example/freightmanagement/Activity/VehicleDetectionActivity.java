@@ -17,6 +17,7 @@ import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.Bean.VerAddBean;
 import com.example.freightmanagement.R;
 import com.example.freightmanagement.Utils.OnItemClickListener;
+import com.example.freightmanagement.Utils.OnItemClickListener2;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;
 import com.example.freightmanagement.presenter.VehicleDetectionPresenter;
@@ -96,34 +97,34 @@ public class VehicleDetectionActivity extends BaseActivity<VehicleDetectionPrese
     @Override
     public void trainingList(final VehicleDetectionBean vehicleDetectionBean) {
         adapter1.setPages(vehicleDetectionBean.getData().getType1());
-        adapter1.setOnItemClickListener(new OnItemClickListener() {
+        adapter1.setOnItemClickListener(new OnItemClickListener2() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position, String edte) {
                 completeBosBean.setChechDataId(vehicleDetectionBean.getData().getType1().get(position).getId());
                 completeBosBean.setState(1);
-                completeBosBean.setReslut("");
+                completeBosBean.setReslut(edte);
                 lisBean.add(completeBosBean);
                 verAddBean.setCompleteBos(lisBean);
             }
         });
         adapter2.setPages(vehicleDetectionBean.getData().getType2());
-        adapter2.setOnItemClickListener(new OnItemClickListener() {
+        adapter2.setOnItemClickListener(new OnItemClickListener2() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position, String edte) {
                 completeBosBean.setChechDataId(vehicleDetectionBean.getData().getType2().get(position).getId());
                 completeBosBean.setState(1);
-                completeBosBean.setReslut("");
+                completeBosBean.setReslut(edte);
                 lisBean.add(completeBosBean);
                 verAddBean.setCompleteBos(lisBean);
             }
         });
         adapter3.setPages(vehicleDetectionBean.getData().getType3());
-        adapter3.setOnItemClickListener(new OnItemClickListener() {
+        adapter3.setOnItemClickListener(new OnItemClickListener2() {
             @Override
-            public void onItemClick(View view, int position) {
+            public void onItemClick(View view, int position,String edte) {
                 completeBosBean.setChechDataId(vehicleDetectionBean.getData().getType3().get(position).getId());
                 completeBosBean.setState(1);
-                completeBosBean.setReslut("");
+                completeBosBean.setReslut(edte);
                 lisBean.add(completeBosBean);
                 verAddBean.setCompleteBos(lisBean);
             }
