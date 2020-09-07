@@ -50,7 +50,11 @@ public class VehicleFetectionXx3Adapter extends RecyclerView.Adapter<VehicleFete
                 @Override
                 public void onClick(View v) {
                     if (listener != null) {
-                        listener.onItemClick(v, position,holder.edy_text.getText().toString());
+                        if (position== pages.size() - 1){
+                            listener.onItemClick(v, position,holder.edy_text.getText().toString());
+                        }else {
+                            listener.onItemClick(v, position,"");
+                        }
                     }
                 }
             });
