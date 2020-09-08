@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.freightmanagement.Adapter.VehicleFetectionAdapter;
 import com.example.freightmanagement.Adapter.VehicleFetectionXx2Adapter;
 import com.example.freightmanagement.Adapter.VehicleFetectionXx3Adapter;
 import com.example.freightmanagement.Adapter.VehicleFetectionXxAdapter;
@@ -16,7 +15,6 @@ import com.example.freightmanagement.Base.BaseActivity;
 import com.example.freightmanagement.Bean.VehicleDetectionBean;
 import com.example.freightmanagement.Bean.VerAddBean;
 import com.example.freightmanagement.R;
-import com.example.freightmanagement.Utils.OnItemClickListener;
 import com.example.freightmanagement.Utils.OnItemClickListener2;
 import com.example.freightmanagement.Utils.PrefUtilsData;
 import com.example.freightmanagement.Utils.ToastUtils;

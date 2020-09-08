@@ -1,3 +1,4 @@
+/*
 package com.example.freightmanagement.Adapter;
 
 import android.content.Context;
@@ -19,9 +20,11 @@ import com.example.freightmanagement.Utils.OnItemClickListener2;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by songdechuan on 2020/8/6.
- */
+ *//*
+
 
 public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetectionAdapter.TrainingViewHolder> {
     private final LayoutInflater layoutInflater;
@@ -149,3 +152,4 @@ public class VehicleFetectionAdapter extends RecyclerView.Adapter<VehicleFetecti
         void onItemClick(VerAddBean verAddBean);
     }
 }
+*/
