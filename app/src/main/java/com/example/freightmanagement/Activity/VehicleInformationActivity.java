@@ -33,6 +33,7 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
     private TextView mTvZhuceDate;
     private TextView mTvCarYunyingNum;
     private TextView mTvYunyingYxq;
+    private String name;
 
     @Override
     public int setLayoutResource() {
@@ -99,8 +100,9 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
             case R.id.lin_celiang:
                 if (PrefUtilsData.getType().equals("1")) {
                     Intent intent = new Intent(VehicleInformationActivity.this, VehicleDetectionActivity.class);
-                    intent.putExtra("name1", owner);
+                    intent.putExtra("name1", name);
                     intent.putExtra("name2", owner2);
+
                     startActivity(intent);
                 } else if (PrefUtilsData.getType().equals("2")) {
                     getTz("1");
@@ -148,12 +150,14 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
             CheliangBean.DataBean.CarBoBean carBo = data.getCarBo();
             CheliangBean.DataBean.CertificateIDBoBean idCardBo = data.getCertificateIDBo();
             if (idCardBo != null) {
+                name = idCardBo.getName();
                 mTvDriverName.setText(idCardBo.getName());
             }
             if (carBo != null) {
                 CheliangBean.DataBean.CarBoBean.CertificateTransportBoBean certificateTransportBo = carBo.getCertificateTransportBo();
+                CheliangBean.DataBean.CarBoBean.CertificateDrivingBoBean certificateDrivingBo = carBo.getCertificateDrivingBo();
                 if (certificateTransportBo != null) {
-                    mTvCarNum.setText(certificateTransportBo.getPlateNo());
+                    mTvCarNum.setText(certificateDrivingBo.getPlateNo());
                 }
             }
             CheliangBean.DataBean.CarBoBean.CertificateDrivingBoBean certificateDrivingBo = carBo.getCertificateDrivingBo();
@@ -164,6 +168,7 @@ public class VehicleInformationActivity extends BaseActivity<VehicleInformationP
                 mTvCarShibie.setText(certificateDrivingBo.getVin());
                 mTvZhuceDate.setText(certificateDrivingBo.getRegistrationDate());
             }
+
             CheliangBean.DataBean.CarBoBean.CertificateTransportBoBean certificateTransportBo = carBo.getCertificateTransportBo();
             if (certificateTransportBo != null) {
                 mTvCarYunyingNum.setText(certificateTransportBo.getPlateNo());

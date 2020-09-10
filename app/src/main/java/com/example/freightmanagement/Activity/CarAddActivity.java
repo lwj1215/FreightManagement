@@ -283,11 +283,11 @@ public class CarAddActivity extends BaseActivity<CarAddPresenter> implements Car
                 certificateRegistration.setCarBrand(mEtDengJiCarBrand.getText().toString());
                 certificateRegistration.setGrantNo(mEtDengJiNum.getText().toString());
                 certificateRegistration.setCarModel(mEtDengJiCarModel.getText().toString());
-                certificateRegistration.setCarNo(mEtDengJiCarBrand.getText().toString());
+                certificateRegistration.setCarNo(mEtDengJiCarCode.getText().toString());
                 certificateRegistration.setEngineNo(mEtDengJiCarEngine.getText().toString());
                 certificateRegistration.setFuelType(mEtDengJiRanLiao.getText().toString());
                 certificateRegistration.setPower(mEtDengJiGongLv.getText().toString());
-                certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
+//                certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
                 certificateRegistration.setDisplacement(mEtDengJiPaiLiang.getText().toString());
                 certificateRegistration.setMaker(mEtDengJiBuildName.getText().toString());
                 certificateRegistration.setTireCount(mEtDengJiTires.getText().toString());
